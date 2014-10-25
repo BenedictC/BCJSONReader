@@ -16,78 +16,52 @@
  - On completion of the ATTEMPT block there is at least 1 entry in the FAILURE_INFO dictionary.
  - ABANDON() is called from within the ATTEMPT block.
 
- ATTEMPT/SALVAGE differs from TRY/CATCH. With TRY/CATCH, RAISE can be called within *any* functions/block and the
- exception will bubble up to the nearest CATCH block. However, with ATTEMPT/SALVAGE, ABANDON can only be called within 
- the immediate scope of the ATTEMPT block and not within nested blocks or functions.
- 
- When writing code a call to ATTEMPT must be immediately followed by a call to SALVAGE.
+ Calling return from within an ATTEMPT block will return from the parent scope of the ATTEMPT block. Calling break will
+ jump to after the SALVAGE block.
 
- Examples:
+ ABANDON is the ATTEMPT/SALVAGE equivilant to RAISE in TRY/CATCH but ABANDON has less powerful behavour. RAISE can be
+ called within *any* functions/block and the exception will bubble up to the nearest CATCH block. However, ABANDON can
+ only be called within the immediate scope of an ATTEMPT block and not within called functions or nested blocks.
  
- //Valid example:
+ FAILURE_INFO and SET_FAILURE_INFO are used to access and set key/value pairs in a dictionary that is shared between
+ the ATTEMPT and SALVAGE blocks.
+
+ The syntax for ATTEMPT/SALVAGE blocks is as follows:
  ATTEMPT({
-    if (somePredicate) {
-        ABANDON();
-    }
-    ABANDON();
- }) SALVAGE ({
-    NSLog(@"%@", REASON);
- });
- 
-
-
- //Invalid example 1:
- // This will not compile because the call to ABANDON is within a nested block.
- ATTEMPT({
-    ^{
-         ABANDON();
-     }();
- }) SALVAGE ({
-    NSLog(@"%@", REASON);
- });
- 
- 
-
- //Invalid example 2:
- // This will not compile because ABANDON is in an separate function.
- void arbitaryFunction() {
-    //...
-    ABANDON();
-    //...
- }
-
- ATTEMPT({
-    arbitaryFunction();
- }) SALVAGE ({
-     NSLog(@"%@", REASON);
- });
+     //This is the ATTEMPT block
+ }) //End of ATTEMPT. Note that there is NOT a sem-colon before SALVAGE (only whitespace and comments are allowed).
+ SALVAGE ({
+    //This is the SALVAGE block
+ }); //End of SALVAGE. Note that the semi-colon is optional.
 
  */
 
 
 
 /**
- <#Description#>
+ Begins an ATTEMPT/SALVAGE control structure. A call to ATTEMPT must be immediately followed by a call to SALVAGE.
 
- @param ATTEMPT_BLOCK <#ATTEMPT_BLOCK description#>
+ @param ATTEMPT_BLOCK The code block used during the ATTEMPT stage.
 
- @return <#return value description#>
  */
 #define ATTEMPT(ATTEMPT_BLOCK) do { \
     NSMutableDictionary * const __failureInfo__ = [NSMutableDictionary new]; \
+    BOOL __hasSalvaged__ = NO;\
     ATTEMPT_BLOCK \
     if ([__failureInfo__ count] == 0) break; /* If we reach the end of ATTEMPT_BLOCK and haven't any failures then
                                                   bail out and don't fall through into SALVAGE_BLOCK. */ \
     goto Salvage; /* Avoid 'unused label' warning. */ \
-    Salvage:
+    Salvage: \
+    if (__hasSalvaged__) break; /*avoid accidental infinite loops due to ABANDON() being called in SALVAGE. */ \
+    __hasSalvaged__ = YES;
+
 
 
 /**
- <#Description#>
+ Ends an ATTEMPT/SALVAGE control structure. A call to SALVAGE must be immediately preceeded by a call to ATTEMPT.
 
- @param SALVAGE_BLOCK <#SALVAGE_BLOCK description#>
+ @param SALVAGE_BLOCK The code block used during the SALVAGE stage.
 
- @return <#return value description#>
  */
 #define SALVAGE(SALVAGE_BLOCK) SALVAGE_BLOCK \
 } while(0); /* Close the ATTEMPT block. */
@@ -95,23 +69,22 @@
 
 
 /**
- To be called within ATTEMPT blocks. When invoke execution of the ATTEMPT block ends and jumps to the SALVAGE block.
+ Can be called within an ATTEMPT block. When invoke execution of the ATTEMPT block ends and jumps to the SALVAGE block.
 
- @param FAILURE_INFO_OBJ <#FAILURE_INFO_OBJ description#>
-
- @return <#return value description#>
+ @return none;
  */
 #define ABANDON() do {goto Salvage;} while(0)
 
 
 
 /**
- Set a value in the failureInfo dictionary.
+ Set a value in the FAILURE_INFO dictionary which is availble to the ATTEMPT and SALVAGE blocks. To remove a value 
+ use nil as the value.
 
- @param KEY  <#KEY description#>
- @param VALUE <#INFO description#>
+ @param KEY  The key to use in the FAILURE_INFO dictionary.
+ @param VALUE The value to associated with KEY in the FAILURE_INFO dictionary.
 
- @return <#return value description#>
+ @return none;
  */
 #define SET_FAILURE_INFO(KEY, VALUE) do {\
 id aValue = (VALUE); \
@@ -128,9 +101,9 @@ if (aValue == nil) { \
 /**
  Retrieve a value from the failureInfo dictionary.
 
- @param KEY  <#KEY description#>
+ @param KEY  The key in the FAILURE_INFO dictionary to retrieve.
 
- @return <#return value description#>
+ @return The value for the provided key or nil if the value is not set.
  */
 #define FAILURE_INFO(KEY) [__failureInfo__ objectForKey:(KEY)]
 
