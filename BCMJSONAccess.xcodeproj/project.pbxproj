@@ -27,8 +27,8 @@
 		8282CEBE19F5987200555BB0 /* DemoApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DemoApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		8282CEC819F5989200555BB0 /* BCLTypeCheckedCollectionAccessors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BCLTypeCheckedCollectionAccessors.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		8294F4F719F6D7A0005D1F62 /* AttemptSalvage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttemptSalvage.h; sourceTree = "<group>"; };
-		82D3B18F19FADFDC003C4EB5 /* BCPSafeCollectionAccess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BCPSafeCollectionAccess.h; sourceTree = "<group>"; };
-		82D3B19519FBF7C5003C4EB5 /* SafeCollectionAccessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SafeCollectionAccessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		82D3B18F19FADFDC003C4EB5 /* BCMJSONAccess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BCMJSONAccess.h; sourceTree = "<group>"; };
+		82D3B19519FBF7C5003C4EB5 /* BCMJSONAccessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BCMJSONAccessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		82D3B19819FBF7C5003C4EB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82D3B19919FBF7C5003C4EB5 /* SafeCollectionAccessTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SafeCollectionAccessTests.m; sourceTree = "<group>"; };
 		82D3B19F19FBF8D3003C4EB5 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -66,7 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				8282CEBE19F5987200555BB0 /* DemoApp */,
-				82D3B19519FBF7C5003C4EB5 /* SafeCollectionAccessTests.xctest */,
+				82D3B19519FBF7C5003C4EB5 /* BCMJSONAccessTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -74,7 +74,7 @@
 		82D3B19019FBC7CD003C4EB5 /* SafeCollectionAccess */ = {
 			isa = PBXGroup;
 			children = (
-				82D3B18F19FADFDC003C4EB5 /* BCPSafeCollectionAccess.h */,
+				82D3B18F19FADFDC003C4EB5 /* BCMJSONAccess.h */,
 				8294F4F719F6D7A0005D1F62 /* AttemptSalvage.h */,
 				8282CEC819F5989200555BB0 /* BCLTypeCheckedCollectionAccessors.h */,
 			);
@@ -109,9 +109,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8282CEBD19F5987200555BB0 /* DemoApp */ = {
+		8282CEBD19F5987200555BB0 /* BCMJSONAccess */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8282CEC519F5987200555BB0 /* Build configuration list for PBXNativeTarget "DemoApp" */;
+			buildConfigurationList = 8282CEC519F5987200555BB0 /* Build configuration list for PBXNativeTarget "BCMJSONAccess" */;
 			buildPhases = (
 				8282CEBA19F5987200555BB0 /* Sources */,
 				8282CEBB19F5987200555BB0 /* Frameworks */,
@@ -121,14 +121,14 @@
 			);
 			dependencies = (
 			);
-			name = DemoApp;
+			name = BCMJSONAccess;
 			productName = TypeSafeJSON;
 			productReference = 8282CEBE19F5987200555BB0 /* DemoApp */;
 			productType = "com.apple.product-type.tool";
 		};
-		82D3B19419FBF7C5003C4EB5 /* SafeCollectionAccessTests */ = {
+		82D3B19419FBF7C5003C4EB5 /* BCMJSONAccessTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 82D3B19B19FBF7C5003C4EB5 /* Build configuration list for PBXNativeTarget "SafeCollectionAccessTests" */;
+			buildConfigurationList = 82D3B19B19FBF7C5003C4EB5 /* Build configuration list for PBXNativeTarget "BCMJSONAccessTests" */;
 			buildPhases = (
 				82D3B19119FBF7C5003C4EB5 /* Sources */,
 				82D3B19219FBF7C5003C4EB5 /* Frameworks */,
@@ -138,9 +138,9 @@
 			);
 			dependencies = (
 			);
-			name = SafeCollectionAccessTests;
+			name = BCMJSONAccessTests;
 			productName = SafeCollectionAccessTests;
-			productReference = 82D3B19519FBF7C5003C4EB5 /* SafeCollectionAccessTests.xctest */;
+			productReference = 82D3B19519FBF7C5003C4EB5 /* BCMJSONAccessTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -160,7 +160,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8282CEB919F5987200555BB0 /* Build configuration list for PBXProject "SafeCollectionAccess" */;
+			buildConfigurationList = 8282CEB919F5987200555BB0 /* Build configuration list for PBXProject "BCMJSONAccess" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -172,8 +172,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8282CEBD19F5987200555BB0 /* DemoApp */,
-				82D3B19419FBF7C5003C4EB5 /* SafeCollectionAccessTests */,
+				8282CEBD19F5987200555BB0 /* BCMJSONAccess */,
+				82D3B19419FBF7C5003C4EB5 /* BCMJSONAccessTests */,
 			);
 		};
 /* End PBXProject section */
@@ -312,7 +312,7 @@
 				);
 				INFOPLIST_FILE = SafeCollectionAccessTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BCMJSONAccessTests;
 			};
 			name = Debug;
 		};
@@ -326,14 +326,14 @@
 				);
 				INFOPLIST_FILE = SafeCollectionAccessTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = BCMJSONAccessTests;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8282CEB919F5987200555BB0 /* Build configuration list for PBXProject "SafeCollectionAccess" */ = {
+		8282CEB919F5987200555BB0 /* Build configuration list for PBXProject "BCMJSONAccess" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8282CEC319F5987200555BB0 /* Debug */,
@@ -342,7 +342,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8282CEC519F5987200555BB0 /* Build configuration list for PBXNativeTarget "DemoApp" */ = {
+		8282CEC519F5987200555BB0 /* Build configuration list for PBXNativeTarget "BCMJSONAccess" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8282CEC619F5987200555BB0 /* Debug */,
@@ -351,7 +351,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		82D3B19B19FBF7C5003C4EB5 /* Build configuration list for PBXNativeTarget "SafeCollectionAccessTests" */ = {
+		82D3B19B19FBF7C5003C4EB5 /* Build configuration list for PBXNativeTarget "BCMJSONAccessTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				82D3B19C19FBF7C5003C4EB5 /* Debug */,

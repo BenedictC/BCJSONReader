@@ -1,15 +1,15 @@
 //
-//  BCPSafeCollectionAccess.h
+//  BCMJSONAccess.h
 //  BCLTypeCheckedCollectionAccessors
 //
 //  Created by Benedict Cohen on 24/10/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#ifndef BCPSafeCollectionAccess_h
-#define BCPSafeCollectionAccess_h
+#ifndef BCMJSONAccess_h
+#define BCMJSONAccess_h
 
-#import "Attempt.h"
+#import "AttemptSalvage.h"
 #import "BCLTypeCheckedCollectionAccessors.h"
 
 
