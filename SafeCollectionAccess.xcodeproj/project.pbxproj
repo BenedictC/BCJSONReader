@@ -26,7 +26,7 @@
 /* Begin PBXFileReference section */
 		8282CEBE19F5987200555BB0 /* DemoApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DemoApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		8282CEC819F5989200555BB0 /* BCLTypeCheckedCollectionAccessors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BCLTypeCheckedCollectionAccessors.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		8294F4F719F6D7A0005D1F62 /* Attempt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Attempt.h; sourceTree = "<group>"; };
+		8294F4F719F6D7A0005D1F62 /* AttemptSalvage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AttemptSalvage.h; sourceTree = "<group>"; };
 		82D3B18F19FADFDC003C4EB5 /* BCPSafeCollectionAccess.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BCPSafeCollectionAccess.h; sourceTree = "<group>"; };
 		82D3B19519FBF7C5003C4EB5 /* SafeCollectionAccessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SafeCollectionAccessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		82D3B19819FBF7C5003C4EB5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,7 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				82D3B18F19FADFDC003C4EB5 /* BCPSafeCollectionAccess.h */,
-				8294F4F719F6D7A0005D1F62 /* Attempt.h */,
+				8294F4F719F6D7A0005D1F62 /* AttemptSalvage.h */,
 				8282CEC819F5989200555BB0 /* BCLTypeCheckedCollectionAccessors.h */,
 			);
 			path = SafeCollectionAccess;
@@ -358,6 +358,7 @@
 				82D3B19D19FBF7C5003C4EB5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

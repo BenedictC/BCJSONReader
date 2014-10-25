@@ -1,13 +1,13 @@
 //
-//  Attempt.h
+//  AttemptSalvage.h
 //  TypeCheckedCollectionAccess
 //
 //  Created by Benedict Cohen on 21/10/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#ifndef Attempt_control_flow_h
-#define Attempt_control_flow_h
+#ifndef AttemptSalvage_h
+#define AttemptSalvage_h
 
 /**
  ATTEMPT/SALVAGE is a control-flow construct similiar to TRY/CATCH. It takes two blocks of code, an ATTEMPT block and
@@ -52,7 +52,7 @@
                                                   bail out and don't fall through into SALVAGE_BLOCK. */ \
     goto Salvage; /* Avoid 'unused label' warning. */ \
     Salvage: \
-    if (__hasSalvaged__) break; /*avoid accidental infinite loops due to ABANDON() being called in SALVAGE. */ \
+    NSCAssert(!__hasSalvaged__, @"Error within ATTEMPT/SALVAGE. Most likely this is due to ABANDON() being called with the SALVAGE block"); \
     __hasSalvaged__ = YES;
 
 
