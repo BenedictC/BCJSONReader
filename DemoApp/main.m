@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BCPSafeCollectionAccess.h"
+#import "BCMJSONAccess.h"
 
 
 

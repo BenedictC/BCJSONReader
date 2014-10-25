@@ -1,6 +1,6 @@
 //
 //  BCMJSONAccess.h
-//  BCLTypeCheckedCollectionAccessors
+//  BCMJSONAccess
 //
 //  Created by Benedict Cohen on 24/10/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
@@ -12,42 +12,53 @@
 #import "AttemptSalvage.h"
 #import "BCLTypeCheckedCollectionAccessors.h"
 
-
-
 /**
- BCPSafeCollectionAccess provides a macros to access collections in a type safe manner and provides a control flow
- for handling errors.
+
+ BCPSafeCollectionAccess provides macros to access collections in a type safe manner and control flow for handling
+ errors. BCPSafeCollectionAccess depends on BCLTypeCheckedCollectionAccessors for accessing the objects and
+ ATTEMPT/SALVAGE for control flow.
 
  */
 
-#pragma mark - Constants
 
+
+#pragma mark - FAILURE_INFO Keys
+/**
+ The key for the NSArray which stores NSErrors occured during the ATTEMPT block.
+ */
 static NSString * const BCPErrorsKey = @"BCPErrorsKey";
+/**
+ The key for the NSNumber which stores a BOOL which indicates if BCPSetAbandonOnError should ABANDON() when called.
+ */
 static NSString * const BCPShouldAbandonOnErrorKey = @"BCPShouldAbandonOnErrorKey";
 
 
 
 #pragma mark - Control Flow
 /**
- <#Description#>
+ Changes the behaviour of BCPHandleError to call ABANDON() when an error occurs. All other BCP* macros call
+ BCPHandleError.
 
- @param ABANDON_ON_ERROR <#ABANDON_ON_ERROR description#>
+ @param ABANDON_ON_ERROR A bool.
 
- @return <#return value description#>
+ @return none.
  */
 #define BCPSetAbandonOnError(ABANDON_ON_ERROR) \
 do { \
-    BOOL shouldAbandon = ABANDON_ON_ERROR; \
-    SET_FAILURE_INFO(BCPShouldAbandonOnErrorKey, @(shouldAbandon)); \
+BOOL shouldAbandon = (ABANDON_ON_ERROR); \
+SET_FAILURE_INFO(BCPShouldAbandonOnErrorKey, @(shouldAbandon)); \
 } while(0)
 
 
+
+#pragma mark - Error Handling
 /**
- <#Description#>
+ Adds the supplied error to the error array. If BCPSetAbandonOnError has been called with YES then this macro will also
+ call ABANDON.
 
- @param ERROR <#ERROR_TYPE description#>
+ @param ERROR The error to add to the error array.
 
- @return <#return value description#>
+ @return none
  */
 #define BCPHandleError(ERROR) do { \
 /* Fetch/create the errors array and store the error. */ \
@@ -65,58 +76,66 @@ if (shouldAbandon) ABANDON(); \
 
 
 
+/**
+ Returns an NSArray of NSError objects that occured within the ATTEMPT block.
+
+ @return an NSArray of NSError objects.
+ */
+#define BCPGetErrors() FAILURE_INFO(BCPErrorsKey)
+
+
 #pragma mark - BCL* Function Wrappers
 
 #define BCPIsKindOfClass(OBJECT, CLASS) ({ \
-    NSError *error = BCLIsKindOfClass((OBJECT), (CLASS)); \
-    BOOL success = error == nil; \
-    if (!success) BCPHandleError(error); \
-    success; \
+NSError *error = BCLIsKindOfClass((OBJECT), (CLASS)); \
+BOOL success = error == nil; \
+if (!success) BCPHandleError(error); \
+success; \
 })
 
 
 
 #define BCPArrayGetMandatoryObject(OBJECT, IDX, CLASS) ({ \
-    id result; \
-    NSError *error = BCLArrayGetMandatoryObject((OBJECT), (IDX), (CLASS), &result); \
-    if (error != nil) BCPHandleError(error); \
-    result; \
+id result; \
+NSError *error = BCLArrayGetMandatoryObject((OBJECT), (IDX), (CLASS), &result); \
+if (error != nil) BCPHandleError(error); \
+result; \
 })
 
 
 
 #define BCPArrayGetNullableObject(OBJECT, IDX, NULL_SUB, CLASS) ({ \
-    id result; \
-    NSError *error = BCLArrayGetNullableObject((OBJECT), (IDX), (CLASS), (NULL_SUB), &result); \
-    if (error != nil) BCPHandleError(error); \
-    result; \
+id result; \
+NSError *error = BCLArrayGetNullableObject((OBJECT), (IDX), (CLASS), (NULL_SUB), &result); \
+if (error != nil) BCPHandleError(error); \
+result; \
 })
 
 
 
 #define BCPDictionaryGetMandatoryObject(OBJECT, KEY, CLASS) ({ \
-    id result; \
-    NSError *error = BCLDictionaryGetMandatoryObject((OBJECT), (KEY), (CLASS), &result); \
-    if (error != nil) BCPHandleError(error); \
-    result; \
+id result; \
+NSError *error = BCLDictionaryGetMandatoryObject((OBJECT), (KEY), (CLASS), &result); \
+if (error != nil) BCPHandleError(error); \
+result; \
 })
 
 
 
 #define BCPDictionaryGetNullableObject(OBJECT, KEY, NULL_SUB, CLASS) ({ \
-    id result; \
-    NSError *error =  BCLDictionaryGetNullableObject((OBJECT), (KEY), (CLASS), (NULL_SUB), &result); \
-    if (error != nil) BCPHandleError(error); \
-    result; \
+id result; \
+NSError *error =  BCLDictionaryGetNullableObject((OBJECT), (KEY), (CLASS), (NULL_SUB), &result); \
+if (error != nil) BCPHandleError(error); \
+result; \
 })
 
 
 
 #define BCPDictionaryGetOptionalObject(OBJECT, KEY, DEFAULT_VALUE, CLASS) ({ \
-    id result; \
-    NSError *error = BCLDictionaryGetOptionalObject((OBJECT), (KEY), (CLASS), (DEFAULT_VALUE), &result); \
-    if (error != nil) BCPHandleError(error); \
-    result; \
+id result; \
+NSError *error = BCLDictionaryGetOptionalObject((OBJECT), (KEY), (CLASS), (DEFAULT_VALUE), &result); \
+if (error != nil) BCPHandleError(error); \
+result; \
 })
 
 
@@ -146,20 +165,17 @@ if (shouldAbandon) ABANDON(); \
 
 //Common Types
 #define BCPArrayGetMandatoryInteger(ARRAY, IDX) ({ \
-    NSNumber *value = BCPArrayGetMandatoryObject((ARRAY), (IDX), [NSNumber class]); \
-    [value integerValue]; \
+NSNumber *value = BCPArrayGetMandatoryObject((ARRAY), (IDX), [NSNumber class]); \
+[value integerValue]; \
 })
-
 #define BCPArrayGetMandatoryDouble(ARRAY, IDX) ({ \
-    NSNumber *value = BCPArrayGetMandatoryObject((ARRAY), (IDX), [NSNumber class]); \
-    [value doubleValue]; \
+NSNumber *value = BCPArrayGetMandatoryObject((ARRAY), (IDX), [NSNumber class]); \
+[value doubleValue]; \
 })
-
 #define BCPArrayGetMandatoryBoolean(ARRAY, IDX) ({ \
-    NSNumber *value = BCPArrayGetMandatoryObject((ARRAY), (IDX), [NSNumber class]); \
-    [value booleanValue]; \
+NSNumber *value = BCPArrayGetMandatoryObject((ARRAY), (IDX), [NSNumber class]); \
+[value booleanValue]; \
 })
-
 #define BCPArrayGetMandatoryString(ARRAY, IDX) BCPArrayGetMandatoryObject((ARRAY), (IDX), [NSString class])
 #define BCPArrayGetMandatoryDictionary(ARRAY, IDX) BCPArrayGetMandatoryObject((ARRAY), (IDX), [NSDictionary class])
 #define BCPArrayGetMandatoryArray(ARRAY, IDX) BCPArrayGetMandatoryObject((ARRAY), (IDX), [NSArray class])
@@ -179,20 +195,17 @@ if (shouldAbandon) ABANDON(); \
 
 //Common Types
 #define BCPArrayGetNullableInteger(ARRAY, IDX, NULL_SUBSTITUTE) ({ \
-    NSNumber *value = BCPArrayGetNullableObject((ARRAY), (IDX), (NULL_SUBSTITUTE), [NSNumber class]); \
-    [value integerValue]; \
+NSNumber *value = BCPArrayGetNullableObject((ARRAY), (IDX), (NULL_SUBSTITUTE), [NSNumber class]); \
+[value integerValue]; \
 })
-
 #define BCPArrayGetNullableDouble(ARRAY, IDX, NULL_SUBSTITUTE) ({ \
-    NSNumber *value = BCPArrayGetNullableObject((ARRAY), (IDX), (NULL_SUBSTITUTE), [NSNumber class]); \
-    [value doubleValue]; \
+NSNumber *value = BCPArrayGetNullableObject((ARRAY), (IDX), (NULL_SUBSTITUTE), [NSNumber class]); \
+[value doubleValue]; \
 })
-
 #define BCPArrayGetNullableBoolean(ARRAY, IDX, NULL_SUBSTITUTE) ({ \
-    NSNumber *value = BCPArrayGetNullableObject((ARRAY), (IDX), (NULL_SUBSTITUTE), [NSNumber class]); \
-    [value booleanValue]; \
+NSNumber *value = BCPArrayGetNullableObject((ARRAY), (IDX), (NULL_SUBSTITUTE), [NSNumber class]); \
+[value booleanValue]; \
 })
-
 #define BCPArrayGetNullableString(ARRAY, IDX, NULL_SUBSTITUTE) BCPArrayGetNullableObject((ARRAY), (IDX), (NULL_SUBSTITUTE), [NSString class])
 #define BCPArrayGetNullableDictionary(ARRAY, IDX, NULL_SUBSTITUTE) BCPArrayGetNullableObject((ARRAY), (IDX), (NULL_SUBSTITUTE), [NSDictionary class])
 #define BCPArrayGetNullableArray(ARRAY, IDX, NULL_SUBSTITUTE) BCPArrayGetNullableObject((ARRAY), (IDX), (NULL_SUBSTITUTE), [NSArray class])
@@ -211,20 +224,17 @@ if (shouldAbandon) ABANDON(); \
 
 //Common Types
 #define BCPDictionaryGetMandatoryInteger(DICTIONARY, KEY) ({ \
-    NSNumber *value = BCPDictionaryGetMandatoryObject((DICTIONARY), (KEY), [NSNumber class]); \
-    [value integerValue]; \
+NSNumber *value = BCPDictionaryGetMandatoryObject((DICTIONARY), (KEY), [NSNumber class]); \
+[value integerValue]; \
 })
-
 #define BCPDictionaryGetMandatoryDouble(DICTIONARY, KEY) ({ \
-    NSNumber *value = BCPDictionaryGetMandatoryObject((DICTIONARY), (KEY), [NSNumber class]); \
-    [value doubleValue]; \
+NSNumber *value = BCPDictionaryGetMandatoryObject((DICTIONARY), (KEY), [NSNumber class]); \
+[value doubleValue]; \
 })
-
 #define BCPDictionaryGetMandatoryBoolean(DICTIONARY, KEY) ({ \
-    NSNumber *value = BCPDictionaryGetMandatoryObject((DICTIONARY), (KEY), [NSNumber class]); \
-    [value booleanValue]; \
+NSNumber *value = BCPDictionaryGetMandatoryObject((DICTIONARY), (KEY), [NSNumber class]); \
+[value booleanValue]; \
 })
-
 #define BCPDictionaryGetMandatoryString(DICTIONARY, KEY) BCPDictionaryGetMandatoryObject((DICTIONARY), (KEY), [NSString class])
 #define BCPDictionaryGetMandatoryDictionary(DICTIONARY, KEY) BCPDictionaryGetMandatoryObject((DICTIONARY), (KEY), [NSDictionary class])
 #define BCPDictionaryGetMandatoryArray(DICTIONARY, KEY) BCPDictionaryGetMandatoryObject((DICTIONARY), (KEY), [NSArray class])
@@ -244,20 +254,17 @@ if (shouldAbandon) ABANDON(); \
 
 //Common Types
 #define BCPDictionaryGetNullableInteger(DICTIONARY, KEY, NULL_SUBSTITUTE) ({ \
-    NSNumber *value = BCPDictionaryGetNullableObject((DICTIONARY), (KEY), (NULL_SUBSTITUTE), [NSNumber class]); \
-    [value integerValue]; \
+NSNumber *value = BCPDictionaryGetNullableObject((DICTIONARY), (KEY), (NULL_SUBSTITUTE), [NSNumber class]); \
+[value integerValue]; \
 })
-
 #define BCPDictionaryGetNullableDouble(DICTIONARY, KEY, NULL_SUBSTITUTE) ({ \
-    NSNumber *value = BCPDictionaryGetNullableObject((DICTIONARY), (KEY), (NULL_SUBSTITUTE), [NSNumber class]); \
-    [value doubleValue]; \
+NSNumber *value = BCPDictionaryGetNullableObject((DICTIONARY), (KEY), (NULL_SUBSTITUTE), [NSNumber class]); \
+[value doubleValue]; \
 })
-
 #define BCPDictionaryGetNullableBoolean(DICTIONARY, KEY, NULL_SUBSTITUTE) ({ \
-    NSNumber *value = BCPDictionaryGetNullableObject((DICTIONARY), (KEY), (NULL_SUBSTITUTE), [NSNumber class]); \
-    [value booleanValue]; \
+NSNumber *value = BCPDictionaryGetNullableObject((DICTIONARY), (KEY), (NULL_SUBSTITUTE), [NSNumber class]); \
+[value booleanValue]; \
 })
-
 #define BCPDictionaryGetNullableString(DICTIONARY, KEY, NULL_SUBSTITUTE) BCPDictionaryGetNullableObject((DICTIONARY), (KEY), (NULL_SUBSTITUTE), [NSString class])
 #define BCPDictionaryGetNullableDictionary(DICTIONARY, KEY, NULL_SUBSTITUTE) BCPDictionaryGetNullableObject((DICTIONARY), (KEY), (NULL_SUBSTITUTE), [NSDictionary class])
 #define BCPDictionaryGetNullableArray(DICTIONARY, KEY, NULL_SUBSTITUTE) BCPDictionaryGetNullableObject((DICTIONARY), (KEY), (NULL_SUBSTITUTE), [NSArray class])
@@ -274,20 +281,17 @@ if (shouldAbandon) ABANDON(); \
 
 //Common Types
 #define BCPDictionaryGetOptionalInteger(DICTIONARY, KEY, DEFAULT_VALUE) ({ \
-    NSNumber *value = BCPDictionaryGetOptionalObject((DICTIONARY), (KEY), (DEFAULT_VALUE), [NSNumber class]); \
-    [value integerValue]; \
+NSNumber *value = BCPDictionaryGetOptionalObject((DICTIONARY), (KEY), (DEFAULT_VALUE), [NSNumber class]); \
+[value integerValue]; \
 })
-
 #define BCPDictionaryGetOptionalDouble(DICTIONARY, KEY, DEFAULT_VALUE) ({ \
-    NSNumber *value = BCPDictionaryGetOptionalObject((DICTIONARY), (KEY), (DEFAULT_VALUE), [NSNumber class]); \
-    [value doubleValue]; \
+NSNumber *value = BCPDictionaryGetOptionalObject((DICTIONARY), (KEY), (DEFAULT_VALUE), [NSNumber class]); \
+[value doubleValue]; \
 })
-
 #define BCPDictionaryGetOptionalBoolean(DICTIONARY, KEY, DEFAULT_VALUE) ({ \
-    NSNumber *value = BCPDictionaryGetOptionalObject((DICTIONARY), (KEY), (DEFAULT_VALUE), [NSNumber class]); \
-    [value booleanValue]; \
+NSNumber *value = BCPDictionaryGetOptionalObject((DICTIONARY), (KEY), (DEFAULT_VALUE), [NSNumber class]); \
+[value booleanValue]; \
 })
-
 #define BCPDictionaryGetOptionalString(DICTIONARY, KEY, DEFAULT_VALUE) BCPDictionaryGetOptionalObject((DICTIONARY), (KEY), (DEFAULT_VALUE), [NSString class])
 #define BCPDictionaryGetOptionalDictionary(DICTIONARY, KEY, DEFAULT_VALUE) BCPDictionaryGetOptionalObject((DICTIONARY), (KEY), (DEFAULT_VALUE), [NSDictionary class])
 #define BCPDictionaryGetOptionalArray(DICTIONARY, KEY, DEFAULT_VALUE) BCPDictionaryGetOptionalObject((DICTIONARY), (KEY), (DEFAULT_VALUE), [NSArray class])
