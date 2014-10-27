@@ -44,6 +44,7 @@ typedef NS_ENUM(NSUInteger, BCLError){
 
  @return nil if the object is of type class otherwise an NSError describing the failure reason.
  */
+ __attribute__((nonnull(1, 2)))
 static inline NSError *BCLIsKindOfClass(id object, Class class) {
     return ([object isKindOfClass:class]) ? nil : [NSError errorWithDomain:BCLErrorDomain code:BCLErrorUnexpectedValueType userInfo:
                                                    @{
@@ -65,7 +66,8 @@ static inline NSError *BCLIsKindOfClass(id object, Class class) {
 
  @return nil if the fetch is successful otherwise an NSError describing the failure reason.
  */
-static inline NSError *BCLArrayGetMandatoryObject(NSArray *array, NSUInteger idx, Class class, id *outValue) {
+ __attribute__((nonnull(1, 3, 4)))
+static inline NSError * BCLArrayGetMandatoryObject(NSArray *array, NSUInteger idx, Class class, id *outValue) {
     *outValue = nil; //Ensure that there isn't junk in the outValue.
     NSUInteger count = [array count];
     if (!(idx < count)) {
@@ -105,6 +107,7 @@ static inline NSError *BCLArrayGetMandatoryObject(NSArray *array, NSUInteger idx
 
  @return nil if the fetch is successful otherwise an NSError describing the failure reason.
  */
+ __attribute__((nonnull(1, 3, 4, 5)))
 static inline NSError *BCLArrayGetNullableObject(NSArray *array, NSUInteger idx, Class class, id nullSubstitute, id *outValue) {
     *outValue = nil; //Ensure that there isn't junk in the outValue.
     NSUInteger count = [array count];
@@ -151,6 +154,7 @@ static inline NSError *BCLArrayGetNullableObject(NSArray *array, NSUInteger idx,
 
  @return nil if the fetch is successful otherwise an NSError describing the failure reason.
  */
+ __attribute__((nonnull(1, 2, 3, 4)))
 static inline NSError *BCLDictionaryGetMandatoryObject(NSDictionary *dict, id key, Class class, id *outValue) {
     *outValue = [dict objectForKey:key];
     if (*outValue == nil) {
@@ -190,6 +194,7 @@ static inline NSError *BCLDictionaryGetMandatoryObject(NSDictionary *dict, id ke
 
  @return nil if the fetch is successful otherwise an NSError describing the failure reason.
  */
+ __attribute__((nonnull(1, 2, 3, 5)))
 static inline NSError *BCLDictionaryGetNullableObject(NSDictionary *dict, id key, Class class, id nullSubstitute, id *outValue) {
     *outValue = [dict objectForKey:key];
     if (*outValue == nil) {
@@ -236,6 +241,7 @@ static inline NSError *BCLDictionaryGetNullableObject(NSDictionary *dict, id key
 
  @return nil if the fetch is successful otherwise an NSError describing the failure reason.
  */
+ __attribute__((nonnull(1, 2, 3, 5)))
 static inline NSError *BCLDictionaryGetOptionalObject(NSDictionary *dict, id key, Class class, id defaultValue, id *outValue) {
     *outValue = [dict objectForKey:key];
     if (*outValue == nil) {

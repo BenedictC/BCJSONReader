@@ -7,31 +7,60 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BCMJSONAccess.h"
+#import "AttemptSalvage.h"
+#import "BCLContinuation.h"
 
 
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
 
-        NSDictionary *json = @{@"number": @7};
+        NSDictionary *json = @{@"number": @7,
+                               @"string": @"arf"};
 
-        ATTEMPT({
-            BCPSetAbandonOnError(YES);
-            NSNumber *number  = BCPDictionaryGetMandatoryObject(json, @"number", [NSNumber class]);
+//      //Plain function access
+//        void (^handleError)(NSError *) = ^(NSError *error){
+//            [error self];
+//        };
+//        id value;
+//        NSError *error;
+//        //Function with error returned
+//        if ((error = BCLArrayGetMandatoryObject(@[], 0, [NSArray class], &value))) handleError(error);
+//        //Function with status returned
+//        if (BCLArrayGetMandatoryObject(@[], 0, [NSArray class], &value, &error)) handleError(error);
+//        //Function with completion block
+//        BCLArrayGetMandatoryObject(@[], 0, [NSArray class], ^(BOOL didSucceed, id value, NSError *error){
+//
+//        });
 
-            NSInteger integer = BCPDictionaryGetMandatoryInteger(json, @"number");
-            id string = BCPDictionaryGetMandatoryString(json, @"number");
-            [string self];
 
-            NSLog(@"%@, %ld", number, integer);
-        })
-        SALVAGE({
-            NSLog(@"Failed with errors: %@", FAILURE_INFO(BCPErrorsKey));
-        });
+
+//        //Macro control-flow
+//        ATTEMPT({
+//            BCMSetAbandonOnError(YES);
+//            NSNumber *number  = BCMDictionaryGetMandatoryObject(json, @"number", [NSNumber class]);
+//
+//            NSInteger integer = BCMDictionaryGetMandatoryInteger(json, @"number");
+//            id string = BCMDictionaryGetMandatoryString(json, @"number");
+//            [string self];
+//
+//            NSLog(@"%@, %ld", number, integer);
+//        })
+//        SALVAGE({
+//            NSLog(@"Failed with errors: %@", BCMGetErrors());
+//        });
+
+
+
+//Continuation
+        [BCLContinuation untilEnd:
+         BCJDictionaryGetOptionalObject(json, @"number", NSNumber.class, @0, ^(NSNumber *value){
+            
+        }),
+         BCJDictionaryGetOptionalObject(json, @"number", NSNumber.class, @0, ^(NSNumber *value){
+        }),
+         nil];
+        
     }
-
-    NSLog(@"Bye!");
-
     return 0;
 }
