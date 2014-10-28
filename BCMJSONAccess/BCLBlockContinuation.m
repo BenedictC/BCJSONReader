@@ -10,7 +10,7 @@
 
 
 
-id<BCLContinuation> BCLContinuationWithBlock(BOOL(^block)(NSError **)) {
+id<BCLContinuation> BCLContinuationWithBlock(BOOL(^block)(NSError **outError)) {
 
     return [[BCLBlockContinuation alloc] initWithBlock:block];
 }
@@ -19,21 +19,21 @@ id<BCLContinuation> BCLContinuationWithBlock(BOOL(^block)(NSError **)) {
 
 @implementation BCLBlockContinuation
 
--(instancetype)initWithBlock:(BOOL(^)(NSError **))block
+-(instancetype)initWithBlock:(BOOL(^)(NSError **outError))block
 {
     self = [super init];
     if (self == nil) return nil;
 
     _block = block;
 
-    return nil;
+    return self;
 }
 
 
 
--(BOOL)executeAndReturnError:(NSError **)error
+-(BOOL)executeAndReturnError:(NSError **)outError
 {
-    return self.block(error);
+    return self.block(outError);
 }
 
 @end

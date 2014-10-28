@@ -12,7 +12,7 @@
 
 @interface BCLContinuation : NSObject
 
-+(NSArray *)untilEnd:(id<BCLContinuation>)failabiles, ...;
-+(NSError *)untilError:(id<BCLContinuation>)failabiles, ...;
++(NSArray *)untilEnd:(id<BCLContinuation>)firstContinuations, ... NS_REQUIRES_NIL_TERMINATION;
++(NSError *)untilError:(id<BCLContinuation>)firstContinuations, ... NS_REQUIRES_NIL_TERMINATION;
 
 @end

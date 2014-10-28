@@ -12,19 +12,46 @@
 
 @implementation BCLContinuation
 
-+(NSArray *)untilEnd:(id<BCLContinuation>)failabiles, ...
++(NSArray *)untilEnd:(id<BCLContinuation>)firstContinuation, ...
 {
-    //TODO:
-    return nil;    
+    NSMutableArray *errors = [NSMutableArray new];
+
+    va_list args;
+    va_start(args, firstContinuation);
+    id<BCLContinuation> currentContinuation = firstContinuation;
+    while (currentContinuation != nil) {
+
+        NSError *error = nil;
+        if (![currentContinuation executeAndReturnError:&error] && error != nil) {
+            [errors addObject:error];
+        }
+
+        currentContinuation = va_arg(args, id);
+    }
+    va_end(args);
+
+    return (errors.count == 0) ? nil : errors;
 }
 
 
 
-+(NSError *)untilError:(id<BCLContinuation>)failabiles, ...
++(NSError *)untilError:(id<BCLContinuation>)firstContinuation, ...
 {
-    //TODO:
+    va_list args;
+    va_start(args, firstContinuation);
+    id<BCLContinuation> currentContinuation = firstContinuation;
+    while (currentContinuation != nil) {
+
+        NSError *error = nil;
+        if (![currentContinuation executeAndReturnError:&error]) {
+            return error;
+        }
+
+        currentContinuation = va_arg(args, id);
+    }
+    va_end(args);
+
     return nil;
 }
-
 
 @end

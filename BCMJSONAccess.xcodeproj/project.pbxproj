@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		825129641A0043E30037A4E9 /* libBCMJSONAccess.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82EBE79A19FCEEB0001F995B /* libBCMJSONAccess.a */; };
 		82D3B1A019FBF8D3003C4EB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D3B19F19FBF8D3003C4EB5 /* main.m */; };
 		82EBE7B619FCF202001F995B /* AttemptSalvage.h in Headers */ = {isa = PBXBuildFile; fileRef = 82EBE7B219FCF1B6001F995B /* AttemptSalvage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		82EBE7B719FCF202001F995B /* BCLTypeCheckedCollectionAccessors.h in Headers */ = {isa = PBXBuildFile; fileRef = 82EBE7B319FCF1B6001F995B /* BCLTypeCheckedCollectionAccessors.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -16,8 +17,8 @@
 		82EBE7C219FE2C52001F995B /* BCLContinuation+ControlFlow.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EBE7C019FE2C52001F995B /* BCLContinuation+ControlFlow.m */; };
 		82EBE7C819FE2E46001F995B /* BCLBlockContinuation.h in Headers */ = {isa = PBXBuildFile; fileRef = 82EBE7C619FE2E46001F995B /* BCLBlockContinuation.h */; };
 		82EBE7C919FE2E46001F995B /* BCLBlockContinuation.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EBE7C719FE2E46001F995B /* BCLBlockContinuation.m */; };
-		82EBE7CE19FE3115001F995B /* BCMJSONAccess.h in Headers */ = {isa = PBXBuildFile; fileRef = 82EBE7CC19FE3115001F995B /* BCMJSONAccess.h */; };
-		82EBE7CF19FE3115001F995B /* BCMJSONAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EBE7CD19FE3115001F995B /* BCMJSONAccess.m */; };
+		82EBE7CE19FE3115001F995B /* BCJJSONContinuations.h in Headers */ = {isa = PBXBuildFile; fileRef = 82EBE7CC19FE3115001F995B /* BCJJSONContinuations.h */; };
+		82EBE7CF19FE3115001F995B /* BCJJSONContinuations.m in Sources */ = {isa = PBXBuildFile; fileRef = 82EBE7CD19FE3115001F995B /* BCJJSONContinuations.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,14 +41,14 @@
 		82EBE7AA19FCEEB0001F995B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82EBE7B219FCF1B6001F995B /* AttemptSalvage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttemptSalvage.h; path = BCMJSONAccess/AttemptSalvage.h; sourceTree = "<group>"; };
 		82EBE7B319FCF1B6001F995B /* BCLTypeCheckedCollectionAccessors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCLTypeCheckedCollectionAccessors.h; path = BCMJSONAccess/BCLTypeCheckedCollectionAccessors.h; sourceTree = "<group>"; };
-		82EBE7B419FCF1B6001F995B /* BCMJSONAccessMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCMJSONAccessMacros.h; sourceTree = "<group>"; };
+		82EBE7B419FCF1B6001F995B /* BCMJSONAccessMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCMJSONAccessMacros.h; path = BCMJSONAccess/BCMJSONAccessMacros.h; sourceTree = "<group>"; };
 		82EBE7B919FCF409001F995B /* AttemptSalvageTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttemptSalvageTests.m; sourceTree = "<group>"; };
 		82EBE7BF19FE2C52001F995B /* BCLContinuation+ControlFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCLContinuation+ControlFlow.h"; sourceTree = "<group>"; };
 		82EBE7C019FE2C52001F995B /* BCLContinuation+ControlFlow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCLContinuation+ControlFlow.m"; sourceTree = "<group>"; };
 		82EBE7C619FE2E46001F995B /* BCLBlockContinuation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLBlockContinuation.h; sourceTree = "<group>"; };
 		82EBE7C719FE2E46001F995B /* BCLBlockContinuation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLBlockContinuation.m; sourceTree = "<group>"; };
-		82EBE7CC19FE3115001F995B /* BCMJSONAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCMJSONAccess.h; sourceTree = "<group>"; };
-		82EBE7CD19FE3115001F995B /* BCMJSONAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCMJSONAccess.m; sourceTree = "<group>"; };
+		82EBE7CC19FE3115001F995B /* BCJJSONContinuations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJJSONContinuations.h; sourceTree = "<group>"; };
+		82EBE7CD19FE3115001F995B /* BCJJSONContinuations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJJSONContinuations.m; sourceTree = "<group>"; };
 		82EBE7D019FE474B001F995B /* BCLContinuationProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BCLContinuationProtocol.h; sourceTree = "<group>"; };
 		82EBE7D119FE481C001F995B /* BCLContinuation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BCLContinuation.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				825129641A0043E30037A4E9 /* libBCMJSONAccess.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,10 +83,11 @@
 			isa = PBXGroup;
 			children = (
 				82D3B19E19FBF8D3003C4EB5 /* DemoApp */,
-				82EBE7C319FE2D2D001F995B /* BCLAttempt */,
+				82EBE7B119FCF1B6001F995B /* BCJJSONContinuations */,
+				82EBE7C319FE2D2D001F995B /* BCLContinuation */,
 				82EBE7CA19FE301E001F995B /* AttemptSalvage */,
-				82EBE7CB19FE30CA001F995B /* BCLTypeCheckedCollectionAccessors */,
-				82EBE7B119FCF1B6001F995B /* BCMJSONAccess */,
+				82EBE7B419FCF1B6001F995B /* BCMJSONAccessMacros.h */,
+				82EBE7B319FCF1B6001F995B /* BCLTypeCheckedCollectionAccessors.h */,
 				82EBE7A819FCEEB0001F995B /* BCMJSONAccessTests */,
 				8282CEBF19F5987200555BB0 /* Products */,
 			);
@@ -125,17 +128,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		82EBE7B119FCF1B6001F995B /* BCMJSONAccess */ = {
+		82EBE7B119FCF1B6001F995B /* BCJJSONContinuations */ = {
 			isa = PBXGroup;
 			children = (
-				82EBE7B419FCF1B6001F995B /* BCMJSONAccessMacros.h */,
-				82EBE7CC19FE3115001F995B /* BCMJSONAccess.h */,
-				82EBE7CD19FE3115001F995B /* BCMJSONAccess.m */,
+				82EBE7CC19FE3115001F995B /* BCJJSONContinuations.h */,
+				82EBE7CD19FE3115001F995B /* BCJJSONContinuations.m */,
 			);
+			name = BCJJSONContinuations;
 			path = BCMJSONAccess;
 			sourceTree = "<group>";
 		};
-		82EBE7C319FE2D2D001F995B /* BCLAttempt */ = {
+		82EBE7C319FE2D2D001F995B /* BCLContinuation */ = {
 			isa = PBXGroup;
 			children = (
 				82EBE7D119FE481C001F995B /* BCLContinuation.h */,
@@ -145,7 +148,7 @@
 				82EBE7C619FE2E46001F995B /* BCLBlockContinuation.h */,
 				82EBE7C719FE2E46001F995B /* BCLBlockContinuation.m */,
 			);
-			name = BCLAttempt;
+			name = BCLContinuation;
 			path = BCMJSONAccess;
 			sourceTree = "<group>";
 		};
@@ -157,14 +160,6 @@
 			name = AttemptSalvage;
 			sourceTree = "<group>";
 		};
-		82EBE7CB19FE30CA001F995B /* BCLTypeCheckedCollectionAccessors */ = {
-			isa = PBXGroup;
-			children = (
-				82EBE7B319FCF1B6001F995B /* BCLTypeCheckedCollectionAccessors.h */,
-			);
-			name = BCLTypeCheckedCollectionAccessors;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -174,7 +169,7 @@
 			files = (
 				82EBE7C819FE2E46001F995B /* BCLBlockContinuation.h in Headers */,
 				82EBE7B619FCF202001F995B /* AttemptSalvage.h in Headers */,
-				82EBE7CE19FE3115001F995B /* BCMJSONAccess.h in Headers */,
+				82EBE7CE19FE3115001F995B /* BCJJSONContinuations.h in Headers */,
 				82EBE7B719FCF202001F995B /* BCLTypeCheckedCollectionAccessors.h in Headers */,
 				82EBE7C119FE2C52001F995B /* BCLContinuation+ControlFlow.h in Headers */,
 				82EBE7B819FCF202001F995B /* BCMJSONAccessMacros.h in Headers */,
@@ -306,7 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				82EBE7C919FE2E46001F995B /* BCLBlockContinuation.m in Sources */,
-				82EBE7CF19FE3115001F995B /* BCMJSONAccess.m in Sources */,
+				82EBE7CF19FE3115001F995B /* BCJJSONContinuations.m in Sources */,
 				82EBE7C219FE2C52001F995B /* BCLContinuation+ControlFlow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -448,6 +443,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 			};
 			name = Debug;
 		};
@@ -459,6 +455,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

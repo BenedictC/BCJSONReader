@@ -10,14 +10,27 @@
 #import "AttemptSalvage.h"
 #import "BCLContinuation.h"
 
+#import "BCJJSONContinuations.h"
+
+
+
+@interface TestObject : NSObject
+@property NSInteger number;
+@property NSString *string;
+@end
+
+@implementation TestObject
+
+@end
+
 
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
 
-        NSDictionary *json = @{@"number": @7,
-                               @"string": @"arf"};
-
+//        NSDictionary *json = @{@"number": @7,
+//                               @"string": @"arf"};
+//
 //      //Plain function access
 //        void (^handleError)(NSError *) = ^(NSError *error){
 //            [error self];
@@ -53,14 +66,33 @@ int main(int argc, const char * argv[]) {
 
 
 //Continuation
-        [BCLContinuation untilEnd:
-         BCJDictionaryGetOptionalObject(json, @"number", NSNumber.class, @0, ^(NSNumber *value){
-            
-        }),
-         BCJDictionaryGetOptionalObject(json, @"number", NSNumber.class, @0, ^(NSNumber *value){
-        }),
-         nil];
-        
+        NSDictionary *sourceObject = @{
+                                       @"number": @7,
+                                       @"string": @"arf"
+                                       };
+        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:sourceObject options:0 error:NULL];
+        TestObject *target = [TestObject new];
+        NSArray *errors = ({
+            NSDictionary *json;
+
+            [BCLContinuation untilEnd:
+             BCJDeserializeJSON(jsonData, &json),
+             BCJSetNumber(json, @"number", target, BCJ_KEY(number)),
+             BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
+                id localJson = json;
+                NSLog(@"%@", localJson);
+                return YES;
+            }),
+             BCJSetNumber(json, @"notANumber", BCJGetterModeOptional, 0, target, BCJ_KEY(number)),
+             BCJSetString(json, @"string", BCJGetterModeNullableDefaultable, @"default", target, BCJ_KEY(string)),
+             BCJSetString(json, @"string", target, BCJ_KEY(string)),
+             BCJGetValue(json, @"number", NSNumber.class, 0, nil, ^(NSNumber *number){
+                return;
+            }),
+             nil];
+        });
+
+        [errors self];
     }
     return 0;
 }

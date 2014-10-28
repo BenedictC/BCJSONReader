@@ -10,12 +10,13 @@
 
 
 
-id<BCLContinuation> BCLContinuationWithBlock(BOOL(^block)(NSError **));
+id<BCLContinuation> BCLContinuationWithBlock(BOOL(^block)(NSError **outError));
+
 
 
 @interface BCLBlockContinuation : NSObject <BCLContinuation>
 
--(instancetype)initWithBlock:(BOOL(^)(NSError **))block;
-@property(nonatomic, readonly, copy) BOOL(^block)(NSError **);
+-(instancetype)initWithBlock:(BOOL(^)(NSError **outError))block;
+@property(nonatomic, readonly, copy) BOOL(^block)(NSError **outError);
 
 @end

@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-
-
 #import "BCLContinuationProtocol.h"
 #import "BCLContinuation+ControlFlow.h"
 #import "BCLBlockContinuation.h"
