@@ -21,6 +21,11 @@
 
 @implementation TestObject
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@> %@", super.description, @(self.aNumber)];
+}
+
 @end
 
 
@@ -59,7 +64,7 @@ int main(int argc, const char * argv[]) {
              //Fill the json container
              BCJDeserializeJSON(jsonData, json),
 
-//             //Set a type mismatched value (this will fail at DEBUG due to an assert against type mismatches.)
+//             //Set a type mismatched value (this will fail in DEBUG due to an assert against type mismatches.)
 //             BCJSetNumber(json, @"number", target, BCJ_KEY(string)),
 
              BCJSetString(json, @"string", target, BCJ_KEY(aNumber)),
@@ -70,14 +75,11 @@ int main(int argc, const char * argv[]) {
             }),
 
              //Set an array property by mapping a collection
-             BCJSetMap(json, @"addresses", NSDictionary.class, BCJMapModeMandatory, target, BCJ_KEY(addresses), ^id(id key, NSDictionary *addressJSON, NSError **outError){
-
+             BCJSetMap(json, @"dict", NSNumber.class, BCJMapModeMandatory, target, BCJ_KEY(addresses), @"aNumber", ^id(NSString *key, NSNumber *number, NSError **outError){
                 TestObject *address = [TestObject new];
-                *outError = [BCLContinuation untilError:
-                 BCJSetString(addressJSON, @"post_code", address, BCJ_KEY(postCode)),
-                 nil];
+                address.aNumber = [number integerValue];
 
-                return (*outError == nil) ? address : nil;
+                return address;
              }),
 
              //Set a stack variable
@@ -86,6 +88,7 @@ int main(int argc, const char * argv[]) {
              nil];
         });
 
+        NSLog(@"%@", target.addresses);
         NSLog(@"error: %@", error);
     }
     return 0;
