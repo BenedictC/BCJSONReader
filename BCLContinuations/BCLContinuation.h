@@ -9,3 +9,4 @@
 #import "BCLContinuationProtocol.h"
 #import "BCLContinuation+ControlFlow.h"
 #import "BCLBlockContinuation.h"
+#import "BCLContinuation+ControlFlowContinuations.h"

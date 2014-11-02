@@ -10,9 +10,25 @@
 
 
 
+extern NSString * const BCLErrorDomain;
+
+extern NSString * const BCLDetailedErrorsKey;
+
+
+
+enum : NSInteger {
+    BCLMultipleErrorsError,
+    BCLUnknownError,
+};
+
+
+
 @interface BCLContinuation : NSObject
 
-+(NSArray *)untilEnd:(id<BCLContinuation>)firstContinuations, ... NS_REQUIRES_NIL_TERMINATION;
++(NSError *)untilEnd:(id<BCLContinuation>)firstContinuations, ... NS_REQUIRES_NIL_TERMINATION;
 +(NSError *)untilError:(id<BCLContinuation>)firstContinuations, ... NS_REQUIRES_NIL_TERMINATION;
+
++(BCLContinuation *)currentContinuation;
+-(void)abortWithError:(NSError *)errror;
 
 @end

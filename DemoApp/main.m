@@ -7,16 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AttemptSalvage.h"
-#import "BCLContinuation.h"
 
 #import "BCJJSONContinuations.h"
 
 
 
 @interface TestObject : NSObject
-@property NSInteger number;
+@property NSInteger aNumber;
 @property NSString *string;
+@property NSArray *addresses;
+@property NSString *postCode;
 @end
 
 @implementation TestObject
@@ -28,71 +28,65 @@
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
 
-//        NSDictionary *json = @{@"number": @7,
-//                               @"string": @"arf"};
-//
-//      //Plain function access
-//        void (^handleError)(NSError *) = ^(NSError *error){
-//            [error self];
-//        };
-//        id value;
-//        NSError *error;
-//        //Function with error returned
-//        if ((error = BCLArrayGetMandatoryObject(@[], 0, [NSArray class], &value))) handleError(error);
-//        //Function with status returned
-//        if (BCLArrayGetMandatoryObject(@[], 0, [NSArray class], &value, &error)) handleError(error);
-//        //Function with completion block
-//        BCLArrayGetMandatoryObject(@[], 0, [NSArray class], ^(BOOL didSucceed, id value, NSError *error){
-//
-//        });
-
-
-
-//        //Macro control-flow
-//        ATTEMPT({
-//            BCMSetAbandonOnError(YES);
-//            NSNumber *number  = BCMDictionaryGetMandatoryObject(json, @"number", [NSNumber class]);
-//
-//            NSInteger integer = BCMDictionaryGetMandatoryInteger(json, @"number");
-//            id string = BCMDictionaryGetMandatoryString(json, @"number");
-//            [string self];
-//
-//            NSLog(@"%@, %ld", number, integer);
-//        })
-//        SALVAGE({
-//            NSLog(@"Failed with errors: %@", BCMGetErrors());
-//        });
-
-
-
-//Continuation
-        NSDictionary *sourceObject = @{
+        //Input data
+        NSData *jsonData = ({
+            NSDictionary *sourceObject = @{
                                        @"number": @7,
-                                       @"string": @"arf"
+                                       @"string": @"arf",
+                                       @"dict" : @{
+                                               @"one": @(1),
+                                               @"two": @(2),
+                                               @"three": @(3),
+                                               @"four": @(4),
+                                               @"five": @(5)
+                                               },
                                        };
-        NSData *jsonData = [NSJSONSerialization dataWithJSONObject:sourceObject options:0 error:NULL];
-        TestObject *target = [TestObject new];
-        NSArray *errors = ({
-            NSDictionary *json;
+            [NSJSONSerialization dataWithJSONObject:sourceObject options:0 error:NULL];
+        });
 
-            [BCLContinuation untilEnd:
-             BCJDeserializeJSON(jsonData, &json),
-             BCJSetNumber(json, @"number", target, BCJ_KEY(number)),
-             BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
-                id localJson = json;
-                NSLog(@"%@", localJson);
+        //Output objects
+        TestObject *target = [TestObject new];
+        NSString *string = @"adfsgd";
+
+        //Run the continuation
+        NSError *error = ({
+            //Create a container to store the JSON in.
+            BCJContainer *json = [BCJContainer new];
+
+            //Go!
+            [BCLContinuation untilError:
+
+             //Fill the json container
+             BCJDeserializeJSON(jsonData, json),
+
+//             //Set a type mismatched value (this will fail at DEBUG due to an assert against type mismatches.)
+//             BCJSetNumber(json, @"number", target, BCJ_KEY(string)),
+
+             BCJSetString(json, @"string", target, BCJ_KEY(aNumber)),
+             //Get a value and validate & set it.
+             BCJGetValue(json, @"string", NSString.class, BCJGetterModeMantatory, nil, ^BOOL(id value, NSError **outError) {
+                BCJValidateAndSet(value, @"SELF == 'arf!!'", target, BCJ_KEY(string), outError);
                 return YES;
             }),
-             BCJSetNumber(json, @"notANumber", BCJGetterModeOptional, 0, target, BCJ_KEY(number)),
-             BCJSetString(json, @"string", BCJGetterModeNullableDefaultable, @"default", target, BCJ_KEY(string)),
-             BCJSetString(json, @"string", target, BCJ_KEY(string)),
-             BCJGetValue(json, @"number", NSNumber.class, 0, nil, ^(NSNumber *number){
-                return;
-            }),
+
+             //Set an array property by mapping a collection
+             BCJSetMap(json, @"addresses", NSDictionary.class, BCJMapModeMandatory, target, BCJ_KEY(addresses), ^id(id key, NSDictionary *addressJSON, NSError **outError){
+
+                TestObject *address = [TestObject new];
+                *outError = [BCLContinuation untilError:
+                 BCJSetString(addressJSON, @"post_code", address, BCJ_KEY(postCode)),
+                 nil];
+
+                return (*outError == nil) ? address : nil;
+             }),
+
+             //Set a stack variable
+             BCJSetValue(json, @"string", NSMutableString.class, BCJGetterModeDefaultable, @"default", &string),
+
              nil];
         });
 
-        [errors self];
+        NSLog(@"error: %@", error);
     }
     return 0;
 }
