@@ -39,6 +39,6 @@ extern NSString * const BCJErrorDomain;
 enum : NSInteger {
     BCJUnexpectedTypeError,
     BCJIndexOutOfBoundsError,
-    BCJMissingKeyError,
+    BCJMissingValueError,
     BCJInvalidValueError,
 };
