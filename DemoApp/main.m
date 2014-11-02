@@ -13,17 +13,17 @@
 
 
 @interface TestObject : NSObject
-@property NSInteger aNumber;
+@property NSInteger number;
 @property NSString *string;
-@property NSArray *addresses;
-@property NSString *postCode;
+@property NSArray *array;
+@property NSDate *date;
 @end
 
 @implementation TestObject
 
 -(NSString *)description
 {
-    return [NSString stringWithFormat:@"<%@> %@", super.description, @(self.aNumber)];
+    return [NSString stringWithFormat:@"<%@> %@", super.description, @(self.number)];
 }
 
 @end
@@ -38,13 +38,13 @@ int main(int argc, const char * argv[]) {
             NSDictionary *sourceObject = @{
                                        @"status": @"failed",
                                        @"reason": @"arf",
-//                                       @"dict" : @{
-//                                               @"one": @(1),
-//                                               @"two": @(2),
-//                                               @"three": @(3),
-//                                               @"four": @(4),
-//                                               @"five": @(5)
-//                                               },
+                                       @"numbers" : @{
+                                               @"one": @(1),
+                                               @"two": @(2),
+                                               @"three": @(3),
+                                               @"four": @(4),
+                                               @"five": @(5)
+                                               },
                                        };
             [NSJSONSerialization dataWithJSONObject:sourceObject options:0 error:NULL];
         });
@@ -52,57 +52,38 @@ int main(int argc, const char * argv[]) {
         //Output objects
         TestObject *target = [TestObject new];
         __block NSString * targetString = @"adfsgd";
-        __block id resonseError = nil;
 
         //Go!
         BCJContainer *json = [BCJContainer new]; //Create a container to store the JSON in.
         NSError *error = [BCLContinuation untilError:
-
-         //Deserialization:
-         BCJDeserializeJSON(jsonData, json),
-
-         //Get the value we need to switch on
-         BCJGetValue(json, @"status", NSString.class, BCJGetterModeMantatory, nil, ^BOOL(NSString *status, NSError *__autoreleasing *outError) {
-
-            //Does the JSON look like a failure?
-            if (![status isEqualToString:@"success"]) {
-                return [BCLContinuation withError:outError untilEnd:
-                             BCJSetString(resonseError, BCJ_KEY(reason), json, @"reason"),
-                        nil];
-            }
-
-            return [BCLContinuation withError:outError untilError:
+                    //Deserialization:
+                    BCJDeserializeJSON(json, jsonData),
 
                     //StandardTypes:
-                    BCJSetString(target, BCJ_KEY(aNumber), json, @"string"),
+                    BCJSetString(target, BCJ_KEY(string), json, @"reason"),
                     //Set a type mismatched value (this will fail in DEBUG due to an assert against type mismatches.)
                     //BCJSetNumber(target, BCJ_KEY(string), json, @"number"),
 
                     //AdditionalTypes:
-                    BCJSetDateFromISO8601String(target, BCJ_KEY(date), json, @"date"),
+                    BCJSetDateFromISO8601String(target, BCJ_KEY(date), json, @"date", BCJGetterModeOptional, nil),
 
                     //GettersAndSetters:
                     BCJGetValue(json, @"string", NSString.class, BCJGetterModeDefaultable, @"default", ^BOOL(NSString *string, NSError **outValue){
                                     targetString = string;
                                     return YES;
                                 }),
-                    BCJGetValue(json, @"string", NSString.class, BCJGetterModeMantatory, nil, ^BOOL(id value, NSError **outError) {
-                                    //Validation:
-                                    BCJValidateAndSet(value, @"SELF == 'arf!!'", target, BCJ_KEY(string), outError);
-                                    return YES;
-                                }),
-
-                    //Map:
-                    BCJSetMap(target, BCJ_KEY(addresses), json, @"dict", NSNumber.class, BCJMapModeMandatory, @"aNumber", ^id(NSString *key, NSNumber *number, NSError **outError){
-                                 TestObject *address = [TestObject new];
-                                 address.aNumber = [number integerValue];
-                                 return address;
+//                    //Map:
+                    BCJSetMap(target, BCJ_KEY(array), json, @"numbers", NSNumber.class, BCJMapModeMandatory, BCJ_SORT_DESCRIPTORS(@"self"), ^id(NSString *key, NSNumber *number, NSError **outError){
+                                NSLog(@"%@", key);
+                                return number;
                               }),
                     nil];
-         }),
-         nil];
 
-        NSLog(@"%@", target.addresses);
+        NSLog(@"integer: %@", @(target.number));
+        NSLog(@"string: %@", target.string);
+        NSLog(@"array: %@", target.array);
+        NSLog(@"date: %@", target.date);
+
         NSLog(@"error: %@", error);
     }
     return 0;
