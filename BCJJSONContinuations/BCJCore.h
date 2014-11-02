@@ -42,7 +42,11 @@ static inline BOOL BCJ_OVERLOADABLE BCJGetValue(id<BCJIndexedContainer> array, N
     //Check bounds
     BOOL isInBounds = idx < array.count;
     if (!isInBounds) {
-        if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: Out of bounds" code:0 userInfo:nil];
+        if (outError == NULL) {
+            NSString *format = NSLocalizedString(@"Index <%@> is out of bounds for collection <%@>. Expected instance of <%@>.", nil);
+            NSString *description = [NSString stringWithFormat:format, @(idx), array, NSStringFromClass(class)];
+            *outError = [NSError errorWithDomain:BCJErrorDomain code:BCJIndexOutOfBoundsError userInfo:@{NSLocalizedDescriptionKey:description}];
+        }
         return NO;
     }
 
@@ -61,13 +65,23 @@ static inline BOOL BCJ_OVERLOADABLE BCJGetValue(id<BCJIndexedContainer> array, N
 
     //Check for optionals
     if (!BCJShouldAllowNilValue(options) && value == nil) {
-        if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: Missing value" code:0 userInfo:nil];
+        if (outError == NULL) {
+            NSString *format = NSLocalizedString(@"Object at index <%@> of collection <%@> is nil. Expected instance of <%@>.", nil);
+            NSString *description = [NSString stringWithFormat:format, @(idx), array, NSStringFromClass(class)];
+            *outError = [NSError errorWithDomain:BCJErrorDomain code:BCJMissingValueError userInfo:@{NSLocalizedDescriptionKey:description}];
+        }
         return NO;
     }
 
     //Type check value
-    if (![value isKindOfClass:class]) {
-        if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: Wrong type" code:0 userInfo:nil];
+    BOOL shouldCheckClass = value != nil;
+    BOOL isIncorrectKind = ![value isKindOfClass:class];
+    if (shouldCheckClass && isIncorrectKind) {
+        if (outError == NULL) {
+            NSString *format = NSLocalizedString(@"Object at index <%@> of collection <%@> is of unexpected type. Expected instance of <%@> but found instance of <%@>.", nil);
+            NSString *description = [NSString stringWithFormat:format, @(idx), array, NSStringFromClass(class), NSStringFromClass([value class])];
+            *outError = [NSError errorWithDomain:BCJErrorDomain code:BCJUnexpectedTypeError userInfo:@{NSLocalizedDescriptionKey:description}];
+        }
         return NO;
     }
 
@@ -97,13 +111,23 @@ static inline BOOL BCJ_OVERLOADABLE BCJGetValue(id<BCJKeyedContainer> dict, id k
 
     //Check for nil
     if (!BCJShouldAllowNilValue(options) && value == nil) {
-        if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: Missing value" code:0 userInfo:nil];
+        if (outError == NULL) {
+            NSString *format = NSLocalizedString(@"Object for key <%@> of collection <%@> is nil. Expected instance of <%@>.", nil);
+            NSString *description = [NSString stringWithFormat:format, key, dict, NSStringFromClass(class)];
+            *outError = [NSError errorWithDomain:BCJErrorDomain code:BCJMissingValueError userInfo:@{NSLocalizedDescriptionKey:description}];
+        }
         return NO;
     }
 
     //Check for type
-    if (![value isKindOfClass:class]) {
-        if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: Wrong type" code:0 userInfo:nil];
+    BOOL shouldCheckClass = value != nil;
+    BOOL isIncorrectKind = ![value isKindOfClass:class];
+    if (shouldCheckClass && isIncorrectKind) {
+        if (outError == NULL) {
+            NSString *format = NSLocalizedString(@"Object for key <%@> of collection <%@> is of unexpected type. Expected instance of <%@> but found instance of <%@>.", nil);
+            NSString *description = [NSString stringWithFormat:format, key, dict, NSStringFromClass(class), NSStringFromClass([value class])];
+            *outError = [NSError errorWithDomain:BCJErrorDomain code:BCJUnexpectedTypeError userInfo:@{NSLocalizedDescriptionKey:description}];
+        }
         return NO;
     }
     
@@ -124,6 +148,9 @@ static inline BOOL BCJ_OVERLOADABLE BCJSetValue(id target, NSString *targetKey, 
     //to catch these bugs early.
 
     ^{
+        //0. ensure we have a value to check
+        if (value == nil) return;
+
         //1. Look for a *property* matching targetKey
         objc_property_t property = class_getProperty([target class], targetKey.UTF8String);
         if (property != NULL) {
@@ -138,7 +165,9 @@ static inline BOOL BCJ_OVERLOADABLE BCJSetValue(id target, NSString *targetKey, 
 
             if (className != nil) {
                 Class class = NSClassFromString(className);
-                NSCAssert([value isKindOfClass:class], @"Value is of the wrong kind of class");
+                NSCAssert([value isKindOfClass:class], ({
+                        [NSString stringWithFormat:@"Attempted to set an object of type <%@> to an ivar of type <%@> for key <%@> of object <%@>.", NSStringFromClass([value class]), NSStringFromClass(class), targetKey, target];
+                         }));
                 return;
             }
             //TODO: Check non-object types
@@ -161,7 +190,9 @@ static inline BOOL BCJ_OVERLOADABLE BCJSetValue(id target, NSString *targetKey, 
                 NSRange range = NSMakeRange(2, encoding.length-3);
                 NSString *className = [encoding substringWithRange:range];
                 Class class = NSClassFromString(className);
-                NSCAssert([value isKindOfClass:class], @"Value is of the wrong kind of class");
+                NSCAssert([value isKindOfClass:class], ({
+                    [NSString stringWithFormat:@"Attempted to set an object of type <%@> to an ivar of type <%@> for key <%@> of object <%@>.", NSStringFromClass([value class]), NSStringFromClass(class), targetKey, target];
+                }));
                 return;
             }
             //TODO: Check non-object types
@@ -181,7 +212,7 @@ static inline BOOL BCJ_OVERLOADABLE BCJSetValue(id target, NSString *targetKey, 
     }
 
     //Done!
-    //TODO: Is it correct/expected to set using the validated value?
+    //Note that we're using the validatedValue
     [target setValue:validatedValue forKey:targetKey];
     return YES;
 }
