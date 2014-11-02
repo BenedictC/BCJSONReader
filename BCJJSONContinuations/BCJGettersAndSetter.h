@@ -30,8 +30,3 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(id<BCJKeyedContainer> dict, id 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(id<BCJIndexedContainer> array, NSUInteger idx, Class class, BCJGetterOptions options, id defaultValue, id target, NSString *targetKey) __attribute__((nonnull(1,3,6,7)));
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(id<BCJKeyedContainer> dict, id key, Class class, BCJGetterOptions options, id defaultValue, id target, NSString *targetKey) __attribute__((nonnull(1,2,3,6,7)));
-
-//outValue result-style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(id<BCJIndexedContainer> array, NSUInteger idx, Class class, BCJGetterOptions options, id defaultValue, id __strong *outValue) __attribute__((nonnull(1,3,6)));
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(id<BCJKeyedContainer> dict, id key, Class class, BCJGetterOptions options, id defaultValue, id __strong *outValue) __attribute__((nonnull(1,2,3,6)));

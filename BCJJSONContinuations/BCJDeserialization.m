@@ -71,12 +71,3 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, Class clas
         return successBlock(content, outError);
     });
 }
-
-
-
-//outValue result-style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, Class class, BCJJSONReadingOptions options, id __strong *outValue) {
-    return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
-        return deserializeJSON(data, class, options, outValue, outError);
-    });
-}

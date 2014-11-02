@@ -56,7 +56,6 @@
 		821C2B1B1A05A38900C56BC3 /* BCLContinuation+ControlFlowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2B1A1A05A38900C56BC3 /* BCLContinuation+ControlFlowTests.m */; };
 		821C2B1D1A05A3A000C56BC3 /* BCLBlockContinuationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2B1C1A05A3A000C56BC3 /* BCLBlockContinuationTests.m */; };
 		821C2B1F1A05A3D500C56BC3 /* BCLContinuation+ControlFlowContinuationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2B1E1A05A3D500C56BC3 /* BCLContinuation+ControlFlowContinuationsTests.m */; };
-		821C2B211A05A4AA00C56BC3 /* readme.md in Sources */ = {isa = PBXBuildFile; fileRef = 821C2B201A05A4AA00C56BC3 /* readme.md */; };
 		82D3B1A019FBF8D3003C4EB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D3B19F19FBF8D3003C4EB5 /* main.m */; };
 /* End PBXBuildFile section */
 
@@ -413,7 +412,6 @@
 				821C2B0A1A05A1B700C56BC3 /* BCJDeserializationTests.m in Sources */,
 				821C2B141A05A25800C56BC3 /* BCJValidationTests.m in Sources */,
 				821C2B1F1A05A3D500C56BC3 /* BCLContinuation+ControlFlowContinuationsTests.m in Sources */,
-				821C2B211A05A4AA00C56BC3 /* readme.md in Sources */,
 				821C2B0E1A05A22000C56BC3 /* BCJGettersAndSettersTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

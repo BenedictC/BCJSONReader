@@ -41,7 +41,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(id<BCJIndexedContainer> array, 
         id value;
         if (!BCJGetValue(array, idx, class, options, defaultValue, &value, outError)) return NO;
 
-        return BCJSetValue(value, target, targetKey, outError);
+        return BCJSetValue(target, targetKey, value, outError);
     });
 }
 
@@ -52,23 +52,6 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(id<BCJKeyedContainer> dict, id 
         id value;
         if (!BCJGetValue(dict, key, class, options, defaultValue, &value, outError)) return NO;
 
-        return BCJSetValue(value, target, targetKey, outError);
-    });
-}
-
-
-
-//outValue result-style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(id<BCJIndexedContainer> array, NSUInteger idx, Class class, BCJGetterOptions options, id defaultValue, id __strong *outValue) {
-    return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
-        return BCJGetValue(array, idx, class, options, defaultValue, outValue, outError);
-    });
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(id<BCJKeyedContainer> dict, id key, Class class, BCJGetterOptions options, id defaultValue, id __strong *outValue) {
-    return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
-        return BCJGetValue(dict, key, class, options, defaultValue, outValue, outError);
+        return BCJSetValue(target, targetKey, value, outError);
     });
 }

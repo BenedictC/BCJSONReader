@@ -35,20 +35,7 @@ static inline BOOL BCJShouldAllowNilValue(BCJGetterOptions options) {
 
 
 #pragma mark - Getter functions
-/**
- <#Description#>
-
- @param array        <#array description#>
- @param idx          <#idx description#>
- @param class        <#class description#>
- @param options      <#options description#>
- @param defaultValue <#defaultValue description#>
- @param outValue     <#outValue description#>
- @param outError     <#outError description#>
-
- @return <#return value description#>
- */
-static inline BOOL BCJ_OVERLOADABLE BCJGetValue(id<BCJIndexedContainer> array, NSUInteger idx, Class class, BCJGetterOptions options, id defaultValue, id __strong *outValue, NSError **outError) {
+static inline BOOL BCJ_OVERLOADABLE BCJGetValue(id<BCJIndexedContainer> array, NSUInteger idx, Class class, BCJGetterOptions options, id defaultValue, id *outValue, NSError **outError) {
     //Reset outValue
     *outValue = nil;
 
@@ -90,20 +77,7 @@ static inline BOOL BCJ_OVERLOADABLE BCJGetValue(id<BCJIndexedContainer> array, N
 
 
 
-/**
- <#Description#>
-
- @param dict         <#dict description#>
- @param key          <#key description#>
- @param class        <#class description#>
- @param options      <#options description#>
- @param defaultValue <#defaultValue description#>
- @param outValue     <#outValue description#>
- @param outError     <#outError description#>
-
- @return <#return value description#>
- */
-static inline BOOL BCJ_OVERLOADABLE BCJGetValue(id<BCJKeyedContainer> dict, id key, Class class, BCJGetterOptions options, id defaultValue, id __strong *outValue, NSError **outError) {
+static inline BOOL BCJ_OVERLOADABLE BCJGetValue(id<BCJKeyedContainer> dict, id key, Class class, BCJGetterOptions options, id defaultValue, id __strong* outValue, NSError **outError) {
     //Reset outValue
     //    id<BCJKeyedContainer> dict = *dictRef;
     *outValue = nil;
@@ -143,17 +117,7 @@ static inline BOOL BCJ_OVERLOADABLE BCJGetValue(id<BCJKeyedContainer> dict, id k
 #ifdef DEBUG
 @import ObjectiveC.runtime;
 #endif
-/**
- <#Description#>
-
- @param value     <#value description#>
- @param target    <#target description#>
- @param targetKey <#targetKey description#>
- @param outError  <#outError description#>
-
- @return <#return value description#>
- */
-static inline BOOL BCJ_OVERLOADABLE BCJSetValue(id value, id target, NSString *targetKey, NSError **outError)
+static inline BOOL BCJ_OVERLOADABLE BCJSetValue(id target, NSString *targetKey, id value, NSError **outError)
 {
 #ifdef DEBUG
     //KVC will work regardless of type which means type mismatch bugs can occur. We add type checking for DEBUG builds

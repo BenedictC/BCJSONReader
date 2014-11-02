@@ -36,57 +36,71 @@ int main(int argc, const char * argv[]) {
         //Input data
         NSData *jsonData = ({
             NSDictionary *sourceObject = @{
-                                       @"number": @7,
-                                       @"string": @"arf",
-                                       @"dict" : @{
-                                               @"one": @(1),
-                                               @"two": @(2),
-                                               @"three": @(3),
-                                               @"four": @(4),
-                                               @"five": @(5)
-                                               },
+                                       @"status": @"failed",
+                                       @"reason": @"arf",
+//                                       @"dict" : @{
+//                                               @"one": @(1),
+//                                               @"two": @(2),
+//                                               @"three": @(3),
+//                                               @"four": @(4),
+//                                               @"five": @(5)
+//                                               },
                                        };
             [NSJSONSerialization dataWithJSONObject:sourceObject options:0 error:NULL];
         });
 
         //Output objects
         TestObject *target = [TestObject new];
-        NSString *string = @"adfsgd";
+        __block NSString * targetString = @"adfsgd";
+        __block id resonseError = nil;
 
-        //Run the continuation
-        NSError *error = ({
-            //Create a container to store the JSON in.
-            BCJContainer *json = [BCJContainer new];
+        //Go!
+        BCJContainer *json = [BCJContainer new]; //Create a container to store the JSON in.
+        NSError *error = [BCLContinuation untilError:
 
-            //Go!
-            [BCLContinuation untilError:
+         //Deserialization:
+         BCJDeserializeJSON(jsonData, json),
 
-             //Fill the json container
-             BCJDeserializeJSON(jsonData, json),
+         //Get the value we need to switch on
+         BCJGetValue(json, @"status", NSString.class, BCJGetterModeMantatory, nil, ^BOOL(NSString *status, NSError *__autoreleasing *outError) {
 
-//             //Set a type mismatched value (this will fail in DEBUG due to an assert against type mismatches.)
-//             BCJSetNumber(json, @"number", target, BCJ_KEY(string)),
+            //Does the JSON look like a failure?
+            if (![status isEqualToString:@"success"]) {
+                return [BCLContinuation withError:outError untilEnd:
+                             BCJSetString(json, @"reason", resonseError, BCJ_KEY(reason)),
+                        nil];
+            }
 
-             BCJSetString(json, @"string", target, BCJ_KEY(aNumber)),
-             //Get a value and validate & set it.
-             BCJGetValue(json, @"string", NSString.class, BCJGetterModeMantatory, nil, ^BOOL(id value, NSError **outError) {
-                BCJValidateAndSet(value, @"SELF == 'arf!!'", target, BCJ_KEY(string), outError);
-                return YES;
-            }),
+            return [BCLContinuation withError:outError untilError:
 
-             //Set an array property by mapping a collection
-             BCJSetMap(json, @"dict", NSNumber.class, BCJMapModeMandatory, target, BCJ_KEY(addresses), @"aNumber", ^id(NSString *key, NSNumber *number, NSError **outError){
-                TestObject *address = [TestObject new];
-                address.aNumber = [number integerValue];
+                    //StandardTypes:
+                    BCJSetString(json, @"string", target, BCJ_KEY(aNumber)),
+                    //Set a type mismatched value (this will fail in DEBUG due to an assert against type mismatches.)
+                    //BCJSetNumber(json, @"number", target, BCJ_KEY(string)),
 
-                return address;
-             }),
+                    //AdditionalTypes:
+                    BCJSetDateFromISO8601String(json, @"date", target, BCJ_KEY(date)),
 
-             //Set a stack variable
-             BCJSetValue(json, @"string", NSMutableString.class, BCJGetterModeDefaultable, @"default", &string),
+                    //GettersAndSetters:
+                    BCJGetValue(json, @"string", NSString.class, BCJGetterModeDefaultable, @"default", ^BOOL(NSString *string, NSError **outValue){
+                                    targetString = string;
+                                    return YES;
+                                }),
+                    BCJGetValue(json, @"string", NSString.class, BCJGetterModeMantatory, nil, ^BOOL(id value, NSError **outError) {
+                                    //Validation:
+                                    BCJValidateAndSet(value, @"SELF == 'arf!!'", target, BCJ_KEY(string), outError);
+                                    return YES;
+                                }),
 
-             nil];
-        });
+                    //Map:
+                    BCJSetMap(json, @"dict", NSNumber.class, BCJMapModeMandatory, target, BCJ_KEY(addresses), @"aNumber", ^id(NSString *key, NSNumber *number, NSError **outError){
+                                 TestObject *address = [TestObject new];
+                                 address.aNumber = [number integerValue];
+                                 return address;
+                              }),
+                    nil];
+         }),
+         nil];
 
         NSLog(@"%@", target.addresses);
         NSLog(@"error: %@", error);

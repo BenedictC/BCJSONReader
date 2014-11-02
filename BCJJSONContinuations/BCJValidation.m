@@ -47,7 +47,7 @@ BOOL BCJ_OVERLOADABLE BCJValidate(id value, NSString *predicateString, NSError *
 BOOL BCJ_OVERLOADABLE BCJValidateAndSet(id value, NSPredicate *predicate, id target, NSString *targetKey, NSError **outError) {
     if (!BCJValidate(value, predicate, outError)) return NO;
 
-    return BCJSetValue(value, target, targetKey, outError);
+    return BCJSetValue(target, targetKey, value, outError);
 }
 
 

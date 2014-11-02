@@ -48,7 +48,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id<BCJ
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSDate *date;
         if (!BCJGetDateFromTimeIntervalSinceEpoch(array, idx, options, defaultValue, &date, outError)) return NO;
-        return BCJSetValue(date, target, targetKey, outError);
+        return BCJSetValue(target, targetKey, date, outError);
     });
 }
 
@@ -64,7 +64,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id<BCJ
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSDate *date;
         if (!BCJGetDateFromTimeIntervalSinceEpoch(dict, key, options, defaultValue, &date, outError)) return NO;
-        return BCJSetValue(date, target, targetKey, outError);
+        return BCJSetValue(target, targetKey, date, outError);
     });
 }
 
@@ -147,7 +147,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id<BCJIndexedCo
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSDate *date;
         if (!BCJGetDateFromISO8601String(array, idx, options, defaultValue, &date, outError)) return NO;
-        return BCJSetValue(date, target, targetKey, outError);
+        return BCJSetValue(target, targetKey, date, outError);
     });
 }
 
@@ -163,7 +163,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id<BCJKeyedCont
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSDate *date;
         if (!BCJGetDateFromISO8601String(dict, key, options, defaultValue, &date, outError)) return NO;
-        return BCJSetValue(date, target, targetKey, outError);
+        return BCJSetValue(target, targetKey, date, outError);
     });
 }
 
@@ -227,7 +227,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id<BCJIndexedContainer> array, NS
         NSURL *value;
         if (!BCJGetURL(array, idx, options, defaultValue, &value, outError)) return NO;
 
-        return BCJSetValue(value, target, targetKey, outError);
+        return BCJSetValue(target, targetKey, value, outError);
     });
 }
 
@@ -244,7 +244,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id<BCJKeyedContainer> dict, id ke
         NSURL *value;
         if (!BCJGetURL(dict, key, options, defaultValue, &value, outError)) return NO;
 
-        return BCJSetValue(value, target, targetKey, outError);
+        return BCJSetValue(target, targetKey, value, outError);
     });
 }
 
@@ -303,7 +303,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(id<BCJIndexedContainer> array, N
         if (BCJGetEnum(array, idx, options, defaultValue, enumMapping, &value, outError)) return NO;
 
         //Success
-        return BCJSetValue(value, target, targetKey, outError);
+        return BCJSetValue(target, targetKey, value, outError);
     });
 }
 
@@ -315,6 +315,6 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(id<BCJKeyedContainer> dict, id k
         if (BCJGetEnum(dict, key, options, defaultValue, enumMapping, &value, outError)) return NO;
 
         //Success
-        return BCJSetValue(value, target, targetKey, outError);
+        return BCJSetValue(target, targetKey, value, outError);
     });
 }

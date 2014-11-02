@@ -26,8 +26,11 @@ enum : NSInteger {
 @interface BCLContinuation : NSObject
 
 //Synchronous execution
-+(NSError *)untilEnd:(id<BCLContinuation>)firstContinuations, ... NS_REQUIRES_NIL_TERMINATION;
-+(NSError *)untilError:(id<BCLContinuation>)firstContinuations, ... NS_REQUIRES_NIL_TERMINATION;
++(NSError *)untilEnd:(id<BCLContinuation>)firstContinuation, ... NS_REQUIRES_NIL_TERMINATION;
++(NSError *)untilError:(id<BCLContinuation>)firstContinuation, ... NS_REQUIRES_NIL_TERMINATION;
+
++(BOOL)withError:(NSError **)outError untilEnd:(id<BCLContinuation>)firstContinuation, ... NS_REQUIRES_NIL_TERMINATION;
++(BOOL)withError:(NSError **)outError untilError:(id<BCLContinuation>)firstContinuation, ... NS_REQUIRES_NIL_TERMINATION;
 
 //Asynchronous execution
 //TODO:

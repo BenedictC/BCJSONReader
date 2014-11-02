@@ -14,6 +14,21 @@ NSString * const BCLErrorDomain = @"BCLErrorDomain";
 NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
 
 
+#pragma mark - helper macros
+#define CONTINUATIONS_FROM_VARGS(FIRST_CONTINUATION) ({ \
+NSMutableArray *continuations = [NSMutableArray new]; \
+va_list args; \
+va_start(args, FIRST_CONTINUATION); \
+id<BCLContinuation> currentContination = firstContinuation; \
+while (currentContination != nil) { \
+    [continuations addObject:currentContination]; \
+    currentContination = va_arg(args, id<BCLContinuation>); \
+} \
+va_end(args); \
+    continuations; \
+ })
+
+
 
 @interface BCLContinuation ()
 
@@ -160,16 +175,7 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
 #pragma mark - Public control flow
 +(NSError *)untilEnd:(id<BCLContinuation>)firstContinuation, ...
 {
-    NSMutableArray *continuations = [NSMutableArray new];
-    va_list args;
-    va_start(args, firstContinuation);
-    id<BCLContinuation> currentContination = firstContinuation;
-    while (currentContination != nil) {
-        [continuations addObject:currentContination];
-
-        currentContination = va_arg(args, id<BCLContinuation>);
-    }
-    va_end(args);
+    NSArray *continuations = CONTINUATIONS_FROM_VARGS(firstContinuation);
 
     return [BCLContinuation untilEndWithContinuations:continuations];
 }
@@ -178,18 +184,31 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
 
 +(NSError *)untilError:(id<BCLContinuation>)firstContinuation, ...
 {
-    NSMutableArray *continuations = [NSMutableArray new];
-    va_list args;
-    va_start(args, firstContinuation);
-    id<BCLContinuation> currentContination = firstContinuation;
-    while (currentContination != nil) {
-        [continuations addObject:currentContination];
-
-        currentContination = va_arg(args, id<BCLContinuation>);
-    }
-    va_end(args);
+    NSArray *continuations = CONTINUATIONS_FROM_VARGS(firstContinuation);
 
     return [BCLContinuation untilErrorWithContinuations:continuations];
+}
+
+
+
++(BOOL)withError:(NSError **)outError untilEnd:(id<BCLContinuation>)firstContinuation, ...
+{
+    NSArray *continuations = CONTINUATIONS_FROM_VARGS(firstContinuation);
+
+    NSError *error = [BCLContinuation untilErrorWithContinuations:continuations];
+    if (outError != NULL) *outError = error;
+    return (error == nil);
+}
+
+
+
++(BOOL)withError:(NSError **)outError untilError:(id<BCLContinuation>)firstContinuation, ...
+{
+    NSArray *continuations = CONTINUATIONS_FROM_VARGS(firstContinuation);
+
+    NSError *error = [BCLContinuation untilErrorWithContinuations:continuations];
+    if (outError != NULL) *outError = error;
+    return (error == nil);
 }
 
 

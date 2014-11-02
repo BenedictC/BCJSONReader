@@ -26,6 +26,3 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, BCJContain
 
 //Block result-style
 id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, Class class, BCJJSONReadingOptions options, BOOL(^successBlock)(id fragment, NSError **outError)) __attribute__((nonnull(1,2,4)));
-
-//outValue result-style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, Class class, BCJJSONReadingOptions options, id __strong *outValue) __attribute__((nonnull(1,2,4)));
