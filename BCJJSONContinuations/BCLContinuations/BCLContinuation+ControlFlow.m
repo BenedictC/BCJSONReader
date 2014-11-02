@@ -17,6 +17,7 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
 
 @interface BCLContinuation ()
 
+@property(nonatomic, readonly) NSArray *continuations;
 @property(nonatomic) BOOL shouldAbort;
 @property(nonatomic) NSError *abortionError;
 
@@ -63,14 +64,28 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
 
 
 
+#pragma mark - instance life cycle
+-(instancetype)initWithContinuations:(NSArray *)continuations
+{
+    self = [super init];
+
+    if (self == nil) return nil;
+
+    _continuations = [continuations copy];
+
+    return self;
+}
+
+
+
 #pragma mark - Private control flow
--(NSError *)untilEndWithContinuations:(NSArray *)continuations
+-(NSError *)executeUntilEnd
 {
     NSMutableArray *errors = [NSMutableArray new];
 
     [BCLContinuation pushContinuation:self];
 
-    for (id<BCLContinuation> currentContinuation in continuations) {
+    for (id<BCLContinuation> currentContinuation in self.continuations) {
 
         //Check that we should continue
         if (self.shouldAbort) {
@@ -80,10 +95,9 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
         }
 
         //Execute the continuation
-        NSError *error = nil;
-        if (![currentContinuation executeAndReturnError:&error] && error != nil) {
-            [errors addObject:error];
-        }
+        [currentContinuation executeWithCompletionHandler:^(BOOL didSucceed, NSError *error) {
+            if (!didSucceed && error != nil) [errors addObject:error];
+        }];
     }
 
     AuRevoir:
@@ -96,31 +110,34 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
 
 
 
--(NSError *)untilErrorWithContinuations:(NSArray *)continuations
+-(NSError *)executeUntilError
 {
-    NSError *error = nil;
+    __block NSError *exitError = nil;
 
     [BCLContinuation pushContinuation:self];
 
-    for (id<BCLContinuation> currentContinuation in continuations) {
+    for (id<BCLContinuation> currentContinuation in self.continuations) {
 
         //Check that we should continue
         if (self.shouldAbort) {
-            error = (self.abortionError) ?: [NSError errorWithDomain:BCLErrorDomain code:BCLUnknownError userInfo:nil];
+            exitError = (self.abortionError) ?: [NSError errorWithDomain:BCLErrorDomain code:BCLUnknownError userInfo:nil];
             goto AuRevoir;
         }
 
         //Execute the continuation
-        if (![currentContinuation executeAndReturnError:&error]) {
-            goto AuRevoir;
-        }
+        __block BOOL shouldExit = NO;
+        [currentContinuation executeWithCompletionHandler:^(BOOL didSucceed, NSError *error) {
+            shouldExit = !didSucceed;
+            exitError = error;
+        }];
+        if (shouldExit) goto AuRevoir;
     }
 
     AuRevoir:
 
     [BCLContinuation popContinuation];
 
-    return error;
+    return exitError;
 }
 
 
@@ -128,14 +145,14 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
 #pragma mark - protected control flow
 +(NSError *)untilEndWithContinuations:(NSArray *)continuations
 {
-    return [[BCLContinuation new] untilEndWithContinuations:continuations];
+    return [[[BCLContinuation alloc] initWithContinuations:continuations] executeUntilEnd];
 }
 
 
 
 +(NSError *)untilErrorWithContinuations:(NSArray *)continuations
 {
-    return [[BCLContinuation new] untilErrorWithContinuations:continuations];
+    return [[[BCLContinuation alloc] initWithContinuations:continuations] executeUntilError];
 }
 
 

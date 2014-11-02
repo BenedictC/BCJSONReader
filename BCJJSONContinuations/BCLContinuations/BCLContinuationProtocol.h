@@ -12,6 +12,6 @@
 
 @protocol BCLContinuation <NSObject>
 
--(BOOL)executeAndReturnError:(NSError **)error;
+-(void)executeWithCompletionHandler:(void(^)(BOOL didSucceed, NSError *error))completionHandler;
 
 @end

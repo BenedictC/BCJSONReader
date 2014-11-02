@@ -31,9 +31,12 @@ id<BCLContinuation> BCLContinuationWithBlock(BOOL(^block)(NSError **outError)) {
 
 
 
--(BOOL)executeAndReturnError:(NSError **)outError
+-(void)executeWithCompletionHandler:(void(^)(BOOL didSucceed, NSError *error))completionHandler
 {
-    return self.block(outError);
+    NSError *error = nil;
+    BOOL didSucceed = self.block(&error);
+
+    completionHandler(didSucceed, error);
 }
 
 @end
