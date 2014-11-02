@@ -44,7 +44,7 @@ BOOL BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSinceEpoch(id<BCJKeyedContainer>
 
 #pragma mark - NSDate epoch continuations
 //Block result-style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSDate *defaultValue, id target, NSString *targetKey) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSDate *defaultValue) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSDate *date;
         if (!BCJGetDateFromTimeIntervalSinceEpoch(array, idx, options, defaultValue, &date, outError)) return NO;
@@ -54,13 +54,13 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id<BCJ
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id<BCJIndexedContainer> array, NSUInteger idx, id target, NSString *targetKey) {
-    return BCJSetDateFromTimeIntervalSinceEpoch(array, idx, 0, nil, target, targetKey);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) {
+    return BCJSetDateFromTimeIntervalSinceEpoch(target, targetKey, array, idx, 0, nil);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSDate *defaultValue, id target, NSString *targetKey) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSDate *defaultValue) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSDate *date;
         if (!BCJGetDateFromTimeIntervalSinceEpoch(dict, key, options, defaultValue, &date, outError)) return NO;
@@ -70,8 +70,8 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id<BCJ
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id<BCJKeyedContainer> dict, id key, id target, NSString *targetKey) {
-    return BCJSetDateFromTimeIntervalSinceEpoch(dict, key, 0, nil, target, targetKey);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) {
+    return BCJSetDateFromTimeIntervalSinceEpoch(target, targetKey, dict, key, 0, nil);
 }
 
 
@@ -143,7 +143,7 @@ BOOL BCJ_OVERLOADABLE BCJGetDateFromISO8601String(id<BCJKeyedContainer> dict, id
 
 
 #pragma mark - NSDate ISO8601 continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSDate *defaultValue, id target, NSString *targetKey) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSDate *defaultValue) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSDate *date;
         if (!BCJGetDateFromISO8601String(array, idx, options, defaultValue, &date, outError)) return NO;
@@ -153,13 +153,13 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id<BCJIndexedCo
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id<BCJIndexedContainer> array, NSUInteger idx, id target, NSString *targetKey) {
-    return BCJSetDateFromISO8601String(array, idx, 0, nil, target, targetKey);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) {
+    return BCJSetDateFromISO8601String(target, targetKey, array, idx, 0, nil);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSDate *defaultValue, id target, NSString *targetKey) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSDate *defaultValue) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSDate *date;
         if (!BCJGetDateFromISO8601String(dict, key, options, defaultValue, &date, outError)) return NO;
@@ -169,8 +169,8 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id<BCJKeyedCont
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id<BCJKeyedContainer> dict, id key, id target, NSString *targetKey) {
-    return BCJSetDateFromISO8601String(dict, key, 0, nil, target, targetKey);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) {
+    return BCJSetDateFromISO8601String(target, targetKey, dict, key, 0, nil);
 }
 
 
@@ -222,7 +222,7 @@ BOOL BCJ_OVERLOADABLE BCJGetURL(id<BCJKeyedContainer> dict, id key, BCJGetterOpt
 
 #pragma mark - Set NSURL continuations
 //KVC result-style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSURL *defaultValue, id target, NSString *targetKey) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSURL *defaultValue) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSURL *value;
         if (!BCJGetURL(array, idx, options, defaultValue, &value, outError)) return NO;
@@ -233,13 +233,13 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id<BCJIndexedContainer> array, NS
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id<BCJIndexedContainer> array, NSUInteger idx, id target, NSString *targetKey) {
-    return BCJSetURL(array, idx, 0, nil, target, targetKey);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) {
+    return BCJSetURL(target, targetKey, array, idx, 0, nil);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSURL *defaultValue, id target, NSString *targetKey) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSURL *defaultValue) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSURL *value;
         if (!BCJGetURL(dict, key, options, defaultValue, &value, outError)) return NO;
@@ -250,8 +250,8 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id<BCJKeyedContainer> dict, id ke
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id<BCJKeyedContainer> dict, id key, id target, NSString *targetKey) {
-    return BCJSetURL(dict, key, 0, nil, target, targetKey);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) {
+    return BCJSetURL(target, targetKey, dict, key, 0, nil);
 }
 
 
@@ -297,7 +297,7 @@ BOOL BCJ_OVERLOADABLE BCJGetEnum(id<BCJKeyedContainer> dict, id key, BCJGetterOp
 
 #pragma mark - Set Enum continuations
 //KVC style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, id defaultValue, NSDictionary *enumMapping, id target, NSString *targetKey) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, id defaultValue, NSDictionary *enumMapping) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
         if (BCJGetEnum(array, idx, options, defaultValue, enumMapping, &value, outError)) return NO;
@@ -309,7 +309,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(id<BCJIndexedContainer> array, N
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, id defaultValue, NSDictionary *enumMapping, id target, NSString *targetKey) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, id defaultValue, NSDictionary *enumMapping) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
         if (BCJGetEnum(dict, key, options, defaultValue, enumMapping, &value, outError)) return NO;

@@ -67,19 +67,19 @@ int main(int argc, const char * argv[]) {
             //Does the JSON look like a failure?
             if (![status isEqualToString:@"success"]) {
                 return [BCLContinuation withError:outError untilEnd:
-                             BCJSetString(json, @"reason", resonseError, BCJ_KEY(reason)),
+                             BCJSetString(resonseError, BCJ_KEY(reason), json, @"reason"),
                         nil];
             }
 
             return [BCLContinuation withError:outError untilError:
 
                     //StandardTypes:
-                    BCJSetString(json, @"string", target, BCJ_KEY(aNumber)),
+                    BCJSetString(target, BCJ_KEY(aNumber), json, @"string"),
                     //Set a type mismatched value (this will fail in DEBUG due to an assert against type mismatches.)
-                    //BCJSetNumber(json, @"number", target, BCJ_KEY(string)),
+                    //BCJSetNumber(target, BCJ_KEY(string), json, @"number"),
 
                     //AdditionalTypes:
-                    BCJSetDateFromISO8601String(json, @"date", target, BCJ_KEY(date)),
+                    BCJSetDateFromISO8601String(target, BCJ_KEY(date), json, @"date"),
 
                     //GettersAndSetters:
                     BCJGetValue(json, @"string", NSString.class, BCJGetterModeDefaultable, @"default", ^BOOL(NSString *string, NSError **outValue){
@@ -93,7 +93,7 @@ int main(int argc, const char * argv[]) {
                                 }),
 
                     //Map:
-                    BCJSetMap(json, @"dict", NSNumber.class, BCJMapModeMandatory, target, BCJ_KEY(addresses), @"aNumber", ^id(NSString *key, NSNumber *number, NSError **outError){
+                    BCJSetMap(target, BCJ_KEY(addresses), json, @"dict", NSNumber.class, BCJMapModeMandatory, @"aNumber", ^id(NSString *key, NSNumber *number, NSError **outError){
                                  TestObject *address = [TestObject new];
                                  address.aNumber = [number integerValue];
                                  return address;

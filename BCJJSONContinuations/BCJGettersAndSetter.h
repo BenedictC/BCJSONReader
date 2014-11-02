@@ -27,6 +27,6 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(id<BCJKeyedContainer> dict, id 
 
 #pragma mark - Set arbitary object continuations
 //KVC result-style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(id<BCJIndexedContainer> array, NSUInteger idx, Class class, BCJGetterOptions options, id defaultValue, id target, NSString *targetKey) __attribute__((nonnull(1,3,6,7)));
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, Class class, BCJGetterOptions options, id defaultValue) __attribute__((nonnull(1,2,3,5)));
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(id<BCJKeyedContainer> dict, id key, Class class, BCJGetterOptions options, id defaultValue, id target, NSString *targetKey) __attribute__((nonnull(1,2,3,6,7)));
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, Class class, BCJGetterOptions options, id defaultValue) __attribute__((nonnull(1,2,3,4,5)));

@@ -43,7 +43,7 @@ static inline BOOL deserializeJSON(NSData *data, Class class, BCJJSONReadingOpti
 
 #pragma mark - JSON Deserialization continuations
 //BCJContainer result-style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, BCJJSONReadingOptions options, BCJContainer *emptyContainer) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(BCJContainer *emptyContainer, NSData *data, BCJJSONReadingOptions options) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id content;
         if (!deserializeJSON(data, NSObject.class, options, &content, outError)) return NO;
@@ -56,8 +56,8 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, BCJJSONRea
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, BCJContainer *emptyContainer) {
-    return BCJDeserializeJSON(data, 0, emptyContainer);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(BCJContainer *emptyContainer, NSData *data) {
+    return BCJDeserializeJSON(emptyContainer, data, 0);
 }
 
 

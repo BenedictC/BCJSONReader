@@ -72,8 +72,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		821C2AAA1A05721800C56BC3 /* BCJAdditionalTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJAdditionalTypes.h; sourceTree = "<group>"; };
-		821C2AAB1A05721800C56BC3 /* BCJAdditionalTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJAdditionalTypes.m; sourceTree = "<group>"; };
+		821C2AAA1A05721800C56BC3 /* BCJAdditionalTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BCJAdditionalTypes.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		821C2AAB1A05721800C56BC3 /* BCJAdditionalTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BCJAdditionalTypes.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		821C2AAC1A05721800C56BC3 /* BCJConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJConstants.h; sourceTree = "<group>"; };
 		821C2AAD1A05721800C56BC3 /* BCJConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJConstants.m; sourceTree = "<group>"; };
 		821C2AAE1A05721800C56BC3 /* BCJContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJContainer.h; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		821C2AB71A05721800C56BC3 /* BCJJSONContinuations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJJSONContinuations.h; sourceTree = "<group>"; };
 		821C2AB81A05721800C56BC3 /* BCJMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJMap.h; sourceTree = "<group>"; };
 		821C2AB91A05721800C56BC3 /* BCJMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJMap.m; sourceTree = "<group>"; };
-		821C2ABA1A05721800C56BC3 /* BCJStandardTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJStandardTypes.h; sourceTree = "<group>"; };
+		821C2ABA1A05721800C56BC3 /* BCJStandardTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BCJStandardTypes.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		821C2ABB1A05721800C56BC3 /* BCJStandardTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJStandardTypes.m; sourceTree = "<group>"; };
 		821C2ABC1A05721800C56BC3 /* BCJValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJValidation.h; sourceTree = "<group>"; };
 		821C2ABD1A05721800C56BC3 /* BCJValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJValidation.m; sourceTree = "<group>"; };

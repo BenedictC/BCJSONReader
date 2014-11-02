@@ -22,14 +22,14 @@ BCMEvent *event = [BCMEvent new]; //The model object we wish to create.
 BCJContainer *json = [BCJContainer new];
 NSError *error = [BCLContinuation untilError:
                   BCJDeserialize(jsonData, json),
-                  BCJSetString(json, @"description", event, BCJ_KEY(eventDescription)),
-                  BCJSetDateFromISO8601String(json, @"date", event, BCJ_KEY(date)),
-                  BCJSetNumber(json, @"rsvp_required", BCJGetterModeOptional, @NO, event, BCJ_KEY(isRSVPRequired)),
-                  BCJSetMap(@"speakers", NSDictionary.class, BCJMapModeMandatory, event, BCJ_KEY(speakers), id(^fromArrayMap)(NSUInteger elementIndex, NSDictionary *speakerJSON, NSError **outError)) {
+                  BCJSetString(event, BCJ_KEY(eventDescription), json, @"description"),
+                  BCJSetDateFromISO8601String(event, BCJ_KEY(date), json, @"date"),
+                  BCJSetNumber(event, BCJ_KEY(isRSVPRequired), json, @"rsvp_required", BCJGetterModeOptional, @NO),
+                  BCJSetMap(event, BCJ_KEY(speakers), json, @"speakers", NSDictionary.class, BCJMapModeMandatory, id(^fromArrayMap)(NSUInteger elementIndex, NSDictionary *speakerJSON, NSError **outError)) {
                             BCMSpeaker *talk = [BCMTalk new];
                             BOOL didSucceed = [BCLContinuation withError:outError untilError:
-                                               BCJSetString(speakerJSON, @"name", talk, BCJ_KEY(speakerName)),
-                                               BCJSetString(speakerJSON, @"title", talk, BCJ_KEY(title)),
+                                               BCJSetString(talk, BCJ_KEY(speakerName), speakerJSON, @"name"),
+                                               BCJSetString(talk, BCJ_KEY(title), speakerJSON, @"title"),
                                                nil];
                             return (didSucceed) ? talk : nil;
                             }),

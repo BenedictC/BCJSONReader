@@ -44,7 +44,7 @@ BOOL BCJ_OVERLOADABLE BCJValidate(id value, NSString *predicateString, NSError *
 
 
 #pragma mark - Validation setter function
-BOOL BCJ_OVERLOADABLE BCJValidateAndSet(id value, NSPredicate *predicate, id target, NSString *targetKey, NSError **outError) {
+BOOL BCJ_OVERLOADABLE BCJValidateAndSet(id target, NSString *targetKey, id value, NSPredicate *predicate, NSError **outError) {
     if (!BCJValidate(value, predicate, outError)) return NO;
 
     return BCJSetValue(target, targetKey, value, outError);
@@ -52,8 +52,6 @@ BOOL BCJ_OVERLOADABLE BCJValidateAndSet(id value, NSPredicate *predicate, id tar
 
 
 
-BOOL BCJ_OVERLOADABLE BCJValidateAndSet(id value, NSString *predicateString, id target, NSString *targetKey, NSError **outError) {
-    return  BCJValidateAndSet(value, [NSPredicate predicateWithFormat:predicateString], target, targetKey, outError);
+BOOL BCJ_OVERLOADABLE BCJValidateAndSet(id target, NSString *targetKey, id value, NSString *predicateString, NSError **outError) {
+    return  BCJValidateAndSet(target, targetKey, value, [NSPredicate predicateWithFormat:predicateString], outError);
 }
-
-

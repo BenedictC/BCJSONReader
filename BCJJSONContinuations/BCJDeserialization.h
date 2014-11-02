@@ -21,8 +21,8 @@ typedef NS_OPTIONS(NSUInteger, BCJJSONReadingOptions) {
 
 #pragma mark - JSON Deserialization continuations
 //BCJContainer result-style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, BCJJSONReadingOptions options, BCJContainer *emptyContainer) __attribute__((nonnull(1,3)));
-id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, BCJContainer *emptyContainer) __attribute__((nonnull(1,2)));
+id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(BCJContainer *emptyContainer, NSData *data, BCJJSONReadingOptions options) __attribute__((nonnull(1,2)));
+id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(BCJContainer *emptyContainer, NSData *data) __attribute__((nonnull(1,2)));
 
 //Block result-style
 id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, Class class, BCJJSONReadingOptions options, BOOL(^successBlock)(id fragment, NSError **outError)) __attribute__((nonnull(1,2,4)));

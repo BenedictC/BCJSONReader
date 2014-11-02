@@ -23,5 +23,5 @@ BOOL BCJ_OVERLOADABLE BCJValidate(id value, NSString *predicateString, NSError *
 
 
 #pragma mark - Validation setter functions
-BOOL BCJ_OVERLOADABLE BCJValidateAndSet(id value, NSPredicate *predicate, id target, NSString *targetKey, NSError **outError) __attribute__((nonnull(1,2,3,4,5)));
-BOOL BCJ_OVERLOADABLE BCJValidateAndSet(id value, NSString *predicateString, id target, NSString *targetKey, NSError **outError) __attribute__((nonnull(1,2,3,4,5)));
+BOOL BCJ_OVERLOADABLE BCJValidateAndSet(id target, NSString *targetKey, id value, NSPredicate *predicate, NSError **outError) __attribute__((nonnull(1,2,3,4,5)));
+BOOL BCJ_OVERLOADABLE BCJValidateAndSet(id target, NSString *targetKey, id value, NSString *predicateString, NSError **outError) __attribute__((nonnull(1,2,3,4,5)));
