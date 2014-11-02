@@ -107,7 +107,11 @@ BOOL BCJ_OVERLOADABLE BCJGetDateFromISO8601String(id<BCJIndexedContainer> array,
     //Convert the string to a date
     NSDate *date = ([dateString isEqualToString:sentinel]) ? defaultValue : dateFromISO8601String(dateString);
     if (date == nil) {
-        if (outError == NULL) *outError = [NSError errorWithDomain:@"TODO: Invalid date string" code:0 userInfo:nil];
+        if (outError == NULL) {
+            NSString *format = NSLocalizedString(@"The object at index<%@> of collection <%@> is not a string represention of an ISO 8601 date (yyyy-MM-dd'T'HH:mm:ss.SSSZ). Actual value: <%@>.", nil);
+            NSString *description = [NSString stringWithFormat:format, @(idx), array, dateString];
+            *outError = [NSError errorWithDomain:BCJErrorDomain code:BCJInvalidValueError userInfo:@{NSLocalizedDescriptionKey:description}];
+        }
         return NO;
     }
 
