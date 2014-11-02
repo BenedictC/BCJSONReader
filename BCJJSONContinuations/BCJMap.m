@@ -46,7 +46,8 @@ BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *dict, Class elementClass, BCJMapO
         [values addObject:mappedValue];
     }];
 
-#pragma message "TODO: Apply sortDescriptors"
+    //Apply sortDescriptors
+    [values sortUsingDescriptors:sortDescriptors];
 
     return (didError) ? nil : values;
 }
@@ -123,6 +124,13 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id<BCJIndexedContainer> array, NS
 
 
 
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id<BCJIndexedContainer> array, NSUInteger idx, Class elementClass, BCJMapOptions options, id target, NSString *targetKey, NSString *sortKey, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) {
+    NSArray *sortDescriptors = (sortKey == nil) ? nil : @[[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:YES]];
+    return BCJSetMap(array, idx, elementClass, options, target, targetKey, sortDescriptors, fromDictionaryMap);
+}
+
+
+
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id<BCJIndexedContainer> array, NSUInteger idx, Class elementClass, BCJMapOptions options, id target, NSString *targetKey, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
 
@@ -157,6 +165,13 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id<BCJKeyedContainer> dict, id ke
         //Set the value
         return BCJSetValue(values, target, targetKey, outError);
     });
+}
+
+
+
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id<BCJKeyedContainer> dict, id key, Class elementClass, BCJMapOptions options, id target, NSString *targetKey, NSString *sortKey, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) {
+    NSArray *sortDescriptors = (sortKey == nil) ? nil : @[[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:YES]];
+    return BCJSetMap(dict, key, elementClass, options, target, targetKey, sortDescriptors, fromDictionaryMap);
 }
 
 

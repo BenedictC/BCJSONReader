@@ -47,7 +47,7 @@ const static BCJMapOptions BCJMapModeNullableDefaultableLenient = BCJMapModeNull
 
 
 #pragma mark - Map functions
-BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *dict, Class elementClass, BCJMapOptions options, id(^mapFromDictionary)(id elementKey, id elementValue, NSError **outError), NSError **outError) __attribute__((nonnull(1,2,4,5)));
+BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *dict, Class elementClass, BCJMapOptions options, NSArray *sortDescriptiors, id(^mapFromDictionary)(id elementKey, id elementValue, NSError **outError), NSError **outError) __attribute__((nonnull(1,2,4,5)));
 
 BCJ_OVERLOADABLE NSArray *BCJMap(NSArray *array, Class elementClass, BCJMapOptions options, id(^mapFromArray)(NSUInteger elementIdx, id elementValue, NSError **outError), NSError **outError) __attribute__((nonnull(1,2,4,5)));
 
@@ -55,7 +55,9 @@ BCJ_OVERLOADABLE NSArray *BCJMap(NSArray *array, Class elementClass, BCJMapOptio
 
 #pragma mark - Set Map continuations
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id<BCJIndexedContainer> array, NSUInteger idx, Class elementClass, BCJMapOptions options, id target, NSString *targetKey, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) __attribute__((nonnull(1,3,5,6,8)));
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id<BCJIndexedContainer> array, NSUInteger idx, Class elementClass, BCJMapOptions options, id target, NSString *targetKey, NSString *sortKey, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) __attribute__((nonnull(1,3,5,6,8)));
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id<BCJIndexedContainer> array, NSUInteger idx, Class elementClass, BCJMapOptions options, id target, NSString *targetKey, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) __attribute__((nonnull(1,3,5,6,7)));
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id<BCJKeyedContainer> dict, id key, Class elementClass, BCJMapOptions options, id target, NSString *targetKey, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) __attribute__((nonnull(1,2,3,5,6,8)));
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id<BCJKeyedContainer> dict, id key, Class elementClass, BCJMapOptions options, id target, NSString *targetKey, NSString *sortKey, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) __attribute__((nonnull(1,2,3,5,6,8)));
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id<BCJKeyedContainer> dict, id key, Class elementClass, BCJMapOptions options, id target, NSString *targetKey, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) __attribute__((nonnull(1,2,3,5,6,7)));
