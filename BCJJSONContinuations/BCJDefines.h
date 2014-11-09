@@ -7,12 +7,5 @@
 //
 
 #define BCJ_OVERLOADABLE __attribute__((overloadable))
-
-
-
-#ifdef DEBUG
-#define BCJ_KEY(NAME) NSStringFromSelector(@selector(NAME))
-#else
-#define BCJ_KEY(NAME) @"" #NAME
-#endif
-
+#define BCJ_WARN_UNUSED __attribute__((warn_unused_result))
+#define BCJ_REQUIRED(...) __attribute__((nonnull(__VA_ARGS__)))

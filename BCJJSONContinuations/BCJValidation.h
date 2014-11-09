@@ -6,22 +6,23 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCLContinuation.h"
+#import <Foundation/Foundation.h>
+
 #import "BCJDefines.h"
 
 
 
 #pragma mark - Type checking functions
-BOOL BCJ_OVERLOADABLE BCJIsOfKindClass(id value, Class class, NSError **outError) __attribute__((nonnull(1,2,3)));
+BOOL BCJ_OVERLOADABLE BCJIsOfKindClass(id value, Class class, NSError **outError) BCJ_REQUIRED(1,2,3);
 
 
 
 #pragma mark - Validation functions
-BOOL BCJ_OVERLOADABLE BCJValidate(id value, NSPredicate *predicate, NSError **outError) __attribute__((nonnull(1,2,3)));
-BOOL BCJ_OVERLOADABLE BCJValidate(id value, NSString *predicateString, NSError **outError) __attribute__((nonnull(1,2,3)));
+BOOL BCJ_OVERLOADABLE BCJValidate(id value, NSPredicate *predicate, NSError **outError) BCJ_REQUIRED(1,2,3);
+BOOL BCJ_OVERLOADABLE BCJValidate(id value, NSString *predicateString, NSError **outError) BCJ_REQUIRED(1,2,3);
 
 
 
 #pragma mark - Validation setter functions
-BOOL BCJ_OVERLOADABLE BCJValidateAndSet(id target, NSString *targetKey, id value, NSPredicate *predicate, NSError **outError) __attribute__((nonnull(1,2,3,4,5)));
-BOOL BCJ_OVERLOADABLE BCJValidateAndSet(id target, NSString *targetKey, id value, NSString *predicateString, NSError **outError) __attribute__((nonnull(1,2,3,4,5)));
+BOOL BCJ_OVERLOADABLE BCJValidateAndSet(BCJJSONTarget *target, id value, NSPredicate *predicate, NSError **outError) BCJ_REQUIRED(1,2,3,4);
+BOOL BCJ_OVERLOADABLE BCJValidateAndSet(BCJJSONTarget *target, id value, NSString *predicateString, NSError **outError) BCJ_REQUIRED(1,2,3,4);

@@ -10,7 +10,7 @@
 
 
 
-id<BCLContinuation> BCLContinuationWithBlock(BOOL(^block)(NSError **outError));
+id<BCLContinuation> BCLContinuationWithBlock(BOOL(^block)(NSError **outError)) __attribute__((warn_unused_result));
 
 
 

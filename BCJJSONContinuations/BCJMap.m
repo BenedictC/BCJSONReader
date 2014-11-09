@@ -7,12 +7,24 @@
 //
 
 #import "BCJMap.h"
-#import "BCJCore.h"
+#import "BCJError.h"
+#import "BCJJSONSource+LateBoundClassCheck.h"
+#import "BCJJSONTarget.h"
+
+
+
+#pragma mark - helper functions
+static inline BOOL isOptionSet(NSInteger option, NSInteger options) {
+    return (options & option) != 0;
+}
 
 
 
 #pragma mark - Map functions
 BCJ_OVERLOADABLE NSArray *BCJMap(NSArray *fromArray, Class elementClass, BCJMapOptions options, id(^mapFromArray)(NSUInteger elementIdx, id elementValue, NSError **outError), NSError **outError) {
+    NSCParameterAssert(fromArray);
+    NSCParameterAssert(mapFromArray);
+
     //Apply the mapping to the elements
     NSMutableArray *values = [NSMutableArray new];
     __block BOOL didError = NO;
@@ -20,7 +32,7 @@ BCJ_OVERLOADABLE NSArray *BCJMap(NSArray *fromArray, Class elementClass, BCJMapO
     [fromArray enumerateObjectsUsingBlock:^(id elementValue, NSUInteger elementIdx, BOOL *stop) {
         //Check element is of correct kind
         if (![elementValue isKindOfClass:elementClass]) {
-            if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: incorrect element type" code:0 userInfo:nil];
+            if (outError != NULL) *outError = [BCJError unexpectedElementTypeErrorWithElement:elementValue subscript:@(elementIdx) expectedElementClass:elementClass];
             didError = YES;
             *stop = YES;
             return; //from container enumaration
@@ -30,11 +42,10 @@ BCJ_OVERLOADABLE NSArray *BCJMap(NSArray *fromArray, Class elementClass, BCJMapO
         NSError *elementOutError = nil;
         id mappedValue = mapFromArray(elementIdx, elementValue, &elementOutError);
         if (mappedValue == nil) {
-            BOOL shouldDiscardMappingError = BCJIsOptionSet(BCJMapOptionDiscardMappingErrors, options);
+            BOOL shouldDiscardMappingError = isOptionSet(BCJMapOptionDiscardMappingErrors, options);
             if (!shouldDiscardMappingError) {
                 if (outError != NULL) {
-                    NSDictionary *userInfo = (elementOutError == nil) ? nil : @{@"underlyingError": elementOutError};
-                    *outError = [NSError errorWithDomain:@"TODO: Mapping failed" code:0 userInfo:userInfo];
+                    *outError = [BCJError mappingErrorWithElement:elementValue subscript:@(elementIdx) underlyingError:elementOutError];
                 }
                 didError = YES;
                 *stop = YES;
@@ -52,6 +63,9 @@ BCJ_OVERLOADABLE NSArray *BCJMap(NSArray *fromArray, Class elementClass, BCJMapO
 
 
 BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *fromDict, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^mapFromDictionary)(id elementKey, id elementValue, NSError **outError), NSError **outError) {
+    NSCParameterAssert(fromDict);
+    NSCParameterAssert(mapFromDictionary);
+
     //Apply the mapping to the elements
     NSMutableArray *values = [NSMutableArray new];
     __block BOOL didError = NO;
@@ -59,7 +73,7 @@ BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *fromDict, Class elementClass, BCJ
     [fromDict enumerateKeysAndObjectsUsingBlock:^(id elementKey, id elementValue, BOOL *stop) {
         //Check element is of correct kind
         if (![elementValue isKindOfClass:elementClass]) {
-            if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: incorrect element type" code:0 userInfo:nil];
+            if (outError != NULL) *outError = [BCJError unexpectedElementTypeErrorWithElement:elementValue subscript:elementKey expectedElementClass:elementClass];
             didError = YES;
             *stop = YES;
             return; //from container enumaration
@@ -69,11 +83,10 @@ BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *fromDict, Class elementClass, BCJ
         NSError *elementOutError = nil;
         id mappedValue = mapFromDictionary(elementKey, elementValue, &elementOutError);
         if (mappedValue == nil) {
-            BOOL shouldDiscardMappingError = BCJIsOptionSet(BCJMapOptionDiscardMappingErrors, options);
+            BOOL shouldDiscardMappingError = isOptionSet(BCJMapOptionDiscardMappingErrors, options);
             if (!shouldDiscardMappingError) {
                 if (outError != NULL) {
-                    NSDictionary *userInfo = (elementOutError == nil) ? nil : @{@"underlyingError": elementOutError};
-                    *outError = [NSError errorWithDomain:@"TODO: Mapping failed" code:0 userInfo:userInfo];
+                    *outError = [BCJError mappingErrorWithElement:elementValue subscript:elementKey underlyingError:elementOutError];
                 }
                 didError = YES;
                 *stop = YES;
@@ -94,23 +107,17 @@ BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *fromDict, Class elementClass, BCJ
 
 
 #pragma mark - Set Map continuations
-static inline BCJGetterOptions getterOptionsFromMapOptions(BCJMapOptions mapOptions) {
-    //Create getter options from mapping options
-    BCJGetterOptions getterOptions = 0;
-    if (BCJIsOptionSet(BCJMapOptionReplaceNullWithNil, mapOptions)) getterOptions |= BCJGetterOptionReplaceNullWithNil;
-    if (BCJIsOptionSet(BCJMapOptionReplaceNilWithEmptyCollection, mapOptions)) getterOptions |= BCJGetterOptionReplaceNilWithDefaultValue;
-    if (BCJIsOptionSet(BCJMapOptionAllowsNilValue, mapOptions)) getterOptions |= BCJGetterOptionAllowsNilValue;
-    return getterOptions;
-}
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONTarget *target, BCJJSONSource *source, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) {
+    NSCParameterAssert(target);
+    NSCParameterAssert(source);
+    NSCParameterAssert(fromArrayMap);
+    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
 
         //Get the container
         NSArray *container;
-        if (!BCJGetValue(array, idx, NSArray.class, getterOptionsFromMapOptions(options), @{}, &container, outError)) return NO;
+        if (![source getValue:&container ofKind:NSArray.class error:outError]) return NO;
 
         //Perform the mapping
         NSArray *values = BCJMap(container, elementClass, options, fromArrayMap, outError);
@@ -118,18 +125,23 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id target, NSString *targetKey, i
         if (!didMappingSucceed) return NO;
 
         //Set the value
-        return BCJSetValue(target, targetKey, values, outError);
+        return [target setWithValue:values outError:outError];
     });
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, Class elementClass, BCJMapOptions options,NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONTarget *target, BCJJSONSource *source, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) {
+    NSCParameterAssert(target);
+    NSCParameterAssert(source);
+    NSCParameterAssert(fromDictionaryMap);
+    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
+
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
 
         //Get the container
         NSDictionary *container;
-        if (!BCJGetValue(array, idx, NSDictionary.class, getterOptionsFromMapOptions(options), @{}, &container, outError)) return NO;
+        if (![source getValue:&container ofKind:NSDictionary.class error:outError]) return NO;
 
         //Perform the mapping
         NSArray *values = BCJMap(container, elementClass, options, sortDescriptors, fromDictionaryMap, outError);
@@ -137,44 +149,6 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id target, NSString *targetKey, i
         if (!didMappingSucceed) return NO;
 
         //Set the value
-        return BCJSetValue(target, targetKey, values, outError);
-    });
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) {
-    return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
-
-        //Get the container
-        NSArray *container;
-        if (!BCJGetValue(dict, key, NSArray.class, getterOptionsFromMapOptions(options), @{}, &container, outError)) return NO;
-
-        //Perform the mapping
-        NSArray *values = BCJMap(container, elementClass, options, fromArrayMap, outError);
-        BOOL didMappingSucceed = (values != nil);
-        if (!didMappingSucceed) return NO;
-
-        //Set the value
-        return BCJSetValue(target, targetKey, values, outError);
-    });
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) {
-    return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
-
-        //Get the container
-        NSDictionary *container;
-        if (!BCJGetValue(dict, key, NSDictionary.class, getterOptionsFromMapOptions(options), @{}, &container, outError)) return NO;
-
-        //Perform the mapping
-        NSArray *values = BCJMap(container, elementClass, options, sortDescriptors, fromDictionaryMap, outError);
-        BOOL didMappingSucceed = (values != nil);
-        if (!didMappingSucceed) return NO;
-
-        //Set the value
-        return BCJSetValue(target, targetKey, values, outError);
+        return [target setWithValue:values outError:outError];
     });
 }

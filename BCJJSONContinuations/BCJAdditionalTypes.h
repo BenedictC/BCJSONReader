@@ -6,69 +6,39 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 #import "BCLContinuation.h"
 #import "BCJDefines.h"
-#import "BCJConstants.h"
-#import "BCJContainerProtocols.h"
+
+@class BCJJSONSource;
+@class BCJJSONTarget;
 
 
 
-#pragma mark - NSDate epoch functions
-BOOL BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSinceEpoch(id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSDate *defaultValue, NSDate **outDate, NSError **outError) __attribute__((nonnull(1,5,6)));
+#pragma mark - NSDate epoch
+BOOL BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSinceEpoch(BCJJSONSource *source, NSDate **outDate, NSError **outError) BCJ_REQUIRED(1,2,3);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(BCJJSONTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2);
 
-BOOL BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSinceEpoch(id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSDate *defaultValue, NSDate **outDate, NSError **outError) __attribute__((nonnull(1,2,5,6)));
+#pragma mark - NSDate ISO 8601
+NSDate *BCJDateFromISO8601String(NSString *dateString) BCJ_REQUIRED(1);
+BOOL BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *source, NSDate **outDate, NSError **outError) BCJ_REQUIRED(1,2);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONTarget *target, BCJJSONSource *source) BCJ_WARN_UNUSED BCJ_REQUIRED(1,2);
 
+#pragma mark - NSURL
+BOOL BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **outURL, NSError **outError) BCJ_REQUIRED(1,2,3);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJJSONTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2);
 
+#pragma mark - Enums
+/**
+  The default value of the source is the default mapping key NOT mapping value.
 
-#pragma mark - NSDate epoch continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSDate *defaultValue) __attribute__((nonnull(1,2,3)));
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) __attribute__((nonnull(1,2,3)));
+ @param source      <#source description#>
+ @param enumMapping <#enumMapping description#>
+ @param outValue    <#outValue description#>
+ @param outError    <#outError description#>
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSDate *defaultValue) __attribute__((nonnull(1,2,3,4)));
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) __attribute__((nonnull(1,2,3,4)));
-
-
-
-#pragma mark - NSDate ISO 8601 functions
-BOOL BCJ_OVERLOADABLE BCJGetDateFromISO8601String(id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSDate *defaultValue, NSDate **outDate, NSError **outError) __attribute__((nonnull(1,5,6)));
-
-BOOL BCJ_OVERLOADABLE BCJGetDateFromISO8601String(id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSDate *defaultValue, NSDate **outDate, NSError **outError) __attribute__((nonnull(1,2,5,6)));
-
-
-
-#pragma mark - NSDate ISO 8601 continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSDate *defaultValue) __attribute__((nonnull(1,2,3)));
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) __attribute__((nonnull(1,2,3)));
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSDate *defaultValue) __attribute__((nonnull(1,2,3,4)));
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) __attribute__((nonnull(1,2,3,4)));
-
-
-
-#pragma mark - GET NSURL functions
-BOOL BCJ_OVERLOADABLE BCJGetURL(id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSURL *defaultValue, NSURL **outURL, NSError **outError) __attribute__((nonnull(1,5,6)));
-
-BOOL BCJ_OVERLOADABLE BCJGetURL(id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSURL *defaultValue, NSURL **outURL, NSError **outError) __attribute__((nonnull(1,2,5,6)));
-
-
-
-#pragma mark - Set NSURL continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSURL *defaultValue) __attribute__((nonnull(1,2,3)));
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) __attribute__((nonnull(1,2,3)));
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSURL *defaultValue) __attribute__((nonnull(1,2,3,4)));
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) __attribute__((nonnull(1,2,3,4)));
-
-
-
-#pragma mark - Get Enum functions
-BOOL BCJ_OVERLOADABLE BCJGetEnum(id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, id defaultValue, NSDictionary *enumMapping, id *outValue, NSError **outError) __attribute__((nonnull(1,5,6,7)));
-
-BOOL BCJ_OVERLOADABLE BCJGetEnum(id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, id defaultValue, NSDictionary *enumMapping, id *outValue, NSError **outError) __attribute__((nonnull(1,2,5,6,7)));
-
-
-
-#pragma mark - Set Enum continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, id defaultValue, NSDictionary *enumMapping) __attribute__((nonnull(1,2,3,6,7)));
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, id defaultValue, NSDictionary *enumMapping) __attribute__((nonnull(1,2,3,4,7)));
+ @return <#return value description#>
+ */
+BOOL BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDictionary *enumMapping, id *outValue, NSError **outError) BCJ_REQUIRED(1,2,3,4);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJJSONTarget *target, BCJJSONSource *source, NSDictionary *enumMapping) BCJ_REQUIRED(1,2,3);

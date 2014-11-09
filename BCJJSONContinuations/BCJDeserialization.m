@@ -8,19 +8,28 @@
 
 #import "BCLContinuation.h"
 #import "BCJDeserialization.h"
-#import "BCJCore.h"
+#import "BCJJSONTarget.h"
+#import "BCJContainer.h"
+#import "BCJError.h"
+
+
+
+#pragma mark - helper functions
+static inline BOOL isOptionSet(NSInteger option, NSInteger options) {
+    return (options & option) != 0;
+}
 
 
 
 #pragma mark - deserialization function
-static inline BOOL deserializeJSON(NSData *data, Class class, BCJJSONReadingOptions options, id __strong *outValue, NSError **outError) {
+BOOL BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, Class expectedClass, BCJJSONReadingOptions options, id __strong *outValue, NSError **outError) {
     //Reset outValue
     *outValue = nil;
 
     //Translate BCJJSONReadingOptions into NSJSONReadingOptions
     NSJSONReadingOptions jsonOptions = NSJSONReadingAllowFragments;
-    if (BCJIsOptionSet(BCJJSONReadingMutableContainers, options)) jsonOptions |= NSJSONReadingMutableContainers;
-    if (BCJIsOptionSet(BCJJSONReadingMutableLeaves, options))     jsonOptions |= NSJSONReadingMutableLeaves;
+    if (isOptionSet(BCJJSONReadingMutableContainers, options)) jsonOptions |= NSJSONReadingMutableContainers;
+    if (isOptionSet(BCJJSONReadingMutableLeaves, options))     jsonOptions |= NSJSONReadingMutableLeaves;
 
     //Create the JSON
     id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:jsonOptions error:outError];
@@ -29,8 +38,8 @@ static inline BOOL deserializeJSON(NSData *data, Class class, BCJJSONReadingOpti
     }
 
     //Check the type
-    if (![jsonObject isKindOfClass:class]) {
-        if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: Wrong class type" code:0 userInfo:nil];
+    if (expectedClass != nil && ![jsonObject isKindOfClass:expectedClass]) {
+        if (outError != NULL) *outError = [BCJError unexpectedTypeErrorWithJSONSource:nil value:jsonObject expectedClass:expectedClass];
         return NO;
     }
 
@@ -46,7 +55,7 @@ static inline BOOL deserializeJSON(NSData *data, Class class, BCJJSONReadingOpti
 id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(BCJContainer *emptyContainer, NSData *data, BCJJSONReadingOptions options) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id content;
-        if (!deserializeJSON(data, NSObject.class, options, &content, outError)) return NO;
+        if (!BCJDeserializeJSON(data, NSObject.class, options, &content, outError)) return NO;
 
         [emptyContainer setContentAndSeal:content];
 
@@ -66,7 +75,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(BCJContainer *emptyConta
 id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, Class class, BCJJSONReadingOptions options, BOOL(^successBlock)(id fragment, NSError **outError)) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id content;
-        if (!deserializeJSON(data, class, options, &content, outError)) return NO;
+        if (!BCJDeserializeJSON(data, class, options, &content, outError)) return NO;
 
         return successBlock(content, outError);
     });

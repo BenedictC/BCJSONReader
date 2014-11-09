@@ -7,15 +7,21 @@
 //
 
 #import "BCLContinuation.h"
-#import "BCJCore.h"
+#import "BCJDefines.h"
+#import "BCJJSONTarget.h"
+#import "BCJError.h"
 
 
 
 #pragma mark - Type checking continuations
 BOOL BCJ_OVERLOADABLE BCJIsOfKindClass(id value, Class class, NSError **outError) {
+    NSCParameterAssert(class);
     BOOL isValid = [value isKindOfClass:class];
     if (!isValid) {
-        if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: wrong class type" code:0 userInfo:nil];
+        if (outError != NULL) {
+            NSString *criteria = [NSString stringWithFormat:@"value.class != %@", NSStringFromClass(class)];
+            *outError = [BCJError invalidValueErrorWithJSONSource:nil value:value criteria:criteria];
+        }
         return NO;
     }
 
@@ -26,9 +32,10 @@ BOOL BCJ_OVERLOADABLE BCJIsOfKindClass(id value, Class class, NSError **outError
 
 #pragma mark - Validation functions
 BOOL BCJ_OVERLOADABLE BCJValidate(id value, NSPredicate *predicate, NSError **outError) {
+    NSCParameterAssert(predicate);
     BOOL isValid = [predicate evaluateWithObject:value];
     if (!isValid) {
-        if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: value did not pass validation" code:0 userInfo:nil];
+        if (outError != NULL) *outError = [BCJError invalidValueErrorWithJSONSource:nil value:value criteria:predicate.predicateFormat];
         return NO;
     }
 
@@ -44,14 +51,14 @@ BOOL BCJ_OVERLOADABLE BCJValidate(id value, NSString *predicateString, NSError *
 
 
 #pragma mark - Validation setter function
-BOOL BCJ_OVERLOADABLE BCJValidateAndSet(id target, NSString *targetKey, id value, NSPredicate *predicate, NSError **outError) {
+BOOL BCJ_OVERLOADABLE BCJValidateAndSet(BCJJSONTarget *target, id value, NSPredicate *predicate, NSError **outError) {
     if (!BCJValidate(value, predicate, outError)) return NO;
 
-    return BCJSetValue(target, targetKey, value, outError);
+    return [target setWithValue:value outError:outError];
 }
 
 
 
-BOOL BCJ_OVERLOADABLE BCJValidateAndSet(id target, NSString *targetKey, id value, NSString *predicateString, NSError **outError) {
-    return  BCJValidateAndSet(target, targetKey, value, [NSPredicate predicateWithFormat:predicateString], outError);
+BOOL BCJ_OVERLOADABLE BCJValidateAndSet(BCJJSONTarget *target, id value, NSString *predicateString, NSError **outError) {
+    return  BCJValidateAndSet(target, value, [NSPredicate predicateWithFormat:predicateString], outError);
 }

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
 
 
 

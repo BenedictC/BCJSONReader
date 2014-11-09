@@ -8,8 +8,9 @@
 
 #import "BCLContinuation.h"
 #import "BCJDefines.h"
-#import "BCJConstants.h"
-#import "BCJContainerProtocols.h"
+
+@class BCJJSONSource;
+@class BCJJSONTarget;
 
 
 
@@ -27,47 +28,19 @@
 
 #pragma mark - constants
 typedef NS_OPTIONS(NSUInteger, BCJMapOptions) {
-    //Input handling
-    BCJMapOptionReplaceNullWithNil  = (1UL  << 0),
-    BCJMapOptionReplaceNilWithEmptyCollection = (1UL  << 1),
-    BCJMapOptionAllowsNilValue  = (1UL  << 2),
-
     //Control flow behaviour
-    BCJMapOptionDiscardMappingErrors  = (1UL  << 3),
+    BCJMapOptionDiscardMappingErrors  = (1UL  << 1),
 };
 
 
 
-//Mapping modes (i.e. predefined mapping options)
-typedef BCJMapOptions BCJMapMode;
-const static BCJMapOptions BCJMapModeMandatory           = 0;
-
-const static BCJMapOptions BCJMapModeOptional            = BCJMapOptionAllowsNilValue;
-const static BCJMapOptions BCJMapModeDefaultable         = BCJMapOptionAllowsNilValue     | BCJMapOptionReplaceNilWithEmptyCollection;
-
-const static BCJMapOptions BCJMapModeNullableOptional    = BCJMapOptionReplaceNullWithNil | BCJMapOptionAllowsNilValue;
-const static BCJMapOptions BCJMapModeNullableDefaultable = BCJMapOptionReplaceNullWithNil | BCJMapOptionAllowsNilValue | BCJMapOptionReplaceNilWithEmptyCollection;
-
-const static BCJMapOptions BCJMapModeMandatoryLenient           = BCJMapOptionDiscardMappingErrors;
-
-const static BCJMapOptions BCJMapModeOptionalLenient            = BCJMapModeOptional | BCJMapOptionDiscardMappingErrors;
-const static BCJMapOptions BCJMapModeDefaultableLenient         = BCJMapModeDefaultable | BCJMapOptionDiscardMappingErrors;
-
-const static BCJMapOptions BCJMapModeNullableOptionalLenient    = BCJMapModeNullableOptional | BCJMapOptionDiscardMappingErrors;
-const static BCJMapOptions BCJMapModeNullableDefaultableLenient = BCJMapModeNullableDefaultable | BCJMapOptionDiscardMappingErrors;
-
-
-
 #pragma mark - Map functions
-BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *dict, Class elementClass, BCJMapOptions options, NSArray *sortDescriptiors, id(^mapFromDictionary)(id elementKey, id elementValue, NSError **outError), NSError **outError) __attribute__((nonnull(1,2,4,5)));
+BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *dict, Class elementClass, BCJMapOptions options, NSArray *sortDescriptiors, id(^mapFromDictionary)(id elementKey, id elementValue, NSError **outError), NSError **outError) BCJ_REQUIRED(1,2,4,5);
 
-BCJ_OVERLOADABLE NSArray *BCJMap(NSArray *array, Class elementClass, BCJMapOptions options, id(^mapFromArray)(NSUInteger elementIdx, id elementValue, NSError **outError), NSError **outError) __attribute__((nonnull(1,2,4,5)));
+BCJ_OVERLOADABLE NSArray *BCJMap(NSArray *array, Class elementClass, BCJMapOptions options, id(^mapFromArray)(NSUInteger elementIdx, id elementValue, NSError **outError), NSError **outError) BCJ_REQUIRED(1,2,4,5);
 
 
 
 #pragma mark - Set Map continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) __attribute__((nonnull(1,2,3,5,7)));
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) __attribute__((nonnull(1,2,3,5,7,8)));
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) __attribute__((nonnull(1,2,3,4,5,7)));
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) __attribute__((nonnull(1,2,3,4,5,7,8)));
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONTarget *target, BCJJSONSource *source, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) BCJ_REQUIRED(1,2,5) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONTarget *target, BCJJSONSource *source, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) BCJ_REQUIRED(1,2,6) BCJ_WARN_UNUSED;

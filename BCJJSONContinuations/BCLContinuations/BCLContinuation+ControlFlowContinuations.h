@@ -10,5 +10,5 @@
 
 
 
-id<BCLContinuation> BCLUntilEnd(id<BCLContinuation> firstContinuations, ...) NS_REQUIRES_NIL_TERMINATION;
-id<BCLContinuation> BCLUntilError(id<BCLContinuation> firstContinuations, ...) NS_REQUIRES_NIL_TERMINATION;
+id<BCLContinuation> BCLUntilEnd(id<BCLContinuation> firstContinuations, ...) NS_REQUIRES_NIL_TERMINATION __attribute__((warn_unused_result));
+id<BCLContinuation> BCLUntilError(id<BCLContinuation> firstContinuations, ...) NS_REQUIRES_NIL_TERMINATION __attribute__((warn_unused_result));

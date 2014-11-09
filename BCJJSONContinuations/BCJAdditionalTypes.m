@@ -7,77 +7,53 @@
 //
 
 #import "BCJAdditionalTypes.h"
-#import "BCJCore.h"
+#import "BCJError.h"
+#import "BCJJSONSource+LateBoundClassCheck.h"
+#import "BCJJSONTarget.h"
 
 
 
-#pragma mark - NSDate epoch functions
-BOOL BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSinceEpoch(id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSDate *defaultValue, NSDate **outDate, NSError **outError) {
+#pragma mark - NSDate epoch
+BOOL BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSinceEpoch(BCJJSONSource *source, NSDate **outDate, NSError **outError) {
+    //Perform additional checks that couldn't be performed when source and target are created
+    NSCParameterAssert(source);
+    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
+
+    //Reset outValue
     *outDate = nil;
-    NSNumber *defaultNumber = (defaultValue == nil) ? nil : @([defaultValue timeIntervalSince1970]);
+
+    //Get value
     NSNumber *timeInterval;
-    if (!BCJGetValue(array, idx, NSNumber.class, options, defaultNumber, &timeInterval, outError)) return NO;
+    if (![source getValue:&timeInterval ofKind:NSNumber.class error:outError]) return NO;
 
     //If we don't have a value then we don't need to create a date
     if (timeInterval == nil) return YES;
 
+    //'Set' value
     *outDate = [NSDate dateWithTimeIntervalSince1970:[timeInterval integerValue]];
     return YES;
 }
 
 
 
-BOOL BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSinceEpoch(id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSDate *defaultValue, NSDate **outDate, NSError **outError) {
-    *outDate = nil;
-    NSNumber *defaultNumber = (defaultValue == nil) ? nil : @([defaultValue timeIntervalSince1970]);
-    NSNumber *timeInterval;
-    if (!BCJGetValue(dict, key, NSNumber.class, options, defaultNumber, &timeInterval, outError)) return NO;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(BCJJSONTarget *target, BCJJSONSource *source) {
+    //Perform additional checks that couldn't be performed when source and target are created
+    NSCParameterAssert(target);
+    NSCParameterAssert(source);
+    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
-    //If we don't have a value then we don't need to create a date
-    if (timeInterval == nil) return YES;
-
-    *outDate = [NSDate dateWithTimeIntervalSince1970:[timeInterval integerValue]];
-    return YES;
-}
-
-
-
-#pragma mark - NSDate epoch continuations
-//Block result-style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSDate *defaultValue) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSDate *date;
-        if (!BCJGetDateFromTimeIntervalSinceEpoch(array, idx, options, defaultValue, &date, outError)) return NO;
-        return BCJSetValue(target, targetKey, date, outError);
+        if (!BCJGetDateFromTimeIntervalSinceEpoch(source, &date, outError)) return NO;
+
+        return [target setWithValue:date outError:outError];
     });
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) {
-    return BCJSetDateFromTimeIntervalSinceEpoch(target, targetKey, array, idx, 0, nil);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSDate *defaultValue) {
-    return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
-        NSDate *date;
-        if (!BCJGetDateFromTimeIntervalSinceEpoch(dict, key, options, defaultValue, &date, outError)) return NO;
-        return BCJSetValue(target, targetKey, date, outError);
-    });
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) {
-    return BCJSetDateFromTimeIntervalSinceEpoch(target, targetKey, dict, key, 0, nil);
-}
-
-
-
-#pragma mark - NSDate ISO8601 functions
-static inline NSDate *dateFromISO8601String(NSString *dateString) {
+#pragma mark - NSDate ISO 8601
+NSDate *BCJDateFromISO8601String(NSString *dateString) {
     static NSDateFormatter *formatter = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -87,190 +63,154 @@ static inline NSDate *dateFromISO8601String(NSString *dateString) {
         formatter.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss.SSSZ";
     });
 
-    return [formatter dateFromString:dateString];
+    NSDate *date = [formatter dateFromString:dateString];
+    return date;
 }
 
 
 
-BOOL BCJ_OVERLOADABLE BCJGetDateFromISO8601String(id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSDate *defaultValue, NSDate **outDate, NSError **outError) {
-    *outDate = nil;
-    //It would be wasteful to create a string representation of the default value. Instead we use a sentinel which
-    //cannot be mistaken for a valid value.
-    static NSString * const sentinel = @"SENTINEL";
-    NSString *defaultString = (defaultValue == nil) ? nil : sentinel;
-    NSString *dateString;
-    if (!BCJGetValue(array, idx, NSString.class, options, defaultString, &dateString, outError)) return NO;
+BOOL BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *source, NSDate **outDate, NSError **outError) {
+    //Perform additional checks that couldn't be performed when source and target are created
+    NSCParameterAssert(source);
+    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
-    //If we don't have a value then we don't need to create a date
+    //Reset outValue
+    *outDate = nil;
+
+    static NSString * const sentinal = @"SENTINAL";
+    NSString *defaultString = (source.defaultValue == nil) ? nil : sentinal;
+    BCJJSONSource *stringSource = [[BCJJSONSource alloc] initWithObject:source.object JSONPath:source.JSONPath expectedClass:NSString.class options:source.options defaultValue:defaultString];
+
+    NSString *dateString;
+    //TODO: Should we return a different error?
+    if (![stringSource getValue:&dateString ofKind:nil error:outError]) return NO;
+
+    //If we don't have a value then the getter was happy with a nil value so we don't need to create a date.
     if (dateString == nil) return YES;
 
-    //Convert the string to a date
-    NSDate *date = ([dateString isEqualToString:sentinel]) ? defaultValue : dateFromISO8601String(dateString);
-    if (date == nil) {
-        if (outError == NULL) {
-            NSString *format = NSLocalizedString(@"The object at index<%@> of collection <%@> is not a string represention of an ISO 8601 date (yyyy-MM-dd'T'HH:mm:ss.SSSZ). Actual value: <%@>.", nil);
-            NSString *description = [NSString stringWithFormat:format, @(idx), array, dateString];
-            *outError = [NSError errorWithDomain:BCJErrorDomain code:BCJInvalidValueError userInfo:@{NSLocalizedDescriptionKey:description}];
+    //Did the getter return our sentinal?
+    BOOL shouldUseDefault = [dateString isEqualToString:sentinal];
+    if (shouldUseDefault) {
+        *outDate = source.defaultValue;
+        return YES;
+    }
+
+    //Attempt to create a string from the fetched string
+    NSDate *possibleDate = BCJDateFromISO8601String(dateString);
+    BOOL didFailToCreateDate = (possibleDate == nil);
+    if (didFailToCreateDate) {
+        if (outError != NULL) {
+            NSString *criteria = [NSString stringWithFormat:@"is a valid ISO 8601 date"];
+            *outError = [BCJError invalidValueErrorWithJSONSource:source value:possibleDate criteria:criteria];
         }
         return NO;
     }
 
-    *outDate = date;
+    //Done!
+    *outDate = possibleDate;
     return YES;
 }
 
 
 
-BOOL BCJ_OVERLOADABLE BCJGetDateFromISO8601String(id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSDate *defaultValue, NSDate **outDate, NSError **outError) {
-    *outDate = nil;
-    //It would be wasteful to create a string representation of the default value. Instead we use a sentinel which
-    //cannot be mistaken for a valid value.
-    static NSString * const sentinel = @"SENTINEL";
-    NSString *defaultString = (defaultValue == nil) ? nil : sentinel;
-    NSString *dateString;
-    if (!BCJGetValue(dict, key, NSString.class, options, defaultString, &dateString, outError)) return NO;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONTarget *target, BCJJSONSource *source) {
+    //Perform additional checks that couldn't be performed when source and target are created
+    NSCParameterAssert(target);
+    NSCParameterAssert(source);
+    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
-    //If we don't have a value then we don't need to create a date
-    if (dateString == nil) return YES;
-
-    //Convert the string to a date
-    NSDate *date = ([dateString isEqualToString:sentinel]) ? defaultValue : dateFromISO8601String(dateString);
-    if (date == nil) {
-        if (outError == NULL) *outError = [NSError errorWithDomain:@"TODO: Invalid date string" code:0 userInfo:nil];
-        return NO;
-    }
-
-    *outDate = date;
-    return YES;
-}
-
-
-
-#pragma mark - NSDate ISO8601 continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSDate *defaultValue) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSDate *date;
-        if (!BCJGetDateFromISO8601String(array, idx, options, defaultValue, &date, outError)) return NO;
-        return BCJSetValue(target, targetKey, date, outError);
+        if (!BCJGetDateFromISO8601String(source, &date, outError)) return NO;
+
+        return [target setWithValue:date outError:outError];
     });
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) {
-    return BCJSetDateFromISO8601String(target, targetKey, array, idx, 0, nil);
-}
+#pragma mark - Get NSURL
+BOOL BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **outURL, NSError **outError) {
+    //Perform additional checks that couldn't be performed when source and target are created
+    NSCParameterAssert(source);
+    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSDate *defaultValue) {
-    return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
-        NSDate *date;
-        if (!BCJGetDateFromISO8601String(dict, key, options, defaultValue, &date, outError)) return NO;
-        return BCJSetValue(target, targetKey, date, outError);
-    });
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) {
-    return BCJSetDateFromISO8601String(target, targetKey, dict, key, 0, nil);
-}
-
-
-
-#pragma mark - Get NSURL functions
-BOOL BCJ_OVERLOADABLE BCJGetURL(id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSURL *defaultValue, NSURL **outURL, NSError **outError) {
+    //Reset outValue
     *outURL = nil;
 
-    NSString *string;
-    if (!BCJGetValue(array, idx, NSString.class, options, defaultValue.absoluteString, &string, outError)) return NO;
+    id fetchedValue;
+    if (![source getValue:&fetchedValue ofKind:nil error:outError]) return NO;
 
-    //If BCJGetValue succeed and the value is nil then we don't need to try and create a URL
-    if (string == nil) return YES;
+    //If the getter succeed with a nil then we're done
+    if (fetchedValue == nil) return YES;
 
-    //Attempt to create URL from the string
-    NSURL *url = [NSURL URLWithString:string];
-    if (url == nil) {
-        if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: Invalid URL" code:0 userInfo:nil];
-        return NO;
+    //The value is a URL so we're done
+    if ([fetchedValue isKindOfClass:NSURL.class]) {
+        *outURL = fetchedValue;
+        return YES;
+
     }
 
-    *outURL = url;
-    return YES;
+    //Attempt to creat URL from the fetched string
+    if ([fetchedValue isKindOfClass:NSString.class]) {
+        NSURL *url = [NSURL URLWithString:fetchedValue];
+        if (url == nil) {
+            if (outError != NULL) *outError = [BCJError invalidValueErrorWithJSONSource:source value:fetchedValue criteria:@"is a valid URL"];
+            return NO;
+        }
+
+        *outURL = url;
+        return YES;
+    }
+
+    //The fetch Value was of the wrong type
+    if (outError != NULL) *outError = [BCJError unexpectedTypeErrorWithJSONSource:source value:fetchedValue expectedClass:NSString.class];
+    return NO;
 }
 
 
 
-BOOL BCJ_OVERLOADABLE BCJGetURL(id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSURL *defaultValue, NSURL **outURL, NSError **outError) {
-    *outURL = nil;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJJSONTarget *target, BCJJSONSource *source) {
+    //Perform additional checks that couldn't be performed when source and target are created
+    NSCParameterAssert(target);
+    NSCParameterAssert(source);
+    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
-    NSString *string;
-    if (!BCJGetValue(dict, key, NSString.class, options, defaultValue.absoluteString, &string, outError)) return NO;
-
-    //If BCJGetValue succeed and the value is nil then we don't need to try and create a URL
-    if (string == nil) return YES;
-
-    //Attempt to create URL from the string
-    NSURL *url = [NSURL URLWithString:string];
-    if (url == nil) {
-        if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: Invalid URL" code:0 userInfo:nil];
-        return NO;
-    }
-
-    *outURL = url;
-    return YES;
-}
-
-
-
-#pragma mark - Set NSURL continuations
-//KVC result-style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSURL *defaultValue) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSURL *value;
-        if (!BCJGetURL(array, idx, options, defaultValue, &value, outError)) return NO;
+        if (!BCJGetURL(source, &value, outError)) return NO;
 
-        return BCJSetValue(target, targetKey, value, outError);
+        return [target setWithValue:value outError:outError];
     });
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) {
-    return BCJSetURL(target, targetKey, array, idx, 0, nil);
-}
+#pragma mark - Get Enum
+BOOL BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDictionary *enumMapping, id *outValue, NSError **outError) {
+    NSCParameterAssert(source);
+    NSCParameterAssert(enumMapping);
+    NSCParameterAssert(outValue);
+    NSCParameterAssert(outError);
+    //Note that we don't need to check the source type because it will be used as a key to access an enum and we don't
+    //care what the enum keys are.
 
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSURL *defaultValue) {
-    return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
-        NSURL *value;
-        if (!BCJGetURL(dict, key, options, defaultValue, &value, outError)) return NO;
-
-        return BCJSetValue(target, targetKey, value, outError);
-    });
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) {
-    return BCJSetURL(target, targetKey, dict, key, 0, nil);
-}
-
-
-
-#pragma mark - Get Enum functions
-BOOL BCJ_OVERLOADABLE BCJGetEnum(id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, id defaultValue, NSDictionary *enumMapping, id *outValue, NSError **outError) {
+    //Reset outValue
     *outValue = nil;
-    //Get the value
-    NSString *enumString;
-    if (!BCJGetValue(array, idx, NSString.class, options, defaultValue, &enumString, outError)) return NO;
 
-    //Look up the value in the mapping
-    id value = [enumMapping objectForKey:enumString];
+    //Get the value
+    id enumKey;
+    if (![source getValue:&enumKey error:outError]) return NO;
+
+    //We don't have a key but that's fine because otherwise the getter out have complained.
+    if (enumKey == nil) return YES;
+
+    //Get the value
+    id value = enumMapping[enumKey];
+
+    //If the value is nil then the mapping was incomplete.
     if (value == nil) {
-        if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: value not found in mapping" code:0 userInfo:nil];
+        if (outError != NULL) *outError = [BCJError unknownKeyForEnumMappingErrorWithJSONSource:source enumMapping:enumMapping key:enumKey];
         return NO;
     }
 
@@ -280,45 +220,16 @@ BOOL BCJ_OVERLOADABLE BCJGetEnum(id<BCJIndexedContainer> array, NSUInteger idx, 
 
 
 
-BOOL BCJ_OVERLOADABLE BCJGetEnum(id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, id defaultValue, NSDictionary *enumMapping, id *outValue, NSError **outError) {
-    *outValue = nil;
-    //Get the value
-    NSString *enumString;
-    if (!BCJGetValue(dict, key, NSString.class, options, defaultValue, &enumString, outError)) return NO;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJJSONTarget *target, BCJJSONSource *source, NSDictionary *enumMapping) {
+    //Perform additional checks that couldn't be performed when source and target are created
+    NSCParameterAssert(target);
+    NSCParameterAssert(source);
+    NSCParameterAssert(enumMapping);
+    //Note that we don't need to check the source type because it will be used as a key to access an enum and we don't
 
-    //Look up the value in the mapping
-    id value = [enumMapping objectForKey:enumString];
-    if (value == nil) {
-        if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: value not found in mapping" code:0 userInfo:nil];
-        return NO;
-    }
-
-    *outValue = value;
-    return YES;
-}
-
-
-
-#pragma mark - Set Enum continuations
-//KVC style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, id defaultValue, NSDictionary *enumMapping) {
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
-        if (BCJGetEnum(array, idx, options, defaultValue, enumMapping, &value, outError)) return NO;
-
-        //Success
-        return BCJSetValue(target, targetKey, value, outError);
-    });
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, id defaultValue, NSDictionary *enumMapping) {
-    return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
-        id value;
-        if (BCJGetEnum(dict, key, options, defaultValue, enumMapping, &value, outError)) return NO;
-
-        //Success
-        return BCJSetValue(target, targetKey, value, outError);
+        if (!BCJGetEnum(source, enumMapping, &value, outError)) return NO;
+        return [target setWithValue:value outError:outError];
     });
 }

@@ -1,5 +1,5 @@
 //
-//  BCJAdditionalTypesTests.m
+//  BCJStandardTypesTests.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 07/11/2014.
@@ -11,17 +11,15 @@
 
 
 
-@interface BCJAdditionalTypesTests : XCTestCase
+@interface BCJStandardTypesTests : XCTestCase
 
 @end
 
 
 
-@implementation BCJAdditionalTypesTests
+@implementation BCJStandardTypesTests
 
--(void)testEnum
-{
-    //Test 
+- (void)testNull {
 }
 
 @end

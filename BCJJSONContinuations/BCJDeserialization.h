@@ -6,8 +6,12 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
+#import "BCLContinuationProtocol.h"
 #import "BCJDefines.h"
-#import "BCJContainer.h"
+
+@class BCJContainer;
 
 
 
@@ -19,10 +23,13 @@ typedef NS_OPTIONS(NSUInteger, BCJJSONReadingOptions) {
 
 
 
+#pragma mark - deserialization function
+BOOL BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, Class class, BCJJSONReadingOptions options, id __strong *outValue, NSError **outError) BCJ_REQUIRED(1,4);
+
 #pragma mark - JSON Deserialization continuations
 //BCJContainer result-style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(BCJContainer *emptyContainer, NSData *data, BCJJSONReadingOptions options) __attribute__((nonnull(1,2)));
-id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(BCJContainer *emptyContainer, NSData *data) __attribute__((nonnull(1,2)));
+id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(BCJContainer *emptyContainer, NSData *data, BCJJSONReadingOptions options) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(BCJContainer *emptyContainer, NSData *data) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 
 //Block result-style
-id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, Class class, BCJJSONReadingOptions options, BOOL(^successBlock)(id fragment, NSError **outError)) __attribute__((nonnull(1,2,4)));
+id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, Class class, BCJJSONReadingOptions options, BOOL(^successBlock)(id fragment, NSError **outError)) BCJ_REQUIRED(1,2,4) BCJ_WARN_UNUSED;

@@ -5,7 +5,7 @@
 BCJJSONContinuations is:
 + Flexible. Provides functions for lots of JSON usage patterns.
 + Extensible. For when the JSON is especially obscure.
-+ Explicit and predicatable. Understanding a fragment of code requires minimal assumed knowledge.
++ Explicit and predicatable.
 + Tested.
 + Documented.
 
@@ -24,7 +24,7 @@ NSError *error = [BCLContinuation untilError:
                   BCJDeserialize(jsonData, json),
                   BCJSetString(event, BCJ_KEY(eventDescription), json, @"description"),
                   BCJSetDateFromISO8601String(event, BCJ_KEY(date), json, @"date"),
-                  BCJSetNumber(event, BCJ_KEY(isRSVPRequired), json, @"rsvp_required", BCJGetterModeOptional, @NO),
+                  BCJSetNumber(event, BCJ_KEY(isRSVPRequired), json, @"rsvp_required", BCJSourceModeOptional, @NO),
                   BCJSetMap(event, BCJ_KEY(speakers), json, @"speakers", NSDictionary.class, BCJMapModeMandatory, id(^fromArrayMap)(NSUInteger elementIndex, NSDictionary *speakerJSON, NSError **outError)) {
                             BCMSpeaker *talk = [BCMTalk new];
                             BOOL didSucceed = [BCLContinuation withError:outError untilError:
@@ -42,7 +42,7 @@ BCJJSONContinuations is a library designed to deal with the crazy JSON structure
 
 ## There are lots of other libraries for handling JSON, why not use one of them?
 Other JSON libraries tends to make simplifying assumptions about the JSON structures that they'll be faced with. These
-assumptions may be suitable for a specific JSON structure but not all. The promise of these libraries tend to break 
+assumptions may be suitable for a specific JSON structure but not for all. The promise of these libraries tend to break 
 down when faced with JSON that does not conform to the assumptions. When these assumptions fail we're left in a worse
 position that if we hadn't used the library: first we must figure out how to breakout of the library and only then can 
 we write the manual code that the library claimed to help use avoid. Other undesirable and common patterns in JSON
@@ -54,8 +54,8 @@ when debugging as it requires the coder to have an intimate knowledge of the ass
 knowldege is can only by found by reading the documentation (if there is any) or digging into the libraries codebase.
 
 ## So what's different about BCJJSONContinuations?
-First and foremost BCJJSONContinuations provides the infrastructure for handling the process (this infrastructure is
-actually provided by another library, BCLContinuations, which is included with BCJJSONContinuations). 
+First and foremost BCJJSONContinuations provides the infrastructure for handling the JSON handling process (this 
+infrastructure is actually provided by another library, BCLContinuations, which is included with BCJJSONContinuations). 
 BCJJSONContinuations then builds on this infrastructure and provides functions for the common steps that occur when
 processing JSON. 
 

@@ -6,18 +6,17 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
+#import "BCJAdditionalTypes.h"
+
+
 
 @interface BCLContinuation_ControlFlowContinuationsTests : XCTestCase
 
 @end
 
-@implementation BCLContinuation_ControlFlowContinuationsTests
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
-}
+
+@implementation BCLContinuation_ControlFlowContinuationsTests
 
 @end

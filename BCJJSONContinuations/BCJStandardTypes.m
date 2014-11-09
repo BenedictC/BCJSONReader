@@ -7,207 +7,72 @@
 //
 
 #import "BCJStandardTypes.h"
-#import "BCJGettersAndSetter.h"
-#import "BCJCore.h"
+#import "BCJJSONSource+LateBoundClassCheck.h"
+#import "BCJJSONTarget.h"
+#import "BCJJSONSource+OptionsAdditons.h"
 
 
 
-#pragma mark - Set NSArray continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetArray(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSArray *defaultValue) {
-    return BCJSetValue(target, targetKey, array, idx, NSArray.class, options, defaultValue);
+#pragma mark - (private) generic setter
+static inline id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJJSONTarget *target, BCJJSONSource *source, Class expectedClass) {
+    NSCParameterAssert(target);
+    NSCParameterAssert(source);
+    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
+
+    return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
+        id value;
+        if (![source getValue:&value ofKind:expectedClass error:outError]) return NO;
+
+        return [target setWithValue:value outError:outError];
+    });
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetArray(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) {
-    return BCJSetValue(target, targetKey, array, idx, NSArray.class, 0, nil);
+#pragma mark - type specific setters
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetArray(BCJJSONTarget *target, BCJJSONSource *source) {
+    return BCJSetValue(target, source, NSArray.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetArray(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSArray *defaultValue) {
-    return BCJSetValue(target, targetKey, dict, key, NSArray.class, options, defaultValue);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableArray(BCJJSONTarget *target, BCJJSONSource *source) {
+    return BCJSetValue(target, source, NSMutableArray.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetArray(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) {
-    return BCJSetValue(target, targetKey, dict, key, NSArray.class, 0, nil);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDictionary(BCJJSONTarget *target, BCJJSONSource *source) {
+    return BCJSetValue(target, source, NSDictionary.class);
 }
 
 
 
-#pragma mark - Set NSMutableArray continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableArray(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSMutableArray *defaultValue) {
-    return BCJSetValue(target, targetKey, array, idx, NSMutableArray.class, options, defaultValue);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableDictionary(BCJJSONTarget *target, BCJJSONSource *source) {
+    return BCJSetValue(target, source, NSMutableDictionary.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableArray(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) {
-    return BCJSetValue(target, targetKey, array, idx, NSMutableArray.class, 0, nil);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetString(BCJJSONTarget *target, BCJJSONSource *source) {
+    return BCJSetValue(target, source, NSString.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableArray(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSMutableArray *defaultValue) {
-    return BCJSetValue(target, targetKey, dict, key, NSMutableArray.class, options, defaultValue);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableString(BCJJSONTarget *target, BCJJSONSource *source) {
+    return BCJSetValue(target, source, NSMutableString.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableArray(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) {
-    return BCJSetValue(target, targetKey, dict, key, NSMutableArray.class, 0, nil);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNumber(BCJJSONTarget *target, BCJJSONSource *source) {
+    return BCJSetValue(target, source, NSNumber.class);
 }
 
 
 
-#pragma mark - Set NSDictionary continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDictionary(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSDictionary *defaultValue) {
-    return BCJSetValue(target, targetKey, array, idx, NSDictionary.class, options, defaultValue);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDictionary(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) {
-    return BCJSetValue(target, targetKey, array, idx, NSDictionary.class, 0, nil);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDictionary(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSDictionary *defaultValue) {
-    return BCJSetValue(target, targetKey, dict, key, NSDictionary.class, options, defaultValue);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDictionary(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) {
-    return BCJSetValue(target, targetKey, dict, key, NSDictionary.class, 0, nil);
-}
-
-
-
-#pragma mark - Set NSMutableDictionary continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableDictionary(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSMutableDictionary *defaultValue) {
-    return BCJSetValue(target, targetKey, array, idx, NSMutableDictionary.class, options, defaultValue);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableDictionary(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) {
-    return BCJSetValue(target, targetKey, array, idx, NSMutableDictionary.class, 0, nil);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableDictionary(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSMutableDictionary *defaultValue) {
-    return BCJSetValue(target, targetKey, dict, key, NSMutableDictionary.class, options, defaultValue);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableDictionary(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) {
-    return BCJSetValue(target, targetKey, dict, key, NSMutableDictionary.class, 0, nil);
-}
-
-
-
-#pragma mark - Set NSString continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetString(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSString *defaultValue) {
-    return BCJSetValue(target, targetKey, array, idx, NSString.class, options, defaultValue);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetString(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) {
-    return BCJSetValue(target, targetKey, array, idx, NSString.class, 0, nil);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetString(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSString *defaultValue) {
-    return BCJSetValue(target, targetKey, dict, key, NSString.class, options, defaultValue);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetString(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) {
-    return BCJSetValue(target, targetKey, dict, key, NSString.class, 0, nil);
-}
-
-
-
-#pragma mark - Set NSMutableString continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableString(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSMutableString *defaultValue) {
-    return BCJSetValue(target, targetKey, array, idx, NSMutableString.class, options, defaultValue);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableString(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) {
-    return BCJSetValue(target, targetKey, array, idx, NSMutableString.class, 0, nil);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableString(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSMutableString *defaultValue) {
-    return BCJSetValue(target, targetKey, dict, key, NSMutableString.class, options, defaultValue);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableString(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) {
-    return BCJSetValue(target, targetKey, dict, key, NSMutableString.class, 0, nil);
-}
-
-
-
-#pragma mark - Set NSNumber continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNumber(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options, NSNumber *defaultValue) {
-    return BCJSetValue(target, targetKey, array, idx, NSNumber.class, options, defaultValue);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNumber(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) {
-    return BCJSetValue(target, targetKey, array, idx, NSNumber.class, 0, nil);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNumber(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options, NSNumber *defaultValue) {
-    return BCJSetValue(target, targetKey, dict, key, NSNumber.class, options, defaultValue);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNumber(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) {
-    return BCJSetValue(target, targetKey, dict, key, NSNumber.class, 0, nil);
-}
-
-
-
-#pragma mark - Set NSNull continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNull(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx, BCJGetterOptions options) {
-    NSCAssert(BCJShouldReplaceNullWithNil(options), @"Invalid option <BCJGetterOptionReplaceNullWithNil> is not permitted when setting NSNull");
-    return BCJSetValue(target, targetKey, array, idx, NSNull.class, options, [NSNull null]);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNull(id target, NSString *targetKey, id<BCJIndexedContainer> array, NSUInteger idx) {
-    return BCJSetValue(target, targetKey, array, idx, NSNull.class, 0, [NSNull null]);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNull(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key, BCJGetterOptions options) {
-    NSCAssert(BCJShouldReplaceNullWithNil(options), @"Invalid option <BCJGetterOptionReplaceNullWithNil> is not permitted when setting NSNull");
-    return BCJSetValue(target, targetKey, dict, key, NSNull.class, options, [NSNull null]);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNull(id target, NSString *targetKey, id<BCJKeyedContainer> dict, id key) {
-    return BCJSetValue(target, targetKey, dict, key, NSNull.class, 0, [NSNull null]);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNull(BCJJSONTarget *target, BCJJSONSource *source) {
+    NSCAssert(BCJShouldReplaceNullWithNil(source.options), @"Invalid option <BCJGetterOptionReplaceNullWithNil> is not permitted when setting NSNull");
+    return BCJSetValue(target, source, NSNull.class);
 }

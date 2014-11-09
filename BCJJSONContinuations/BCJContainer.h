@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 #import "BCJContainerProtocols.h"
 
 
@@ -14,7 +16,7 @@
 
 -(instancetype)initWithContent:(id)content;
 
-@property(nonatomic,readonly) id content;
+@property(nonatomic, readonly) id content;
 @property(nonatomic, readonly) BOOL isSealed;
 
 -(void)setContentAndSeal:(id)object;
