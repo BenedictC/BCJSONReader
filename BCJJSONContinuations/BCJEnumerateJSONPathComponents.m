@@ -10,18 +10,29 @@
 
 
 
-static inline BOOL scanSubscriptComponent(NSScanner *scanner, id *outComponent) {
+typedef NS_ENUM(NSUInteger, ScanResult) {
+    kScanResultFailed = 0,
+    kScanResultNoMatch,
+    kScanResultSucceed,
+};
+
+
+
+static inline ScanResult scanSubscriptComponent(NSScanner *scanner, id *outComponent) {
 
     id subscript = nil;
     BOOL isSubscript = [scanner scanString:@"[" intoString:NULL];
-    if (!isSubscript) return NO;
+    //Not a subscript
+    if (!isSubscript) return kScanResultNoMatch;
 
+    //Is it an integer subscript?
     unsigned long long idx = 0;
     BOOL didScanIntegerSubscript = [scanner scanUnsignedLongLong:&idx];
     if (didScanIntegerSubscript) {
         subscript = @(idx);
     }
 
+    //Is it a string subscript?
     BOOL shouldScanForStringSubscript = (subscript == nil);
     BOOL didScanStringSubscriptOpening = shouldScanForStringSubscript && [scanner scanString:@"'" intoString:NULL];
     if (didScanStringSubscriptOpening) {
@@ -61,12 +72,14 @@ static inline BOOL scanSubscriptComponent(NSScanner *scanner, id *outComponent) 
             }
 
             //Escaped character is invalid.
-            return NO;
+            return kScanResultFailed;
         }
     }
 
-    BOOL didCloseSubscript = [scanner scanString:@"]" intoString:NULL];
-    if (!didCloseSubscript) return NO;
+    //Close subscript
+    BOOL shouldScanForCloseSubscript = subscript != nil;
+    BOOL didCloseSubscript = shouldScanForCloseSubscript && [scanner scanString:@"]" intoString:NULL];
+    if (!didCloseSubscript) return kScanResultFailed;
 
     //If there's another path component, thus meaning there're at least 2 more characters ("[SUBSCRIPT" or .indentifer),
     BOOL hasAtLeast1MoreComponent = (scanner.scanLocation < scanner.string.length - 1);
@@ -80,12 +93,12 @@ static inline BOOL scanSubscriptComponent(NSScanner *scanner, id *outComponent) 
     }
 
     *outComponent = subscript;
-    return YES;
+    return kScanResultSucceed;
 }
 
 
 
-static inline BOOL scanIdentifierComponent(NSScanner *scanner, id *outComponent) {
+static inline ScanResult scanIdentifierComponent(NSScanner *scanner, id *outComponent) {
     //Technically there are a lot more unicode code points that are acceptable, but we go for 99+% of JSON keys.
     //See on https://mathiasbynens.be/notes/javascript-properties.
     static NSCharacterSet *headCharacters = nil;
@@ -103,7 +116,7 @@ static inline BOOL scanIdentifierComponent(NSScanner *scanner, id *outComponent)
     NSMutableString *identifier = [NSMutableString new];
     NSString *fragment = nil;
     if (![scanner scanCharactersFromSet:headCharacters intoString:&fragment]) {
-        return NO;
+        return kScanResultNoMatch;
     }
 
     [identifier appendString:fragment];
@@ -126,7 +139,22 @@ static inline BOOL scanIdentifierComponent(NSScanner *scanner, id *outComponent)
     }
 
     *outComponent = identifier;
-    return YES;
+    return kScanResultSucceed;
+}
+
+
+
+static inline id scanComponent(NSScanner *scanner) {
+
+    id component = nil;
+
+    if (scanSubscriptComponent(scanner, &component) == kScanResultFailed) return nil;
+    if (component != nil) return component;
+
+    if (scanIdentifierComponent(scanner, &component) == kScanResultFailed) return nil;
+    if (component != nil) return component;
+
+    return nil;
 }
 
 
@@ -139,10 +167,9 @@ NSError *BCJEnumerateJSONPathComponents(NSString *JSONPath, void(^enumerator)(id
     scanner.charactersToBeSkipped = nil; //Don't skip whitespace!
     NSUInteger componentIdx = 0;
     do {
-        //Attempt to get the next component
-        id component = nil;
-        BOOL didScanComponent = scanSubscriptComponent(scanner, &component) || scanIdentifierComponent(scanner, &component);
-        if (!didScanComponent) {
+        //If we don't have a component after calling the scan functions then the path must be invalid.
+        id component = scanComponent(scanner);
+        if (component == nil) {
             return [BCJError invalidJSONPathErrorWithInvalidJSONPath:JSONPath errorPosition:scanner.scanLocation];
         }
 
