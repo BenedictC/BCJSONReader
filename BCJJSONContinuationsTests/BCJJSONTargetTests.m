@@ -31,7 +31,12 @@
     //Then
     XCTAssertEqualObjects(target.object, object, @"Constructor failed to set object");
     XCTAssertEqualObjects(target.key, key, @"Constructor failed to set key");
+}
 
+
+-(void)testSetValue
+{
+    XCTFail(@"TODO");    
 }
 
 @end

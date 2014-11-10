@@ -19,4 +19,9 @@
 
 @implementation BCJValidationTests
 
+-(void)testValidation
+{
+    XCTFail(@"TODO");
+}
+
 @end

@@ -37,7 +37,6 @@
 		821C2B071A0572CD00C56BC3 /* BCLContinuation.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AFB1A0572CD00C56BC3 /* BCLContinuation.h */; };
 		821C2B081A0572CD00C56BC3 /* BCLContinuationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AFC1A0572CD00C56BC3 /* BCLContinuationProtocol.h */; };
 		821C2B0A1A05A1B700C56BC3 /* BCJDeserializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2B091A05A1B700C56BC3 /* BCJDeserializationTests.m */; };
-		821C2B0E1A05A22000C56BC3 /* BCJGettersAndSettersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2B0D1A05A22000C56BC3 /* BCJGettersAndSettersTests.m */; };
 		821C2B121A05A24800C56BC3 /* BCJMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2B111A05A24800C56BC3 /* BCJMapTests.m */; };
 		821C2B141A05A25800C56BC3 /* BCJValidationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2B131A05A25800C56BC3 /* BCJValidationTests.m */; };
 		821C2B1B1A05A38900C56BC3 /* BCLContinuation+ControlFlowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2B1A1A05A38900C56BC3 /* BCLContinuation+ControlFlowTests.m */; };
@@ -174,7 +173,6 @@
 		821C2AFB1A0572CD00C56BC3 /* BCLContinuation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLContinuation.h; sourceTree = "<group>"; };
 		821C2AFC1A0572CD00C56BC3 /* BCLContinuationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLContinuationProtocol.h; sourceTree = "<group>"; };
 		821C2B091A05A1B700C56BC3 /* BCJDeserializationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJDeserializationTests.m; sourceTree = "<group>"; };
-		821C2B0D1A05A22000C56BC3 /* BCJGettersAndSettersTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJGettersAndSettersTests.m; sourceTree = "<group>"; };
 		821C2B111A05A24800C56BC3 /* BCJMapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJMapTests.m; sourceTree = "<group>"; };
 		821C2B131A05A25800C56BC3 /* BCJValidationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJValidationTests.m; sourceTree = "<group>"; };
 		821C2B171A05A29100C56BC3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -284,7 +282,6 @@
 				828555921A0D868500FCBF61 /* BCJAdditionalTypesTests.m */,
 				821C2B091A05A1B700C56BC3 /* BCJDeserializationTests.m */,
 				82D85A681A0A2249001B3C32 /* BCJEnumerateJSONPathComponentsTests.m */,
-				821C2B0D1A05A22000C56BC3 /* BCJGettersAndSettersTests.m */,
 				828555941A0D877A00FCBF61 /* BCJJSONSourceTests.m */,
 				828555961A0D878D00FCBF61 /* BCJJSONTargetTests.m */,
 				821C2B111A05A24800C56BC3 /* BCJMapTests.m */,
@@ -613,7 +610,6 @@
 				821C2B141A05A25800C56BC3 /* BCJValidationTests.m in Sources */,
 				821C2B1F1A05A3D500C56BC3 /* BCLContinuation+ControlFlowContinuationsTests.m in Sources */,
 				828555991A0D87CB00FCBF61 /* BCJStandardTypesTests.m in Sources */,
-				821C2B0E1A05A22000C56BC3 /* BCJGettersAndSettersTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

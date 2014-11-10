@@ -19,4 +19,17 @@
 
 @implementation BCLBlockContinuationTests
 
+-(void)testConstruction
+{
+    XCTFail(@"TODO");
+}
+
+
+
+-(void)testInvocation
+{
+    XCTFail(@"TODO");
+}
+
+
 @end

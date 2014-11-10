@@ -18,4 +18,16 @@
 
 @implementation BCLContinuation_ControlFlow
 
+-(void)testUntilError
+{
+    XCTFail(@"TODO");
+}
+
+
+
+-(void)testUntilEnd
+{
+    XCTFail(@"TODO");
+}
+
 @end

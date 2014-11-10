@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "BCJJSONSource.h"
+#import "BCJJSONSource+LateBoundClassCheck.h"
 
 
 
@@ -41,13 +41,40 @@
 
 
 
+- (void)testMandatoryGetValue
+{
+    //Given (setup environment)
+    id expectedValue = @123456;
+    NSDictionary *object = @{@"number": expectedValue};
+    NSString *path = @"number";
+    BCJJSONSource *source = [[BCJJSONSource alloc] initWithObject:object JSONPath:path expectedClass:nil options:0 defaultValue:nil];
+
+    //When (perform the action)
+    id actualValue;
+    NSError *error;
+    BOOL didSucceed = [source getValue:&actualValue error:&error];
+
+    //Then (verify the action had the expected result)
+    XCTAssert(didSucceed, @"");
+    XCTAssertEqualObjects(expectedValue, actualValue, @"");
+}
+
+
+
 -(void)testGetValue
 {
-    //TODO: Test which class gets used for type checking
+    XCTFail(@"TODO");
     //TODO: Test different options, both valid and invalid combinations
     //TODO: Test that outValue is correct on success and failure
     //TODO: Test error message is correct
 }
 
+
+
+-(void)testLateBoundClassCheck
+{
+    XCTFail(@"TODO");    
+    //TODO: Test which class gets used for type checking
+}
 
 @end

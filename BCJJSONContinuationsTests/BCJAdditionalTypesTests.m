@@ -21,7 +21,7 @@
 
 -(void)testEnum
 {
-    //Test 
+    XCTFail(@"TODO");
 }
 
 @end

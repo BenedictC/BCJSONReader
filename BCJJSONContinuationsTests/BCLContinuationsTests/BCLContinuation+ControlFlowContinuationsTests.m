@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "BCJAdditionalTypes.h"
+#import "BCLContinuation+ControlFlowContinuations.h"
 
 
 
@@ -18,5 +18,17 @@
 
 
 @implementation BCLContinuation_ControlFlowContinuationsTests
+
+-(void)testUntilEnd
+{
+    XCTFail(@"TODO");
+}
+
+
+
+-(void)testUntilError
+{
+    XCTFail(@"TODO");
+}
 
 @end
