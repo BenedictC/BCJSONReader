@@ -15,3 +15,5 @@ NSString * const BCJErrorDomain = @"BCJErrorDomain";
 NSString * const BCJJSONSourceErrorKey = @"BCJJSONSourceErrorKey";
 
 NSString * const BCJEnumMappingErrorKey = @"BCJEnumMappingErrorKey";
+
+NSString * const BCJUnderlyingErrorKey = @"BCJUnderlyingErrorKey";
