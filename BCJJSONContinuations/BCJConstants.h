@@ -19,6 +19,8 @@ extern NSString * const BCJEnumMappingErrorKey;
 
 extern NSString * const BCJUnderlyingErrorKey;
 
+extern NSString * const BCJInvalidJSONPathFailurePositionErrorKey;
+
 
 
 enum : NSInteger {

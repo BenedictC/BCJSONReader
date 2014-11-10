@@ -99,6 +99,7 @@
     NSString *format = NSLocalizedString(@"The string %@ is not a valid JSONPath. Error at position %i.", nil);
     NSString *description = [NSString stringWithFormat:format, JSONPath, (unsigned long)position];
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:description forKey:NSLocalizedDescriptionKey];
+    userInfo[BCJInvalidJSONPathFailurePositionErrorKey] = @(position);
 
     return [NSError errorWithDomain:BCJErrorDomain code:BCJInvalidJSONPathError userInfo:userInfo];
 }
