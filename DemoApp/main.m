@@ -17,6 +17,7 @@
 @property NSString *string;
 @property NSArray *array;
 @property NSDate *date;
+@property NSURL *url;
 @end
 
 @implementation TestObject
@@ -45,6 +46,10 @@ int main(int argc, const char * argv[]) {
                                                @"four": @(4),
                                                @"five": @(5)
                                                },
+                                       @"array": @[@"http://johnlennon.com",
+                                                   @"http://paulmccartney.com",
+                                                   @"http://georgeharrison.com",
+                                                   @"http://ringostarr.com"],
                                        @"date" : @([[NSDate new] timeIntervalSince1970]),
                                        @"otherString": @"boom!",
                                        };
@@ -53,7 +58,7 @@ int main(int argc, const char * argv[]) {
 
         //Output objects
         TestObject *target = [TestObject new];
-        __block NSString *stackString = @"adfsgd";
+        __block NSString *stackString = nil;
         //Go!
         BCJContainer *json = [BCJContainer new]; //Create a container to store the JSON in.
         NSError *error = [BCLContinuation untilError:
@@ -62,9 +67,7 @@ int main(int argc, const char * argv[]) {
                           //StandardTypes:
                           BCJSetString(BCJ_TARGET(target, string), BCJSource(json, @"string")),
                           BCJSetNumber(BCJ_TARGET(target, number), BCJSource(json, @"number")),
-//
-//                          BCJSetString(BCJSource(json, @"string"), BCJ_TARGET(target, string)),
-//                          BCJSetNumber(BCJSource(json, @"number"), BCJ_TARGET(target, number)),
+                          BCJSetURL(BCJ_TARGET(target, url), BCJSource(json, @"array[3]")),
 
                           //AdditionalTypes:
                           BCJSetDateFromTimeIntervalSinceEpoch(BCJ_TARGET(target, date), BCJSource(json, @"date", BCJSourceModeOptional)),
@@ -83,10 +86,12 @@ int main(int argc, const char * argv[]) {
         NSLog(@"target.number: %@", @(target.number));
         NSLog(@"target.date: %@", target.date);
         NSLog(@"target.array: %@", target.array);
+        NSLog(@"target.url: %@", target.url);
 
         NSLog(@"stackString: %@", stackString);
 
         NSLog(@"error: %@", error);
     }
+
     return 0;
 }
