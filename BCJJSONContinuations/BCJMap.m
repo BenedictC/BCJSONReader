@@ -22,8 +22,8 @@ static inline BOOL isOptionSet(NSInteger option, NSInteger options) {
 
 #pragma mark - Map functions
 BCJ_OVERLOADABLE NSArray *BCJMap(NSArray *fromArray, Class elementClass, BCJMapOptions options, id(^mapFromArray)(NSUInteger elementIdx, id elementValue, NSError **outError), NSError **outError) {
-    NSCParameterAssert(fromArray);
-    NSCParameterAssert(mapFromArray);
+    NSCParameterAssert(fromArray != nil);
+    NSCParameterAssert(mapFromArray != nil);
 
     //Apply the mapping to the elements
     NSMutableArray *values = [NSMutableArray new];
@@ -63,8 +63,8 @@ BCJ_OVERLOADABLE NSArray *BCJMap(NSArray *fromArray, Class elementClass, BCJMapO
 
 
 BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *fromDict, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^mapFromDictionary)(id elementKey, id elementValue, NSError **outError), NSError **outError) {
-    NSCParameterAssert(fromDict);
-    NSCParameterAssert(mapFromDictionary);
+    NSCParameterAssert(fromDict != nil);
+    NSCParameterAssert(mapFromDictionary != nil);
 
     //Apply the mapping to the elements
     NSMutableArray *values = [NSMutableArray new];
@@ -108,9 +108,9 @@ BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *fromDict, Class elementClass, BCJ
 
 #pragma mark - Set Map continuations
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONTarget *target, BCJJSONSource *source, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) {
-    NSCParameterAssert(target);
-    NSCParameterAssert(source);
-    NSCParameterAssert(fromArrayMap);
+    NSCParameterAssert(target != nil);
+    NSCParameterAssert(source != nil);
+    NSCParameterAssert(fromArrayMap != nil);
     NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
@@ -132,9 +132,9 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONTarget *target, BCJJSONSou
 
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONTarget *target, BCJJSONSource *source, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) {
-    NSCParameterAssert(target);
-    NSCParameterAssert(source);
-    NSCParameterAssert(fromDictionaryMap);
+    NSCParameterAssert(target != nil);
+    NSCParameterAssert(source != nil);
+    NSCParameterAssert(fromDictionaryMap != nil);
     NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {

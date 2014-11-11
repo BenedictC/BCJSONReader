@@ -53,6 +53,10 @@ BOOL BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, Class expectedClass, BCJJ
 #pragma mark - JSON Deserialization continuations
 //BCJContainer result-style
 id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(BCJContainer *emptyContainer, NSData *data, BCJJSONReadingOptions options) {
+    NSCParameterAssert(emptyContainer != nil);
+    NSCParameterAssert(!emptyContainer.isSealed);
+    NSCParameterAssert(data != nil);
+
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id content;
         if (!BCJDeserializeJSON(data, NSObject.class, options, &content, outError)) return NO;

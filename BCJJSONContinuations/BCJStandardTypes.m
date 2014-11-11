@@ -15,8 +15,8 @@
 
 #pragma mark - (private) generic setter
 static inline id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJJSONTarget *target, BCJJSONSource *source, Class expectedClass) {
-    NSCParameterAssert(target);
-    NSCParameterAssert(source);
+    NSCParameterAssert(target != nil);
+    NSCParameterAssert(source != nil);
     NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {

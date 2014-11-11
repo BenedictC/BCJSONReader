@@ -14,8 +14,8 @@
 
 #pragma mark - Get arbitary object continuations
 id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJJSONSource *source, BOOL(^successBlock)(id value, NSError **outError)) {
-    NSCParameterAssert(source);
-    NSCParameterAssert(successBlock);
+    NSCParameterAssert(source != nil);
+    NSCParameterAssert(successBlock != nil);
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
@@ -29,8 +29,8 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJJSONSource *source, BOOL(^su
 
 #pragma mark - Set arbitary object continuations
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJJSONTarget *target, BCJJSONSource *source) {
-    NSCParameterAssert(target);
-    NSCParameterAssert(source);
+    NSCParameterAssert(target != nil);
+    NSCParameterAssert(source != nil);
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;

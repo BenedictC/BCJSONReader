@@ -16,7 +16,7 @@
 #pragma mark - NSDate epoch
 BOOL BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSinceEpoch(BCJJSONSource *source, NSDate **outDate, NSError **outError) {
     //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(source);
+    NSCParameterAssert(source != nil);
     NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     //Reset outValue
@@ -38,8 +38,8 @@ BOOL BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSinceEpoch(BCJJSONSource *source
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(BCJJSONTarget *target, BCJJSONSource *source) {
     //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(target);
-    NSCParameterAssert(source);
+    NSCParameterAssert(target !=nil);
+    NSCParameterAssert(source != nil);
     NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
@@ -71,7 +71,7 @@ NSDate *BCJDateFromISO8601String(NSString *dateString) {
 
 BOOL BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *source, NSDate **outDate, NSError **outError) {
     //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(source);
+    NSCParameterAssert(source != nil);
     NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     //Reset outValue
@@ -115,8 +115,8 @@ BOOL BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *source, NSDate 
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONTarget *target, BCJJSONSource *source) {
     //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(target);
-    NSCParameterAssert(source);
+    NSCParameterAssert(target != nil);
+    NSCParameterAssert(source != nil);
     NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
@@ -132,7 +132,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONTarget *
 #pragma mark - Get NSURL
 BOOL BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **outURL, NSError **outError) {
     //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(source);
+    NSCParameterAssert(source != nil);
     NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     //Reset outValue
@@ -172,8 +172,8 @@ BOOL BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **outURL, NSError *
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJJSONTarget *target, BCJJSONSource *source) {
     //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(target);
-    NSCParameterAssert(source);
+    NSCParameterAssert(target != nil);
+    NSCParameterAssert(source != nil);
     NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
@@ -188,10 +188,10 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJJSONTarget *target, BCJJSONSou
 
 #pragma mark - Get Enum
 BOOL BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDictionary *enumMapping, id *outValue, NSError **outError) {
-    NSCParameterAssert(source);
-    NSCParameterAssert(enumMapping);
-    NSCParameterAssert(outValue);
-    NSCParameterAssert(outError);
+    NSCParameterAssert(source != nil);
+    NSCParameterAssert(enumMapping != nil);
+    NSCParameterAssert(outValue != nil);
+    NSCParameterAssert(outError != nil);
     //Note that we don't need to check the source type because it will be used as a key to access an enum and we don't
     //care what the enum keys are.
 
@@ -222,9 +222,9 @@ BOOL BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDictionary *enumMappin
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJJSONTarget *target, BCJJSONSource *source, NSDictionary *enumMapping) {
     //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(target);
-    NSCParameterAssert(source);
-    NSCParameterAssert(enumMapping);
+    NSCParameterAssert(target != nil);
+    NSCParameterAssert(source != nil);
+    NSCParameterAssert(enumMapping != nil);
     //Note that we don't need to check the source type because it will be used as a key to access an enum and we don't
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {

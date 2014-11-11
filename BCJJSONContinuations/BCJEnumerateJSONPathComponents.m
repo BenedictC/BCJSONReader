@@ -160,8 +160,8 @@ static inline id scanComponent(NSScanner *scanner) {
 
 
 NSError *BCJEnumerateJSONPathComponents(NSString *JSONPath, void(^enumerator)(id component, NSUInteger componentIdx, BOOL *stop)) {
-    NSCParameterAssert(JSONPath);
-    NSCParameterAssert(enumerator);
+    NSCParameterAssert(JSONPath != nil);
+    NSCParameterAssert(enumerator != nil);
 
     NSScanner *scanner = [NSScanner scannerWithString:JSONPath];
     scanner.charactersToBeSkipped = nil; //Don't skip whitespace!
