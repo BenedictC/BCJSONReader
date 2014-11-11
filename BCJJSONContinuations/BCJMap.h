@@ -35,7 +35,7 @@ typedef NS_OPTIONS(NSUInteger, BCJMapOptions) {
 
 
 #pragma mark - Map functions
-BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *dict, Class elementClass, BCJMapOptions options, NSArray *sortDescriptiors, id(^mapFromDictionary)(id elementKey, id elementValue, NSError **outError), NSError **outError) BCJ_REQUIRED(1,2,4,5);
+BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *dict, Class elementClass, BCJMapOptions options, NSArray *sortDescriptiors, id(^mapFromDictionary)(id elementKey, id elementValue, NSError **outError), NSError **outError) BCJ_REQUIRED(1,2,4,5) ;
 
 BCJ_OVERLOADABLE NSArray *BCJMap(NSArray *array, Class elementClass, BCJMapOptions options, id(^mapFromArray)(NSUInteger elementIdx, id elementValue, NSError **outError), NSError **outError) BCJ_REQUIRED(1,2,4,5);
 
