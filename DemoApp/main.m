@@ -31,66 +31,81 @@
 
 
 
-int main(int argc, const char * argv[]) {
-    @autoreleasepool {
+void demo(void) {
+    //Input data
+    NSDictionary *sourceObject = @{
+                                   @"number": @1234,
+                                   @"string": @"arf",
+                                   @"dict" : @{
+                                           @"one": @(1),
+                                           @"two": @(2),
+                                           @"three": @(3),
+                                           @"four": @(4),
+                                           @"five": @(5)
+                                           },
+                                   @"array": @[@{@"url": @"http://johnlennon.com"},
+                                               @{@"url": @"http://paulmccartney.com"},
+                                               @{@"url": @"http://georgeharrison.com"},
+                                               @{@"url": @"http://ringostarr.com"}],
+                                   @"date" : @([[NSDate new] timeIntervalSince1970]),
+                                   @"otherString": @"boom!",
+                                   };
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:sourceObject options:0 error:NULL];
 
-        //Input data
-        NSData *jsonData = ({
-            NSDictionary *sourceObject = @{
-                                       @"number": @1234,
-                                       @"string": @"arf",
-                                       @"dict" : @{
-                                               @"one": @(1),
-                                               @"two": @(2),
-                                               @"three": @(3),
-                                               @"four": @(4),
-                                               @"five": @(5)
-                                               },
-                                       @"array": @[@"http://johnlennon.com",
-                                                   @"http://paulmccartney.com",
-                                                   @"http://georgeharrison.com",
-                                                   @"http://ringostarr.com"],
-                                       @"date" : @([[NSDate new] timeIntervalSince1970]),
-                                       @"otherString": @"boom!",
-                                       };
-            [NSJSONSerialization dataWithJSONObject:sourceObject options:0 error:NULL];
-        });
+    //Output objects
+    TestObject *target = [TestObject new];
+    __block NSString *stackString = nil;
 
-        //Output objects
-        TestObject *target = [TestObject new];
-        __block NSString *stackString = nil;
-        //Go!
-        BCJContainer *json = [BCJContainer new]; //Create a container to store the JSON in.
-        NSError *error = [BCLContinuation untilError:
-                          //Deserialization:
-                          BCJDeserializeJSON(json, jsonData),
-                          //StandardTypes:
-                          BCJSetString(BCJ_TARGET(target, string), BCJSource(json, @"string")),
-                          BCJSetNumber(BCJ_TARGET(target, number), BCJSource(json, @"number")),
-                          BCJSetURL(BCJ_TARGET(target, url), BCJSource(json, @"array[3]")),
 
-                          //AdditionalTypes:
-                          BCJSetDateFromTimeIntervalSinceEpoch(BCJ_TARGET(target, date), BCJSource(json, @"date", BCJSourceModeOptional)),
-                          //Map:
-                          BCJSetMap(BCJ_TARGET(target, array), BCJSource(json, @"dict"), NSNumber.class, BCJMapOptionDiscardMappingErrors, BCJ_SORT_DESCRIPTORS(@"self"), ^id(NSString *key, NSNumber *number, NSError **outError){
-                                        return @([number integerValue] * 1000);
-                                    }),
-                          //Getters:
-                          BCJGetValue(BCJSource(json, @"otherString", BCJSourceModeDefaultable, @"default", NSString.class), ^BOOL(NSString *string, NSError **outValue){
+
+    //Go!
+    BCJContainer *json = [BCJContainer new]; //Create a container to store the JSON in.
+    NSError *error = [BCLContinuation untilError:
+                      //Deserialization:
+                      BCJDeserializeJSON(json, jsonData),
+
+                      //Generic getter:
+                      BCJGetValue(BCJSource(json, @"otherString", BCJSourceModeDefaultable, @"default", NSString.class), ^BOOL(NSString *string, NSError **outError){
+                                        //Validation
+                                        if (!BCJValidate(string, @"self MATCHES '.*'", outError)) return NO;
                                         stackString = string;
                                         return YES;
-                                     }),
-                          nil];
+                                    }),
 
-        NSLog(@"target.string: %@", target.string);
-        NSLog(@"target.number: %@", @(target.number));
-        NSLog(@"target.date: %@", target.date);
-        NSLog(@"target.array: %@", target.array);
-        NSLog(@"target.url: %@", target.url);
+                      //StandardTypes:
+                      BCJSetString(BCJSource(json, @"string"), BCJ_TARGET(target, string)),
+                      BCJSetNumber(BCJSource(json, @"number"), BCJ_TARGET(target, number)),
 
-        NSLog(@"stackString: %@", stackString);
+                      //AdditionalTypes:
+                      BCJSetURL(BCJSource(json, @"array[3].url"),  BCJ_TARGET(target, url)),
+                      BCJSetDateFromTimeIntervalSinceEpoch(BCJSource(json, @"date", BCJSourceModeOptional), BCJ_TARGET(target, date)),
 
-        NSLog(@"error: %@", error);
+                      //Map:
+                      BCJSetMap(BCJSource(json, @"dict"), BCJ_TARGET(target, array), NSNumber.class, BCJMapOptionDiscardMappingErrors, BCJ_SORT_DESCRIPTORS(@"self"), ^id(NSString *key, NSNumber *number, NSError **outError){
+                                    return @([number integerValue] * 1000);
+                                }),
+                      nil];
+
+
+
+
+    //Log results
+    NSLog(@"target.string: %@", target.string);
+    NSLog(@"target.number: %@", @(target.number));
+    NSLog(@"target.date: %@", target.date);
+    NSLog(@"target.array: %@", target.array);
+    NSLog(@"target.url: %@", target.url);
+
+    NSLog(@"stackString: %@", stackString);
+
+    NSLog(@"error: %@", error);
+}
+
+
+
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        demo();
     }
 
     return 0;
