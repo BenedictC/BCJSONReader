@@ -27,7 +27,10 @@
     //TODO: Test error message is correct
 
 //BCJDeserializeJSON(NSData *data, Class class, BCJJSONReadingOptions options, id __strong *outValue, NSError **outError) BCJ_REQUIRED(1,4);
-    XCTFail(@"TODO");    
+//id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(BCJContainer *emptyContainer, NSData *data, BCJJSONReadingOptions options) {    
+    XCTFail(@"TODO");
+
+
 }
 
 @end

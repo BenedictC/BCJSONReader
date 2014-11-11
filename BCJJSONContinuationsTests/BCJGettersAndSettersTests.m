@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "BCJAdditionalTypes.h"
+#import "BCJGettersAndSetters.h"
 
 
 
@@ -19,6 +19,16 @@
 
 @implementation BCJGettersAndSettersTests
 
+-(void)testGetter
+{
+    //Is there anypoint? The functions are basically wrappers for BCJJSONSource and BCJJSONTarget.
+}
 
+
+
+-(void)testSetter
+{
+
+}
 
 @end
