@@ -48,7 +48,6 @@ void demo(void) {
                                                @{@"url": @"http://georgeharrison.com"},
                                                @{@"url": @"http://ringostarr.com"}],
                                    @"date" : @([[NSDate new] timeIntervalSince1970]),
-                                   @"otherString": @"boom!",
                                    };
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:sourceObject options:0 error:NULL];
 
@@ -60,31 +59,42 @@ void demo(void) {
 
     //Go!
     BCJContainer *json = [BCJContainer new]; //Create a container to store the JSON in.
-    NSError *error = [BCLContinuation untilError:
-                      //Deserialization:
-                      BCJDeserializeJSON(json, jsonData),
+//    NSError *error = [BCLContinuation untilError:
+    NSError *error;
+    [BCLContinuation withError:&error untilError:
+         //Deserialization:
+         BCJDeserializeJSON(json, jsonData),
 
-                      //Generic getter:
-                      BCJGetValue(BCJSource(json, @"otherString", BCJSourceModeDefaultable, @"default", NSString.class), ^BOOL(NSString *string, NSError **outError){
-                                        //Validation
-                                        if (!BCJValidate(string, @"self MATCHES '.*'", outError)) return NO;
-                                        stackString = string;
-                                        return YES;
-                                    }),
+         //StandardTypes:
+         BCJSetString(BCJSource(json, @"string"), BCJ_TARGET(target, string)),
+         BCJSetNumber(BCJSource(json, @"number"), BCJ_TARGET(target, number)),
 
-                      //StandardTypes:
-                      BCJSetString(BCJSource(json, @"string"), BCJ_TARGET(target, string)),
-                      BCJSetNumber(BCJSource(json, @"number"), BCJ_TARGET(target, number)),
+         //AdditionalTypes:
+         BCJSetURL(BCJSource(json, @"array[3].url"),  BCJ_TARGET(target, url)),
+         BCJSetDateFromTimeIntervalSinceEpoch(BCJSource(json, @"date", BCJSourceModeOptional), BCJ_TARGET(target, date)),
 
-                      //AdditionalTypes:
-                      BCJSetURL(BCJSource(json, @"array[3].url"),  BCJ_TARGET(target, url)),
-                      BCJSetDateFromTimeIntervalSinceEpoch(BCJSource(json, @"date", BCJSourceModeOptional), BCJ_TARGET(target, date)),
 
-                      //Map:
-                      BCJSetMap(BCJSource(json, @"dict"), BCJ_TARGET(target, array), NSNumber.class, BCJMapOptionDiscardMappingErrors, BCJ_SORT_DESCRIPTORS(@"self"), ^id(NSString *key, NSNumber *number, NSError **outError){
-                                    return @([number integerValue] * 1000);
-                                }),
-                      nil];
+         //Map:
+         BCJSetMap(BCJSource(json, @"dict"), BCJ_TARGET(target, array), NSNumber.class, BCJMapOptionDiscardMappingErrors, BCJ_SORT_DESCRIPTORS(@"self"), ^id(NSString *key, NSNumber *number, NSError **outError){
+            //Map a number to a textural description of number * 1000
+            static NSNumberFormatter *formatter = nil;
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                formatter = [NSNumberFormatter new];
+                formatter.numberStyle = NSNumberFormatterSpellOutStyle;
+            });
+            return [formatter stringFromNumber:@(number.integerValue * 1000)];
+        }),
+
+         //Generic getter:
+         BCJGetValue(BCJSource(json, @"missingString", BCJSourceModeDefaultable, @"default", NSString.class), ^BOOL(NSString *string, NSError **outError){
+            //Validation
+            if (!BCJValidate(string, @"self MATCHES '.*'", outError)) return NO;
+            stackString = string;
+            return YES;
+        }),
+
+     nil];
 
 
 
