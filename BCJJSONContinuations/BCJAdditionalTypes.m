@@ -13,8 +13,8 @@
 
 
 
-#pragma mark - NSDate epoch
-BOOL BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSinceEpoch(BCJJSONSource *source, NSDate **outDate, NSError **outError) {
+#pragma mark - NSDate from 1970
+BOOL BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJJSONSource *source, NSDate **outDate, NSError **outError) {
     //Perform additional checks that couldn't be performed when source and target are created
     NSCParameterAssert(source != nil);
     NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
@@ -36,7 +36,7 @@ BOOL BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSinceEpoch(BCJJSONSource *source
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(BCJJSONTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJJSONTarget *target, BCJJSONSource *source) {
     //Perform additional checks that couldn't be performed when source and target are created
     NSCParameterAssert(target !=nil);
     NSCParameterAssert(source != nil);
@@ -44,7 +44,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(BCJJSO
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSDate *date;
-        if (!BCJGetDateFromTimeIntervalSinceEpoch(source, &date, outError)) return NO;
+        if (!BCJGetDateFromTimeIntervalSince1970(source, &date, outError)) return NO;
 
         return [target setWithValue:date outError:outError];
     });
