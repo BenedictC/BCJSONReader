@@ -13,8 +13,8 @@
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(BCJJSONSource *source, BCJJSONTarget *target) {
-    return BCJSetDateFromTimeIntervalSinceEpoch(target, source);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJJSONSource *source, BCJJSONTarget *target) {
+    return BCJSetDateFromTimeIntervalSince1970(target, source);
 }
 
 

@@ -60,8 +60,8 @@ void demo(void) {
     //Go!
     BCJContainer *json = [BCJContainer new]; //Create a container to store the JSON in.
 //    NSError *error = [BCLContinuation untilError:
-    NSError *error;
-    [BCLContinuation withError:&error untilError:
+    NSError *error =
+    [BCLContinuation untilError:
          //Deserialization:
          BCJDeserializeJSON(json, jsonData),
 
@@ -70,9 +70,8 @@ void demo(void) {
          BCJSetNumber(BCJSource(json, @"number"), BCJ_TARGET(target, number)),
 
          //AdditionalTypes:
-         BCJSetURL(BCJSource(json, @"array[3].url"),  BCJ_TARGET(target, url)),
-         BCJSetDateFromTimeIntervalSinceEpoch(BCJSource(json, @"date", BCJSourceModeOptional), BCJ_TARGET(target, date)),
-
+                                   BCJSetURL(BCJSource(json, @"array[3].url"),  BCJ_TARGET(target, url)),
+         BCJSetDateFromTimeIntervalSince1970(BCJSource(json, @"date", BCJSourceModeStrict), BCJ_TARGET(target, date)),
 
          //Map:
          BCJSetMap(BCJSource(json, @"dict"), BCJ_TARGET(target, array), NSNumber.class, BCJMapOptionDiscardMappingErrors, BCJ_SORT_DESCRIPTORS(@"self"), ^id(NSString *key, NSNumber *number, NSError **outError){

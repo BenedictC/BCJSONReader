@@ -8,7 +8,7 @@
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSinceEpoch(BCJJSONSource *source, BCJJSONTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJJSONSource *source, BCJJSONTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONSource *source, BCJJSONTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJJSONSource *source, BCJJSONTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJJSONSource *source, BCJJSONTarget *target, NSDictionary *enumMapping) BCJ_REQUIRED(1,2,3) BCJ_WARN_UNUSED;
