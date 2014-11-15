@@ -13,11 +13,13 @@
 
 @implementation BCJJSONSource (LateBoundClassCheck)
 
--(BOOL)getValue:(id *)value ofKind:(Class)lateBoundClass error:(NSError **)outError
+-(BCJSourceResult)getValue:(id *)value ofKind:(Class)lateBoundClass error:(NSError **)outError
 {
-    if (![self getValue:value error:outError]) return NO;
+    //We only need to do the check if a value has be fetched
+    BCJSourceResult result = [self getValue:value error:outError];
+    if (result != BCJSourceResultSuccess) return result;
 
-    //Type check value
+    //Perform the check
     BOOL shouldCheckClass = *value != nil;
     BOOL isCorrectKind = lateBoundClass == nil || [*value isKindOfClass:lateBoundClass];
     if (shouldCheckClass && !isCorrectKind) {
@@ -25,13 +27,12 @@
             NSString *criteria = [NSString stringWithFormat:@"value.class != %@", NSStringFromClass(lateBoundClass)];
             *outError = [BCJError invalidValueErrorWithJSONSource:self value:*value criteria:criteria];
         }
-
         //Reset the value and fail
         *value = nil;
-        return NO;
+        return BCJSourceResultFailure;
     }
 
-    return YES;
+    return BCJSourceResultSuccess;
 }
 
 @end
