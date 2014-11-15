@@ -9,6 +9,7 @@
 #import "BCJJSONTarget.h"
 
 #import "BCJDefines.h"
+#import "BCJError.h"
 #ifdef DEBUG
 #import <objc/runtime.h>
 #endif
@@ -17,10 +18,17 @@
 
 @implementation BCJJSONTarget
 
+-(instancetype)init
+{
+    return [self initWithObject:nil key:nil];
+}
+
+
+
 -(instancetype)initWithObject:(id)object key:(NSString *)key;
 {
-    NSParameterAssert(object);
-    NSParameterAssert(key);
+    NSParameterAssert(object != nil);
+    NSParameterAssert(key != nil && key.length > 0);
 
     self = [super init];
     if (self == nil) return nil;
@@ -33,8 +41,25 @@
 
 
 
--(BOOL)setWithValue:(id)value outError:(NSError **)outError;
+-(BOOL)setValue:(id)value error:(NSError **)outError;
 {
+    //Ensure we're sane
+    if (self.object == nil) {
+        if (outError != NULL) {
+#pragma message "TODO: cannot set value on nil object."
+            *outError = [NSError new];
+        }
+        return NO;
+    }
+
+    if (self.key == nil || self.key.length == 0) {
+        if (outError != NULL) {
+#pragma message "TODO: cannot set value using empty key."
+            *outError = [NSError new];
+        }
+        return NO;
+    }
+
 #ifdef DEBUG
     //KVC will work regardless of type which means type mismatch bugs can occur. We add type checking for DEBUG builds
     //to catch these bugs early.
@@ -94,16 +119,16 @@
     }();
 #endif
 
-    //If the target is nil then there's no point in continuing.
-    if (self.object == nil) return YES;
-
     //Validate using KVC
     id validatedValue = value;
     if (![self.object validateValue:&validatedValue forKey:self.key error:outError]) {
+        if (outError != NULL) {
+#pragma message "TODO: in valid value."
+            *outError = [NSError new];
+        }
         return NO;
     }
 
-    //Done!
     //Note that we're using the validatedValue
     [self.object setValue:validatedValue forKey:self.key];
     return YES;

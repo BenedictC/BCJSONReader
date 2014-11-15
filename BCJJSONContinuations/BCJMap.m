@@ -125,7 +125,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONTarget *target, BCJJSONSou
         if (!didMappingSucceed) return NO;
 
         //Set the value
-        return [target setWithValue:values outError:outError];
+        return [target setValue:values error:outError];
     });
 }
 
@@ -149,6 +149,6 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONTarget *target, BCJJSONSou
         if (!didMappingSucceed) return NO;
 
         //Set the value
-        return [target setWithValue:values outError:outError];
+        return [target setValue:values error:outError];
     });
 }

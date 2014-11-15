@@ -36,6 +36,6 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJJSONTarget *target, BCJJSONS
         id value;
         if (![source getValue:&value error:outError]) return NO;
 
-        return [target setWithValue:value outError:outError];
+        return [target setValue:value error:outError];
     });
 }

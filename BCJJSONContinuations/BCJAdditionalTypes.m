@@ -46,7 +46,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJJSON
         NSDate *date;
         if (!BCJGetDateFromTimeIntervalSince1970(source, &date, outError)) return NO;
 
-        return [target setWithValue:date outError:outError];
+        return [target setValue:date error:outError];
     });
 }
 
@@ -123,7 +123,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONTarget *
         NSDate *date;
         if (!BCJGetDateFromISO8601String(source, &date, outError)) return NO;
 
-        return [target setWithValue:date outError:outError];
+        return [target setValue:date error:outError];
     });
 }
 
@@ -180,7 +180,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJJSONTarget *target, BCJJSONSou
         NSURL *value;
         if (!BCJGetURL(source, &value, outError)) return NO;
 
-        return [target setWithValue:value outError:outError];
+        return [target setValue:value error:outError];
     });
 }
 
@@ -230,6 +230,6 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJJSONTarget *target, BCJJSONSo
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
         if (!BCJGetEnum(source, enumMapping, &value, outError)) return NO;
-        return [target setWithValue:value outError:outError];
+        return [target setValue:value error:outError];
     });
 }
