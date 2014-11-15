@@ -20,8 +20,8 @@
 
  @return YES if options contains BCJSourceOptionMustReturnValue, other wise NO.
  */
-static inline BOOL BCJMustReturnValue(BCJSourceOptions options) {
-    return (options & BCJSourceOptionMustReturnValue) != 0;
+static inline BOOL BCJTreatValueNotFoundAsSuccess(BCJSourceOptions options) {
+    return (options & BCJSourceOptionTreatValueNotFoundAsSuccess) != 0;
 }
 
 /**
@@ -42,8 +42,8 @@ static inline BOOL BCJPathMustEvaluateToValue(BCJSourceOptions options) {
 
  @return YES if options contains BCJSourceOptionReplaceNullWithDefaultValue, other wise NO.
  */
-static inline BOOL BCJReplaceNullWithDefaultValue(BCJSourceOptions options) {
-    return (options & BCJSourceOptionReplaceNullWithDefaultValue) != 0;
+static inline BOOL BCJReplaceNullWithNil(BCJSourceOptions options) {
+    return (options & BCJSourceOptionReplaceNullWithNil) != 0;
 }
 
 
