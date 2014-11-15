@@ -10,17 +10,19 @@
 
 
 
-id<BCLContinuation> BCLContinuationWithBlock(BOOL(^block)(NSError **outError)) {
+@implementation BCLBlockContinuation
 
-    return [[BCLBlockContinuation alloc] initWithBlock:block];
+-(instancetype)init
+{
+    return [self initWithBlock:NULL];
 }
 
 
 
-@implementation BCLBlockContinuation
-
 -(instancetype)initWithBlock:(BOOL(^)(NSError **outError))block
 {
+    NSCParameterAssert(block != NULL);
+    
     self = [super init];
     if (self == nil) return nil;
 
@@ -40,3 +42,14 @@ id<BCLContinuation> BCLContinuationWithBlock(BOOL(^block)(NSError **outError)) {
 }
 
 @end
+
+
+
+
+
+id<BCLContinuation> BCLContinuationWithBlock(BOOL(^block)(NSError **outError)) {
+
+    return [[BCLBlockContinuation alloc] initWithBlock:block];
+}
+
+

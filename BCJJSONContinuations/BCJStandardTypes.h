@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "BCLContinuation.h"
+#import "BCLContinuations.h"
 #import "BCJDefines.h"
 
 @class BCJJSONTarget;

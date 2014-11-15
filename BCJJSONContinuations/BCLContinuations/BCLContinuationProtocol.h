@@ -11,7 +11,11 @@
 
 
 @protocol BCLContinuation <NSObject>
+/**
+ <#Description#>
 
+ @param completionHandler <#completionHandler description#>
+ */
 -(void)executeWithCompletionHandler:(void(^)(BOOL didSucceed, NSError *error))completionHandler;
 
 @end

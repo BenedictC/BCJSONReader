@@ -23,7 +23,7 @@ static inline id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJJSONTarget *ta
         id value;
         if (![source getValue:&value ofKind:expectedClass error:outError]) return NO;
 
-        return [target setWithValue:value outError:outError];
+        return [target setValue:value error:outError];
     });
 }
 

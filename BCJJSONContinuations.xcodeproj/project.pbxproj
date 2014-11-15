@@ -18,10 +18,10 @@
 		821C2ADE1A05721800C56BC3 /* BCJStandardTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2ABA1A05721800C56BC3 /* BCJStandardTypes.h */; };
 		821C2AE11A05721800C56BC3 /* BCJValidation.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2ABC1A05721800C56BC3 /* BCJValidation.h */; };
 		821C2AFD1A0572CD00C56BC3 /* BCLBlockContinuation.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AF41A0572CD00C56BC3 /* BCLBlockContinuation.h */; };
-		821C2B001A0572CD00C56BC3 /* BCLContinuation+ControlFlow+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AF61A0572CD00C56BC3 /* BCLContinuation+ControlFlow+Protected.h */; };
-		821C2B011A0572CD00C56BC3 /* BCLContinuation+ControlFlow.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AF71A0572CD00C56BC3 /* BCLContinuation+ControlFlow.h */; };
-		821C2B041A0572CD00C56BC3 /* BCLContinuation+ControlFlowContinuations.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AF91A0572CD00C56BC3 /* BCLContinuation+ControlFlowContinuations.h */; };
-		821C2B071A0572CD00C56BC3 /* BCLContinuation.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AFB1A0572CD00C56BC3 /* BCLContinuation.h */; };
+		821C2B001A0572CD00C56BC3 /* BCLContinuationsClass+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AF61A0572CD00C56BC3 /* BCLContinuationsClass+Protected.h */; };
+		821C2B011A0572CD00C56BC3 /* BCLContinuationsClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AF71A0572CD00C56BC3 /* BCLContinuationsClass.h */; };
+		821C2B041A0572CD00C56BC3 /* BCLControlFlowContinuations.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AF91A0572CD00C56BC3 /* BCLControlFlowContinuations.h */; };
+		821C2B071A0572CD00C56BC3 /* BCLContinuations.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AFB1A0572CD00C56BC3 /* BCLContinuations.h */; };
 		821C2B081A0572CD00C56BC3 /* BCLContinuationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AFC1A0572CD00C56BC3 /* BCLContinuationProtocol.h */; };
 		821C2B0A1A05A1B700C56BC3 /* BCJDeserializationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2B091A05A1B700C56BC3 /* BCJDeserializationTests.m */; };
 		821C2B121A05A24800C56BC3 /* BCJMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2B111A05A24800C56BC3 /* BCJMapTests.m */; };
@@ -47,8 +47,8 @@
 		823451E91A12650C00E19D74 /* BCJStandardTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2ABB1A05721800C56BC3 /* BCJStandardTypes.m */; };
 		823451EA1A12650C00E19D74 /* BCJValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2ABD1A05721800C56BC3 /* BCJValidation.m */; };
 		823451EB1A12650C00E19D74 /* BCLBlockContinuation.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AF51A0572CD00C56BC3 /* BCLBlockContinuation.m */; };
-		823451EC1A12650C00E19D74 /* BCLContinuation+ControlFlow.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AF81A0572CD00C56BC3 /* BCLContinuation+ControlFlow.m */; };
-		823451ED1A12650C00E19D74 /* BCLContinuation+ControlFlowContinuations.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AFA1A0572CD00C56BC3 /* BCLContinuation+ControlFlowContinuations.m */; };
+		823451EC1A12650C00E19D74 /* BCLContinuationsClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AF81A0572CD00C56BC3 /* BCLContinuationsClass.m */; };
+		823451ED1A12650C00E19D74 /* BCLControlFlowContinuations.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AFA1A0572CD00C56BC3 /* BCLControlFlowContinuations.m */; };
 		823451EF1A12650D00E19D74 /* BCJAdditionalTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AAB1A05721800C56BC3 /* BCJAdditionalTypes.m */; };
 		823451F01A12650D00E19D74 /* BCJConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AAD1A05721800C56BC3 /* BCJConstants.m */; };
 		823451F11A12650D00E19D74 /* BCJContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AAF1A05721800C56BC3 /* BCJContainer.m */; };
@@ -64,8 +64,8 @@
 		823451FB1A12650D00E19D74 /* BCJStandardTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2ABB1A05721800C56BC3 /* BCJStandardTypes.m */; };
 		823451FC1A12650D00E19D74 /* BCJValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2ABD1A05721800C56BC3 /* BCJValidation.m */; };
 		823451FD1A12650D00E19D74 /* BCLBlockContinuation.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AF51A0572CD00C56BC3 /* BCLBlockContinuation.m */; };
-		823451FE1A12650D00E19D74 /* BCLContinuation+ControlFlow.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AF81A0572CD00C56BC3 /* BCLContinuation+ControlFlow.m */; };
-		823451FF1A12650D00E19D74 /* BCLContinuation+ControlFlowContinuations.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AFA1A0572CD00C56BC3 /* BCLContinuation+ControlFlowContinuations.m */; };
+		823451FE1A12650D00E19D74 /* BCLContinuationsClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AF81A0572CD00C56BC3 /* BCLContinuationsClass.m */; };
+		823451FF1A12650D00E19D74 /* BCLControlFlowContinuations.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AFA1A0572CD00C56BC3 /* BCLControlFlowContinuations.m */; };
 		823452001A12654600E19D74 /* BCJInvertedContinuationFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 823451D71A12623200E19D74 /* BCJInvertedContinuationFunctions.m */; };
 		823452011A12654600E19D74 /* BCJInvertedContinuationFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = 823451D71A12623200E19D74 /* BCJInvertedContinuationFunctions.m */; };
 		823452021A12658000E19D74 /* libBCJJSONContinuationsOSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 828555C31A0E147D00FCBF61 /* libBCJJSONContinuationsOSX.dylib */; };
@@ -90,10 +90,10 @@
 		828555F31A0E14DC00FCBF61 /* BCJStandardTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2ABA1A05721800C56BC3 /* BCJStandardTypes.h */; };
 		828555F51A0E14DC00FCBF61 /* BCJValidation.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2ABC1A05721800C56BC3 /* BCJValidation.h */; };
 		828555F71A0E14DC00FCBF61 /* BCLBlockContinuation.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AF41A0572CD00C56BC3 /* BCLBlockContinuation.h */; };
-		828555F91A0E14DC00FCBF61 /* BCLContinuation.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AFB1A0572CD00C56BC3 /* BCLContinuation.h */; };
-		828555FA1A0E14DC00FCBF61 /* BCLContinuation+ControlFlow.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AF71A0572CD00C56BC3 /* BCLContinuation+ControlFlow.h */; };
-		828555FC1A0E14DC00FCBF61 /* BCLContinuation+ControlFlow+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AF61A0572CD00C56BC3 /* BCLContinuation+ControlFlow+Protected.h */; };
-		828555FD1A0E14DC00FCBF61 /* BCLContinuation+ControlFlowContinuations.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AF91A0572CD00C56BC3 /* BCLContinuation+ControlFlowContinuations.h */; };
+		828555F91A0E14DC00FCBF61 /* BCLContinuations.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AFB1A0572CD00C56BC3 /* BCLContinuations.h */; };
+		828555FA1A0E14DC00FCBF61 /* BCLContinuationsClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AF71A0572CD00C56BC3 /* BCLContinuationsClass.h */; };
+		828555FC1A0E14DC00FCBF61 /* BCLContinuationsClass+Protected.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AF61A0572CD00C56BC3 /* BCLContinuationsClass+Protected.h */; };
+		828555FD1A0E14DC00FCBF61 /* BCLControlFlowContinuations.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AF91A0572CD00C56BC3 /* BCLControlFlowContinuations.h */; };
 		828555FF1A0E14DC00FCBF61 /* BCLContinuationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 821C2AFC1A0572CD00C56BC3 /* BCLContinuationProtocol.h */; };
 		828556001A0E14DD00FCBF61 /* BCJContainerProtocols.h in Headers */ = {isa = PBXBuildFile; fileRef = 822A67DF1A09236D003A8EF6 /* BCJContainerProtocols.h */; };
 		828556011A0E14DD00FCBF61 /* BCJEnumerateJSONPathComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 82D85A6A1A0A2292001B3C32 /* BCJEnumerateJSONPathComponents.h */; };
@@ -152,12 +152,12 @@
 		821C2ABD1A05721800C56BC3 /* BCJValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = BCJValidation.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		821C2AF41A0572CD00C56BC3 /* BCLBlockContinuation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLBlockContinuation.h; sourceTree = "<group>"; };
 		821C2AF51A0572CD00C56BC3 /* BCLBlockContinuation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLBlockContinuation.m; sourceTree = "<group>"; };
-		821C2AF61A0572CD00C56BC3 /* BCLContinuation+ControlFlow+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCLContinuation+ControlFlow+Protected.h"; sourceTree = "<group>"; };
-		821C2AF71A0572CD00C56BC3 /* BCLContinuation+ControlFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCLContinuation+ControlFlow.h"; sourceTree = "<group>"; };
-		821C2AF81A0572CD00C56BC3 /* BCLContinuation+ControlFlow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCLContinuation+ControlFlow.m"; sourceTree = "<group>"; };
-		821C2AF91A0572CD00C56BC3 /* BCLContinuation+ControlFlowContinuations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCLContinuation+ControlFlowContinuations.h"; sourceTree = "<group>"; };
-		821C2AFA1A0572CD00C56BC3 /* BCLContinuation+ControlFlowContinuations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCLContinuation+ControlFlowContinuations.m"; sourceTree = "<group>"; };
-		821C2AFB1A0572CD00C56BC3 /* BCLContinuation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLContinuation.h; sourceTree = "<group>"; };
+		821C2AF61A0572CD00C56BC3 /* BCLContinuationsClass+Protected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCLContinuationsClass+Protected.h"; sourceTree = "<group>"; };
+		821C2AF71A0572CD00C56BC3 /* BCLContinuationsClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLContinuationsClass.h; sourceTree = "<group>"; };
+		821C2AF81A0572CD00C56BC3 /* BCLContinuationsClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLContinuationsClass.m; sourceTree = "<group>"; };
+		821C2AF91A0572CD00C56BC3 /* BCLControlFlowContinuations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLControlFlowContinuations.h; sourceTree = "<group>"; };
+		821C2AFA1A0572CD00C56BC3 /* BCLControlFlowContinuations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLControlFlowContinuations.m; sourceTree = "<group>"; };
+		821C2AFB1A0572CD00C56BC3 /* BCLContinuations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLContinuations.h; sourceTree = "<group>"; };
 		821C2AFC1A0572CD00C56BC3 /* BCLContinuationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLContinuationProtocol.h; sourceTree = "<group>"; };
 		821C2B091A05A1B700C56BC3 /* BCJDeserializationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJDeserializationTests.m; sourceTree = "<group>"; };
 		821C2B111A05A24800C56BC3 /* BCJMapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJMapTests.m; sourceTree = "<group>"; };
@@ -292,12 +292,12 @@
 			children = (
 				821C2AF41A0572CD00C56BC3 /* BCLBlockContinuation.h */,
 				821C2AF51A0572CD00C56BC3 /* BCLBlockContinuation.m */,
-				821C2AFB1A0572CD00C56BC3 /* BCLContinuation.h */,
-				821C2AF71A0572CD00C56BC3 /* BCLContinuation+ControlFlow.h */,
-				821C2AF81A0572CD00C56BC3 /* BCLContinuation+ControlFlow.m */,
-				821C2AF61A0572CD00C56BC3 /* BCLContinuation+ControlFlow+Protected.h */,
-				821C2AF91A0572CD00C56BC3 /* BCLContinuation+ControlFlowContinuations.h */,
-				821C2AFA1A0572CD00C56BC3 /* BCLContinuation+ControlFlowContinuations.m */,
+				821C2AFB1A0572CD00C56BC3 /* BCLContinuations.h */,
+				821C2AF71A0572CD00C56BC3 /* BCLContinuationsClass.h */,
+				821C2AF81A0572CD00C56BC3 /* BCLContinuationsClass.m */,
+				821C2AF61A0572CD00C56BC3 /* BCLContinuationsClass+Protected.h */,
+				821C2AF91A0572CD00C56BC3 /* BCLControlFlowContinuations.h */,
+				821C2AFA1A0572CD00C56BC3 /* BCLControlFlowContinuations.m */,
 				821C2AFC1A0572CD00C56BC3 /* BCLContinuationProtocol.h */,
 			);
 			path = BCLContinuations;
@@ -371,16 +371,16 @@
 				828555EF1A0E14DC00FCBF61 /* BCJLogging.h in Headers */,
 				828555E21A0E14DC00FCBF61 /* BCJDeserialization.h in Headers */,
 				828555ED1A0E14DC00FCBF61 /* BCJJSONTarget.h in Headers */,
-				828555FD1A0E14DC00FCBF61 /* BCLContinuation+ControlFlowContinuations.h in Headers */,
-				828555FA1A0E14DC00FCBF61 /* BCLContinuation+ControlFlow.h in Headers */,
+				828555FD1A0E14DC00FCBF61 /* BCLControlFlowContinuations.h in Headers */,
+				828555FA1A0E14DC00FCBF61 /* BCLContinuationsClass.h in Headers */,
 				828555F11A0E14DC00FCBF61 /* BCJMap.h in Headers */,
 				828555E11A0E14DC00FCBF61 /* BCJDefines.h in Headers */,
-				828555FC1A0E14DC00FCBF61 /* BCLContinuation+ControlFlow+Protected.h in Headers */,
+				828555FC1A0E14DC00FCBF61 /* BCLContinuationsClass+Protected.h in Headers */,
 				828555E01A0E14DC00FCBF61 /* BCJContainerProtocols.h in Headers */,
 				828555E61A0E14DC00FCBF61 /* BCJGettersAndSetters.h in Headers */,
 				828555DA1A0E14DC00FCBF61 /* BCJAdditionalTypes.h in Headers */,
 				828555F31A0E14DC00FCBF61 /* BCJStandardTypes.h in Headers */,
-				828555F91A0E14DC00FCBF61 /* BCLContinuation.h in Headers */,
+				828555F91A0E14DC00FCBF61 /* BCLContinuations.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,11 +404,11 @@
 				821C2AD31A05721800C56BC3 /* BCJDefines.h in Headers */,
 				821C2ADB1A05721800C56BC3 /* BCJMap.h in Headers */,
 				821C2AC81A05721800C56BC3 /* BCJAdditionalTypes.h in Headers */,
-				821C2B001A0572CD00C56BC3 /* BCLContinuation+ControlFlow+Protected.h in Headers */,
+				821C2B001A0572CD00C56BC3 /* BCLContinuationsClass+Protected.h in Headers */,
 				82C5782A1A07BF9100769944 /* BCJLogging.h in Headers */,
-				821C2B071A0572CD00C56BC3 /* BCLContinuation.h in Headers */,
-				821C2B011A0572CD00C56BC3 /* BCLContinuation+ControlFlow.h in Headers */,
-				821C2B041A0572CD00C56BC3 /* BCLContinuation+ControlFlowContinuations.h in Headers */,
+				821C2B071A0572CD00C56BC3 /* BCLContinuations.h in Headers */,
+				821C2B011A0572CD00C56BC3 /* BCLContinuationsClass.h in Headers */,
+				821C2B041A0572CD00C56BC3 /* BCLControlFlowContinuations.h in Headers */,
 				828556031A0E14DD00FCBF61 /* BCJJSONSource+OptionsAdditons.h in Headers */,
 				821C2ADA1A05721800C56BC3 /* BCJJSONContinuations.h in Headers */,
 			);
@@ -552,14 +552,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				823451FE1A12650D00E19D74 /* BCLContinuation+ControlFlow.m in Sources */,
+				823451FE1A12650D00E19D74 /* BCLContinuationsClass.m in Sources */,
 				823451F21A12650D00E19D74 /* BCJError.m in Sources */,
 				823451EF1A12650D00E19D74 /* BCJAdditionalTypes.m in Sources */,
 				823451F01A12650D00E19D74 /* BCJConstants.m in Sources */,
 				823451F81A12650D00E19D74 /* BCJJSONTarget.m in Sources */,
 				823451FB1A12650D00E19D74 /* BCJStandardTypes.m in Sources */,
 				823451F61A12650D00E19D74 /* BCJJSONSource.m in Sources */,
-				823451FF1A12650D00E19D74 /* BCLContinuation+ControlFlowContinuations.m in Sources */,
+				823451FF1A12650D00E19D74 /* BCLControlFlowContinuations.m in Sources */,
 				823451F51A12650D00E19D74 /* BCJGettersAndSetters.m in Sources */,
 				823451FC1A12650D00E19D74 /* BCJValidation.m in Sources */,
 				823451FD1A12650D00E19D74 /* BCLBlockContinuation.m in Sources */,
@@ -596,14 +596,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				823451EC1A12650C00E19D74 /* BCLContinuation+ControlFlow.m in Sources */,
+				823451EC1A12650C00E19D74 /* BCLContinuationsClass.m in Sources */,
 				823451E01A12650C00E19D74 /* BCJError.m in Sources */,
 				823451DD1A12650C00E19D74 /* BCJAdditionalTypes.m in Sources */,
 				823451DE1A12650C00E19D74 /* BCJConstants.m in Sources */,
 				823451E61A12650C00E19D74 /* BCJJSONTarget.m in Sources */,
 				823451E91A12650C00E19D74 /* BCJStandardTypes.m in Sources */,
 				823451E41A12650C00E19D74 /* BCJJSONSource.m in Sources */,
-				823451ED1A12650C00E19D74 /* BCLContinuation+ControlFlowContinuations.m in Sources */,
+				823451ED1A12650C00E19D74 /* BCLControlFlowContinuations.m in Sources */,
 				823451E31A12650C00E19D74 /* BCJGettersAndSetters.m in Sources */,
 				823451EA1A12650C00E19D74 /* BCJValidation.m in Sources */,
 				823451EB1A12650C00E19D74 /* BCLBlockContinuation.m in Sources */,

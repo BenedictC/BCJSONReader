@@ -1,17 +1,23 @@
 //
-//  BCLContinuation+ControlFlow+Protected.h
+//  BCLContinuationsClass+Protected.h
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 30/10/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCLContinuation+ControlFlow.h"
+#import "BCLContinuations.h"
 
 
 
-@interface BCLContinuation (Protected)
+@interface BCLContinuations (Protected)
+/**
+ <#Description#>
 
+ @param continuations <#continuations description#>
+
+ @return <#return value description#>
+ */
 +(NSError *)untilEndWithContinuations:(NSArray *)continuations;
 +(NSError *)untilErrorWithContinuations:(NSArray *)continuations;
 

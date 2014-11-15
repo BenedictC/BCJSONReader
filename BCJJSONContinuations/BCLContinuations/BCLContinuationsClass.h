@@ -1,15 +1,19 @@
 //
-//  BCLContinuation+ControlFlow.h
+//  BCLContinuationsClass.h
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 27/10/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-@import Foundation;
+#import <Foundation/Foundation.h>
+#import "BCLContinuationProtocol.h"
 
 
 
+/**
+ <#Description#>
+ */
 extern NSString * const BCLErrorDomain;
 
 extern NSString * const BCLDetailedErrorsKey;
@@ -23,7 +27,7 @@ enum : NSInteger {
 
 
 
-@interface BCLContinuation : NSObject
+@interface BCLContinuations : NSObject
 
 //Synchronous execution
 +(NSError *)untilEnd:(id<BCLContinuation>)firstContinuation, ... NS_REQUIRES_NIL_TERMINATION;
@@ -35,7 +39,7 @@ enum : NSInteger {
 //Asynchronous execution
 //TODO:
 
-+(BCLContinuation *)currentContinuation;
++(BCLContinuations *)currentContinuations;
 -(void)abortWithError:(NSError *)errror;
 
 @end

@@ -1,5 +1,5 @@
 //
-//  BCLContinuation.h
+//  BCLContinuations.h
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 27/10/2014.
@@ -7,6 +7,7 @@
 //
 
 #import "BCLContinuationProtocol.h"
-#import "BCLContinuation+ControlFlow.h"
+#import "BCLContinuationsClass.h"
+
 #import "BCLBlockContinuation.h"
-#import "BCLContinuation+ControlFlowContinuations.h"
+#import "BCLControlFlowContinuations.h"

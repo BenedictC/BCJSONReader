@@ -61,7 +61,7 @@ void demo(void) {
     BCJContainer *json = [BCJContainer new]; //Create a container to store the JSON in.
 //    NSError *error = [BCLContinuation untilError:
     NSError *error =
-    [BCLContinuation untilError:
+    [BCLContinuations untilError:
          //Deserialization:
          BCJDeserializeJSON(json, jsonData),
 
