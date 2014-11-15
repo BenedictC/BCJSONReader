@@ -10,6 +10,10 @@
 
 
 
+/**
+ The BCJContainer protocols declare methods for accessing data held in collection. The protocols formalize the methods
+ used by BCJJSONSource for accessing elements used in JSONPath.
+ */
 @protocol BCJContainer <NSObject>
 @optional
 -(id)content;

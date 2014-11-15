@@ -28,7 +28,7 @@
  */
 BOOL BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJJSONSource *source, NSDate **outDate, NSError **outError) BCJ_REQUIRED(1,2,3);
 /**
- Return a continuation that fetches an NSNumber from source, uses the NSNumber to create an NSDate with dateWithTimeIntervalSince1970: and finally invokes setValue:outError: on target with the NSDate.
+ Return a continuation that fetches an NSNumber from source, uses the NSNumber to create an NSDate with dateWithTimeIntervalSince1970: and if a value was fetched invokes setValue:outError: on target with the NSDate.
 
  @param target A target that references an NSDate property.
  @param source A source that references an NSNumber.
@@ -57,7 +57,7 @@ NSDate *BCJDateFromISO8601String(NSString *dateString) BCJ_REQUIRED(1);
  */
 BOOL BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *source, NSDate **outDate, NSError **outError) BCJ_REQUIRED(1,2);
 /**
- Returns a continuation that calls BCJGetDateFromISO8601String and finally invokes setValue:outError: on target with the NSDate.
+ Returns a continuation that calls BCJGetDateFromISO8601String and if a value was fetched invokes setValue:outError: on target with the NSDate.
 
  @param target A target that references an NSDate property.
  @param source A source that references an NSString.
@@ -78,7 +78,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONTarget *
  */
 BOOL BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **outURL, NSError **outError) BCJ_REQUIRED(1,2,3);
 /**
-  Returns a continuation that calls BCJGetURL and finally invokes setValue:outError: on target with the NSURL.
+  Returns a continuation that calls BCJGetURL and if a value was fetched invokes setValue:outError: on target with the NSURL.
 
  @param target A target the references an NSURL property.
  @param source A source that references an NSString.
@@ -102,7 +102,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJJSONTarget *target, BCJJSONSou
  */
 BOOL BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDictionary *enumMapping, id *outValue, NSError **outError) BCJ_REQUIRED(1,2,3,4);
 /**
- Returns a continuation that calls BCJGetEnum and finally invokes setValue:outError: on target with the value from BCJGetEnum.
+ Returns a continuation that calls BCJGetEnum and if a value was fetched invokes setValue:outError: on target with the value from BCJGetEnum.
 
  @param target      A target that references the same type as the values of enumMapping.
  @param source      A source that references the same type as the keys of enumMapping.

@@ -65,3 +65,12 @@ Compared to other libaries BCJJSONContinuations is slightly more verbose. This i
 For example, some other libraries attempt to automatically map from dictionaries to objects. BCJJSONContinuations shuns
 'magic' like this in favour of explict statements. Avoiding magic makes it much easier to fix bugs when they inevitable 
 appear.
+
+
+# Examples
+How would implement 'find and update' be implemented if the object must exist when target is created?
+- Simple (not reccomended way): 1. Fetch id and then create a sub continuation
+
+- Create and merge: 1 pass and merge:
+
+- walk and collect IDs, fetch all objects from the store, re-walk data, save:

@@ -96,8 +96,7 @@ void demo(void) {
      nil];
 
 
-
-
+    
     //Log results
     NSLog(@"target.string: %@", target.string);
     NSLog(@"target.number: %@", @(target.number));

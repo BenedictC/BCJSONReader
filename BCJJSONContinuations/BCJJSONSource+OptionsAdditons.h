@@ -17,16 +17,16 @@ static inline BOOL BCJIsOptionSet(NSInteger option, NSInteger options) {
     return (options & option) != 0;
 }
 
-static inline BOOL BCJShouldReplaceNullWithNil(BCJSourceOptions options) {
-    return (options & BCJSourceOptionReplaceNullWithNil) != 0;
+static inline BOOL BCJMustReturnValue(BCJSourceOptions options) {
+    return (options & BCJSourceOptionMustReturnValue) != 0;
 }
 
-static inline BOOL BCJShouldReplaceNilWithDefaultValue(BCJSourceOptions options) {
-    return (options & BCJSourceOptionReplaceNilWithDefaultValue) != 0;
+static inline BOOL BCJPathMustEvaluateToValue(BCJSourceOptions options) {
+    return (options & BCJSourceOptionPathMustEvaluateToValue) != 0;
 }
 
-static inline BOOL BCJShouldAllowNilValue(BCJSourceOptions options) {
-    return (options & BCJSourceOptionAllowsNilValue) != 0;
+static inline BOOL BCJReplaceNullWithDefaultValue(BCJSourceOptions options) {
+    return (options & BCJSourceOptionReplaceNullWithDefaultValue) != 0;
 }
 
 

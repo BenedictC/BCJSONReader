@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
+
+
+//Macros for __attribute__. Foundation provides similar macros but they are not consistent across platforms.
 #define BCJ_OVERLOADABLE __attribute__((overloadable))
 #define BCJ_WARN_UNUSED __attribute__((warn_unused_result))
 #define BCJ_REQUIRED(...) __attribute__((nonnull(__VA_ARGS__)))

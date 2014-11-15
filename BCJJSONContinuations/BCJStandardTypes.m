@@ -73,6 +73,6 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNumber(BCJJSONTarget *target, BCJJSON
 
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNull(BCJJSONTarget *target, BCJJSONSource *source) {
-    NSCAssert(BCJShouldReplaceNullWithNil(source.options), @"Invalid option <BCJGetterOptionReplaceNullWithNil> is not permitted when setting NSNull");
+    NSCAssert(BCJReplaceNullWithDefaultValue(source.options), @"Invalid option <BCJGetterOptionReplaceNullWithNil> is not permitted when setting NSNull");
     return BCJSetValue(target, source, NSNull.class);
 }

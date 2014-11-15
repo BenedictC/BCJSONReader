@@ -13,12 +13,10 @@
 
 /**
 
- BCJError exists only to serve as a 'namespace' for the error creation methods. Instances of BCJError are useless and
- attempting to instatiate an instance will raise an exception.
+ BCJError exists only to serve as a 'namespace' for the error creation methods. Instances of BCJError are useless and attempting to instatiate an instance will raise an exception.
 
  */
 @interface BCJError : NSObject
-
 
 +(NSError *)missingValueErrorWithJSONSource:(BCJJSONSource *)source component:(NSString *)component componentIndex:(NSUInteger)componentIndex;
 +(NSError *)unexpectedTypeErrorWithJSONSource:(BCJJSONSource *)source value:(id)value expectedClass:(Class)expectedClass;
