@@ -9,22 +9,39 @@
 #ifndef BCJJSONContinuations_BCJJSONSource_OptionsAdditons_h
 #define BCJJSONContinuations_BCJJSONSource_OptionsAdditons_h
 
+
+
 #import "BCJJSONSource.h"
 
+/**
+ Checks if BCJSourceOptionMustReturnValue has been set.
 
+ @param options the options to check.
 
-static inline BOOL BCJIsOptionSet(NSInteger option, NSInteger options) {
-    return (options & option) != 0;
-}
-
+ @return YES if options contains BCJSourceOptionMustReturnValue, other wise NO.
+ */
 static inline BOOL BCJMustReturnValue(BCJSourceOptions options) {
     return (options & BCJSourceOptionMustReturnValue) != 0;
 }
 
+/**
+ Checks if BCJSourceOptionPathMustEvaluateToValue has been set.
+
+ @param options the options to check.
+
+ @return YES if options contains BCJSourceOptionPathMustEvaluateToValue, other wise NO.
+ */
 static inline BOOL BCJPathMustEvaluateToValue(BCJSourceOptions options) {
     return (options & BCJSourceOptionPathMustEvaluateToValue) != 0;
 }
 
+/**
+ Checks if BCJSourceOptionReplaceNullWithDefaultValue has been set.
+
+ @param options the options to check.
+
+ @return YES if options contains BCJSourceOptionReplaceNullWithDefaultValue, other wise NO.
+ */
 static inline BOOL BCJReplaceNullWithDefaultValue(BCJSourceOptions options) {
     return (options & BCJSourceOptionReplaceNullWithDefaultValue) != 0;
 }
