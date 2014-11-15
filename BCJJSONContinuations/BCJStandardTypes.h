@@ -18,7 +18,7 @@
 /**
  Returns a continuation that attempts to get an NSArray from source and if successful attempts to set the value of target with the fetched value.
 
- @param target A target the references an NSArray property.
+ @param target A target that references an NSArray property.
  @param source A source that references an NSArray.
 
  @return A continuation.
@@ -27,7 +27,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetArray(BCJJSONTarget *target, BCJJSONS
 /**
  Returns a continuation that attempts to get an NSMutableArray from source and if successful attempts to set the value of target with the fetched value.
 
- @param target A target the references an NSMutableArray property.
+ @param target A target that references an NSMutableArray property.
  @param source A source that references an NSMutableArray.
 
  @return A continuation.
@@ -36,7 +36,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableArray(BCJJSONTarget *target, B
 /**
  Returns a continuation that attempts to get an NSDictionary from source and if successful attempts to set the value of target with the fetched value.
 
- @param target A target the references an NSDictionary property.
+ @param target A target that references an NSDictionary property.
  @param source A source that references an NSDictionary.
 
  @return A continuation.
@@ -45,7 +45,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDictionary(BCJJSONTarget *target, BCJ
 /**
  Returns a continuation that attempts to get an NSMutableDictionary from source and if successful attempts to set the value of target with the fetched value.
 
- @param target A target the references an NSMutableDictionary property.
+ @param target A target that references an NSMutableDictionary property.
  @param source A source that references an NSMutableDictionary.
 
  @return A continuation.
@@ -54,7 +54,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableDictionary(BCJJSONTarget *targ
 /**
  Returns a continuation that attempts to get an NSString from source and if successful attempts to set the value of target with the fetched value.
 
- @param target A target the references an NSString property.
+ @param target A target that references an NSString property.
  @param source A source that references an NSString.
 
  @return A continuation.
@@ -63,7 +63,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetString(BCJJSONTarget *target, BCJJSON
 /**
  Returns a continuation that attempts to get an NSMutableString from source and if successful attempts to set the value of target with the fetched value.
 
- @param target A target the references an NSMutableString property.
+ @param target A target that references an NSMutableString property.
  @param source A source that references an NSMutableString.
 
  @return A continuation.
@@ -72,7 +72,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableString(BCJJSONTarget *target, 
 /**
  Returns a continuation that attempts to get an NSNumber from source and if successful attempts to set the value of target with the fetched value.
 
- @param target A target the references an NSNumber or number scalar type property.
+ @param target A target that references an NSNumber or number scalar type property.
  @param source A source that references an NSNumber.
 
  @return A continuation.
@@ -81,7 +81,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNumber(BCJJSONTarget *target, BCJJSON
 /**
  Returns a continuation that attempts to get an NSNull from source and if successful attempts to set the value of target with the fetched value.
 
- @param target A target the references an NSNull property.
+ @param target A target that references an NSNull property.
  @param source A source that references an NSNull.
 
  @return A continuation.
