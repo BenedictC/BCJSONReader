@@ -21,14 +21,14 @@
 
 -(void)testGetter
 {
-    //Should probably add some tests, but there's not much to test!
+    //Should probably add some tests, but there's not much to test because BCJGetValue is basically a wrapper around BCJJSONSource.
 }
 
 
 
 -(void)testSetter
 {
-    //Should probably add some tests, but there's not much to test!
+    //Should probably add some tests, but there's not much to test because BCJSetValue is basically a wrapper around BCJJSONSource and BCJJSONTarget.
 }
 
 @end
