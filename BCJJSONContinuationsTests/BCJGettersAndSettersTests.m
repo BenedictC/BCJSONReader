@@ -21,14 +21,14 @@
 
 -(void)testGetter
 {
-    //Is there anypoint? The functions are basically wrappers for BCJJSONSource and BCJJSONTarget.
+    //Should probably add some tests, but there's not much to test!
 }
 
 
 
 -(void)testSetter
 {
-
+    //Should probably add some tests, but there's not much to test!
 }
 
 @end
