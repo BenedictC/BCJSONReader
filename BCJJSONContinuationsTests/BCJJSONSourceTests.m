@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "BCJJSONSource+LateBoundClassCheck.h"
+#import "BCJJSONSource+DeferredClassCheck.h"
 
 
 
@@ -71,7 +71,7 @@
 
 
 
--(void)testLateBoundClassCheck
+-(void)testDeferredClassCheck
 {
     XCTFail(@"TODO");    
     //TODO: Test which class gets used for type checking

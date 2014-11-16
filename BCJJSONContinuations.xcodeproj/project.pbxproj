@@ -40,7 +40,7 @@
 		823451E21A12650C00E19D74 /* BCJEnumerateJSONPathComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 820F54661A0C3C6400161370 /* BCJEnumerateJSONPathComponents.m */; };
 		823451E31A12650C00E19D74 /* BCJGettersAndSetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AB61A05721800C56BC3 /* BCJGettersAndSetters.m */; };
 		823451E41A12650C00E19D74 /* BCJJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A67971A08D056003A8EF6 /* BCJJSONSource.m */; };
-		823451E51A12650C00E19D74 /* BCJJSONSource+LateBoundClassCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FB32DA1A0EE164005E3B54 /* BCJJSONSource+LateBoundClassCheck.m */; };
+		823451E51A12650C00E19D74 /* BCJJSONSource+DeferredClassCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FB32DA1A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.m */; };
 		823451E61A12650C00E19D74 /* BCJJSONTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A67931A08CF55003A8EF6 /* BCJJSONTarget.m */; };
 		823451E71A12650C00E19D74 /* BCJLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C578291A07BF9100769944 /* BCJLogging.m */; };
 		823451E81A12650C00E19D74 /* BCJMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AB91A05721800C56BC3 /* BCJMap.m */; };
@@ -57,7 +57,7 @@
 		823451F41A12650D00E19D74 /* BCJEnumerateJSONPathComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 820F54661A0C3C6400161370 /* BCJEnumerateJSONPathComponents.m */; };
 		823451F51A12650D00E19D74 /* BCJGettersAndSetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AB61A05721800C56BC3 /* BCJGettersAndSetters.m */; };
 		823451F61A12650D00E19D74 /* BCJJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A67971A08D056003A8EF6 /* BCJJSONSource.m */; };
-		823451F71A12650D00E19D74 /* BCJJSONSource+LateBoundClassCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FB32DA1A0EE164005E3B54 /* BCJJSONSource+LateBoundClassCheck.m */; };
+		823451F71A12650D00E19D74 /* BCJJSONSource+DeferredClassCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FB32DA1A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.m */; };
 		823451F81A12650D00E19D74 /* BCJJSONTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 822A67931A08CF55003A8EF6 /* BCJJSONTarget.m */; };
 		823451F91A12650D00E19D74 /* BCJLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 82C578291A07BF9100769944 /* BCJLogging.m */; };
 		823451FA1A12650D00E19D74 /* BCJMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AB91A05721800C56BC3 /* BCJMap.m */; };
@@ -102,8 +102,8 @@
 		82C5782A1A07BF9100769944 /* BCJLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 82C578281A07BF9100769944 /* BCJLogging.h */; };
 		82D3B1A019FBF8D3003C4EB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D3B19F19FBF8D3003C4EB5 /* main.m */; };
 		82D85A691A0A2249001B3C32 /* BCJEnumerateJSONPathComponentsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D85A681A0A2249001B3C32 /* BCJEnumerateJSONPathComponentsTests.m */; };
-		82FB32DB1A0EE164005E3B54 /* BCJJSONSource+LateBoundClassCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 82FB32D91A0EE164005E3B54 /* BCJJSONSource+LateBoundClassCheck.h */; };
-		82FB32DC1A0EE164005E3B54 /* BCJJSONSource+LateBoundClassCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 82FB32D91A0EE164005E3B54 /* BCJJSONSource+LateBoundClassCheck.h */; };
+		82FB32DB1A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 82FB32D91A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.h */; };
+		82FB32DC1A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 82FB32D91A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,8 +189,8 @@
 		82D85A681A0A2249001B3C32 /* BCJEnumerateJSONPathComponentsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJEnumerateJSONPathComponentsTests.m; sourceTree = "<group>"; };
 		82D85A6A1A0A2292001B3C32 /* BCJEnumerateJSONPathComponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BCJEnumerateJSONPathComponents.h; sourceTree = "<group>"; };
 		82EBE79A19FCEEB0001F995B /* libBCJJSONContinuations.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBCJJSONContinuations.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		82FB32D91A0EE164005E3B54 /* BCJJSONSource+LateBoundClassCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCJJSONSource+LateBoundClassCheck.h"; sourceTree = "<group>"; };
-		82FB32DA1A0EE164005E3B54 /* BCJJSONSource+LateBoundClassCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCJJSONSource+LateBoundClassCheck.m"; sourceTree = "<group>"; };
+		82FB32D91A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCJJSONSource+DeferredClassCheck.h"; sourceTree = "<group>"; };
+		82FB32DA1A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCJJSONSource+DeferredClassCheck.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,8 +251,8 @@
 				821C2AB71A05721800C56BC3 /* BCJJSONContinuations.h */,
 				822A67961A08D056003A8EF6 /* BCJJSONSource.h */,
 				822A67971A08D056003A8EF6 /* BCJJSONSource.m */,
-				82FB32D91A0EE164005E3B54 /* BCJJSONSource+LateBoundClassCheck.h */,
-				82FB32DA1A0EE164005E3B54 /* BCJJSONSource+LateBoundClassCheck.m */,
+				82FB32D91A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.h */,
+				82FB32DA1A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.m */,
 				8270A6ED1A09542A003EF58C /* BCJJSONSource+OptionsAdditons.h */,
 				822A67921A08CF55003A8EF6 /* BCJJSONTarget.h */,
 				822A67931A08CF55003A8EF6 /* BCJJSONTarget.m */,
@@ -364,7 +364,7 @@
 				828555EC1A0E14DC00FCBF61 /* BCJJSONSource+OptionsAdditons.h in Headers */,
 				828555EA1A0E14DC00FCBF61 /* BCJJSONSource.h in Headers */,
 				828555FF1A0E14DC00FCBF61 /* BCLContinuationProtocol.h in Headers */,
-				82FB32DC1A0EE164005E3B54 /* BCJJSONSource+LateBoundClassCheck.h in Headers */,
+				82FB32DC1A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.h in Headers */,
 				828555F71A0E14DC00FCBF61 /* BCLBlockContinuation.h in Headers */,
 				828555F51A0E14DC00FCBF61 /* BCJValidation.h in Headers */,
 				828555DE1A0E14DC00FCBF61 /* BCJContainer.h in Headers */,
@@ -394,7 +394,7 @@
 				821C2AD71A05721800C56BC3 /* BCJGettersAndSetters.h in Headers */,
 				821C2AFD1A0572CD00C56BC3 /* BCLBlockContinuation.h in Headers */,
 				821C2B081A0572CD00C56BC3 /* BCLContinuationProtocol.h in Headers */,
-				82FB32DB1A0EE164005E3B54 /* BCJJSONSource+LateBoundClassCheck.h in Headers */,
+				82FB32DB1A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.h in Headers */,
 				821C2ACE1A05721800C56BC3 /* BCJContainer.h in Headers */,
 				821C2AE11A05721800C56BC3 /* BCJValidation.h in Headers */,
 				828556011A0E14DD00FCBF61 /* BCJEnumerateJSONPathComponents.h in Headers */,
@@ -569,7 +569,7 @@
 				823451F91A12650D00E19D74 /* BCJLogging.m in Sources */,
 				823452001A12654600E19D74 /* BCJInvertedContinuationFunctions.m in Sources */,
 				823451F11A12650D00E19D74 /* BCJContainer.m in Sources */,
-				823451F71A12650D00E19D74 /* BCJJSONSource+LateBoundClassCheck.m in Sources */,
+				823451F71A12650D00E19D74 /* BCJJSONSource+DeferredClassCheck.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,7 +613,7 @@
 				823451E71A12650C00E19D74 /* BCJLogging.m in Sources */,
 				823452011A12654600E19D74 /* BCJInvertedContinuationFunctions.m in Sources */,
 				823451DF1A12650C00E19D74 /* BCJContainer.m in Sources */,
-				823451E51A12650C00E19D74 /* BCJJSONSource+LateBoundClassCheck.m in Sources */,
+				823451E51A12650C00E19D74 /* BCJJSONSource+DeferredClassCheck.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

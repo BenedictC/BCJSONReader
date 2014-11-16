@@ -31,7 +31,7 @@ static inline void BCJAssertValidGetterOptions(id object, NSString *JSONPath, Cl
 
 
 static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Class expectedClass, BCJSourceOptions options, id defaultValue) {
-#pragma message "TODO"
+#pragma message "TODO: Add logging"
 //    BOOL shouldReplaceNilWithDefaultValue = BCJShouldReplaceNilWithDefaultValue(options);
 //    BOOL isDefaultValuePointless = (!shouldReplaceNilWithDefaultValue && defaultValue != nil);
 //    if (isDefaultValuePointless) {

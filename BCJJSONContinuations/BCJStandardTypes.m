@@ -7,7 +7,7 @@
 //
 
 #import "BCJStandardTypes.h"
-#import "BCJJSONSource+LateBoundClassCheck.h"
+#import "BCJJSONSource+DeferredClassCheck.h"
 #import "BCJJSONTarget.h"
 #import "BCJJSONSource+OptionsAdditons.h"
 
@@ -21,7 +21,13 @@ static inline id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJJSONTarget *ta
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
-        if (![source getValue:&value ofKind:expectedClass error:outError]) return NO;
+        BCJSourceResult result = [source getValue:&value ofKind:expectedClass error:outError];
+        switch (result) {
+            case BCJSourceResultValueNotFound: return YES;
+            case BCJSourceResultFailure: return NO;
+            case BCJSourceResultSuccess:
+                break;
+        }
 
         return [target setValue:value error:outError];
     });

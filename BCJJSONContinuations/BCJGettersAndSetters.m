@@ -19,7 +19,13 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJJSONSource *source, BOOL(^su
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
-        if (![source getValue:&value error:outError]) return NO;
+        BCJSourceResult result = [source getValue:&value error:outError];
+        switch (result) {
+            case BCJSourceResultValueNotFound: return YES;
+            case BCJSourceResultFailure: return NO;
+            case BCJSourceResultSuccess:
+                break;
+        }
 
         return successBlock(value, outError);
     });
@@ -34,8 +40,12 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJJSONTarget *target, BCJJSONS
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
-        if (![source getValue:&value error:outError]) return NO;
-
-        return [target setValue:value error:outError];
+        BCJSourceResult result = [source getValue:&value error:outError];
+        switch (result) {
+            case BCJSourceResultValueNotFound: return YES;
+            case BCJSourceResultSuccess: return [target setValue:value error:outError];
+            default: //This isn't necessary but I'm paranoid.
+            case BCJSourceResultFailure: return NO;
+        }
     });
 }

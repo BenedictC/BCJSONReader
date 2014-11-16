@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "BCLContinuation+ControlFlowContinuations.h"
+#import "BCLControlFlowContinuations.h"
 
 
 

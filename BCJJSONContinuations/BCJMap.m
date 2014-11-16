@@ -8,7 +8,7 @@
 
 #import "BCJMap.h"
 #import "BCJError.h"
-#import "BCJJSONSource+LateBoundClassCheck.h"
+#import "BCJJSONSource+DeferredClassCheck.h"
 #import "BCJJSONTarget.h"
 
 
@@ -117,7 +117,13 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONTarget *target, BCJJSONSou
 
         //Get the container
         NSArray *container;
-        if (![source getValue:&container ofKind:NSArray.class error:outError]) return NO;
+        BCJSourceResult result = [source getValue:&container ofKind:NSArray.class error:outError];
+        switch (result) {
+            case BCJSourceResultValueNotFound: return YES;
+            case BCJSourceResultFailure: return NO;
+            case BCJSourceResultSuccess:
+                break;
+        }
 
         //Perform the mapping
         NSArray *values = BCJMap(container, elementClass, options, fromArrayMap, outError);
