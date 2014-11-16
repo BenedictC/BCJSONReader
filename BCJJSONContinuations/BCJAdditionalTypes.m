@@ -21,6 +21,7 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJJSONSour
 
     //Reset outValue
     *outDate = nil;
+    if (outError != NULL) *outError = nil;
 
     //Get value
     NSNumber *timeInterval;
@@ -77,6 +78,7 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *sour
 
     //Reset outValue
     *outDate = nil;
+    if (outError != NULL) *outError = nil;
 
     static NSString * const sentinal = @"SENTINAL";
     NSString *defaultString = (source.defaultValue == nil) ? nil : sentinal;
@@ -139,6 +141,7 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **outURL
 
     //Reset outValue
     *outURL = nil;
+    if (outError != NULL) *outError = nil;
 
     id fetchedValue;
     //TODO: Should we return a different error?
@@ -200,6 +203,7 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDictionary 
 
     //Reset outValue
     *outValue = nil;
+    if (outError != NULL) *outError = nil;
 
     //Get the value
     id enumKey;
