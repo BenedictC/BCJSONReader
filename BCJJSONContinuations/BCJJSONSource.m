@@ -89,16 +89,19 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
         NSError *pathError = BCJEnumerateJSONPathComponents(self.JSONPath, ^(id component, NSUInteger componentIdx, BOOL *stop) {
 
             if ([component isKindOfClass:[NSNumber class]]) {
-                //Index subscript
+                //Index component
                 if ([lastValue respondsToSelector:@selector(objectAtIndex:)] && [lastValue respondsToSelector:@selector(count)]) {
                     NSUInteger idx = [component integerValue];
                     lastValue = (idx < [lastValue count]) ? [lastValue objectAtIndex:idx] : nil;
                 }
-            } else /*if ([component isKindOfClass:[NSString class]])*/ { //This check is redundant
-                //keyed subscript
+            } else if ([component isKindOfClass:[NSString class]]) {
+                //keyed component
                 if ([lastValue respondsToSelector:@selector(objectForKey:)]) {
                     lastValue = [lastValue objectForKey:component];
                 }
+            } else if ([component isKindOfClass:[NSNull class]]) {
+                //'self' component
+                lastValue = lastValue;
             }
 
             BOOL didFetchFail = (lastValue == nil);
@@ -162,39 +165,39 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
 
 
 #pragma mark - Strict Constructors
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSString *JSONPath, Class expectClass, BCJSourceOptions options, id defaultValue) {
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, Class expectClass, BCJSourceOptions options, id defaultValue) {
     return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:expectClass options:options defaultValue:defaultValue];
 }
 
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSUInteger idx, Class expectClass, BCJSourceOptions options, id defaultValue) {
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx, Class expectClass, BCJSourceOptions options, id defaultValue) {
     NSString *JSONPath = [NSString stringWithFormat:@"%lu", [@(idx) unsignedLongValue]];
     return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:expectClass options:options defaultValue:defaultValue];
 }
 
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSString *JSONPath, Class expectClass, BCJSourceOptions options) {
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, Class expectClass, BCJSourceOptions options) {
     return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:expectClass options:options defaultValue:nil];
 }
 
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSUInteger idx, Class expectClass, BCJSourceOptions options) {
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx, Class expectClass, BCJSourceOptions options) {
     NSString *JSONPath = [NSString stringWithFormat:@"%lu", [@(idx) unsignedLongValue]];
     return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:expectClass options:options defaultValue:nil];
 }
 
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSString *JSONPath, Class expectClass) {
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, Class expectClass) {
     return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:expectClass options:BCJSourceModeOptional defaultValue:nil];
 }
 
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSUInteger idx, Class expectClass) {
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx, Class expectClass) {
     NSString *JSONPath = [NSString stringWithFormat:@"%lu", [@(idx) unsignedLongValue]];
     return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:expectClass options:BCJSourceModeOptional defaultValue:nil];
 }
@@ -202,51 +205,51 @@ BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSUInteger i
 
 
 #pragma mark - Constructors with de-emphasized expectClass
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSString *JSONPath, BCJSourceOptions options, id defaultValue, Class expectClass) {
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, BCJSourceOptions options, id defaultValue, Class expectClass) {
     return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:expectClass options:options defaultValue:defaultValue];
 }
 
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSUInteger idx, BCJSourceOptions options, id defaultValue, Class expectClass) {
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx, BCJSourceOptions options, id defaultValue, Class expectClass) {
     NSString *JSONPath = [NSString stringWithFormat:@"%lu", [@(idx) unsignedLongValue]];
     return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:expectClass options:options defaultValue:defaultValue];
 }
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSString *JSONPath, BCJSourceOptions options, id defaultValue) {
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, BCJSourceOptions options, id defaultValue) {
     return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:nil options:options defaultValue:nil];
 }
 
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSUInteger idx, BCJSourceOptions options, id defaultValue) {
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx, BCJSourceOptions options, id defaultValue) {
     NSString *JSONPath = [NSString stringWithFormat:@"%lu", [@(idx) unsignedLongValue]];
     return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:nil options:options defaultValue:defaultValue];
 }
 
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSString *JSONPath, BCJSourceOptions options) {
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, BCJSourceOptions options) {
     return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:nil options:BCJSourceModeOptional defaultValue:nil];
 }
 
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSUInteger idx, BCJSourceOptions options) {
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx, BCJSourceOptions options) {
     NSString *JSONPath = [NSString stringWithFormat:@"%lu", [@(idx) unsignedLongValue]];
     return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:nil options:options defaultValue:nil];
 }
 
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSString *JSONPath) {
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath) {
     return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:nil options:BCJSourceModeOptional defaultValue:nil];
 }
 
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> object, NSUInteger idx) {
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx) {
     NSString *JSONPath = [NSString stringWithFormat:@"%lu", [@(idx) unsignedLongValue]];
     return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:nil options:BCJSourceModeOptional defaultValue:nil];
 }

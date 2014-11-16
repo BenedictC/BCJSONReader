@@ -7,6 +7,7 @@
 //
 
 #import "BCJError.h"
+#import "BCJConstants.h"
 
 
 
@@ -73,6 +74,14 @@ static inline ScanResult scanSubscriptComponent(NSScanner *scanner, id *outCompo
 
             //Escaped character is invalid.
             return kScanResultFailed;
+        }
+    }
+
+    //Is it the 'self' subscript?
+    BOOL shouldScanForSelfSubscript = (subscript == nil);
+    if (shouldScanForSelfSubscript) {
+        if ([scanner scanString:@"." intoString:NULL]) {
+            subscript = [NSNull null];
         }
     }
 

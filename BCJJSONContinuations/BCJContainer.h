@@ -8,7 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BCJContainerProtocols.h"
+
+
+@protocol BCJContainer <NSObject>
+
+-(id)objectAtIndex:(NSUInteger)idx;
+-(NSUInteger)count;
+
+-(id)objectForKey:(id)key;
+
+-(id)content;
+
+@end
 
 
 
@@ -18,7 +29,7 @@
  The contents of the container can be set only once. Once the content is set the container becomes sealed. Attempting to set the content on sealed container will result in an exception being raised.
 
  */
-@interface BCJContainer : NSObject <BCJIndexedContainer, BCJKeyedContainer>
+@interface BCJContainer : NSObject <BCJContainer>
 
 /**
  Initializes the container with the supplied content.

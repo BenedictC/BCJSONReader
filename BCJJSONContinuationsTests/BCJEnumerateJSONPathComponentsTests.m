@@ -78,6 +78,25 @@
 
 
 
+- (void)testValidSelfSubscript
+{
+    //Given (setup environment)
+    NSString *path = @"[.]";
+
+    //When (perform the action)
+    __block id actualComponent = nil;
+    NSError *error = BCJEnumerateJSONPathComponents(path, ^(id component, NSUInteger componentIdx, BOOL *stop) {
+        actualComponent = component;
+    });
+
+    //Then (verify the action had the expected result)
+    XCTAssertNil(error);
+    id expectedComponent = [NSNull null];
+    XCTAssertEqualObjects(actualComponent, expectedComponent, @"");
+}
+
+
+
 - (void)testValidIntegerSubscript
 {
     //Given (setup environment)
@@ -150,6 +169,7 @@
     id expectedComponent = nil;
     XCTAssertEqualObjects(actualComponent, expectedComponent, @"");
 }
+
 
 
 #pragma message "TODO: Add tests for escape characters in string subscripts"
