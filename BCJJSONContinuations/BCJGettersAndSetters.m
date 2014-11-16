@@ -22,12 +22,10 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJJSONSource *source, BOOL(^su
         BCJSourceResult result = [source getValue:&value error:outError];
         switch (result) {
             case BCJSourceResultValueNotFound: return YES;
+            case BCJSourceResultSuccess: return successBlock(value, outError);
+            default: //This isn't necessary but I'm paranoid.
             case BCJSourceResultFailure: return NO;
-            case BCJSourceResultSuccess:
-                break;
         }
-
-        return successBlock(value, outError);
     });
 }
 
