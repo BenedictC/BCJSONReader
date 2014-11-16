@@ -1,5 +1,5 @@
 //
-//  BCLContinuation+ControlFlowTests.m
+//  BCLContinuationsTests.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 01/11/2014.
@@ -10,13 +10,13 @@
 
 
 
-@interface BCLContinuation_ControlFlow : XCTestCase
+@interface BCLContinuationsTests : XCTestCase
 
 @end
 
 
 
-@implementation BCLContinuation_ControlFlow
+@implementation BCLContinuationsTests
 
 -(void)testUntilError
 {
