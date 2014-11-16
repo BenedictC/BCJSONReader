@@ -12,3 +12,7 @@
 #define BCJ_OVERLOADABLE __attribute__((overloadable))
 #define BCJ_WARN_UNUSED __attribute__((warn_unused_result))
 #define BCJ_REQUIRED(...) __attribute__((nonnull(__VA_ARGS__)))
+
+//TODO: Replace NS*Assert with BCJ*Assert so that they are not removed in release builds
+//#define BCJParameterAssert()
+//#define BCJAssert()
