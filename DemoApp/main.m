@@ -70,7 +70,7 @@ void demo(void) {
          BCJSetNumber(BCJSource(json, @"number"), BCJ_TARGET(target, number)),
 
          //AdditionalTypes:
-                                   BCJSetURL(BCJSource(json, @"array[3].url"),  BCJ_TARGET(target, url)),
+         BCJSetURL(BCJSource(json, @"array[3].url"), BCJ_TARGET(target, url)),
          BCJSetDateFromTimeIntervalSince1970(BCJSource(json, @"date", BCJSourceModeStrict), BCJ_TARGET(target, date)),
 
          //Map:
