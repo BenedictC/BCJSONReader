@@ -19,6 +19,8 @@
 
 @implementation BCJStandardTypesTests
 
+//There's very little value in testing the other functions.
+
 - (void)testNull {
     XCTFail(@"TODO");
 }
