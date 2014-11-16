@@ -11,12 +11,18 @@
 
 
 /**
- <#Description#>
+ Creates a continuation that in turn executes the continuations supplied to it using BCLContinuations untilEnd: method.
 
- @param firstContinuations <#firstContinuations description#>
- @param ...                <#... description#>
+ @param firstContinuations A nil terminated list of id<BCLContinuation> objects.
 
- @return <#return value description#>
+ @return a continuation.
  */
 id<BCLContinuation> BCLUntilEnd(id<BCLContinuation> firstContinuations, ...) NS_REQUIRES_NIL_TERMINATION __attribute__((warn_unused_result));
+/**
+ Creates a continuation that in turn executes the continuations supplied to it using BCLContinuations untilError: method.
+
+ @param firstContinuations A nil terminated list of id<BCLContinuation> objects.
+
+ @return a continuation.
+ */
 id<BCLContinuation> BCLUntilError(id<BCLContinuation> firstContinuations, ...) NS_REQUIRES_NIL_TERMINATION __attribute__((warn_unused_result));

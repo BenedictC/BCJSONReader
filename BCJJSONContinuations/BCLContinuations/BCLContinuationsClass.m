@@ -58,13 +58,6 @@ va_end(args); \
 
 
 
-+(BCLContinuations *)currentContinuations
-{
-    return [[BCLContinuations continuationsStack] lastObject];
-}
-
-
-
 +(void)pushContinuations:(BCLContinuations *)continuations
 {
     [[BCLContinuations continuationsStack] addObject:continuations];
@@ -75,6 +68,13 @@ va_end(args); \
 +(void)popContinuations
 {
     [[BCLContinuations continuationsStack] removeLastObject];
+}
+
+
+
++(BCLContinuations *)currentContinuations
+{
+    return [[BCLContinuations continuationsStack] lastObject];
 }
 
 
@@ -118,8 +118,8 @@ va_end(args); \
     AuRevoir:
 
     [BCLContinuations popContinuations];
-    NSError *error = (errors.count > 0) ? [NSError errorWithDomain:BCLErrorDomain code:BCLMultipleErrorsError userInfo:@{BCLDetailedErrorsKey:errors}] : nil;
 
+    NSError *error = (errors.count > 0) ? [NSError errorWithDomain:BCLErrorDomain code:BCLMultipleErrorsError userInfo:@{BCLDetailedErrorsKey:errors}] : nil;
     return error;
 }
 
@@ -191,28 +191,7 @@ va_end(args); \
 
 
 
-+(BOOL)withError:(NSError **)outError untilEnd:(id<BCLContinuation>)firstContinuation, ...
-{
-    NSArray *continuations = CONTINUATIONS_FROM_VARGS(firstContinuation);
-
-    NSError *error = [BCLContinuations untilErrorWithContinuations:continuations];
-    if (outError != NULL) *outError = error;
-    return (error == nil);
-}
-
-
-
-+(BOOL)withError:(NSError **)outError untilError:(id<BCLContinuation>)firstContinuation, ...
-{
-    NSArray *continuations = CONTINUATIONS_FROM_VARGS(firstContinuation);
-
-    NSError *error = [BCLContinuations untilErrorWithContinuations:continuations];
-    if (outError != NULL) *outError = error;
-    return (error == nil);
-}
-
-
-
+//TODO: Why do we need this method? Why would we want to cancel a continuation rather than just have a continutation fail?
 -(void)abortWithError:(NSError *)error
 {
     self.shouldAbort = YES;

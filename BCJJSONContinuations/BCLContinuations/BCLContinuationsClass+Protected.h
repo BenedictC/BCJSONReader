@@ -12,13 +12,20 @@
 
 @interface BCLContinuations (Protected)
 /**
- <#Description#>
+ Synchronous execution the supplied continuations. If one or more errors occurs then the returned error will be an NSError with code BCLMultipleErrorsError.
 
- @param continuations <#continuations description#>
+ @param continuations an NSArray of id<BCLContinuation> objects.
 
- @return <#return value description#>
+ @return On success nil, otherwise and NSError.
  */
 +(NSError *)untilEndWithContinuations:(NSArray *)continuations;
+/**
+ Synchronous execution the supplied continuations. If an error occurs then the continutions are abort and the error returned.
+
+ @param continuations an NSArray of id<BCLContinuation> objects.
+
+ @return On success nil, otherwise and NSError.
+ */
 +(NSError *)untilErrorWithContinuations:(NSArray *)continuations;
 
 @end
