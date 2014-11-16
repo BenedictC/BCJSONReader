@@ -24,12 +24,10 @@ static inline id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJJSONTarget *ta
         BCJSourceResult result = [source getValue:&value ofKind:expectedClass error:outError];
         switch (result) {
             case BCJSourceResultValueNotFound: return YES;
+            case BCJSourceResultSuccess: return [target setValue:value error:outError];
+            default: //This isn't necessary but I'm paranoid.
             case BCJSourceResultFailure: return NO;
-            case BCJSourceResultSuccess:
-                break;
         }
-
-        return [target setValue:value error:outError];
     });
 }
 
