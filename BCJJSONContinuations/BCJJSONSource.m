@@ -145,7 +145,7 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
     Class expectedClass = self.expectedClass;
     BOOL isCorrectKind = expectedClass == nil || [value isKindOfClass:expectedClass];
     if (shouldCheckClass && !isCorrectKind) {
-        if (outError == NULL) {
+        if (outError != NULL) {
             NSString *criteria = [NSString stringWithFormat:@"value.class != %@", NSStringFromClass(expectedClass)];
             *outError = [BCJError invalidValueErrorWithJSONSource:self value:value criteria:criteria];
         }

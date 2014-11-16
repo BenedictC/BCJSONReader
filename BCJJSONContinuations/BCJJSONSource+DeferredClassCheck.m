@@ -23,7 +23,7 @@
     BOOL shouldCheckClass = *value != nil;
     BOOL isCorrectKind = class == nil || [*value isKindOfClass:class];
     if (shouldCheckClass && !isCorrectKind) {
-        if (outError == NULL) {
+        if (outError != NULL) {
             NSString *criteria = [NSString stringWithFormat:@"value.class != %@", NSStringFromClass(class)];
             *outError = [BCJError invalidValueErrorWithJSONSource:self value:*value criteria:criteria];
         }
