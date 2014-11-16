@@ -1,18 +1,14 @@
 # BCJJSONContinuations
 
 ## TL;DR
-
-BCJJSONContinuations is:
-+ Flexible. Provides functions for lots of JSON usage patterns.
-+ Extensible. For when the JSON is especially obscure.
-+ Explicit and predicatable.
-+ Tested.
+BCJJSONContinuations is a library for processing the crazy JSON structures that exist in the real world. Its' key features:
++ Flexible. Provides functionality for handling many JSON usage styles.
++ Extensible. Easy to integrate new processing (e.g. peculiar date formats).
++ Explicit. Does not use reflection to second guess how to process the JSON.
 + Documented.
+//+ Tested.
 
-Which results in:
-+ Self documenting code. (Functions and constants make it clear what's expected to happen.)
-+ Avoids implicity coupling model objects to web service
-+ Transparent. No ObjC/Runtime.h magic
+
 
 Examples:
 
@@ -38,7 +34,7 @@ NSError *error = [BCLContinuation untilError:
 ````
 
 ## What is BCJJSONContinuations?
-BCJJSONContinuations is a library designed to deal with the crazy JSON structures that exist in the real world.
+BCJJSONContinuations is a library for processing the crazy JSON structures that exist in the real world.
 
 ## There are lots of other libraries for handling JSON, why not use one of them?
 Other JSON libraries tends to make simplifying assumptions about the JSON structures that they'll be faced with. These
@@ -53,6 +49,8 @@ class)
 when debugging as it requires the coder to have an intimate knowledge of the assumptions of the JSON library. This 
 knowldege is can only by found by reading the documentation (if there is any) or digging into the libraries codebase.
 
+
+
 ## So what's different about BCJJSONContinuations?
 First and foremost BCJJSONContinuations provides the infrastructure for handling the JSON handling process (this 
 infrastructure is actually provided by another library, BCLContinuations, which is included with BCJJSONContinuations). 
@@ -61,10 +59,13 @@ processing JSON.
 
 EXPLAIN THAT ALL STEPS MUST BE EXPLICT AND WHY THIS EXTRA EFFORT IS A GOOD THING.
 
-Compared to other libaries BCJJSONContinuations is slightly more verbose. This is (in part) by design.
+Compared to other libaries BCJJSONContinuations is more verbose. This is (in part) by design.
 For example, some other libraries attempt to automatically map from dictionaries to objects. BCJJSONContinuations shuns
 'magic' like this in favour of explict statements. Avoiding magic makes it much easier to fix bugs when they inevitable 
 appear.
+
+If you're lucky enough to be dealing with well structed JSON then you may be better off using a simplier library.
+
 
 
 # Examples
