@@ -36,13 +36,20 @@ extern NSString * const BCJUnderlyingErrorKey;
  */
 extern NSString * const BCJInvalidJSONPathFailurePositionErrorKey;
 
+/**
+ userInfo key for the invalid JSON data
+ */
+extern NSString * const BCJInvalidJSONDataErrorKey;
+
 
 
 enum : NSInteger {
     BCJUnknownEnumMappingKeyError,
     BCJUnexpectedElementTypeError,
     BCJElementMappingError,
+    BCJUnexpectedTypeError,
     BCJMissingValueError,
     BCJInvalidValueError,
     BCJInvalidJSONPathError,
+    BCJInvalidJSONDataError,
 };

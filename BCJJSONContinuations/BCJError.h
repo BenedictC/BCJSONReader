@@ -25,5 +25,6 @@
 +(NSError *)mappingErrorWithElement:(id)element subscript:(id)subscript underlyingError:(NSError *)underlyingError;
 +(NSError *)invalidValueErrorWithJSONSource:(BCJJSONSource *)source value:(id)value criteria:(NSString *)criteria;
 +(NSError *)invalidJSONPathErrorWithInvalidJSONPath:(NSString *)JSONPath errorPosition:(NSUInteger)position;
++(NSError *)invalidJSONDataErrorWithData:(NSData *)data;
 
 @end

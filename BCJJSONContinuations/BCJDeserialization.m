@@ -25,15 +25,17 @@ static inline BOOL isOptionSet(NSInteger option, NSInteger options) {
 BOOL BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, Class expectedClass, BCJJSONReadingOptions options, id __strong *outValue, NSError **outError) {
     //Reset outValue
     *outValue = nil;
+    if (outError != NULL) *outError = nil;
 
     //Translate BCJJSONReadingOptions into NSJSONReadingOptions
-    NSJSONReadingOptions jsonOptions = NSJSONReadingAllowFragments;
+    NSJSONReadingOptions jsonOptions = NSJSONReadingAllowFragments; //Always decode fragments because we do our own type checking later.
     if (isOptionSet(BCJJSONReadingMutableContainers, options)) jsonOptions |= NSJSONReadingMutableContainers;
     if (isOptionSet(BCJJSONReadingMutableLeaves, options))     jsonOptions |= NSJSONReadingMutableLeaves;
 
     //Create the JSON
-    id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:jsonOptions error:outError];
+    id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:jsonOptions error:NULL];
     if (jsonObject == nil) {
+        if (outError != NULL) *outError = [BCJError invalidJSONDataErrorWithData:data];
         return NO;
     }
 

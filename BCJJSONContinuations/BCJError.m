@@ -41,7 +41,7 @@
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:description forKey:NSLocalizedDescriptionKey];
     if (source != nil) userInfo[BCJJSONSourceErrorKey] = source;
 
-    return [NSError errorWithDomain:BCJErrorDomain code:BCJMissingValueError userInfo:userInfo];
+    return [NSError errorWithDomain:BCJErrorDomain code:BCJUnexpectedTypeError userInfo:userInfo];
 }
 
 
@@ -102,6 +102,18 @@
     userInfo[BCJInvalidJSONPathFailurePositionErrorKey] = @(position);
 
     return [NSError errorWithDomain:BCJErrorDomain code:BCJInvalidJSONPathError userInfo:userInfo];
+}
+
+
+
++(NSError *)invalidJSONDataErrorWithData:(NSData *)data
+{
+    NSString *format = NSLocalizedString(@"The data does not contain valid JSON data.", nil);
+    NSString *description = [NSString stringWithFormat:format, nil];
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:description forKey:NSLocalizedDescriptionKey];
+    if (data != nil) userInfo[BCJInvalidJSONDataErrorKey] = data;
+
+    return [NSError errorWithDomain:BCJErrorDomain code:BCJInvalidJSONDataError userInfo:userInfo];
 }
 
 @end
