@@ -43,7 +43,6 @@ enum : NSInteger {
     BCJUnexpectedElementTypeError,
     BCJElementMappingError,
     BCJMissingValueError,
-    BCJUnexpectedTypeError,
     BCJInvalidValueError,
     BCJInvalidJSONPathError,
 };
