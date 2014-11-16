@@ -265,6 +265,7 @@
 		82F3E5C21A191ADC007C367E /* BCJJSONContinuationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BCJJSONContinuationTests.m; sourceTree = "<group>"; };
 		82F3E5F51A191B4C007C367E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		82F3E5F91A191C16007C367E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82F3E5FA1A192F01007C367E /* BCJJSONContinuations.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BCJJSONContinuations.podspec; sourceTree = "<group>"; };
 		82FB32D91A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCJJSONSource+DeferredClassCheck.h"; sourceTree = "<group>"; };
 		82FB32DA1A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCJJSONSource+DeferredClassCheck.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -407,8 +408,7 @@
 		8282CEB519F5987200555BB0 = {
 			isa = PBXGroup;
 			children = (
-				821C2B201A05A4AA00C56BC3 /* readme.md */,
-				82F3E5F51A191B4C007C367E /* LICENSE */,
+				82F3E5FB1A192F09007C367E /* Documents */,
 				82D3B19E19FBF8D3003C4EB5 /* DemoApp */,
 				821C2AA91A05721800C56BC3 /* BCJJSONContinuations */,
 				82F3E5F71A191C16007C367E /* BCJJSONContinuationsFramework */,
@@ -469,6 +469,16 @@
 				82F3E5F91A191C16007C367E /* Info.plist */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		82F3E5FB1A192F09007C367E /* Documents */ = {
+			isa = PBXGroup;
+			children = (
+				821C2B201A05A4AA00C56BC3 /* readme.md */,
+				82F3E5F51A191B4C007C367E /* LICENSE */,
+				82F3E5FA1A192F01007C367E /* BCJJSONContinuations.podspec */,
+			);
+			name = Documents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
