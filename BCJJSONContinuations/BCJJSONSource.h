@@ -112,21 +112,21 @@ const static BCJSourceMode BCJSourceModeNullStrict  = BCJSourceOptionReplaceNull
 /**
  Initalizes an instances.
 
- @param object        the object
- @param JSONPath      a string conforming to the JSON
- @param expectedClass the class that the fetched object is expected to be
+ @param object        The object to evaluate the JSONPath against.
+ @param JSONPath      A valid JSONPath string.
+ @param expectedClass the class that the fetched object is expected to be.
  @param options       the options describing the behaviour of getValue:error:
- @param defaultValue  the value to use if options dictate it is required.
+ @param defaultValue  the default value to use if options dictate it is required.
 
  @return a BCJJSONSource.
  */
 -(instancetype)initWithObject:(id)object JSONPath:(NSString *)JSONPath expectedClass:(Class)expectedClass options:(BCJSourceOptions)options defaultValue:(id)defaultValue;
 
-@property (nonatomic, readonly) id               object;
-@property (nonatomic, readonly) NSString         *JSONPath;
-@property (nonatomic, readonly) Class            expectedClass;
-@property (nonatomic, readonly) BCJSourceOptions options;
-@property (nonatomic, readonly) id               defaultValue;
+@property(nonatomic, readonly) id object;
+@property(nonatomic, readonly) NSString *JSONPath;
+@property(nonatomic, readonly) Class expectedClass;
+@property(nonatomic, readonly) BCJSourceOptions options;
+@property(nonatomic, readonly) id defaultValue;
 
 /**
  Returns by reference the value found in object by evaluating the JSONPath. After evaluating JSONPath the following steps occur:
