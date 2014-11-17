@@ -42,25 +42,10 @@
 
 
 
-#pragma mark - BCJKeyedContainer
--(id)objectForKey:(id)key
+#pragma mark - BCJSourceObject
+-(id)BCJ_sourceObject
 {
-    return ([_content respondsToSelector:@selector(objectForKey:)]) ? [_content objectForKey:key] : nil;
-}
-
-
-
-#pragma mark - BCJIndexedContainer
--(id)objectAtIndex:(NSUInteger)idx
-{
-    return ([_content respondsToSelector:@selector(objectAtIndex:)]) ? [_content objectAtIndex:idx] : nil;
-}
-
-
-
--(NSUInteger)count
-{
-    return ([_content respondsToSelector:@selector(count)]) ? [_content count] : 0;
+    return _content;
 }
 
 @end

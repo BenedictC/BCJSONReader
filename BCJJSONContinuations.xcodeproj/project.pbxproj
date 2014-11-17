@@ -146,6 +146,9 @@
 		82F3E5F31A191B33007C367E /* BCLContinuationsClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AF81A0572CD00C56BC3 /* BCLContinuationsClass.m */; };
 		82F3E5F41A191B33007C367E /* BCLControlFlowContinuations.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2AFA1A0572CD00C56BC3 /* BCLControlFlowContinuations.m */; };
 		82F3E5F61A191B5C007C367E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 82F3E5F51A191B4C007C367E /* LICENSE */; };
+		82F3E5FE1A1A0546007C367E /* BCJSourceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F3E5FD1A1A0546007C367E /* BCJSourceObject.m */; };
+		82F3E5FF1A1A0546007C367E /* BCJSourceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F3E5FD1A1A0546007C367E /* BCJSourceObject.m */; };
+		82F3E6001A1A0546007C367E /* BCJSourceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F3E5FD1A1A0546007C367E /* BCJSourceObject.m */; };
 		82FB32DC1A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 82FB32D91A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.h */; };
 /* End PBXBuildFile section */
 
@@ -261,6 +264,8 @@
 		82F3E5F51A191B4C007C367E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		82F3E5F91A191C16007C367E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82F3E5FA1A192F01007C367E /* BCJJSONContinuations.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BCJJSONContinuations.podspec; sourceTree = "<group>"; };
+		82F3E5FC1A19F75C007C367E /* BCJSourceObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BCJSourceObject.h; sourceTree = "<group>"; };
+		82F3E5FD1A1A0546007C367E /* BCJSourceObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJSourceObject.m; sourceTree = "<group>"; };
 		82FB32D91A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCJJSONSource+DeferredClassCheck.h"; sourceTree = "<group>"; };
 		82FB32DA1A0EE164005E3B54 /* BCJJSONSource+DeferredClassCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCJJSONSource+DeferredClassCheck.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -313,6 +318,8 @@
 				821C2AAB1A05721800C56BC3 /* BCJAdditionalTypes.m */,
 				821C2AAC1A05721800C56BC3 /* BCJConstants.h */,
 				821C2AAD1A05721800C56BC3 /* BCJConstants.m */,
+				82F3E5FC1A19F75C007C367E /* BCJSourceObject.h */,
+				82F3E5FD1A1A0546007C367E /* BCJSourceObject.m */,
 				821C2AAE1A05721800C56BC3 /* BCJContainer.h */,
 				821C2AAF1A05721800C56BC3 /* BCJContainer.m */,
 				821C2AB21A05721800C56BC3 /* BCJDefines.h */,
@@ -719,6 +726,7 @@
 				823451F31A12650D00E19D74 /* BCJDeserialization.m in Sources */,
 				823451FA1A12650D00E19D74 /* BCJMap.m in Sources */,
 				823451F41A12650D00E19D74 /* BCJEnumerateJSONPathComponents.m in Sources */,
+				82F3E5FF1A1A0546007C367E /* BCJSourceObject.m in Sources */,
 				823451F91A12650D00E19D74 /* BCJLogging.m in Sources */,
 				823452001A12654600E19D74 /* BCJInvertedContinuationFunctions.m in Sources */,
 				823451F11A12650D00E19D74 /* BCJContainer.m in Sources */,
@@ -763,6 +771,7 @@
 				823451E11A12650C00E19D74 /* BCJDeserialization.m in Sources */,
 				823451E81A12650C00E19D74 /* BCJMap.m in Sources */,
 				823451E21A12650C00E19D74 /* BCJEnumerateJSONPathComponents.m in Sources */,
+				82F3E5FE1A1A0546007C367E /* BCJSourceObject.m in Sources */,
 				823451E71A12650C00E19D74 /* BCJLogging.m in Sources */,
 				823452011A12654600E19D74 /* BCJInvertedContinuationFunctions.m in Sources */,
 				823451DF1A12650C00E19D74 /* BCJContainer.m in Sources */,
@@ -788,6 +797,7 @@
 				82F3E5E81A191B33007C367E /* BCJError.m in Sources */,
 				82F3E5EA1A191B33007C367E /* BCJInvertedContinuationFunctions.m in Sources */,
 				82F3E5EE1A191B33007C367E /* BCJLogging.m in Sources */,
+				82F3E6001A1A0546007C367E /* BCJSourceObject.m in Sources */,
 				82F3E5F41A191B33007C367E /* BCLControlFlowContinuations.m in Sources */,
 				82F3E5E91A191B33007C367E /* BCJGettersAndSetters.m in Sources */,
 				82F3E5F31A191B33007C367E /* BCLContinuationsClass.m in Sources */,

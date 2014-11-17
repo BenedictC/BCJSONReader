@@ -6,30 +6,17 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
-
-
-@protocol BCJContainer <NSObject>
-
--(id)objectAtIndex:(NSUInteger)idx;
--(NSUInteger)count;
-
--(id)objectForKey:(id)key;
-
--(id)content;
-
-@end
+#import "BCJSourceObject.h"
 
 
 
 /**
- BCJContainer implements the 2 BCJContainer protocols and acts as a wrapper for defering JSON deserialization. 
+ BCJContainer acts as a wrapper for defering JSON deserialization.
  
  The contents of the container can be set only once. Once the content is set the container becomes sealed. Attempting to set the content on sealed container will result in an exception being raised.
 
  */
-@interface BCJContainer : NSObject <BCJContainer>
+@interface BCJContainer : NSObject <BCJSourceObject>
 
 /**
  Initializes the container with the supplied content.
@@ -58,4 +45,3 @@
 -(void)setContentAndSeal:(id)object;
 
 @end
-

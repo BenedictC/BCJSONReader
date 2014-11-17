@@ -8,9 +8,10 @@
 
 #import "BCJJSONSource.h"
 #import "BCJJSONSource+OptionsAdditons.h"
+#import "BCJSourceObject.h"
+#import "BCJEnumerateJSONPathComponents.h"
 #import "BCJLogging.h"
 #import "BCJError.h"
-#import "BCJEnumerateJSONPathComponents.h"
 
 
 
@@ -85,7 +86,7 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
     __block id failedComponent = nil;
     __block NSUInteger failedComponentIdx = NSNotFound;
     id value = ({
-        __block id lastValue = self.object;
+        __block id lastValue = [self.object BCJ_sourceObject];
         NSError *pathError = BCJEnumerateJSONPathComponents(self.JSONPath, ^(id component, NSUInteger componentIdx, BOOL *stop) {
 
             if ([component isKindOfClass:[NSNumber class]]) {
