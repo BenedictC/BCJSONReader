@@ -86,7 +86,7 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
     __block id failedComponent = nil;
     __block NSUInteger failedComponentIdx = NSNotFound;
     id value = ({
-        __block id lastValue = [self.object BCJ_sourceObject];
+        __block id lastValue = BCJSourceObjectForObject(self.object);
         NSError *pathError = BCJEnumerateJSONPathComponents(self.JSONPath, ^(id component, NSUInteger componentIdx, BOOL *stop) {
 
             if ([component isKindOfClass:[NSNumber class]]) {

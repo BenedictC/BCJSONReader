@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
+#ifndef BCJSOURCEOBJECT_H_
+#define BCJSOURCEOBJECT_H_
+
 #import <Foundation/Foundation.h>
 
 
@@ -16,7 +19,7 @@
 @protocol BCJSourceObject <NSObject>
 
 /**
- The object that BCJJSONSource should use as the start of the chain.
+ The object that BCJJSONSource should use to evaluate a JSONPath.
 
  @return An object.
  */
@@ -25,8 +28,15 @@
 @end
 
 
+/**
+ Returns the object that should be used to evaluate a JSONPath.
 
-@interface NSObject (BCJSourceObject)
+ @param object The object to get the source object from.
 
-@end
+ @return an object.
+ */
+static inline id BCJSourceObjectForObject(id object) {
+    return ([object respondsToSelector:@selector(BCJ_sourceObject)]) ? [object BCJ_sourceObject] : object;
+}
 
+#endif
