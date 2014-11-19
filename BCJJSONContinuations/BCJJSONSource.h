@@ -40,15 +40,15 @@ typedef NS_OPTIONS(NSUInteger, BCJSourceOptions){
     /**
      If the JSONPath evaluates to nil then the source will return BCJSourceResultFailure,
      */
-    BCJSourceOptionPathMustEvaluateToValue     = (1UL << 1),
+    BCJSourceOptionPathMustEvaluateToValue     = (1UL << 0),
     /**
      If the JSONPath evaluates to NSNull then this will be replaced with nil.
      */
-    BCJSourceOptionReplaceNullWithNil = (1UL << 2),
+    BCJSourceOptionReplaceNullWithNil          = (1UL << 1),
     /**
      If the JSONPath evaluates to nil then the source will not return BCJSourceResultValueNotFound.
      */
-    BCJSourceOptionTreatValueNotFoundAsSuccess = (1UL << 3),
+    BCJSourceOptionTreatValueNotFoundAsSuccess = (1UL << 2),
 };
 
 
@@ -93,7 +93,10 @@ const static BCJSourceMode BCJSourceModeNullStrict  = BCJSourceOptionReplaceNull
  The behaviour of getValue:error: is modified be specifying options.
  
  A valid JSONPath path is comprised of one or more path components. A path component takes one of the following forms:
- - subscript component: an integer or a single quote delimitted string enclosed by square braces. Single quotes are escaped with the '`' character. Literal '`' are represented with as '``'.
+ - subscript component. A pair of square braces containing one of the following:
+    - an integer
+    - a single quote delimitted string. Single quotes are escaped with the '`' character. Literal '`' are represented with as '``'.
+    - a period.
  - identifier component: a string that starts with the a character matching the regex a-z|A-Z|$|_ followed by zero of more characters matching a-z|A-Z|$|_|0-9 . Identifier components must be terminated with a '.' except if the component is the final component in the path.
 
  Note that the allowable characters for an identifier component is a subset of the allowable characters for a Javascript identifier which allows for many unicode codepoints. If a unicode character is required then a subscript component should be used.
@@ -103,6 +106,7 @@ const static BCJSourceMode BCJSourceModeNullStrict  = BCJSourceOptionReplaceNull
  events[0].date
  ['events'][0]['date']
  ['']
+ [.]
  $schema
  
  In general the BCJSource convience factory functions should be used in favour of this method.

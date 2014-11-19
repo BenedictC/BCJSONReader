@@ -42,7 +42,7 @@ BCJ_OVERLOADABLE NSArray *BCJMap(NSArray *fromArray, Class elementClass, BCJMapO
         NSError *elementOutError = nil;
         id mappedValue = mapFromArray(elementIdx, elementValue, &elementOutError);
         if (mappedValue == nil) {
-            BOOL shouldDiscardMappingError = isOptionSet(BCJMapOptionDiscardMappingErrors, options);
+            BOOL shouldDiscardMappingError = isOptionSet(BCJMapOptionIgnoreFailedMappings, options);
             if (!shouldDiscardMappingError) {
                 if (outError != NULL) {
                     *outError = [BCJError mappingErrorWithElement:elementValue subscript:@(elementIdx) underlyingError:elementOutError];
@@ -83,7 +83,7 @@ BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *fromDict, Class elementClass, BCJ
         NSError *elementOutError = nil;
         id mappedValue = mapFromDictionary(elementKey, elementValue, &elementOutError);
         if (mappedValue == nil) {
-            BOOL shouldDiscardMappingError = isOptionSet(BCJMapOptionDiscardMappingErrors, options);
+            BOOL shouldDiscardMappingError = isOptionSet(BCJMapOptionIgnoreFailedMappings, options);
             if (!shouldDiscardMappingError) {
                 if (outError != NULL) {
                     *outError = [BCJError mappingErrorWithElement:elementValue subscript:elementKey underlyingError:elementOutError];

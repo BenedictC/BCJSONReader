@@ -41,7 +41,7 @@ typedef NS_OPTIONS(NSUInteger, BCJMapOptions){
     /**
      If the map block returns fails to map an element then the mapping will continue and the error will be ignored.
      */
-    BCJMapOptionDiscardMappingErrors  =(1UL  << 1),
+    BCJMapOptionIgnoreFailedMappings  =(1UL << 0),
 };
 
 
