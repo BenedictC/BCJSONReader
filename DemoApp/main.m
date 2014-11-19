@@ -21,12 +21,6 @@
 @end
 
 @implementation TestObject
-
--(NSString *)description
-{
-    return [NSString stringWithFormat:@"<%@> %@", super.description, @(self.number)];
-}
-
 @end
 
 
@@ -47,19 +41,16 @@ void demo(void) {
                                                @{@"url": @"http://paulmccartney.com"},
                                                @{@"url": @"http://georgeharrison.com"},
                                                @{@"url": @"http://ringostarr.com"}],
-                                   @"date" : @([[NSDate new] timeIntervalSince1970]),
+                                   @"date" : @([[NSDate new] timeIntervalSince1970]), //Unix timestamp-style date
                                    };
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:sourceObject options:0 error:NULL];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:sourceObject options:kNilOptions error:NULL];
 
     //Output objects
     TestObject *target = [TestObject new];
     __block NSString *stackString = nil;
 
-
-
     //Go!
-    BCJContainer *json = [BCJContainer new]; //Create a container to store the JSON in.
-//    NSError *error = [BCLContinuation untilError:
+    BCJContainer *json = [BCJContainer new]; //Create a container to store the deserialized JSON in.
     NSError *error =
     [BCLContinuations untilError:
          //Deserialization:
@@ -74,7 +65,7 @@ void demo(void) {
          BCJSetDateFromTimeIntervalSince1970(BCJSource(json, @"date", BCJSourceModeStrict), BCJ_TARGET(target, date)),
 
          //Map:
-         BCJSetMap(BCJSource(json, @"dict"), BCJ_TARGET(target, array), NSNumber.class, BCJMapOptionDiscardMappingErrors, BCJ_SORT_DESCRIPTORS(@"self"), ^id(NSString *key, NSNumber *number, NSError **outError){
+         BCJSetMap(BCJSource(json, @"dict"), BCJ_TARGET(target, array), NSNumber.class, BCJMapOptionIgnoreFailedMappings, BCJ_SORT_DESCRIPTORS(@"self"), ^id(NSString *key, NSNumber *number, NSError **outError){
             //Map a number to a textural description of number * 1000
             static NSNumberFormatter *formatter = nil;
             static dispatch_once_t onceToken;
@@ -86,7 +77,7 @@ void demo(void) {
         }),
 
          //Generic getter:
-         BCJGetValue(BCJSource(json, @"missingString", BCJSourceModeDefaultable, @"default", NSString.class), ^BOOL(NSString *string, NSError **outError){
+         BCJGetValue(BCJSource(json, @"missingString", NSString.class, BCJSourceModeDefaultable, @"default"), ^BOOL(NSString *string, NSError **outError){
             //Validation
             if (!BCJValidate(string, @"self MATCHES '.*'", outError)) return NO;
             stackString = string;
@@ -95,8 +86,6 @@ void demo(void) {
 
      nil];
 
-
-    
     //Log results
     NSLog(@"target.string: %@", target.string);
     NSLog(@"target.number: %@", @(target.number));
