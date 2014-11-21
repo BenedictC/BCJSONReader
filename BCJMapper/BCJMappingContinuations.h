@@ -11,7 +11,8 @@
 #import "BCJJSONSourceConstants.h"
 #import "BCJMapOptions.h"
 
-#import "BCJStackJSONSource.h"
+@class BCJJSONSource;
+@class BCJPropertyTarget;
 
 
 
@@ -38,12 +39,19 @@
 
  @param jsonPath     <#jsonPath description#>
  @param propertyKey  <#propertyKey description#>
- @param options      <#options description#>
- @param defaultValue <#defaultValue description#>
 
  @return <#return value description#>
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(NSString *jsonPath, NSString *propertyKey, BCJJSONSourceOptions options, id defaultValue) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(BCJJSONSource *source, BCJPropertyTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+/**
+ <#Description#>
+
+ @param source            <#source description#>
+ @param targetPropertyKey <#targetPropertyKey description#>
+
+ @return <#return value description#>
+ */
+id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(BCJJSONSource *source, NSString *targetPropertyKey) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 /**
  <#Description#>
 
@@ -52,7 +60,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(NSString *jsonPath, NSString *pr
 
  @return <#return value description#>
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(NSString *jsonPath, NSString *propertyKey) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(NSString *sourceJsonPath, NSString *targetPropertyKey) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 //Selector-checked mapping macro
 #define BCJ_MAP(JSONPATH, PROPERTY) BCJMapping(JSONPATH, BCJ_KEY(PROPERTY))
 

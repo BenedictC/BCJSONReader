@@ -39,7 +39,7 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDiction
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJPropertyTarget *target, BCJJSONSource *source, NSDictionary *enumMapping) BCJ_REQUIRED(1,2,3) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJJSONSource *source, BCJPropertyTarget *target, NSDictionary *enumMapping) BCJ_REQUIRED(1,2,3) BCJ_WARN_UNUSED;
 
 
 
@@ -82,7 +82,7 @@ BCJ_OVERLOADABLE NSArray *BCJGetMap(NSDictionary *dict, Class elementClass, BCJM
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJPropertyTarget *target, BCJJSONSource *source, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) BCJ_REQUIRED(1,2,5) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONSource *source, BCJPropertyTarget *target, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) BCJ_REQUIRED(1,2,5) BCJ_WARN_UNUSED;
 /**
  Returns a continuation that attempts to get a dictionary from source, invoke BCJMap and if successful attempts to set the resulting array on target.
 
@@ -94,7 +94,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJPropertyTarget *target, BCJJSO
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJPropertyTarget *target, BCJJSONSource *source, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) BCJ_REQUIRED(1,2,6) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONSource *source, BCJPropertyTarget *target, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) BCJ_REQUIRED(1,2,6) BCJ_WARN_UNUSED;
 
 
 

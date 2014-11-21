@@ -55,7 +55,7 @@ void demo(void) {
     [BCJMapper mapJSONData:jsonData intoObject:target options:BCJNoOptions usingContinuations:
      BCJ_MAP(@"jsonPath", string),
      BCJ_MAP(@"jsonPath", date),
-//     BCJSetString(BCJSource(@"jsonPath"), BCJTarget(@"property")),
+     BCJSetString(BCJSource(@"jsonPath"), BCJTarget(@"property")),
      nil];
 
     //Continuations-style

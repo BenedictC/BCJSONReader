@@ -56,7 +56,7 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDiction
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJPropertyTarget *target, BCJJSONSource *source, NSDictionary *enumMapping) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJJSONSource *source, BCJPropertyTarget *target, NSDictionary *enumMapping) {
     //Perform additional checks that couldn't be performed when source and target are created
     NSCParameterAssert(target != nil);
     NSCParameterAssert(source != nil);
@@ -159,7 +159,7 @@ BCJ_OVERLOADABLE NSArray *BCJGetMap(NSDictionary *fromDict, Class elementClass, 
 
 
 #pragma mark - Set Map continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJPropertyTarget *target, BCJJSONSource *source, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONSource *source, BCJPropertyTarget *target, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) {
     NSCParameterAssert(target != nil);
     NSCParameterAssert(source != nil);
     NSCParameterAssert(fromArrayMap != nil);
@@ -189,7 +189,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJPropertyTarget *target, BCJJSO
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJPropertyTarget *target, BCJJSONSource *source, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONSource *source, BCJPropertyTarget *target, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) {
     NSCParameterAssert(target != nil);
     NSCParameterAssert(source != nil);
     NSCParameterAssert(fromDictionaryMap != nil);

@@ -35,7 +35,7 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJJSON
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJPropertyTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJJSONSource *source, BCJPropertyTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 
 #pragma mark - NSDate from ISO 8601
 /**
@@ -64,7 +64,7 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJPropertyTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONSource *source, BCJPropertyTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 
 #pragma mark - NSURL
 /**
@@ -85,4 +85,4 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **ou
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJPropertyTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJJSONSource *source, BCJPropertyTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;

@@ -30,6 +30,3 @@
 
 //Logging
 #import "BCJLogging.h"
-
-//Inverted functions
-#import "BCJInvertedContinuationFunctions.h"

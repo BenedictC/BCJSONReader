@@ -14,7 +14,7 @@
 
 
 #pragma mark - (private) generic setter
-static inline id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJPropertyTarget *target, BCJJSONSource *source, Class expectedClass) {
+static inline id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJJSONSource *source, BCJPropertyTarget *target, Class expectedClass) {
     NSCParameterAssert(target != nil);
     NSCParameterAssert(source != nil);
     NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
@@ -34,49 +34,49 @@ static inline id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJPropertyTarget
 
 
 #pragma mark - type specific setters
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetArray(BCJPropertyTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetArray(BCJJSONSource *source, BCJPropertyTarget *target) {
     return BCJSetValue(target, source, NSArray.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableArray(BCJPropertyTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableArray(BCJJSONSource *source, BCJPropertyTarget *target) {
     return BCJSetValue(target, source, NSMutableArray.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDictionary(BCJPropertyTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDictionary(BCJJSONSource *source, BCJPropertyTarget *target) {
     return BCJSetValue(target, source, NSDictionary.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableDictionary(BCJPropertyTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableDictionary(BCJJSONSource *source, BCJPropertyTarget *target) {
     return BCJSetValue(target, source, NSMutableDictionary.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetString(BCJPropertyTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetString(BCJJSONSource *source, BCJPropertyTarget *target) {
     return BCJSetValue(target, source, NSString.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableString(BCJPropertyTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableString(BCJJSONSource *source, BCJPropertyTarget *target) {
     return BCJSetValue(target, source, NSMutableString.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNumber(BCJPropertyTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNumber(BCJJSONSource *source, BCJPropertyTarget *target) {
     return BCJSetValue(target, source, NSNumber.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNull(BCJPropertyTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNull(BCJJSONSource *source, BCJPropertyTarget *target) {
     NSCAssert(BCJReplaceNullWithNil(source.options), @"Invalid option <BCJGetterOptionReplaceNullWithNil> is not permitted when setting NSNull");
     return BCJSetValue(target, source, NSNull.class);
 }

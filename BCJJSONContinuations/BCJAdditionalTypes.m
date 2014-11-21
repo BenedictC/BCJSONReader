@@ -38,7 +38,7 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJJSON
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJPropertyTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJJSONSource *source, BCJPropertyTarget *target) {
     //Perform additional checks that couldn't be performed when source and target are created
     NSCParameterAssert(target !=nil);
     NSCParameterAssert(source != nil);
@@ -117,7 +117,7 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJPropertyTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONSource *source, BCJPropertyTarget *target) {
     //Perform additional checks that couldn't be performed when source and target are created
     NSCParameterAssert(target != nil);
     NSCParameterAssert(source != nil);
@@ -176,7 +176,7 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **ou
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJPropertyTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJJSONSource *source, BCJPropertyTarget *target) {
     //Perform additional checks that couldn't be performed when source and target are created
     NSCParameterAssert(target != nil);
     NSCParameterAssert(source != nil);
