@@ -1,13 +1,13 @@
 //
-//  BCLContinuation+ControlFlowContinuations.m
-//  BCMJSONAccess
+//  BCLControlFlowContinuations.m
+//  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 30/10/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCLContinuation+ControlFlowContinuations.h"
-#import "BCLContinuation+ControlFlow+Protected.h"
+#import "BCLContinuationsClass.h"
+#import "BCLContinuationsClass+AdditionalControlFlow.h"
 #import "BCLBlockContinuation.h"
 
 
@@ -26,7 +26,7 @@ id<BCLContinuation> BCLUntilEnd(id<BCLContinuation> firstContinuation, ...) {
     va_end(args);
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
-        NSError *error = [BCLContinuation untilEndWithContinuations:continuations];
+        NSError *error = [BCLContinuations untilEndWithContinuations:continuations];
         if (outError != NULL) *outError = error;
         return (error == nil);
     });
@@ -48,7 +48,7 @@ id<BCLContinuation> BCLUntilError(id<BCLContinuation> firstContinuation, ...) {
     va_end(args);
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
-        NSError *error = [BCLContinuation untilErrorWithContinuations:continuations];
+        NSError *error = [BCLContinuations untilErrorWithContinuations:continuations];
         if (outError != NULL) *outError = error;
         return (error == nil);
     });

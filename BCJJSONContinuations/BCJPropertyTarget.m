@@ -1,12 +1,12 @@
 //
-//  BCJJSONTarget.m
+//  BCJPropertyTarget.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 04/11/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCJJSONTarget.h"
+#import "BCJPropertyTarget.h"
 
 #import "BCJDefines.h"
 #import "BCJError.h"
@@ -90,7 +90,7 @@ static inline void assertKVCTargetWillAcceptValue(id object, NSString *key, id v
 
 
 
-@implementation BCJJSONTarget
+@implementation BCJPropertyTarget
 
 -(instancetype)init
 {
@@ -135,6 +135,6 @@ static inline void assertKVCTargetWillAcceptValue(id object, NSString *key, id v
 
 
 
-BCJJSONTarget * BCJ_OVERLOADABLE BCJTarget(id object, NSString *key) {
-    return [[BCJJSONTarget alloc] initWithObject:object key:key];
+BCJPropertyTarget * BCJ_OVERLOADABLE BCJTarget(id object, NSString *key) {
+    return [[BCJPropertyTarget alloc] initWithObject:object key:key];
 }

@@ -12,7 +12,7 @@
 #import "BCJDefines.h"
 #import "BCJJSONSource.h"
 
-@class BCJJSONTarget;
+@class BCJPropertyTarget;
 
 
 
@@ -24,9 +24,9 @@
  @param outDate  On success contains an NSDate, otherwise nil.
  @param outError On failure contains an NSError that describes the reason for failure, otherwise nil.
 
- @return The result of getting the value from the source or BCJSourceResultFailure if the result could not be converted to a date.
+ @return The result of getting the value from the source or BCJJSONSourceResultFailure if the result could not be converted to a date.
  */
-BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJJSONSource *source, NSDate **outDate, NSError **outError) BCJ_REQUIRED(1,2,3);
+BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJJSONSource *source, NSDate **outDate, NSError **outError) BCJ_REQUIRED(1,2,3);
 /**
  Return a continuation that fetches an NSNumber from source, uses the NSNumber to create an NSDate with dateWithTimeIntervalSince1970: and if a value was fetched invokes setValue:outError: on target with the NSDate.
 
@@ -35,7 +35,7 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJJSONSour
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJJSONTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJPropertyTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 
 #pragma mark - NSDate from ISO 8601
 /**
@@ -53,9 +53,9 @@ NSDate *BCJDateFromISO8601String(NSString *dateString) BCJ_REQUIRED(1);
  @param outDate  On success contains an NSDate, otherwise nil.
  @param outError On failure contains an NSError that describes the reason for failure, otherwise nil.
 
- @return The result of getting the value from the source or BCJSourceResultFailure if the result could not be converted to a date.
+ @return The result of getting the value from the source or BCJJSONSourceResultFailure if the result could not be converted to a date.
  */
-BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *source, NSDate **outDate, NSError **outError) BCJ_REQUIRED(1,2);
+BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *source, NSDate **outDate, NSError **outError) BCJ_REQUIRED(1,2);
 /**
  Returns a continuation that calls BCJGetDateFromISO8601String and if a value was fetched invokes setValue:outError: on target with the NSDate.
 
@@ -64,7 +64,7 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *sour
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJPropertyTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 
 #pragma mark - NSURL
 /**
@@ -74,9 +74,9 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONTarget *
  @param outURL   On success contains an NSURL, otherwise nil.
  @param outError On failure contains an NSError that describes the reason for failure, otherwise nil.
 
- @return The result of getting the value from the source or BCJSourceResultFailure if the result could not be converted to a URL.
+ @return The result of getting the value from the source or BCJJSONSourceResultFailure if the result could not be converted to a URL.
  */
-BCJSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **outURL, NSError **outError) BCJ_REQUIRED(1,2,3);
+BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **outURL, NSError **outError) BCJ_REQUIRED(1,2,3);
 /**
   Returns a continuation that calls BCJGetURL and if a value was fetched invokes setValue:outError: on target with the NSURL.
 
@@ -85,29 +85,4 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **outURL
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJJSONTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
-
-#pragma mark - Enums
-/**
- Returns by references the a value from enumMapping. The value is fetched by getting the value from source and using this as the key in enumMapping.
-
- @warning source.defaultValue, if specified, is used as the key for the mapping, it is NOT the final value.
-
- @param source      A source that references a key in enumMapping.
- @param enumMapping A dictionary.
- @param outValue    On success contains the value, otherwise nil.
- @param outError    On failure contains an NSError describing the reason for failure, otherwise nil.
-
- @return The result of getting the value from the source or BCJSourceResultFailure if the key was not found in enumMapping.
- */
-BCJSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDictionary *enumMapping, id *outValue, NSError **outError) BCJ_REQUIRED(1,2,3,4);
-/**
- Returns a continuation that calls BCJGetEnum and if a value was fetched invokes setValue:outError: on target with the value from BCJGetEnum.
-
- @param target      A target that references the same type as the values of enumMapping.
- @param source      A source that references the same type as the keys of enumMapping.
- @param enumMapping A dictionary.
-
- @return A continuation.
- */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJJSONTarget *target, BCJJSONSource *source, NSDictionary *enumMapping) BCJ_REQUIRED(1,2,3) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJPropertyTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;

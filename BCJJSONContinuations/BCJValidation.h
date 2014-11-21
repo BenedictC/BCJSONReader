@@ -61,7 +61,7 @@ BOOL BCJ_OVERLOADABLE BCJValidate(id value, NSString *predicateString, NSError *
 
  @return YES on success, otherwise NO.
  */
-BOOL BCJ_OVERLOADABLE BCJValidateAndSet(BCJJSONTarget *target, id value, NSPredicate *predicate, NSError **outError) BCJ_REQUIRED(1,2,3,4);
+BOOL BCJ_OVERLOADABLE BCJValidateAndSet(BCJPropertyTarget *target, id value, NSPredicate *predicate, NSError **outError) BCJ_REQUIRED(1,2,3,4);
 /**
  Evaluates value against predicate and sets the target if value meets the predicate.
 
@@ -72,4 +72,4 @@ BOOL BCJ_OVERLOADABLE BCJValidateAndSet(BCJJSONTarget *target, id value, NSPredi
 
  @return YES on success, otherwise NO.
  */
-BOOL BCJ_OVERLOADABLE BCJValidateAndSet(BCJJSONTarget *target, id value, NSString *predicateString, NSError **outError) BCJ_REQUIRED(1,2,3,4);
+BOOL BCJ_OVERLOADABLE BCJValidateAndSet(BCJPropertyTarget *target, id value, NSString *predicateString, NSError **outError) BCJ_REQUIRED(1,2,3,4);

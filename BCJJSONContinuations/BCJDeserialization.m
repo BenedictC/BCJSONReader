@@ -8,7 +8,7 @@
 
 #import "BCLContinuations.h"
 #import "BCJDeserialization.h"
-#import "BCJJSONTarget.h"
+#import "BCJPropertyTarget.h"
 #import "BCJContainer.h"
 #import "BCJError.h"
 

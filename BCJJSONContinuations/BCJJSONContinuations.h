@@ -6,19 +6,17 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-//Dependancy
-#import "BCLContinuations.h"
-
 //Common
 #import "BCJConstants.h"
 #import "BCJDefines.h"
 
 //Input & output
 #import "BCJJSONSource.h"
-#import "BCJJSONTarget.h"
+#import "BCJPropertyTarget.h"
 
 //Deserialization
 #import "BCJContainer.h"
+#import "BCJContainerJSONSource.h"
 #import "BCJDeserialization.h"
 
 //Getters & Setters

@@ -10,8 +10,8 @@
 #import "BCLContinuations.h"
 #import "BCJDefines.h"
 
-@class BCJJSONTarget;
 @class BCJJSONSource;
+@class BCJPropertyTarget;
 
 
 
@@ -23,7 +23,7 @@
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetArray(BCJJSONTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetArray(BCJPropertyTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 /**
  Returns a continuation that attempts to get an NSMutableArray from source and if successful attempts to set the value of target with the fetched value.
 
@@ -32,7 +32,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetArray(BCJJSONTarget *target, BCJJSONS
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableArray(BCJJSONTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableArray(BCJPropertyTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 /**
  Returns a continuation that attempts to get an NSDictionary from source and if successful attempts to set the value of target with the fetched value.
 
@@ -41,7 +41,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableArray(BCJJSONTarget *target, B
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDictionary(BCJJSONTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDictionary(BCJPropertyTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 /**
  Returns a continuation that attempts to get an NSMutableDictionary from source and if successful attempts to set the value of target with the fetched value.
 
@@ -50,7 +50,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDictionary(BCJJSONTarget *target, BCJ
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableDictionary(BCJJSONTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableDictionary(BCJPropertyTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 /**
  Returns a continuation that attempts to get an NSString from source and if successful attempts to set the value of target with the fetched value.
 
@@ -59,7 +59,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableDictionary(BCJJSONTarget *targ
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetString(BCJJSONTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetString(BCJPropertyTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 /**
  Returns a continuation that attempts to get an NSMutableString from source and if successful attempts to set the value of target with the fetched value.
 
@@ -68,7 +68,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetString(BCJJSONTarget *target, BCJJSON
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableString(BCJJSONTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableString(BCJPropertyTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 /**
  Returns a continuation that attempts to get an NSNumber from source and if successful attempts to set the value of target with the fetched value.
 
@@ -77,7 +77,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableString(BCJJSONTarget *target, 
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNumber(BCJJSONTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNumber(BCJPropertyTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 /**
  Returns a continuation that attempts to get an NSNull from source and if successful attempts to set the value of target with the fetched value.
 
@@ -86,4 +86,4 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNumber(BCJJSONTarget *target, BCJJSON
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNull(BCJJSONTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNull(BCJPropertyTarget *target, BCJJSONSource *source) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;

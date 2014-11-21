@@ -9,12 +9,12 @@
 #import "BCJAdditionalTypes.h"
 #import "BCJError.h"
 #import "BCJJSONSource+DeferredClassCheck.h"
-#import "BCJJSONTarget.h"
+#import "BCJPropertyTarget.h"
 
 
 
 #pragma mark - NSDate from 1970
-BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJJSONSource *source, NSDate **outDate, NSError **outError) {
+BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJJSONSource *source, NSDate **outDate, NSError **outError) {
     //Perform additional checks that couldn't be performed when source and target are created
     NSCParameterAssert(source != nil);
     NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
@@ -25,20 +25,20 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJJSONSour
 
     //Get value
     NSNumber *timeInterval;
-    BCJSourceResult result = [source getValue:&timeInterval ofKind:NSNumber.class error:outError];
-    if (result != BCJSourceResultSuccess) return result;
+    BCJJSONSourceResult result = [source getValue:&timeInterval ofKind:NSNumber.class error:outError];
+    if (result != BCJJSONSourceResultSuccess) return result;
 
     //If we don't have a value then we don't need to create a date
-    if (timeInterval == nil) return BCJSourceResultSuccess;
+    if (timeInterval == nil) return BCJJSONSourceResultSuccess;
 
     //'Set' value
     *outDate = [NSDate dateWithTimeIntervalSince1970:[timeInterval integerValue]];
-    return BCJSourceResultSuccess;
+    return BCJJSONSourceResultSuccess;
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJJSONTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJPropertyTarget *target, BCJJSONSource *source) {
     //Perform additional checks that couldn't be performed when source and target are created
     NSCParameterAssert(target !=nil);
     NSCParameterAssert(source != nil);
@@ -71,7 +71,7 @@ NSDate *BCJDateFromISO8601String(NSString *dateString) {
 
 
 
-BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *source, NSDate **outDate, NSError **outError) {
+BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *source, NSDate **outDate, NSError **outError) {
     //Perform additional checks that couldn't be performed when source and target are created
     NSCParameterAssert(source != nil);
     NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
@@ -86,17 +86,17 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *sour
 
     NSString *dateString;
     //TODO: Should we return a different error?
-    BCJSourceResult result = [stringSource getValue:&dateString ofKind:nil error:outError];
-    if (result != BCJSourceResultSuccess) return result;
+    BCJJSONSourceResult result = [stringSource getValue:&dateString ofKind:nil error:outError];
+    if (result != BCJJSONSourceResultSuccess) return result;
 
     //If we don't have a value then the getter was happy with a nil value so we don't need to create a date.
-    if (dateString == nil) return BCJSourceResultSuccess;
+    if (dateString == nil) return BCJJSONSourceResultSuccess;
 
     //Did the getter return our sentinal?
     BOOL shouldUseDefault = [dateString isEqualToString:sentinal];
     if (shouldUseDefault) {
         *outDate = source.defaultValue;
-        return BCJSourceResultSuccess;
+        return BCJJSONSourceResultSuccess;
     }
 
     //Attempt to create a string from the fetched string
@@ -107,17 +107,17 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *sour
             NSString *criteria = [NSString stringWithFormat:@"is a valid ISO 8601 date"];
             *outError = [BCJError invalidValueErrorWithJSONSource:source value:possibleDate criteria:criteria];
         }
-        return BCJSourceResultFailure;
+        return BCJJSONSourceResultFailure;
     }
 
     //Done!
     *outDate = possibleDate;
-    return BCJSourceResultSuccess;
+    return BCJJSONSourceResultSuccess;
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJPropertyTarget *target, BCJJSONSource *source) {
     //Perform additional checks that couldn't be performed when source and target are created
     NSCParameterAssert(target != nil);
     NSCParameterAssert(source != nil);
@@ -134,7 +134,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONTarget *
 
 
 #pragma mark - Get NSURL
-BCJSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **outURL, NSError **outError) {
+BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **outURL, NSError **outError) {
     //Perform additional checks that couldn't be performed when source and target are created
     NSCParameterAssert(source != nil);
     NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
@@ -145,16 +145,16 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **outURL
 
     id fetchedValue;
     //TODO: Should we return a different error?
-    BCJSourceResult result = [source getValue:&fetchedValue ofKind:nil error:outError];
-    if (result != BCJSourceResultSuccess) return result;
+    BCJJSONSourceResult result = [source getValue:&fetchedValue ofKind:nil error:outError];
+    if (result != BCJJSONSourceResultSuccess) return result;
 
     //If the getter succeed with a nil then we're done
-    if (fetchedValue == nil) return BCJSourceResultSuccess;
+    if (fetchedValue == nil) return BCJJSONSourceResultSuccess;
 
     //The value is a URL so we're done
     if ([fetchedValue isKindOfClass:NSURL.class]) {
         *outURL = fetchedValue;
-        return BCJSourceResultSuccess;
+        return BCJJSONSourceResultSuccess;
     }
 
     //Attempt to creat URL from the fetched string
@@ -162,21 +162,21 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **outURL
         NSURL *url = [NSURL URLWithString:fetchedValue];
         if (url == nil) {
             if (outError != NULL) *outError = [BCJError invalidValueErrorWithJSONSource:source value:fetchedValue criteria:@"is a valid URL"];
-            return BCJSourceResultFailure;
+            return BCJJSONSourceResultFailure;
         }
 
         *outURL = url;
-        return BCJSourceResultSuccess;
+        return BCJJSONSourceResultSuccess;
     }
 
     //The fetch Value was of the wrong type
     if (outError != NULL) *outError = [BCJError unexpectedTypeErrorWithJSONSource:source value:fetchedValue expectedClass:NSString.class];
-    return BCJSourceResultFailure;
+    return BCJJSONSourceResultFailure;
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJJSONTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJPropertyTarget *target, BCJJSONSource *source) {
     //Perform additional checks that couldn't be performed when source and target are created
     NSCParameterAssert(target != nil);
     NSCParameterAssert(source != nil);
@@ -186,58 +186,6 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJJSONTarget *target, BCJJSONSou
         NSURL *value;
         if (!BCJGetURL(source, &value, outError)) return NO;
 
-        return [target setValue:value error:outError];
-    });
-}
-
-
-
-#pragma mark - Get Enum
-BCJSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDictionary *enumMapping, id *outValue, NSError **outError) {
-    NSCParameterAssert(source != nil);
-    NSCParameterAssert(enumMapping != nil);
-    NSCParameterAssert(outValue != nil);
-    NSCParameterAssert(outError != nil);
-    //Note that we don't need to check the source type because it will be used as a key to access an enum and we don't
-    //care what the enum keys are.
-
-    //Reset outValue
-    *outValue = nil;
-    if (outError != NULL) *outError = nil;
-
-    //Get the value
-    id enumKey;
-    BCJSourceResult result = [source getValue:&enumKey error:outError];
-    if (result != BCJSourceResultSuccess) return result;
-
-    //We don't have a key but that's fine because otherwise the getter out have complained.
-    if (enumKey == nil) return BCJSourceResultSuccess;
-
-    //Get the value
-    id value = enumMapping[enumKey];
-
-    //If the value is nil then the mapping was incomplete.
-    if (value == nil) {
-        if (outError != NULL) *outError = [BCJError unknownKeyForEnumMappingErrorWithJSONSource:source enumMapping:enumMapping key:enumKey];
-        return BCJSourceResultFailure;
-    }
-
-    *outValue = value;
-    return BCJSourceResultSuccess;
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJJSONTarget *target, BCJJSONSource *source, NSDictionary *enumMapping) {
-    //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(target != nil);
-    NSCParameterAssert(source != nil);
-    NSCParameterAssert(enumMapping != nil);
-    //Note that we don't need to check the source type because it will be used as a key to access an enum and we don't
-
-    return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
-        id value;
-        if (!BCJGetEnum(source, enumMapping, &value, outError)) return NO;
         return [target setValue:value error:outError];
     });
 }

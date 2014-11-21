@@ -13,11 +13,11 @@
 
 @implementation BCJJSONSource (DeferredClassCheck)
 
--(BCJSourceResult)getValue:(id *)value ofKind:(Class)class error:(NSError **)outError
+-(BCJJSONSourceResult)getValue:(id *)value ofKind:(Class)class error:(NSError **)outError
 {
     //We only need to do the check if a value has be fetched
-    BCJSourceResult result = [self getValue:value error:outError];
-    if (result != BCJSourceResultSuccess) return result;
+    BCJJSONSourceResult result = [self getValue:value error:outError];
+    if (result != BCJJSONSourceResultSuccess) return result;
 
     //Perform the check
     BOOL shouldCheckClass = *value != nil;
@@ -29,10 +29,10 @@
         }
         //Reset the value and fail
         *value = nil;
-        return BCJSourceResultFailure;
+        return BCJJSONSourceResultFailure;
     }
 
-    return BCJSourceResultSuccess;
+    return BCJJSONSourceResultSuccess;
 }
 
 @end

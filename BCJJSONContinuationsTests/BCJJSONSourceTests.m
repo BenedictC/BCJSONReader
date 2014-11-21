@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "BCJJSONSource+DeferredClassCheck.h"
+#import <objc/runtime.h>
 
 
 
@@ -19,13 +20,13 @@
 
 @implementation BCJJSONSourceTests
 
--(void)testConstructors
+-(void)testValidDesignatedInitalizer
 {
     //Given
     NSMutableString *object = [NSMutableString stringWithString:@"arf"];
     NSString *JSONPath = @"self";
     Class defaultExpectedClass = NSString.class;
-    BCJSourceOptions options = BCJSourceModeDefaultable;
+    BCJJSONSourceOptions options = BCJJSONSourceModeDefaultable;
     id defaultValue = @"default";
 
     //When
@@ -41,32 +42,104 @@
 
 
 
-- (void)testMandatoryGetValue
+//-(void)testInvalidDesignatedInitalizer
+//{
+//    //Given
+//    NSMutableString *object = [NSMutableString stringWithString:@"arf"];
+//    NSString *JSONPath = @"self";
+//    Class defaultExpectedClass = NSString.class;
+//    BCJJSONSourceOptions options = BCJJSONSourceModeDefaultable;
+//    id defaultValue = @"default";
+//
+//    //When
+//    //...
+//
+//    //Then
+//    XCTFail(@"should raise exception when object is nil and when JSONPath is nil/invalid.");
+//}
+//
+//
+//
+//-(void)testGetModeOptionalValidObject
+//{
+//    //Given (setup environment)
+//    NSDictionary *object = @{@"number": @123456};
+//    NSString *path = @"number";
+//    Class expectedClass = nil;
+//    BCJJSONSourceMode mode = BCJJSONSourceModeOptional;
+//    id defaultValue = nil;
+//    BCJJSONSource *source = BCJJSONSource(object, path, expectedClass, mode, defaultValue);
+//
+//    //When (perform the action)
+//    id actualValue;
+//    NSError *error;
+//    BCJJSONSourceResult actualResult = [source getValue:&actualValue error:&error];
+//
+//    //Then (verify the action had the expected result)
+//    BCJJSONSourceResult expectedResult = BCJJSONSourceResultSuccess;
+//    XCTAssertEqual(actualResult, expectedResult, @"Incorrect result");
+//
+//    id expectedValue = @123456;
+//    XCTAssertEqualObjects(expectedValue, actualValue, @"Incorrect value");
+//}
+
+
+
+-(void)testGetModeOptionalInvalidObject
 {
     //Given (setup environment)
-    id expectedValue = @123456;
-    NSDictionary *object = @{@"number": expectedValue};
-    NSString *path = @"number";
-    BCJJSONSource *source = [[BCJJSONSource alloc] initWithObject:object JSONPath:path expectedClass:nil options:0 defaultValue:nil];
+    NSDictionary *object = @{@"number": @123456};
+    NSString *path = @"notAnumber";
+    Class expectedClass = nil;
+    BCJJSONSourceMode mode = BCJJSONSourceModeOptional;
+    id defaultValue = nil;
+    BCJJSONSource *source = BCJJSONSource(object, path, expectedClass, mode, defaultValue);
 
     //When (perform the action)
     id actualValue;
     NSError *error;
-    BOOL didSucceed = [source getValue:&actualValue error:&error];
+    BCJJSONSourceResult actualResult = [source getValue:&actualValue error:&error];
 
     //Then (verify the action had the expected result)
-    XCTAssert(didSucceed, @"");
-    XCTAssertEqualObjects(expectedValue, actualValue, @"");
+    BCJJSONSourceResult expectedResult = BCJJSONSourceResultValueNotFound;
+    XCTAssertEqual(actualResult, expectedResult, @"Incorrect result");
+
+    id expectedValue = nil;
+    XCTAssertEqualObjects(expectedValue, actualValue, @"Incorrect value");
+}
+
+
+-(void)testGetModeNullOptional
+{
+    XCTFail(@"TODO");
 }
 
 
 
--(void)testGetValue
+-(void)testGetModeDefaultable
 {
     XCTFail(@"TODO");
-    //TODO: Test different options, both valid and invalid combinations
-    //TODO: Test that outValue is correct on success and failure
-    //TODO: Test error message is correct
+}
+
+
+
+-(void)testGetModeNullDefaultable
+{
+    XCTFail(@"TODO");
+}
+
+
+
+-(void)testGetModeStrict
+{
+    XCTFail(@"TODO");
+}
+
+
+
+-(void)testGetModeNullStrict
+{
+    XCTFail(@"TODO");
 }
 
 

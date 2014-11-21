@@ -1,5 +1,5 @@
 //
-//  BCLContinuationsClass+Protected.h
+//  BCLContinuationsClass+AdditionalControlFlow.h
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 30/10/2014.
@@ -9,8 +9,25 @@
 #import "BCLContinuations.h"
 
 
+#pragma mark - helper macros
+#define BCJ_CONTINUATIONS_ARRAY_FROM_VARGS(FIRST_CONTINUATION) ({ \
+va_list args; \
+va_start(args, FIRST_CONTINUATION); \
+\
+NSMutableArray *__continuations__ = [NSMutableArray new]; \
+id<BCLContinuation> __currentContination__ = FIRST_CONTINUATION; \
+\
+while (__currentContination__ != nil) { \
+    [__continuations__ addObject:__currentContination__]; \
+    __currentContination__ = va_arg(args, id<BCLContinuation>); \
+} \
+va_end(args); \
+__continuations__; \
+})
 
-@interface BCLContinuations (Protected)
+
+
+@interface BCLContinuations (AdditionalControlFlow)
 /**
  Synchronous execution the supplied continuations. If one or more errors occurs then the returned error will be an NSError with code BCLMultipleErrorsError.
 

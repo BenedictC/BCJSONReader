@@ -8,6 +8,8 @@
 
 #import "BCJContainer.h"
 
+#import "BCJJSONSource.h"
+
 
 
 @implementation BCJContainer
@@ -42,8 +44,8 @@
 
 
 
-#pragma mark - BCJSourceObject
--(id)BCJ_sourceObject
+#pragma mark - BCJContainerProtocol
+-(id)containedObject
 {
     return _content;
 }

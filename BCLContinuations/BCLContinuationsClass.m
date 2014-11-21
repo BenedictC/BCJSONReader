@@ -7,26 +7,13 @@
 //
 
 #import "BCLContinuationsClass.h"
+#import "BCLContinuationsClass+AdditionalControlFlow.h"
+
 
 
 NSString * const BCLErrorDomain = @"BCLErrorDomain";
 
 NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
-
-
-#pragma mark - helper macros
-#define CONTINUATIONS_FROM_VARGS(FIRST_CONTINUATION) ({ \
-NSMutableArray *continuations = [NSMutableArray new]; \
-va_list args; \
-va_start(args, FIRST_CONTINUATION); \
-id<BCLContinuation> currentContination = firstContinuation; \
-while (currentContination != nil) { \
-    [continuations addObject:currentContination]; \
-    currentContination = va_arg(args, id<BCLContinuation>); \
-} \
-va_end(args); \
-    continuations; \
- })
 
 
 
@@ -157,7 +144,7 @@ va_end(args); \
 
 
 
-#pragma mark - protected control flow
+#pragma mark - Additional control flow
 +(NSError *)untilEndWithContinuations:(NSArray *)continuations
 {
     return [[[BCLContinuations alloc] initWithContinuations:continuations] executeUntilEnd];
@@ -175,7 +162,7 @@ va_end(args); \
 #pragma mark - Public control flow
 +(NSError *)untilEnd:(id<BCLContinuation>)firstContinuation, ...
 {
-    NSArray *continuations = CONTINUATIONS_FROM_VARGS(firstContinuation);
+    NSArray *continuations = BCJ_CONTINUATIONS_ARRAY_FROM_VARGS(firstContinuation);
 
     return [BCLContinuations untilEndWithContinuations:continuations];
 }
@@ -184,7 +171,7 @@ va_end(args); \
 
 +(NSError *)untilError:(id<BCLContinuation>)firstContinuation, ...
 {
-    NSArray *continuations = CONTINUATIONS_FROM_VARGS(firstContinuation);
+    NSArray *continuations = BCJ_CONTINUATIONS_ARRAY_FROM_VARGS(firstContinuation);
 
     return [BCLContinuations untilErrorWithContinuations:continuations];
 }

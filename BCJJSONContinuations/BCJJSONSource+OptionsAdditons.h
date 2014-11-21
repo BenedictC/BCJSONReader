@@ -14,36 +14,36 @@
 #import "BCJJSONSource.h"
 
 /**
- Checks if BCJSourceOptionMustReturnValue has been set.
+ Checks if BCJJSONSourceOptionMustReturnValue has been set.
 
  @param options the options to check.
 
- @return YES if options contains BCJSourceOptionMustReturnValue, other wise NO.
+ @return YES if options contains BCJJSONSourceOptionMustReturnValue, other wise NO.
  */
-static inline BOOL BCJTreatValueNotFoundAsSuccess(BCJSourceOptions options) {
-    return (options & BCJSourceOptionTreatValueNotFoundAsSuccess) != 0;
+static inline BOOL BCJTreatValueNotFoundAsSuccess(BCJJSONSourceOptions options) {
+    return (options & BCJJSONSourceOptionTreatValueNotFoundAsSuccess) != 0;
 }
 
 /**
- Checks if BCJSourceOptionPathMustEvaluateToValue has been set.
+ Checks if BCJJSONSourceOptionPathMustEvaluateToValue has been set.
 
  @param options the options to check.
 
- @return YES if options contains BCJSourceOptionPathMustEvaluateToValue, other wise NO.
+ @return YES if options contains BCJJSONSourceOptionPathMustEvaluateToValue, other wise NO.
  */
-static inline BOOL BCJPathMustEvaluateToValue(BCJSourceOptions options) {
-    return (options & BCJSourceOptionPathMustEvaluateToValue) != 0;
+static inline BOOL BCJPathMustEvaluateToValue(BCJJSONSourceOptions options) {
+    return (options & BCJJSONSourceOptionPathMustEvaluateToValue) != 0;
 }
 
 /**
- Checks if BCJSourceOptionReplaceNullWithDefaultValue has been set.
+ Checks if BCJJSONSourceOptionReplaceNullWithDefaultValue has been set.
 
  @param options the options to check.
 
- @return YES if options contains BCJSourceOptionReplaceNullWithDefaultValue, other wise NO.
+ @return YES if options contains BCJJSONSourceOptionReplaceNullWithDefaultValue, other wise NO.
  */
-static inline BOOL BCJReplaceNullWithNil(BCJSourceOptions options) {
-    return (options & BCJSourceOptionReplaceNullWithNil) != 0;
+static inline BOOL BCJReplaceNullWithNil(BCJJSONSourceOptions options) {
+    return (options & BCJJSONSourceOptionReplaceNullWithNil) != 0;
 }
 
 

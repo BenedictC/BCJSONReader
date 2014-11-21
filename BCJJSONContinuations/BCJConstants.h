@@ -53,3 +53,11 @@ enum : NSInteger {
     BCJInvalidJSONPathError,
     BCJInvalidJSONDataError,
 };
+
+
+
+#pragma mark - options
+enum : NSUInteger {
+    BCJNoOptions = 0,
+};
+

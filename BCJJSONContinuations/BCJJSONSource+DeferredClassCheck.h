@@ -21,6 +21,6 @@
 
  @return The result status.
  */
--(BCJSourceResult)getValue:(id *)value ofKind:(Class)class error:(NSError **)outError;
+-(BCJJSONSourceResult)getValue:(id *)value ofKind:(Class)class error:(NSError **)outError;
 
 @end

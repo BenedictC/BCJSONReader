@@ -8,7 +8,7 @@
 
 #import "BCJGettersAndSetters.h"
 #import "BCJJSONSource.h"
-#import "BCJJSONTarget.h"
+#import "BCJPropertyTarget.h"
 
 
 
@@ -19,12 +19,12 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJJSONSource *source, BOOL(^su
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
-        BCJSourceResult result = [source getValue:&value error:outError];
+        BCJJSONSourceResult result = [source getValue:&value error:outError];
         switch (result) {
-            case BCJSourceResultValueNotFound: return YES;
-            case BCJSourceResultSuccess: return successBlock(value, outError);
+            case BCJJSONSourceResultValueNotFound: return YES;
+            case BCJJSONSourceResultSuccess: return successBlock(value, outError);
             default: //This isn't necessary but I'm paranoid.
-            case BCJSourceResultFailure: return NO;
+            case BCJJSONSourceResultFailure: return NO;
         }
     });
 }
@@ -32,18 +32,18 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJJSONSource *source, BOOL(^su
 
 
 #pragma mark - Set arbitary object continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJJSONTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJPropertyTarget *target, BCJJSONSource *source) {
     NSCParameterAssert(target != nil);
     NSCParameterAssert(source != nil);
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
-        BCJSourceResult result = [source getValue:&value error:outError];
+        BCJJSONSourceResult result = [source getValue:&value error:outError];
         switch (result) {
-            case BCJSourceResultValueNotFound: return YES;
-            case BCJSourceResultSuccess: return [target setValue:value error:outError];
+            case BCJJSONSourceResultValueNotFound: return YES;
+            case BCJJSONSourceResultSuccess: return [target setValue:value error:outError];
             default: //This isn't necessary but I'm paranoid.
-            case BCJSourceResultFailure: return NO;
+            case BCJJSONSourceResultFailure: return NO;
         }
     });
 }

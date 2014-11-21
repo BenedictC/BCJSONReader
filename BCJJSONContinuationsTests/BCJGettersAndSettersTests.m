@@ -28,7 +28,7 @@
 
 -(void)testSetter
 {
-    //Should probably add some tests, but there's not much to test because BCJSetValue is basically a wrapper around BCJJSONSource and BCJJSONTarget.
+    //Should probably add some tests, but there's not much to test because BCJSetValue is basically a wrapper around BCJJSONSource and BCJPropertyTarget.
 }
 
 @end

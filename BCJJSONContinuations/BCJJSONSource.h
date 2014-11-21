@@ -1,5 +1,5 @@
 //
-//  BCJSource.h
+//  BCJJSONSource.h
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 04/11/2014.
@@ -8,81 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "BCJDefines.h"
-
-
-
-#pragma mark - Results
-/**
- The result type for getting a value from a source.
- */
-typedef NS_ENUM(NSUInteger, BCJSourceResult){
-    /**
-     The get failed.
-     */
-    BCJSourceResultFailure,
-    /**
-     The get succeed.
-     */
-    BCJSourceResultSuccess,
-    /**
-     The get did not retrieve a value from the source.
-     */
-    BCJSourceResultValueNotFound,
-};
-
-
-
-#pragma mark - Source options
-/**
- Options to modifiy the behaviour of the source. It is reccommend that these values are not used directly. Instead use a BCJSourceMode value which are pre-defined combinations of BCJSourceOptions.
- */
-typedef NS_OPTIONS(NSUInteger, BCJSourceOptions){
-    /**
-     If the JSONPath evaluates to nil then the source will return BCJSourceResultFailure,
-     */
-    BCJSourceOptionPathMustEvaluateToValue     = (1UL << 0),
-    /**
-     If the JSONPath evaluates to NSNull then this will be replaced with nil.
-     */
-    BCJSourceOptionReplaceNullWithNil          = (1UL << 1),
-    /**
-     If the JSONPath evaluates to nil then the source will not return BCJSourceResultValueNotFound.
-     */
-    BCJSourceOptionTreatValueNotFoundAsSuccess = (1UL << 2),
-};
-
-
-
-#pragma mark - Source modes (i.e. predefined source options)
-/**
- BCJSourceMode are pre-defined combinations of BCJSourceOptions which describe common behaviours.
- */
-typedef BCJSourceOptions BCJSourceMode;
-
-/**
- The source will return BCJSourceResultValueNotFound if JSONPath evaluates to nil.
- */
-const static BCJSourceMode BCJSourceModeOptional     = 0;
-/**
- The source will return BCJSourceResultValueNotFound if JSONPath evaluates to NSNull or nil.
- */
-const static BCJSourceMode BCJSourceModeNullOptional = BCJSourceOptionReplaceNullWithNil;
-/**
- The source will return defaultValue if JSONPath evaluates to nil.
- */
-const static BCJSourceMode BCJSourceModeDefaultable  = BCJSourceOptionTreatValueNotFoundAsSuccess;
-/**
- The source will return defaultValue if JSONPath evaluates to NSNull or nil.
- */
-const static BCJSourceMode BCJSourceModeNullDefaultable  = BCJSourceOptionReplaceNullWithNil | BCJSourceOptionTreatValueNotFoundAsSuccess;
-/**
- The source will fail if JSONPath evaluates to nil.
- */
-const static BCJSourceMode BCJSourceModeStrict  = BCJSourceOptionPathMustEvaluateToValue;
-/**
- The source will fail if JSONPath evaluates to nil. If JSONPath evaluates to NSNull then it will return defaultValue which maybe nil.
- */
-const static BCJSourceMode BCJSourceModeNullStrict  = BCJSourceOptionReplaceNullWithNil | BCJSourceOptionPathMustEvaluateToValue;
+#import "BCJJSONSourceConstants.h"
 
 
 
@@ -109,14 +35,14 @@ const static BCJSourceMode BCJSourceModeNullStrict  = BCJSourceOptionReplaceNull
  [.]
  $schema
  
- In general the BCJSource convience factory functions should be used in favour of this method.
+ In general the BCJJSONSource convience factory functions should be used in favour of this method.
 
  */
 @interface BCJJSONSource : NSObject
 /**
  Initalizes an instances.
 
- @param object        The object to evaluate the JSONPath against.
+ @param object        The object to evaluate the JSONPath against. If object implements containedObject then its' return value is used instead of the object.
  @param JSONPath      A valid JSONPath string.
  @param expectedClass the class that the fetched object is expected to be.
  @param options       the options describing the behaviour of getValue:error:
@@ -124,21 +50,21 @@ const static BCJSourceMode BCJSourceModeNullStrict  = BCJSourceOptionReplaceNull
 
  @return a BCJJSONSource.
  */
--(instancetype)initWithObject:(id)object JSONPath:(NSString *)JSONPath expectedClass:(Class)expectedClass options:(BCJSourceOptions)options defaultValue:(id)defaultValue;
+-(instancetype)initWithObject:(id)object JSONPath:(NSString *)JSONPath expectedClass:(Class)expectedClass options:(BCJJSONSourceOptions)options defaultValue:(id)defaultValue;
 
 @property(nonatomic, readonly) id object;
 @property(nonatomic, readonly) NSString *JSONPath;
 @property(nonatomic, readonly) Class expectedClass;
-@property(nonatomic, readonly) BCJSourceOptions options;
+@property(nonatomic, readonly) BCJJSONSourceOptions options;
 @property(nonatomic, readonly) id defaultValue;
 
 /**
  Returns by reference the value found in object by evaluating the JSONPath. After evaluating JSONPath the following steps occur:
- 1. Checks if the evaluation completed. If it did not and BCJSourceOptionPathMustEvaluateToValue is set then returns an error.
- 2. If BCJSourceOptionReplaceNullWithNil is set and value is NSNull converts replaces value with nil.
- 3. If BCJSourceOptionTreatValueNotFoundAsSuccess is NOT set and value is nil then returns BCJSourceResultValueNotFound
+ 1. Checks if the evaluation completed. If it did not and BCJJSONSourceOptionPathMustEvaluateToValue is set then returns an error.
+ 2. If BCJJSONSourceOptionReplaceNullWithNil is set and value is NSNull converts replaces value with nil.
+ 3. If BCJJSONSourceOptionTreatValueNotFoundAsSuccess is NOT set and value is nil then returns BCJJSONSourceResultValueNotFound
  4. If value is nil then replaces value with defaultValue
- 5. Checks that value is of the expectClass and returns BCJSourceResultFailure if it is not
+ 5. Checks that value is of the expectClass and returns BCJJSONSourceResultFailure if it is not
  6. Sets the the outValue
 
  @param value    On success contains the fetched value, otherwise nil.
@@ -146,24 +72,24 @@ const static BCJSourceMode BCJSourceModeNullStrict  = BCJSourceOptionReplaceNull
 
  @return The result status.
  */
--(BCJSourceResult)getValue:(id *)value error:(NSError **)outError;
+-(BCJJSONSourceResult)getValue:(id *)value error:(NSError **)outError;
 
 @end
 
 
 
 #pragma mark - Strict Constructors
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, Class expectClass, BCJSourceOptions options, id defaultValue) BCJ_REQUIRED(1,2);
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx,     Class expectClass, BCJSourceOptions options, id defaultValue) BCJ_REQUIRED(1);
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, Class expectClass, BCJSourceOptions options) BCJ_REQUIRED(1,2);
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx,     Class expectClass, BCJSourceOptions options) BCJ_REQUIRED(1);
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, Class expectClass, BCJJSONSourceOptions options, id defaultValue) BCJ_REQUIRED(1,2);
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx,     Class expectClass, BCJJSONSourceOptions options, id defaultValue) BCJ_REQUIRED(1);
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, Class expectClass, BCJJSONSourceOptions options) BCJ_REQUIRED(1,2);
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx,     Class expectClass, BCJJSONSourceOptions options) BCJ_REQUIRED(1);
 BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, Class expectClass) BCJ_REQUIRED(1,2);
 BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx,     Class expectClass) BCJ_REQUIRED(1);
 
 #pragma mark - Constructors with nil expectClass
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, BCJSourceOptions options, id defaultValue) BCJ_REQUIRED(1,2);
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx,     BCJSourceOptions options, id defaultValue) BCJ_REQUIRED(1);
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, BCJSourceOptions options) BCJ_REQUIRED(1,2);
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx,     BCJSourceOptions options) BCJ_REQUIRED(1);
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, BCJJSONSourceOptions options, id defaultValue) BCJ_REQUIRED(1,2);
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx,     BCJJSONSourceOptions options, id defaultValue) BCJ_REQUIRED(1);
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, BCJJSONSourceOptions options) BCJ_REQUIRED(1,2);
+BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx,     BCJJSONSourceOptions options) BCJ_REQUIRED(1);
 BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath) BCJ_REQUIRED(1,2);
 BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSUInteger idx)     BCJ_REQUIRED(1);

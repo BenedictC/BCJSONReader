@@ -13,6 +13,13 @@
 #define BCJ_WARN_UNUSED __attribute__((warn_unused_result))
 #define BCJ_REQUIRED(...) __attribute__((nonnull(__VA_ARGS__)))
 
+#ifdef DEBUG
+#define BCJ_KEY(NAME) NSStringFromSelector(@selector(NAME))
+#else
+#define BCJ_KEY(NAME) @"" #NAME
+#endif
+
+
 //TODO: Replace NS*Assert with BCJ*Assert so that they are not removed in release builds
 //#define BCJParameterAssert()
 //#define BCJAssert()

@@ -1,5 +1,5 @@
 //
-//  BCJJSONTargetTests.m
+//  BCJPropertyTargetTests.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 07/11/2014.
@@ -7,17 +7,17 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "BCJJSONTarget.h"
+#import "BCJPropertyTarget.h"
 
 
 
-@interface BCJJSONTargetTests : XCTestCase
+@interface BCJPropertyTargetTests : XCTestCase
 
 @end
 
 
 
-@implementation BCJJSONTargetTests
+@implementation BCJPropertyTargetTests
 
 - (void)testConstructors
 {
@@ -26,7 +26,7 @@
     NSString *key = @"string";
 
     //When
-    BCJJSONTarget *target = [[BCJJSONTarget alloc] initWithObject:object key:key];
+    BCJPropertyTarget *target = [[BCJPropertyTarget alloc] initWithObject:object key:key];
 
     //Then
     XCTAssertEqualObjects(target.object, object, @"Constructor failed to set object");

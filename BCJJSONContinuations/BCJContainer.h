@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCJSourceObject.h"
+#import <Foundation/Foundation.h>
+#import "BCJContainerProtocol.h"
 
 
 
@@ -16,7 +17,7 @@
  The contents of the container can be set only once. Once the content is set the container becomes sealed. Attempting to set the content on sealed container will result in an exception being raised.
 
  */
-@interface BCJContainer : NSObject <BCJSourceObject>
+@interface BCJContainer : NSObject <BCJContainer>
 
 /**
  Initializes the container with the supplied content.

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "BCJMapper.h"
 #import "BCJJSONContinuations.h"
 
 
@@ -49,9 +50,17 @@ void demo(void) {
     TestObject *target = [TestObject new];
     __block NSString *stackString = nil;
 
-    //Go!
+    //Mapper-style
+    NSError *mappingError =
+    [BCJMapper mapJSONData:jsonData intoObject:target options:BCJNoOptions usingContinuations:
+     BCJ_MAP(@"jsonPath", string),
+     BCJ_MAP(@"jsonPath", date),
+//     BCJSetString(BCJSource(@"jsonPath"), BCJTarget(@"property")),
+     nil];
+
+    //Continuations-style
     BCJContainer *json = [BCJContainer new]; //Create a container to store the deserialized JSON in.
-    NSError *error =
+    NSError *continuationsError =
     [BCLContinuations untilError:
          //Deserialization:
          BCJDeserializeJSON(json, jsonData),
@@ -62,7 +71,7 @@ void demo(void) {
 
          //AdditionalTypes:
          BCJSetURL(BCJSource(json, @"array[3].url"), BCJ_TARGET(target, url)),
-         BCJSetDateFromTimeIntervalSince1970(BCJSource(json, @"date", BCJSourceModeStrict), BCJ_TARGET(target, date)),
+         BCJSetDateFromTimeIntervalSince1970(BCJSource(json, @"date", BCJJSONSourceModeStrict), BCJ_TARGET(target, date)),
 
          //Map:
          BCJSetMap(BCJSource(json, @"dict"), BCJ_TARGET(target, array), NSNumber.class, BCJMapOptionIgnoreFailedMappings, BCJ_SORT_DESCRIPTORS(@"self"), ^id(NSString *key, NSNumber *number, NSError **outError){
@@ -77,7 +86,7 @@ void demo(void) {
         }),
 
          //Generic getter:
-         BCJGetValue(BCJSource(json, @"missingString", NSString.class, BCJSourceModeDefaultable, @"default"), ^BOOL(NSString *string, NSError **outError){
+         BCJGetValue(BCJSource(json, @"missingString", NSString.class, BCJJSONSourceModeDefaultable, @"default"), ^BOOL(NSString *string, NSError **outError){
             //Validation
             if (!BCJValidate(string, @"self MATCHES '.*'", outError)) return NO;
             stackString = string;
@@ -95,7 +104,8 @@ void demo(void) {
 
     NSLog(@"stackString: %@", stackString);
 
-    NSLog(@"error: %@", error);
+    NSLog(@"error: %@", mappingError);
+    NSLog(@"error: %@", continuationsError);
 }
 
 

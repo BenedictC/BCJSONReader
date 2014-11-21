@@ -8,41 +8,38 @@
 
 #import "BCLContinuations.h"
 #import "BCJDefines.h"
+#import "BCJMapOptions.h"
+#import "BCJJSONSourceConstants.h"
 
 @class BCJJSONSource;
-@class BCJJSONTarget;
+@class BCJPropertyTarget;
 
 
 
-#pragma mark - Macros
+#pragma mark - Enums
 /**
- Creates an array of ascending sort descriptors using the supplied strings as keys.
+ Returns by references the a value from enumMapping. The value is fetched by getting the value from source and using this as the key in enumMapping.
 
- @param ... A list of NSStrings. The list does not need to be nil terminated.
+ @warning source.defaultValue, if specified, is used as the key for the mapping, it is NOT the final value.
 
- @return An array containing NSSortDescriptor objects.
+ @param source      A source that references a key in enumMapping.
+ @param enumMapping A dictionary.
+ @param outValue    On success contains the value, otherwise nil.
+ @param outError    On failure contains an NSError describing the reason for failure, otherwise nil.
+
+ @return The result of getting the value from the source or BCJJSONSourceResultFailure if the key was not found in enumMapping.
  */
-#define BCJ_SORT_DESCRIPTORS(...) ({ \
-    NSArray *sortKeys = [NSArray arrayWithObjects: __VA_ARGS__, nil];\
-    NSMutableArray *sortDescriptors = [NSMutableArray new]; \
-    for (NSString *sortKey in sortKeys) { \
-        [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:YES]]; \
-    } \
-    sortDescriptors; \
-})
-
-
-
-#pragma mark - constants
+BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDictionary *enumMapping, id *outValue, NSError **outError) BCJ_REQUIRED(1,2,3,4);
 /**
- Options for changing the behaviour of BCJMap.
+ Returns a continuation that calls BCJGetEnum and if a value was fetched invokes setValue:outError: on target with the value from BCJGetEnum.
+
+ @param target      A target that references the same type as the values of enumMapping.
+ @param source      A source that references the same type as the keys of enumMapping.
+ @param enumMapping A dictionary.
+
+ @return A continuation.
  */
-typedef NS_OPTIONS(NSUInteger, BCJMapOptions){
-    /**
-     If the map block returns fails to map an element then the mapping will continue and the error will be ignored.
-     */
-    BCJMapOptionIgnoreFailedMappings  =(1UL << 0),
-};
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJPropertyTarget *target, BCJJSONSource *source, NSDictionary *enumMapping) BCJ_REQUIRED(1,2,3) BCJ_WARN_UNUSED;
 
 
 
@@ -57,7 +54,7 @@ typedef NS_OPTIONS(NSUInteger, BCJMapOptions){
 
  @return an NSArray.
  */
-BCJ_OVERLOADABLE NSArray *BCJMap(NSArray *array, Class elementClass, BCJMapOptions options, id(^mapFromArray)(NSUInteger elementIdx, id elementValue, NSError **outError), NSError **outError) BCJ_REQUIRED(1,2,4,5);
+BCJ_OVERLOADABLE NSArray *BCJGetMap(NSArray *array, Class elementClass, BCJMapOptions options, id(^mapFromArray)(NSUInteger elementIdx, id elementValue, NSError **outError), NSError **outError) BCJ_REQUIRED(1,2,4,5);
 /**
  Returns an NSArray created by enumerates the contents of a dictionary, checking that the elements are of type elementClass, invokes mapFromDictionary with each key/element pair and stores the result in an array then finally sorts the array using sortDescriptors.
 
@@ -69,7 +66,7 @@ BCJ_OVERLOADABLE NSArray *BCJMap(NSArray *array, Class elementClass, BCJMapOptio
 
  @return an NSArray.
  */
-BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *dict, Class elementClass, BCJMapOptions options, NSArray *sortDescriptiors, id(^mapFromDictionary)(id elementKey, id elementValue, NSError **outError), NSError **outError) BCJ_REQUIRED(1,2,4,5) ;
+BCJ_OVERLOADABLE NSArray *BCJGetMap(NSDictionary *dict, Class elementClass, BCJMapOptions options, NSArray *sortDescriptiors, id(^mapFromDictionary)(id elementKey, id elementValue, NSError **outError), NSError **outError) BCJ_REQUIRED(1,2,4,5) ;
 
 
 
@@ -85,7 +82,7 @@ BCJ_OVERLOADABLE NSArray *BCJMap(NSDictionary *dict, Class elementClass, BCJMapO
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONTarget *target, BCJJSONSource *source, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) BCJ_REQUIRED(1,2,5) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJPropertyTarget *target, BCJJSONSource *source, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) BCJ_REQUIRED(1,2,5) BCJ_WARN_UNUSED;
 /**
  Returns a continuation that attempts to get a dictionary from source, invoke BCJMap and if successful attempts to set the resulting array on target.
 
@@ -97,4 +94,23 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONTarget *target, BCJJSONSou
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONTarget *target, BCJJSONSource *source, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) BCJ_REQUIRED(1,2,6) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJPropertyTarget *target, BCJJSONSource *source, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) BCJ_REQUIRED(1,2,6) BCJ_WARN_UNUSED;
+
+
+
+#pragma mark - Macros
+/**
+ Creates an array of ascending sort descriptors using the supplied strings as keys.
+
+ @param ... A list of NSStrings. The list does not need to be nil terminated.
+
+ @return An array containing NSSortDescriptor objects.
+ */
+#define BCJ_SORT_DESCRIPTORS(...) ({ \
+NSArray *sortKeys = [NSArray arrayWithObjects: __VA_ARGS__, nil];\
+NSMutableArray *sortDescriptors = [NSMutableArray new]; \
+for (NSString *sortKey in sortKeys) { \
+[sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:YES]]; \
+} \
+sortDescriptors; \
+})
