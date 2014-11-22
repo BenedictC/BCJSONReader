@@ -17,21 +17,11 @@
 
 
 
-#pragma mark - Strict Constructors
+#pragma mark - Constructors
 BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> objectContainer, NSString *JSONPath, Class expectClass, BCJJSONSourceOptions options, id defaultValue) BCJ_REQUIRED(1,2);
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> objectContainer, NSUInteger idx,     Class expectClass, BCJJSONSourceOptions options, id defaultValue) BCJ_REQUIRED(1);
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> objectContainer, NSString *JSONPath, Class expectClass, BCJJSONSourceOptions options) BCJ_REQUIRED(1,2);
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> objectContainer, NSUInteger idx,     Class expectClass, BCJJSONSourceOptions options) BCJ_REQUIRED(1);
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> objectContainer, NSString *JSONPath, Class expectClass) BCJ_REQUIRED(1,2);
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> objectContainer, NSUInteger idx,     Class expectClass) BCJ_REQUIRED(1);
-
-#pragma mark - Constructors with nil expectClass
 BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> objectContainer, NSString *JSONPath, BCJJSONSourceOptions options, id defaultValue) BCJ_REQUIRED(1,2);
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> objectContainer, NSUInteger idx,     BCJJSONSourceOptions options, id defaultValue) BCJ_REQUIRED(1);
 BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> objectContainer, NSString *JSONPath, BCJJSONSourceOptions options) BCJ_REQUIRED(1,2);
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> objectContainer, NSUInteger idx,     BCJJSONSourceOptions options) BCJ_REQUIRED(1);
 BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> objectContainer, NSString *JSONPath) BCJ_REQUIRED(1,2);
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id<BCJContainer> objectContainer, NSUInteger idx)     BCJ_REQUIRED(1);
 
 
 
