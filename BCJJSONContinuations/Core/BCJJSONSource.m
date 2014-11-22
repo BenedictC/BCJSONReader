@@ -7,10 +7,28 @@
 //
 
 #import "BCJJSONSource.h"
-#import "BCJJSONSource+OptionsAdditons.h"
 #import "BCJEnumerateJSONPathComponents.h"
 #import "BCJLogging.h"
 #import "BCJError.h"
+
+
+
+#pragma mark - options
+static inline BOOL BCJTreatValueNotFoundAsSuccess(BCJJSONSourceOptions options) {
+    return (options & BCJJSONSourceOptionTreatValueNotFoundAsSuccess) != 0;
+}
+
+
+
+static inline BOOL BCJPathMustEvaluateToValue(BCJJSONSourceOptions options) {
+    return (options & BCJJSONSourceOptionPathMustEvaluateToValue) != 0;
+}
+
+
+
+static inline BOOL BCJReplaceNullWithNil(BCJJSONSourceOptions options) {
+    return (options & BCJJSONSourceOptionReplaceNullWithNil) != 0;
+}
 
 
 
