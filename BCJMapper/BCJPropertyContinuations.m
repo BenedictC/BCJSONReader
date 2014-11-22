@@ -1,12 +1,12 @@
 //
-//  BCJMappingContinuations.m
+//  BCJPropertyContinuations.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 21/11/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCJMappingContinuations.h"
+#import "BCJPropertyContinuations.h"
 
 #import "BCJJSONSource.h"
 #import "BCJAdditionalTypes.h"
@@ -14,32 +14,13 @@
 #import "BCJStackJSONSource.h"
 #import "BCJStackPropertyTarget.h"
 
-#import "BCJPropertyTarget+ExpectedType.h"
+#import "BCJPropertyTarget+ExpectedClass.h"
 
 #import "BCLBlockContinuation.h"
 
 
 
-static inline Class BCJClassFromObjCType(NSString *objCType) {
-//    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^T@\"([^\"]*)\"" options:0 error:NULL];
-//    NSTextCheckingResult *match = [regex firstMatchInString:propertyString options:0 range:NSMakeRange(0, [propertyString length])];
-//    NSRange range = [match rangeAtIndex:1];
-//    (match == nil) ? nil : [propertyString substringWithRange:range];
-
-#warning TODO:
-    return [NSObject class];
-}
-
-
-
-static inline BOOL BCJStorageOfTypeCanReceiveValue(NSString *objCType, NSValue *value) {
-#warning TODO:
-    return YES;
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(BCJJSONSource *source, BCJPropertyTarget *target) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJJSONSource *source, BCJPropertyTarget *target) {
     NSCParameterAssert(source != nil);
     NSCParameterAssert(target != nil);
 
@@ -57,28 +38,17 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(BCJJSONSource *source, BCJProper
                 break;
         }
 
-        //1. nil value
-        if (value == nil) {
+        //1. Attempt to set the value
+        if ([target canReceiveValue:value]) {
             return [target setValue:value error:outError];
         }
 
-        //2. See if value & target are of the same kind
-        NSString *targetObjCType = [target expectedType];
-        Class expectedClass = BCJClassFromObjCType(targetObjCType);
-        if ([value isKindOfClass:expectedClass]) {
-            return [target setValue:value error:outError];
-        }
+        //2. Check for special cases
+        Class expectedClass = [target expectedClass];
 
-        //3. Check if value is an NSValue
-        BOOL isValueType = [value isKindOfClass:NSValue.class];
-        if (isValueType && BCJStorageOfTypeCanReceiveValue(targetObjCType, value)) {
-            return [target setValue:value error:outError];
-        }
-
-        //4. Check for special cases
-        //a. string->URL
+        //a. String->URL
         BOOL isValueAString = [value isKindOfClass:NSString.class];
-        BOOL isTargetAURL = [expectedClass isEqual:NSURL.class];
+        BOOL isTargetAURL = [expectedClass isEqual:NSURL.class]; //TODO: Should we consider NSURL subclasses too?
         if (isValueAString && isTargetAURL) {
             NSURL *url = [NSURL URLWithString:value];
             if (url == nil) {
@@ -88,15 +58,15 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(BCJJSONSource *source, BCJProper
             return [target setValue:url error:outError];
         }
 
-        //b. number->Date
+        //b. Number->Date
         BOOL isValueANumber = [value isKindOfClass:NSNumber.class];
-        BOOL isTargetADate = [expectedClass isEqual:NSDate.class];
+        BOOL isTargetADate = [expectedClass isEqual:NSDate.class];  //TODO: Should we consider NSURL subclasses too?
         if (isValueANumber && isTargetADate) {
             NSDate *date = [NSDate dateWithTimeIntervalSince1970:[value integerValue]];
             return [target setValue:date error:outError];
         }
 
-        //c. string->Date
+        //c. String->Date
         if (isValueAString && isTargetADate) {
             NSDate *date = BCJDateFromISO8601String(value);
             if (date == nil) {
@@ -106,7 +76,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(BCJJSONSource *source, BCJProper
             return [target setValue:date error:outError];
         }
 
-        //Attempt to set the value
+        //3. Bust! Nothing left to try.
         if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: source is not compatible with target" code:0 userInfo:nil];
         return NO;
     });
@@ -114,8 +84,8 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(BCJJSONSource *source, BCJProper
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(NSString *jsonPath, NSString *propertyKey) {
-    return BCJMapping(BCJSource(jsonPath), BCJTarget(propertyKey));
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(NSString *jsonPath, NSString *propertyKey) {
+    return BCJSetProperty(BCJSource(jsonPath), BCJTarget(propertyKey));
 }
 
 

@@ -1,5 +1,5 @@
 //
-//  BCJMappingContinuations.h
+//  BCJPropertyContinuations.h
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 21/11/2014.
@@ -16,7 +16,7 @@
 
 
 
-#pragma mark - Mapping Continuations
+#pragma mark - Property Continuations
 /**
  Performs a mapping from a JSONPath of the source to a property on the target object. Infers and conforms to types based on the target. Special cases for:
 
@@ -42,7 +42,7 @@
 
  @return <#return value description#>
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(BCJJSONSource *source, BCJPropertyTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJJSONSource *source, BCJPropertyTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 /**
  <#Description#>
 
@@ -51,9 +51,9 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(BCJJSONSource *source, BCJProper
 
  @return <#return value description#>
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(NSString *sourceJsonPath, NSString *targetPropertyKey) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(NSString *sourceJsonPath, NSString *targetPropertyKey) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 //Selector-checked mapping macro
-#define BCJ_MAP(JSONPATH, PROPERTY) BCJMapping(JSONPATH, BCJ_KEY(PROPERTY))
+#define BCJ_SET(JSONPATH, PROPERTY) BCJSetProperty(JSONPATH, BCJ_KEY(PROPERTY))
 
 
 

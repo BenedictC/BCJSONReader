@@ -1,22 +1,24 @@
 //
-//  BCJPropertyTarget+ExpectedType.m
+//  BCJPropertyTarget+ExpectedClass.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 21/11/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCJPropertyTarget+ExpectedType.h"
+#import "BCJPropertyTarget+ExpectedClass.h"
 #import <objc/runtime.h>
 
 
 
-@implementation BCJPropertyTarget (ExpectedType)
+@implementation BCJPropertyTarget (ExpectedClass)
 
--(NSString *)expectedType
+-(NSString *)expectedObjCType
 {
     NSString *key = self.key;
     id object = self.object;
+
+    if (object == nil) return nil;
 
     //1. Look for a *property* matching targetKey
     objc_property_t property = class_getProperty([object class], key.UTF8String);
@@ -46,8 +48,28 @@
 
     //Force the buffer to be retained until the end of the function. We do this rather than free() so that if we return early we don't acciendently leak.
     [ivarsData self];
-
     return nil;
+}
+
+
+
+-(Class)expectedClass
+{
+#warning TODO:
+    return [NSValue class];
+}
+
+
+
+-(BOOL)canReceiveValue:(id)value
+{
+#warning TODO:
+    //    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^T@\"([^\"]*)\"" options:0 error:NULL];
+    //    NSTextCheckingResult *match = [regex firstMatchInString:propertyString options:0 range:NSMakeRange(0, [propertyString length])];
+    //    NSRange range = [match rangeAtIndex:1];
+    //    (match == nil) ? nil : [propertyString substringWithRange:range];
+
+    return YES;
 }
 
 @end

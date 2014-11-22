@@ -1,5 +1,5 @@
 //
-//  BCJPropertyTarget+ExpectedType.h
+//  BCJPropertyTarget+ExpectedClass.h
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 21/11/2014.
@@ -10,8 +10,12 @@
 
 
 
-@interface BCJPropertyTarget (ExpectedType)
+@interface BCJPropertyTarget (ExpectedClass)
 
--(NSString *)expectedType;
+-(NSString *)expectedObjCType;
+
+-(Class)expectedClass;
+
+-(BOOL)canReceiveValue:(id)value;
 
 @end
