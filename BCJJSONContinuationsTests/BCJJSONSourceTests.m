@@ -93,7 +93,7 @@
     Class expectedClass = nil;
     BCJJSONSourceMode mode = BCJJSONSourceModeOptional;
     id defaultValue = nil;
-    BCJJSONSource *source = BCJJSONSource(object, path, expectedClass, mode, defaultValue);
+    BCJJSONSource *source = BCJSource(object, path, expectedClass, mode, defaultValue);
 
     //When (perform the action)
     id actualValue;

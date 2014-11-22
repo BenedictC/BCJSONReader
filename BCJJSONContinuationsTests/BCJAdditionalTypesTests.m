@@ -23,7 +23,7 @@
 {
     //Given (setup environment)
     id dict = @{@"date": @(60 * 60 * 24 * 2)};
-    BCJJSONSource *source = BCJJSONSource(dict, @"date");
+    BCJJSONSource *source = BCJSource(dict, @"date");
 
     //When (perform the action)
     NSDate *actualValue;
@@ -46,7 +46,7 @@
 
     //Given (setup environment)
     id dict = @{@"date": @"Not a timestamp"};
-    BCJJSONSource *source = BCJJSONSource(dict, @"date");
+    BCJJSONSource *source = BCJSource(dict, @"date");
 
     //When (perform the action)
     NSDate *actualValue = [NSDate dateWithTimeIntervalSince1970:1234567890];
@@ -67,7 +67,7 @@
 {
     //Given (setup environment)
     id dict = @{@"date": @1234567890};
-    BCJJSONSource *source = BCJJSONSource(dict, @"notAdate");
+    BCJJSONSource *source = BCJSource(dict, @"notAdate");
 
     //When (perform the action)
     NSDate *actualValue = [NSDate dateWithTimeIntervalSince1970:1234567890];
@@ -87,7 +87,7 @@
 {
     //Given (setup environment)
     id dict = @{@"date": @"1970-01-01T00:00:00.000Z"};
-    BCJJSONSource *source = BCJJSONSource(dict, @"date");
+    BCJJSONSource *source = BCJSource(dict, @"date");
 
     //When (perform the action)
     NSDate *actualValue;
@@ -107,7 +107,7 @@
 {
     //Given (setup environment)
     id dict = @{@"date": @"Not a timestamp"};
-    BCJJSONSource *source = BCJJSONSource(dict, @"date");
+    BCJJSONSource *source = BCJSource(dict, @"date");
 
     //When (perform the action)
     NSDate *actualValue = [NSDate dateWithTimeIntervalSince1970:1234567890];
@@ -128,7 +128,7 @@
 {
     //Given (setup environment)
     id dict = @{};
-    BCJJSONSource *source = BCJJSONSource(dict, @"notAdate");
+    BCJJSONSource *source = BCJSource(dict, @"notAdate");
 
     //When (perform the action)
     NSDate *actualValue = [NSDate dateWithTimeIntervalSince1970:1234567890];
@@ -148,7 +148,7 @@
 {
     //Given
     id dict = @{@"url": @"http://ledzeppelin.com"};
-    BCJJSONSource *source = BCJJSONSource(dict, @"url");
+    BCJJSONSource *source = BCJSource(dict, @"url");
 
     //When
     NSURL *actualValue;
@@ -168,7 +168,7 @@
 {
     //Given
     id dict = @{@"url": @"http://the led zeppelin.com"}; //This makes absolutely no sense.
-    BCJJSONSource *source = BCJJSONSource(dict, @"url");
+    BCJJSONSource *source = BCJSource(dict, @"url");
 
     //When
     NSURL *actualValue = [NSURL URLWithString:@"http://thisshouldbenil.com"];
@@ -189,7 +189,7 @@
 {
     //Given (setup environment)
     id dict = @{};
-    BCJJSONSource *source = BCJJSONSource(dict, @"notAdate");
+    BCJJSONSource *source = BCJSource(dict, @"notAdate");
 
     //When (perform the action)
     NSURL *actualValue = [NSURL URLWithString:@"http://thisshouldbenil.com"];
@@ -209,7 +209,7 @@
 {
     //Given
     id dict = @{@"enum": @"one"};
-    BCJJSONSource *source = BCJJSONSource(dict, @"enum");
+    BCJJSONSource *source = BCJSource(dict, @"enum");
     NSDictionary *enumMapping = @{@"one": @1, @"two": @2, @"three": @3};
 
     //When
@@ -230,7 +230,7 @@
 {
     //Given
     id dict = @{@"enum": @"Mmmmmm, cheese. Sorry, I got distracted. I meant 'three'."};
-    BCJJSONSource *source = BCJJSONSource(dict, @"enum");
+    BCJJSONSource *source = BCJSource(dict, @"enum");
     NSDictionary *enumMapping = @{@"one": @1, @"two": @2, @"three": @3};
 
     //When
@@ -252,7 +252,7 @@
 {
     //Given
     id dict = @{};
-    BCJJSONSource *source = BCJJSONSource(dict, @"enum");
+    BCJJSONSource *source = BCJSource(dict, @"enum");
     NSDictionary *enumMapping = @{@"one": @1, @"two": @2, @"three": @3};
 
     //When
