@@ -32,7 +32,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJJSONSource *source, BOOL(^su
 
 
 #pragma mark - Set arbitary object continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJPropertyTarget *target, BCJJSONSource *source) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJJSONSource *source, BCJPropertyTarget *target) {
     NSCParameterAssert(target != nil);
     NSCParameterAssert(source != nil);
 

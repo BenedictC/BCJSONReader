@@ -46,15 +46,6 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(BCJJSONSource *source, BCJProper
 /**
  <#Description#>
 
- @param source            <#source description#>
- @param targetPropertyKey <#targetPropertyKey description#>
-
- @return <#return value description#>
- */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJMapping(BCJJSONSource *source, NSString *targetPropertyKey) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
-/**
- <#Description#>
-
  @param jsonPath     <#jsonPath description#>
  @param propertyKey  <#propertyKey description#>
 

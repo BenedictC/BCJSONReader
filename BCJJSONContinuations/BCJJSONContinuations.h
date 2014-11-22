@@ -10,17 +10,20 @@
 #import "BCJConstants.h"
 #import "BCJDefines.h"
 
-//Input & output
+//Core
 #import "BCJJSONSource.h"
 #import "BCJPropertyTarget.h"
 
+#import "BCJGettersAndSetters.h"
+
+#import "BCJLogging.h"
+
 //Deserialization
+#import "BCJDeserialization.h"
 #import "BCJContainer.h"
 #import "BCJContainerJSONSource.h"
-#import "BCJDeserialization.h"
 
-//Getters & Setters
-#import "BCJGettersAndSetters.h"
+//Type-Specific Continuations
 #import "BCJStandardTypes.h"
 #import "BCJAdditionalTypes.h"
 #import "BCJMap.h"
@@ -28,5 +31,3 @@
 //Validation
 #import "BCJValidation.h"
 
-//Logging
-#import "BCJLogging.h"

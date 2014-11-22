@@ -43,6 +43,7 @@ static inline void assertKVCTargetWillAcceptValue(id object, NSString *key, id v
         });
 
         if (className != nil) {
+#warning TODO: I seems incorrect that this fails when, for example, attempting to set a string property to a dict
             Class class = NSClassFromString(className);
             NSCAssert([value isKindOfClass:class], ({
                 [NSString stringWithFormat:@"Attempted to set an object of type <%@> to an ivar of type <%@> for key <%@> of object <%@>.", NSStringFromClass([value class]), NSStringFromClass(class), key, object];

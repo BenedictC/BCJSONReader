@@ -15,86 +15,6 @@
 		821C2B1F1A05A3D500C56BC3 /* BCLControlFlowContinuationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 821C2B1E1A05A3D500C56BC3 /* BCLControlFlowContinuationsTests.m */; };
 		823451D51A1208B200E19D74 /* BCJGettersAndSettersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823451D41A1208B200E19D74 /* BCJGettersAndSettersTests.m */; };
 		823452021A12658000E19D74 /* libBCJJSONContinuationsOSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 828555C31A0E147D00FCBF61 /* libBCJJSONContinuationsOSX.dylib */; };
-		823C69061A1E9A23006C1A90 /* BCJAdditionalTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68D31A1E9A23006C1A90 /* BCJAdditionalTypes.h */; };
-		823C69071A1E9A23006C1A90 /* BCJAdditionalTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68D31A1E9A23006C1A90 /* BCJAdditionalTypes.h */; };
-		823C69081A1E9A23006C1A90 /* BCJAdditionalTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68D41A1E9A23006C1A90 /* BCJAdditionalTypes.m */; };
-		823C69091A1E9A23006C1A90 /* BCJAdditionalTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68D41A1E9A23006C1A90 /* BCJAdditionalTypes.m */; };
-		823C690A1A1E9A23006C1A90 /* BCJAdditionalTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68D41A1E9A23006C1A90 /* BCJAdditionalTypes.m */; };
-		823C690B1A1E9A23006C1A90 /* BCJConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68D51A1E9A23006C1A90 /* BCJConstants.h */; };
-		823C690C1A1E9A23006C1A90 /* BCJConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68D51A1E9A23006C1A90 /* BCJConstants.h */; };
-		823C690D1A1E9A23006C1A90 /* BCJConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68D61A1E9A23006C1A90 /* BCJConstants.m */; };
-		823C690E1A1E9A23006C1A90 /* BCJConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68D61A1E9A23006C1A90 /* BCJConstants.m */; };
-		823C690F1A1E9A23006C1A90 /* BCJConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68D61A1E9A23006C1A90 /* BCJConstants.m */; };
-		823C69101A1E9A23006C1A90 /* BCJContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68D71A1E9A23006C1A90 /* BCJContainer.h */; };
-		823C69111A1E9A23006C1A90 /* BCJContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68D71A1E9A23006C1A90 /* BCJContainer.h */; };
-		823C69121A1E9A23006C1A90 /* BCJContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68D81A1E9A23006C1A90 /* BCJContainer.m */; };
-		823C69131A1E9A23006C1A90 /* BCJContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68D81A1E9A23006C1A90 /* BCJContainer.m */; };
-		823C69141A1E9A23006C1A90 /* BCJContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68D81A1E9A23006C1A90 /* BCJContainer.m */; };
-		823C69151A1E9A23006C1A90 /* BCJDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68D91A1E9A23006C1A90 /* BCJDefines.h */; };
-		823C69161A1E9A23006C1A90 /* BCJDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68D91A1E9A23006C1A90 /* BCJDefines.h */; };
-		823C69171A1E9A23006C1A90 /* BCJDeserialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68DA1A1E9A23006C1A90 /* BCJDeserialization.h */; };
-		823C69181A1E9A23006C1A90 /* BCJDeserialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68DA1A1E9A23006C1A90 /* BCJDeserialization.h */; };
-		823C69191A1E9A23006C1A90 /* BCJDeserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68DB1A1E9A23006C1A90 /* BCJDeserialization.m */; };
-		823C691A1A1E9A23006C1A90 /* BCJDeserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68DB1A1E9A23006C1A90 /* BCJDeserialization.m */; };
-		823C691B1A1E9A23006C1A90 /* BCJDeserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68DB1A1E9A23006C1A90 /* BCJDeserialization.m */; };
-		823C691C1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68DC1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.h */; };
-		823C691D1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68DC1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.h */; };
-		823C691E1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68DD1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.m */; };
-		823C691F1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68DD1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.m */; };
-		823C69201A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68DD1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.m */; };
-		823C69211A1E9A23006C1A90 /* BCJError.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68DE1A1E9A23006C1A90 /* BCJError.h */; };
-		823C69221A1E9A23006C1A90 /* BCJError.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68DE1A1E9A23006C1A90 /* BCJError.h */; };
-		823C69231A1E9A23006C1A90 /* BCJError.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68DF1A1E9A23006C1A90 /* BCJError.m */; };
-		823C69241A1E9A23006C1A90 /* BCJError.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68DF1A1E9A23006C1A90 /* BCJError.m */; };
-		823C69251A1E9A23006C1A90 /* BCJError.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68DF1A1E9A23006C1A90 /* BCJError.m */; };
-		823C69261A1E9A23006C1A90 /* BCJGettersAndSetters.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68E01A1E9A23006C1A90 /* BCJGettersAndSetters.h */; };
-		823C69271A1E9A23006C1A90 /* BCJGettersAndSetters.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68E01A1E9A23006C1A90 /* BCJGettersAndSetters.h */; };
-		823C69281A1E9A23006C1A90 /* BCJGettersAndSetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68E11A1E9A23006C1A90 /* BCJGettersAndSetters.m */; };
-		823C69291A1E9A23006C1A90 /* BCJGettersAndSetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68E11A1E9A23006C1A90 /* BCJGettersAndSetters.m */; };
-		823C692A1A1E9A23006C1A90 /* BCJGettersAndSetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68E11A1E9A23006C1A90 /* BCJGettersAndSetters.m */; };
-		823C69301A1E9A23006C1A90 /* BCJJSONContinuations.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68E41A1E9A23006C1A90 /* BCJJSONContinuations.h */; };
-		823C69311A1E9A23006C1A90 /* BCJJSONContinuations.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68E41A1E9A23006C1A90 /* BCJJSONContinuations.h */; };
-		823C69321A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68E51A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.h */; };
-		823C69331A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68E51A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.h */; };
-		823C69341A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68E61A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.m */; };
-		823C69351A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68E61A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.m */; };
-		823C69361A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68E61A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.m */; };
-		823C69371A1E9A23006C1A90 /* BCJJSONSource+OptionsAdditons.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68E71A1E9A23006C1A90 /* BCJJSONSource+OptionsAdditons.h */; };
-		823C69381A1E9A23006C1A90 /* BCJJSONSource+OptionsAdditons.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68E71A1E9A23006C1A90 /* BCJJSONSource+OptionsAdditons.h */; };
-		823C69391A1E9A23006C1A90 /* BCJJSONSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68E81A1E9A23006C1A90 /* BCJJSONSource.h */; };
-		823C693A1A1E9A23006C1A90 /* BCJJSONSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68E81A1E9A23006C1A90 /* BCJJSONSource.h */; };
-		823C693B1A1E9A23006C1A90 /* BCJJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68E91A1E9A23006C1A90 /* BCJJSONSource.m */; };
-		823C693C1A1E9A23006C1A90 /* BCJJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68E91A1E9A23006C1A90 /* BCJJSONSource.m */; };
-		823C693D1A1E9A23006C1A90 /* BCJJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68E91A1E9A23006C1A90 /* BCJJSONSource.m */; };
-		823C693E1A1E9A23006C1A90 /* BCJLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68EA1A1E9A23006C1A90 /* BCJLogging.h */; };
-		823C693F1A1E9A23006C1A90 /* BCJLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68EA1A1E9A23006C1A90 /* BCJLogging.h */; };
-		823C69401A1E9A23006C1A90 /* BCJLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68EB1A1E9A23006C1A90 /* BCJLogging.m */; };
-		823C69411A1E9A23006C1A90 /* BCJLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68EB1A1E9A23006C1A90 /* BCJLogging.m */; };
-		823C69421A1E9A23006C1A90 /* BCJLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68EB1A1E9A23006C1A90 /* BCJLogging.m */; };
-		823C69431A1E9A23006C1A90 /* BCJMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68EC1A1E9A23006C1A90 /* BCJMap.h */; };
-		823C69441A1E9A23006C1A90 /* BCJMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68EC1A1E9A23006C1A90 /* BCJMap.h */; };
-		823C69451A1E9A23006C1A90 /* BCJMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68ED1A1E9A23006C1A90 /* BCJMap.m */; };
-		823C69461A1E9A23006C1A90 /* BCJMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68ED1A1E9A23006C1A90 /* BCJMap.m */; };
-		823C69471A1E9A23006C1A90 /* BCJMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68ED1A1E9A23006C1A90 /* BCJMap.m */; };
-		823C69481A1E9A23006C1A90 /* BCJMapOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68EE1A1E9A23006C1A90 /* BCJMapOptions.h */; };
-		823C69491A1E9A23006C1A90 /* BCJMapOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68EE1A1E9A23006C1A90 /* BCJMapOptions.h */; };
-		823C694F1A1E9A23006C1A90 /* BCJPropertyTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68F11A1E9A23006C1A90 /* BCJPropertyTarget.h */; };
-		823C69501A1E9A23006C1A90 /* BCJPropertyTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68F11A1E9A23006C1A90 /* BCJPropertyTarget.h */; };
-		823C69511A1E9A23006C1A90 /* BCJPropertyTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68F21A1E9A23006C1A90 /* BCJPropertyTarget.m */; };
-		823C69521A1E9A23006C1A90 /* BCJPropertyTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68F21A1E9A23006C1A90 /* BCJPropertyTarget.m */; };
-		823C69531A1E9A23006C1A90 /* BCJPropertyTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68F21A1E9A23006C1A90 /* BCJPropertyTarget.m */; };
-		823C69541A1E9A23006C1A90 /* BCJJSONSourceConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68F31A1E9A23006C1A90 /* BCJJSONSourceConstants.h */; };
-		823C69551A1E9A23006C1A90 /* BCJJSONSourceConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68F31A1E9A23006C1A90 /* BCJJSONSourceConstants.h */; };
-		823C69581A1E9A23006C1A90 /* BCJStandardTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68F51A1E9A23006C1A90 /* BCJStandardTypes.h */; };
-		823C69591A1E9A23006C1A90 /* BCJStandardTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68F51A1E9A23006C1A90 /* BCJStandardTypes.h */; };
-		823C695A1A1E9A23006C1A90 /* BCJStandardTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68F61A1E9A23006C1A90 /* BCJStandardTypes.m */; };
-		823C695B1A1E9A23006C1A90 /* BCJStandardTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68F61A1E9A23006C1A90 /* BCJStandardTypes.m */; };
-		823C695C1A1E9A23006C1A90 /* BCJStandardTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68F61A1E9A23006C1A90 /* BCJStandardTypes.m */; };
-		823C695D1A1E9A23006C1A90 /* BCJValidation.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68F71A1E9A23006C1A90 /* BCJValidation.h */; };
-		823C695E1A1E9A23006C1A90 /* BCJValidation.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68F71A1E9A23006C1A90 /* BCJValidation.h */; };
-		823C695F1A1E9A23006C1A90 /* BCJValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68F81A1E9A23006C1A90 /* BCJValidation.m */; };
-		823C69601A1E9A23006C1A90 /* BCJValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68F81A1E9A23006C1A90 /* BCJValidation.m */; };
-		823C69611A1E9A23006C1A90 /* BCJValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68F81A1E9A23006C1A90 /* BCJValidation.m */; };
 		823C69621A1E9A23006C1A90 /* BCJMapperClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68FA1A1E9A23006C1A90 /* BCJMapperClass.h */; };
 		823C69631A1E9A23006C1A90 /* BCJMapperClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68FA1A1E9A23006C1A90 /* BCJMapperClass.h */; };
 		823C69641A1E9A23006C1A90 /* BCJMapperClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C68FB1A1E9A23006C1A90 /* BCJMapperClass.m */; };
@@ -130,16 +50,98 @@
 		823C69971A1F6F38006C1A90 /* BCJMappingContinuations.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69851A1F583E006C1A90 /* BCJMappingContinuations.m */; };
 		823C69981A1F6F38006C1A90 /* BCJStackJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69891A1F61F4006C1A90 /* BCJStackJSONSource.m */; };
 		823C69991A1F6F38006C1A90 /* BCJStackPropertyTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C698F1A1F6C12006C1A90 /* BCJStackPropertyTarget.m */; };
-		823C69B71A1FE217006C1A90 /* BCJContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69B61A1FE217006C1A90 /* BCJContainerProtocol.h */; };
-		823C69BA1A1FE237006C1A90 /* BCJContainerJSONSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69B81A1FE237006C1A90 /* BCJContainerJSONSource.h */; };
-		823C69BB1A1FE237006C1A90 /* BCJContainerJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69B91A1FE237006C1A90 /* BCJContainerJSONSource.m */; };
-		823C69BC1A1FE304006C1A90 /* BCJContainerJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69B91A1FE237006C1A90 /* BCJContainerJSONSource.m */; };
-		823C69BD1A1FE305006C1A90 /* BCJContainerJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69B91A1FE237006C1A90 /* BCJContainerJSONSource.m */; };
 		823C69C01A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69BE1A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.h */; };
 		823C69C11A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69BE1A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.h */; };
 		823C69C21A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69BF1A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.m */; };
 		823C69C31A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69BF1A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.m */; };
 		823C69C41A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69BF1A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.m */; };
+		823C69EE1A208A8E006C1A90 /* BCJJSONContinuations.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69C61A208A8E006C1A90 /* BCJJSONContinuations.h */; };
+		823C69EF1A208A8E006C1A90 /* BCJJSONContinuations.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69C61A208A8E006C1A90 /* BCJJSONContinuations.h */; };
+		823C69F01A208A8E006C1A90 /* BCJConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69C81A208A8E006C1A90 /* BCJConstants.h */; };
+		823C69F11A208A8E006C1A90 /* BCJConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69C81A208A8E006C1A90 /* BCJConstants.h */; };
+		823C69F21A208A8E006C1A90 /* BCJConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69C91A208A8E006C1A90 /* BCJConstants.m */; };
+		823C69F31A208A8E006C1A90 /* BCJConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69C91A208A8E006C1A90 /* BCJConstants.m */; };
+		823C69F41A208A8E006C1A90 /* BCJConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69C91A208A8E006C1A90 /* BCJConstants.m */; };
+		823C69F51A208A8E006C1A90 /* BCJDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69CA1A208A8E006C1A90 /* BCJDefines.h */; };
+		823C69F61A208A8E006C1A90 /* BCJDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69CA1A208A8E006C1A90 /* BCJDefines.h */; };
+		823C69F71A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69CB1A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.h */; };
+		823C69F81A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69CB1A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.h */; };
+		823C69F91A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69CC1A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.m */; };
+		823C69FA1A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69CC1A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.m */; };
+		823C69FB1A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69CC1A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.m */; };
+		823C69FC1A208A8E006C1A90 /* BCJError.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69CD1A208A8E006C1A90 /* BCJError.h */; };
+		823C69FD1A208A8E006C1A90 /* BCJError.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69CD1A208A8E006C1A90 /* BCJError.h */; };
+		823C69FE1A208A8E006C1A90 /* BCJError.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69CE1A208A8E006C1A90 /* BCJError.m */; };
+		823C69FF1A208A8E006C1A90 /* BCJError.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69CE1A208A8E006C1A90 /* BCJError.m */; };
+		823C6A001A208A8E006C1A90 /* BCJError.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69CE1A208A8E006C1A90 /* BCJError.m */; };
+		823C6A011A208A8E006C1A90 /* BCJGettersAndSetters.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69CF1A208A8E006C1A90 /* BCJGettersAndSetters.h */; };
+		823C6A021A208A8E006C1A90 /* BCJGettersAndSetters.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69CF1A208A8E006C1A90 /* BCJGettersAndSetters.h */; };
+		823C6A031A208A8E006C1A90 /* BCJGettersAndSetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69D01A208A8E006C1A90 /* BCJGettersAndSetters.m */; };
+		823C6A041A208A8E006C1A90 /* BCJGettersAndSetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69D01A208A8E006C1A90 /* BCJGettersAndSetters.m */; };
+		823C6A051A208A8E006C1A90 /* BCJGettersAndSetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69D01A208A8E006C1A90 /* BCJGettersAndSetters.m */; };
+		823C6A061A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69D11A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.h */; };
+		823C6A071A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69D11A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.h */; };
+		823C6A081A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69D21A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.m */; };
+		823C6A091A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69D21A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.m */; };
+		823C6A0A1A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69D21A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.m */; };
+		823C6A0B1A208A8E006C1A90 /* BCJJSONSource+OptionsAdditons.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69D31A208A8E006C1A90 /* BCJJSONSource+OptionsAdditons.h */; };
+		823C6A0C1A208A8E006C1A90 /* BCJJSONSource+OptionsAdditons.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69D31A208A8E006C1A90 /* BCJJSONSource+OptionsAdditons.h */; };
+		823C6A0D1A208A8E006C1A90 /* BCJJSONSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69D41A208A8E006C1A90 /* BCJJSONSource.h */; };
+		823C6A0E1A208A8E006C1A90 /* BCJJSONSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69D41A208A8E006C1A90 /* BCJJSONSource.h */; };
+		823C6A0F1A208A8E006C1A90 /* BCJJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69D51A208A8E006C1A90 /* BCJJSONSource.m */; };
+		823C6A101A208A8E006C1A90 /* BCJJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69D51A208A8E006C1A90 /* BCJJSONSource.m */; };
+		823C6A111A208A8E006C1A90 /* BCJJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69D51A208A8E006C1A90 /* BCJJSONSource.m */; };
+		823C6A121A208A8E006C1A90 /* BCJJSONSourceConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69D61A208A8E006C1A90 /* BCJJSONSourceConstants.h */; };
+		823C6A131A208A8E006C1A90 /* BCJJSONSourceConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69D61A208A8E006C1A90 /* BCJJSONSourceConstants.h */; };
+		823C6A141A208A8E006C1A90 /* BCJLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69D71A208A8E006C1A90 /* BCJLogging.h */; };
+		823C6A151A208A8E006C1A90 /* BCJLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69D71A208A8E006C1A90 /* BCJLogging.h */; };
+		823C6A161A208A8E006C1A90 /* BCJLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69D81A208A8E006C1A90 /* BCJLogging.m */; };
+		823C6A171A208A8E006C1A90 /* BCJLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69D81A208A8E006C1A90 /* BCJLogging.m */; };
+		823C6A181A208A8E006C1A90 /* BCJLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69D81A208A8E006C1A90 /* BCJLogging.m */; };
+		823C6A191A208A8E006C1A90 /* BCJPropertyTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69D91A208A8E006C1A90 /* BCJPropertyTarget.h */; };
+		823C6A1A1A208A8E006C1A90 /* BCJPropertyTarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69D91A208A8E006C1A90 /* BCJPropertyTarget.h */; };
+		823C6A1B1A208A8E006C1A90 /* BCJPropertyTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69DA1A208A8E006C1A90 /* BCJPropertyTarget.m */; };
+		823C6A1C1A208A8E006C1A90 /* BCJPropertyTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69DA1A208A8E006C1A90 /* BCJPropertyTarget.m */; };
+		823C6A1D1A208A8E006C1A90 /* BCJPropertyTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69DA1A208A8E006C1A90 /* BCJPropertyTarget.m */; };
+		823C6A1E1A208A8E006C1A90 /* BCJContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69DC1A208A8E006C1A90 /* BCJContainer.h */; };
+		823C6A1F1A208A8E006C1A90 /* BCJContainer.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69DC1A208A8E006C1A90 /* BCJContainer.h */; };
+		823C6A201A208A8E006C1A90 /* BCJContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69DD1A208A8E006C1A90 /* BCJContainer.m */; };
+		823C6A211A208A8E006C1A90 /* BCJContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69DD1A208A8E006C1A90 /* BCJContainer.m */; };
+		823C6A221A208A8E006C1A90 /* BCJContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69DD1A208A8E006C1A90 /* BCJContainer.m */; };
+		823C6A231A208A8E006C1A90 /* BCJContainerJSONSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69DE1A208A8E006C1A90 /* BCJContainerJSONSource.h */; };
+		823C6A241A208A8E006C1A90 /* BCJContainerJSONSource.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69DE1A208A8E006C1A90 /* BCJContainerJSONSource.h */; };
+		823C6A251A208A8E006C1A90 /* BCJContainerJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69DF1A208A8E006C1A90 /* BCJContainerJSONSource.m */; };
+		823C6A261A208A8E006C1A90 /* BCJContainerJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69DF1A208A8E006C1A90 /* BCJContainerJSONSource.m */; };
+		823C6A271A208A8E006C1A90 /* BCJContainerJSONSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69DF1A208A8E006C1A90 /* BCJContainerJSONSource.m */; };
+		823C6A281A208A8E006C1A90 /* BCJContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69E01A208A8E006C1A90 /* BCJContainerProtocol.h */; };
+		823C6A291A208A8E006C1A90 /* BCJContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69E01A208A8E006C1A90 /* BCJContainerProtocol.h */; };
+		823C6A2A1A208A8E006C1A90 /* BCJDeserialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69E11A208A8E006C1A90 /* BCJDeserialization.h */; };
+		823C6A2B1A208A8E006C1A90 /* BCJDeserialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69E11A208A8E006C1A90 /* BCJDeserialization.h */; };
+		823C6A2C1A208A8E006C1A90 /* BCJDeserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69E21A208A8E006C1A90 /* BCJDeserialization.m */; };
+		823C6A2D1A208A8E006C1A90 /* BCJDeserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69E21A208A8E006C1A90 /* BCJDeserialization.m */; };
+		823C6A2E1A208A8E006C1A90 /* BCJDeserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69E21A208A8E006C1A90 /* BCJDeserialization.m */; };
+		823C6A2F1A208A8E006C1A90 /* BCJAdditionalTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69E41A208A8E006C1A90 /* BCJAdditionalTypes.h */; };
+		823C6A301A208A8E006C1A90 /* BCJAdditionalTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69E41A208A8E006C1A90 /* BCJAdditionalTypes.h */; };
+		823C6A311A208A8E006C1A90 /* BCJAdditionalTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69E51A208A8E006C1A90 /* BCJAdditionalTypes.m */; };
+		823C6A321A208A8E006C1A90 /* BCJAdditionalTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69E51A208A8E006C1A90 /* BCJAdditionalTypes.m */; };
+		823C6A331A208A8E006C1A90 /* BCJAdditionalTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69E51A208A8E006C1A90 /* BCJAdditionalTypes.m */; };
+		823C6A341A208A8E006C1A90 /* BCJMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69E61A208A8E006C1A90 /* BCJMap.h */; };
+		823C6A351A208A8E006C1A90 /* BCJMap.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69E61A208A8E006C1A90 /* BCJMap.h */; };
+		823C6A361A208A8E006C1A90 /* BCJMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69E71A208A8E006C1A90 /* BCJMap.m */; };
+		823C6A371A208A8E006C1A90 /* BCJMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69E71A208A8E006C1A90 /* BCJMap.m */; };
+		823C6A381A208A8E006C1A90 /* BCJMap.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69E71A208A8E006C1A90 /* BCJMap.m */; };
+		823C6A391A208A8E006C1A90 /* BCJMapOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69E81A208A8E006C1A90 /* BCJMapOptions.h */; };
+		823C6A3A1A208A8E006C1A90 /* BCJMapOptions.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69E81A208A8E006C1A90 /* BCJMapOptions.h */; };
+		823C6A3B1A208A8E006C1A90 /* BCJStandardTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69E91A208A8E006C1A90 /* BCJStandardTypes.h */; };
+		823C6A3C1A208A8E006C1A90 /* BCJStandardTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69E91A208A8E006C1A90 /* BCJStandardTypes.h */; };
+		823C6A3D1A208A8E006C1A90 /* BCJStandardTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69EA1A208A8E006C1A90 /* BCJStandardTypes.m */; };
+		823C6A3E1A208A8E006C1A90 /* BCJStandardTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69EA1A208A8E006C1A90 /* BCJStandardTypes.m */; };
+		823C6A3F1A208A8E006C1A90 /* BCJStandardTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69EA1A208A8E006C1A90 /* BCJStandardTypes.m */; };
+		823C6A401A208A8E006C1A90 /* BCJValidation.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69EC1A208A8E006C1A90 /* BCJValidation.h */; };
+		823C6A411A208A8E006C1A90 /* BCJValidation.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69EC1A208A8E006C1A90 /* BCJValidation.h */; };
+		823C6A421A208A8E006C1A90 /* BCJValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69ED1A208A8E006C1A90 /* BCJValidation.m */; };
+		823C6A431A208A8E006C1A90 /* BCJValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69ED1A208A8E006C1A90 /* BCJValidation.m */; };
+		823C6A441A208A8E006C1A90 /* BCJValidation.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69ED1A208A8E006C1A90 /* BCJValidation.m */; };
 		828555931A0D868500FCBF61 /* BCJAdditionalTypesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 828555921A0D868500FCBF61 /* BCJAdditionalTypesTests.m */; };
 		828555951A0D877A00FCBF61 /* BCJJSONSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 828555941A0D877A00FCBF61 /* BCJJSONSourceTests.m */; };
 		828555971A0D878D00FCBF61 /* BCJJSONTargetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 828555961A0D878D00FCBF61 /* BCJJSONTargetTests.m */; };
@@ -182,39 +184,6 @@
 		821C2B1E1A05A3D500C56BC3 /* BCLControlFlowContinuationsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLControlFlowContinuationsTests.m; sourceTree = "<group>"; };
 		821C2B201A05A4AA00C56BC3 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		823451D41A1208B200E19D74 /* BCJGettersAndSettersTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJGettersAndSettersTests.m; sourceTree = "<group>"; };
-		823C68D31A1E9A23006C1A90 /* BCJAdditionalTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJAdditionalTypes.h; sourceTree = "<group>"; };
-		823C68D41A1E9A23006C1A90 /* BCJAdditionalTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJAdditionalTypes.m; sourceTree = "<group>"; };
-		823C68D51A1E9A23006C1A90 /* BCJConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJConstants.h; sourceTree = "<group>"; };
-		823C68D61A1E9A23006C1A90 /* BCJConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJConstants.m; sourceTree = "<group>"; };
-		823C68D71A1E9A23006C1A90 /* BCJContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJContainer.h; sourceTree = "<group>"; };
-		823C68D81A1E9A23006C1A90 /* BCJContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJContainer.m; sourceTree = "<group>"; };
-		823C68D91A1E9A23006C1A90 /* BCJDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJDefines.h; sourceTree = "<group>"; };
-		823C68DA1A1E9A23006C1A90 /* BCJDeserialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJDeserialization.h; sourceTree = "<group>"; };
-		823C68DB1A1E9A23006C1A90 /* BCJDeserialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJDeserialization.m; sourceTree = "<group>"; };
-		823C68DC1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJEnumerateJSONPathComponents.h; sourceTree = "<group>"; };
-		823C68DD1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJEnumerateJSONPathComponents.m; sourceTree = "<group>"; };
-		823C68DE1A1E9A23006C1A90 /* BCJError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJError.h; sourceTree = "<group>"; };
-		823C68DF1A1E9A23006C1A90 /* BCJError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJError.m; sourceTree = "<group>"; };
-		823C68E01A1E9A23006C1A90 /* BCJGettersAndSetters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJGettersAndSetters.h; sourceTree = "<group>"; };
-		823C68E11A1E9A23006C1A90 /* BCJGettersAndSetters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJGettersAndSetters.m; sourceTree = "<group>"; };
-		823C68E41A1E9A23006C1A90 /* BCJJSONContinuations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJJSONContinuations.h; sourceTree = "<group>"; };
-		823C68E51A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCJJSONSource+DeferredClassCheck.h"; sourceTree = "<group>"; };
-		823C68E61A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCJJSONSource+DeferredClassCheck.m"; sourceTree = "<group>"; };
-		823C68E71A1E9A23006C1A90 /* BCJJSONSource+OptionsAdditons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCJJSONSource+OptionsAdditons.h"; sourceTree = "<group>"; };
-		823C68E81A1E9A23006C1A90 /* BCJJSONSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJJSONSource.h; sourceTree = "<group>"; };
-		823C68E91A1E9A23006C1A90 /* BCJJSONSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJJSONSource.m; sourceTree = "<group>"; };
-		823C68EA1A1E9A23006C1A90 /* BCJLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJLogging.h; sourceTree = "<group>"; };
-		823C68EB1A1E9A23006C1A90 /* BCJLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJLogging.m; sourceTree = "<group>"; };
-		823C68EC1A1E9A23006C1A90 /* BCJMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJMap.h; sourceTree = "<group>"; };
-		823C68ED1A1E9A23006C1A90 /* BCJMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJMap.m; sourceTree = "<group>"; };
-		823C68EE1A1E9A23006C1A90 /* BCJMapOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJMapOptions.h; sourceTree = "<group>"; };
-		823C68F11A1E9A23006C1A90 /* BCJPropertyTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJPropertyTarget.h; sourceTree = "<group>"; };
-		823C68F21A1E9A23006C1A90 /* BCJPropertyTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJPropertyTarget.m; sourceTree = "<group>"; };
-		823C68F31A1E9A23006C1A90 /* BCJJSONSourceConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJJSONSourceConstants.h; sourceTree = "<group>"; };
-		823C68F51A1E9A23006C1A90 /* BCJStandardTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJStandardTypes.h; sourceTree = "<group>"; };
-		823C68F61A1E9A23006C1A90 /* BCJStandardTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJStandardTypes.m; sourceTree = "<group>"; };
-		823C68F71A1E9A23006C1A90 /* BCJValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJValidation.h; sourceTree = "<group>"; };
-		823C68F81A1E9A23006C1A90 /* BCJValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJValidation.m; sourceTree = "<group>"; };
 		823C68FA1A1E9A23006C1A90 /* BCJMapperClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJMapperClass.h; sourceTree = "<group>"; };
 		823C68FB1A1E9A23006C1A90 /* BCJMapperClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJMapperClass.m; sourceTree = "<group>"; };
 		823C68FD1A1E9A23006C1A90 /* BCLBlockContinuation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLBlockContinuation.h; sourceTree = "<group>"; };
@@ -233,11 +202,44 @@
 		823C69891A1F61F4006C1A90 /* BCJStackJSONSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJStackJSONSource.m; sourceTree = "<group>"; };
 		823C698E1A1F6C12006C1A90 /* BCJStackPropertyTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJStackPropertyTarget.h; sourceTree = "<group>"; };
 		823C698F1A1F6C12006C1A90 /* BCJStackPropertyTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJStackPropertyTarget.m; sourceTree = "<group>"; };
-		823C69B61A1FE217006C1A90 /* BCJContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCJContainerProtocol.h; path = ../../../../../.Trash/BCJContainerProtocol.h; sourceTree = "<group>"; };
-		823C69B81A1FE237006C1A90 /* BCJContainerJSONSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BCJContainerJSONSource.h; path = ../../../../../.Trash/BCJContainerJSONSource.h; sourceTree = "<group>"; };
-		823C69B91A1FE237006C1A90 /* BCJContainerJSONSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BCJContainerJSONSource.m; path = ../../../../../.Trash/BCJContainerJSONSource.m; sourceTree = "<group>"; };
 		823C69BE1A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCJPropertyTarget+ExpectedType.h"; sourceTree = "<group>"; };
 		823C69BF1A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCJPropertyTarget+ExpectedType.m"; sourceTree = "<group>"; };
+		823C69C61A208A8E006C1A90 /* BCJJSONContinuations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJJSONContinuations.h; sourceTree = "<group>"; };
+		823C69C81A208A8E006C1A90 /* BCJConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJConstants.h; sourceTree = "<group>"; };
+		823C69C91A208A8E006C1A90 /* BCJConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJConstants.m; sourceTree = "<group>"; };
+		823C69CA1A208A8E006C1A90 /* BCJDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJDefines.h; sourceTree = "<group>"; };
+		823C69CB1A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJEnumerateJSONPathComponents.h; sourceTree = "<group>"; };
+		823C69CC1A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJEnumerateJSONPathComponents.m; sourceTree = "<group>"; };
+		823C69CD1A208A8E006C1A90 /* BCJError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJError.h; sourceTree = "<group>"; };
+		823C69CE1A208A8E006C1A90 /* BCJError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJError.m; sourceTree = "<group>"; };
+		823C69CF1A208A8E006C1A90 /* BCJGettersAndSetters.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJGettersAndSetters.h; sourceTree = "<group>"; };
+		823C69D01A208A8E006C1A90 /* BCJGettersAndSetters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJGettersAndSetters.m; sourceTree = "<group>"; };
+		823C69D11A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCJJSONSource+DeferredClassCheck.h"; sourceTree = "<group>"; };
+		823C69D21A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCJJSONSource+DeferredClassCheck.m"; sourceTree = "<group>"; };
+		823C69D31A208A8E006C1A90 /* BCJJSONSource+OptionsAdditons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCJJSONSource+OptionsAdditons.h"; sourceTree = "<group>"; };
+		823C69D41A208A8E006C1A90 /* BCJJSONSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJJSONSource.h; sourceTree = "<group>"; };
+		823C69D51A208A8E006C1A90 /* BCJJSONSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJJSONSource.m; sourceTree = "<group>"; };
+		823C69D61A208A8E006C1A90 /* BCJJSONSourceConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJJSONSourceConstants.h; sourceTree = "<group>"; };
+		823C69D71A208A8E006C1A90 /* BCJLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJLogging.h; sourceTree = "<group>"; };
+		823C69D81A208A8E006C1A90 /* BCJLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJLogging.m; sourceTree = "<group>"; };
+		823C69D91A208A8E006C1A90 /* BCJPropertyTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJPropertyTarget.h; sourceTree = "<group>"; };
+		823C69DA1A208A8E006C1A90 /* BCJPropertyTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJPropertyTarget.m; sourceTree = "<group>"; };
+		823C69DC1A208A8E006C1A90 /* BCJContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJContainer.h; sourceTree = "<group>"; };
+		823C69DD1A208A8E006C1A90 /* BCJContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJContainer.m; sourceTree = "<group>"; };
+		823C69DE1A208A8E006C1A90 /* BCJContainerJSONSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJContainerJSONSource.h; sourceTree = "<group>"; };
+		823C69DF1A208A8E006C1A90 /* BCJContainerJSONSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJContainerJSONSource.m; sourceTree = "<group>"; };
+		823C69E01A208A8E006C1A90 /* BCJContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJContainerProtocol.h; sourceTree = "<group>"; };
+		823C69E11A208A8E006C1A90 /* BCJDeserialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJDeserialization.h; sourceTree = "<group>"; };
+		823C69E21A208A8E006C1A90 /* BCJDeserialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJDeserialization.m; sourceTree = "<group>"; };
+		823C69E41A208A8E006C1A90 /* BCJAdditionalTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJAdditionalTypes.h; sourceTree = "<group>"; };
+		823C69E51A208A8E006C1A90 /* BCJAdditionalTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJAdditionalTypes.m; sourceTree = "<group>"; };
+		823C69E61A208A8E006C1A90 /* BCJMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJMap.h; sourceTree = "<group>"; };
+		823C69E71A208A8E006C1A90 /* BCJMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJMap.m; sourceTree = "<group>"; };
+		823C69E81A208A8E006C1A90 /* BCJMapOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJMapOptions.h; sourceTree = "<group>"; };
+		823C69E91A208A8E006C1A90 /* BCJStandardTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJStandardTypes.h; sourceTree = "<group>"; };
+		823C69EA1A208A8E006C1A90 /* BCJStandardTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJStandardTypes.m; sourceTree = "<group>"; };
+		823C69EC1A208A8E006C1A90 /* BCJValidation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJValidation.h; sourceTree = "<group>"; };
+		823C69ED1A208A8E006C1A90 /* BCJValidation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJValidation.m; sourceTree = "<group>"; };
 		8282CEBE19F5987200555BB0 /* DemoApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DemoApp; sourceTree = BUILT_PRODUCTS_DIR; };
 		828555921A0D868500FCBF61 /* BCJAdditionalTypesTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJAdditionalTypesTests.m; sourceTree = "<group>"; };
 		828555941A0D877A00FCBF61 /* BCJJSONSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJJSONSourceTests.m; sourceTree = "<group>"; };
@@ -249,8 +251,6 @@
 		82D85A681A0A2249001B3C32 /* BCJEnumerateJSONPathComponentsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJEnumerateJSONPathComponentsTests.m; sourceTree = "<group>"; };
 		82EBE79A19FCEEB0001F995B /* libBCJJSONContinuationsIOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBCJJSONContinuationsIOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		82F3E5B11A191ADC007C367E /* BCJJSONContinuations.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BCJJSONContinuations.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		82F3E5C11A191ADC007C367E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		82F3E5C21A191ADC007C367E /* BCJJSONContinuationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BCJJSONContinuationTests.m; sourceTree = "<group>"; };
 		82F3E5F51A191B4C007C367E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		82F3E5F91A191C16007C367E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		82F3E5FA1A192F01007C367E /* BCJJSONContinuations.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = BCJJSONContinuations.podspec; sourceTree = "<group>"; };
@@ -333,49 +333,6 @@
 			path = BCLContinuationsTests;
 			sourceTree = "<group>";
 		};
-		823C68D21A1E9A23006C1A90 /* BCJJSONContinuations */ = {
-			isa = PBXGroup;
-			children = (
-				823C68D31A1E9A23006C1A90 /* BCJAdditionalTypes.h */,
-				823C68D41A1E9A23006C1A90 /* BCJAdditionalTypes.m */,
-				823C68D51A1E9A23006C1A90 /* BCJConstants.h */,
-				823C68D61A1E9A23006C1A90 /* BCJConstants.m */,
-				823C69B61A1FE217006C1A90 /* BCJContainerProtocol.h */,
-				823C68D71A1E9A23006C1A90 /* BCJContainer.h */,
-				823C68D81A1E9A23006C1A90 /* BCJContainer.m */,
-				823C69B81A1FE237006C1A90 /* BCJContainerJSONSource.h */,
-				823C69B91A1FE237006C1A90 /* BCJContainerJSONSource.m */,
-				823C68D91A1E9A23006C1A90 /* BCJDefines.h */,
-				823C68DA1A1E9A23006C1A90 /* BCJDeserialization.h */,
-				823C68DB1A1E9A23006C1A90 /* BCJDeserialization.m */,
-				823C68DC1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.h */,
-				823C68DD1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.m */,
-				823C68DE1A1E9A23006C1A90 /* BCJError.h */,
-				823C68DF1A1E9A23006C1A90 /* BCJError.m */,
-				823C68E01A1E9A23006C1A90 /* BCJGettersAndSetters.h */,
-				823C68E11A1E9A23006C1A90 /* BCJGettersAndSetters.m */,
-				823C68E41A1E9A23006C1A90 /* BCJJSONContinuations.h */,
-				823C68E81A1E9A23006C1A90 /* BCJJSONSource.h */,
-				823C68E91A1E9A23006C1A90 /* BCJJSONSource.m */,
-				823C68E51A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.h */,
-				823C68E61A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.m */,
-				823C68E71A1E9A23006C1A90 /* BCJJSONSource+OptionsAdditons.h */,
-				823C68F31A1E9A23006C1A90 /* BCJJSONSourceConstants.h */,
-				823C68EA1A1E9A23006C1A90 /* BCJLogging.h */,
-				823C68EB1A1E9A23006C1A90 /* BCJLogging.m */,
-				823C68EC1A1E9A23006C1A90 /* BCJMap.h */,
-				823C68ED1A1E9A23006C1A90 /* BCJMap.m */,
-				823C68EE1A1E9A23006C1A90 /* BCJMapOptions.h */,
-				823C68F11A1E9A23006C1A90 /* BCJPropertyTarget.h */,
-				823C68F21A1E9A23006C1A90 /* BCJPropertyTarget.m */,
-				823C68F51A1E9A23006C1A90 /* BCJStandardTypes.h */,
-				823C68F61A1E9A23006C1A90 /* BCJStandardTypes.m */,
-				823C68F71A1E9A23006C1A90 /* BCJValidation.h */,
-				823C68F81A1E9A23006C1A90 /* BCJValidation.m */,
-			);
-			path = BCJJSONContinuations;
-			sourceTree = "<group>";
-		};
 		823C68F91A1E9A23006C1A90 /* BCJMapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -410,17 +367,91 @@
 			path = BCLContinuations;
 			sourceTree = "<group>";
 		};
+		823C69C51A208A8E006C1A90 /* BCJJSONContinuations */ = {
+			isa = PBXGroup;
+			children = (
+				823C69C61A208A8E006C1A90 /* BCJJSONContinuations.h */,
+				823C69C71A208A8E006C1A90 /* Core */,
+				823C69DB1A208A8E006C1A90 /* Deserialization */,
+				823C69E31A208A8E006C1A90 /* Type-Specific Continuations */,
+				823C69EB1A208A8E006C1A90 /* Validation */,
+			);
+			path = BCJJSONContinuations;
+			sourceTree = "<group>";
+		};
+		823C69C71A208A8E006C1A90 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				823C69C81A208A8E006C1A90 /* BCJConstants.h */,
+				823C69C91A208A8E006C1A90 /* BCJConstants.m */,
+				823C69CA1A208A8E006C1A90 /* BCJDefines.h */,
+				823C69CB1A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.h */,
+				823C69CC1A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.m */,
+				823C69CD1A208A8E006C1A90 /* BCJError.h */,
+				823C69CE1A208A8E006C1A90 /* BCJError.m */,
+				823C69CF1A208A8E006C1A90 /* BCJGettersAndSetters.h */,
+				823C69D01A208A8E006C1A90 /* BCJGettersAndSetters.m */,
+				823C69D11A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.h */,
+				823C69D21A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.m */,
+				823C69D31A208A8E006C1A90 /* BCJJSONSource+OptionsAdditons.h */,
+				823C69D41A208A8E006C1A90 /* BCJJSONSource.h */,
+				823C69D51A208A8E006C1A90 /* BCJJSONSource.m */,
+				823C69D61A208A8E006C1A90 /* BCJJSONSourceConstants.h */,
+				823C69D71A208A8E006C1A90 /* BCJLogging.h */,
+				823C69D81A208A8E006C1A90 /* BCJLogging.m */,
+				823C69D91A208A8E006C1A90 /* BCJPropertyTarget.h */,
+				823C69DA1A208A8E006C1A90 /* BCJPropertyTarget.m */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		823C69DB1A208A8E006C1A90 /* Deserialization */ = {
+			isa = PBXGroup;
+			children = (
+				823C69DC1A208A8E006C1A90 /* BCJContainer.h */,
+				823C69DD1A208A8E006C1A90 /* BCJContainer.m */,
+				823C69DE1A208A8E006C1A90 /* BCJContainerJSONSource.h */,
+				823C69DF1A208A8E006C1A90 /* BCJContainerJSONSource.m */,
+				823C69E01A208A8E006C1A90 /* BCJContainerProtocol.h */,
+				823C69E11A208A8E006C1A90 /* BCJDeserialization.h */,
+				823C69E21A208A8E006C1A90 /* BCJDeserialization.m */,
+			);
+			path = Deserialization;
+			sourceTree = "<group>";
+		};
+		823C69E31A208A8E006C1A90 /* Type-Specific Continuations */ = {
+			isa = PBXGroup;
+			children = (
+				823C69E41A208A8E006C1A90 /* BCJAdditionalTypes.h */,
+				823C69E51A208A8E006C1A90 /* BCJAdditionalTypes.m */,
+				823C69E61A208A8E006C1A90 /* BCJMap.h */,
+				823C69E71A208A8E006C1A90 /* BCJMap.m */,
+				823C69E81A208A8E006C1A90 /* BCJMapOptions.h */,
+				823C69E91A208A8E006C1A90 /* BCJStandardTypes.h */,
+				823C69EA1A208A8E006C1A90 /* BCJStandardTypes.m */,
+			);
+			path = "Type-Specific Continuations";
+			sourceTree = "<group>";
+		};
+		823C69EB1A208A8E006C1A90 /* Validation */ = {
+			isa = PBXGroup;
+			children = (
+				823C69EC1A208A8E006C1A90 /* BCJValidation.h */,
+				823C69ED1A208A8E006C1A90 /* BCJValidation.m */,
+			);
+			path = Validation;
+			sourceTree = "<group>";
+		};
 		8282CEB519F5987200555BB0 = {
 			isa = PBXGroup;
 			children = (
 				82F3E5FB1A192F09007C367E /* Documents */,
 				82D3B19E19FBF8D3003C4EB5 /* DemoApp */,
 				823C68F91A1E9A23006C1A90 /* BCJMapper */,
-				823C68D21A1E9A23006C1A90 /* BCJJSONContinuations */,
+				823C69C51A208A8E006C1A90 /* BCJJSONContinuations */,
 				823C68FC1A1E9A23006C1A90 /* BCLContinuations */,
 				82F3E5F71A191C16007C367E /* BCJJSONContinuationsFramework */,
 				821C2AF01A05729100C56BC3 /* BCJJSONContinuationsTests */,
-				82F3E5BF1A191ADC007C367E /* BCJJSONContinuationTests */,
 				8282CEBF19F5987200555BB0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -443,23 +474,6 @@
 				82D3B19F19FBF8D3003C4EB5 /* main.m */,
 			);
 			path = DemoApp;
-			sourceTree = "<group>";
-		};
-		82F3E5BF1A191ADC007C367E /* BCJJSONContinuationTests */ = {
-			isa = PBXGroup;
-			children = (
-				82F3E5C21A191ADC007C367E /* BCJJSONContinuationTests.m */,
-				82F3E5C01A191ADC007C367E /* Supporting Files */,
-			);
-			path = BCJJSONContinuationTests;
-			sourceTree = "<group>";
-		};
-		82F3E5C01A191ADC007C367E /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				82F3E5C11A191ADC007C367E /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		82F3E5F71A191C16007C367E /* BCJJSONContinuationsFramework */ = {
@@ -495,33 +509,35 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				823C69371A1E9A23006C1A90 /* BCJJSONSource+OptionsAdditons.h in Headers */,
+				823C69FC1A208A8E006C1A90 /* BCJError.h in Headers */,
+				823C6A3B1A208A8E006C1A90 /* BCJStandardTypes.h in Headers */,
 				823C696C1A1E9A23006C1A90 /* BCLContinuationProtocol.h in Headers */,
-				823C69171A1E9A23006C1A90 /* BCJDeserialization.h in Headers */,
 				823C69701A1E9A23006C1A90 /* BCLContinuationsClass+AdditionalControlFlow.h in Headers */,
-				823C690B1A1E9A23006C1A90 /* BCJConstants.h in Headers */,
-				823C69321A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.h in Headers */,
-				823C69431A1E9A23006C1A90 /* BCJMap.h in Headers */,
-				823C691C1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.h in Headers */,
-				823C69301A1E9A23006C1A90 /* BCJJSONContinuations.h in Headers */,
-				823C69581A1E9A23006C1A90 /* BCJStandardTypes.h in Headers */,
-				823C69061A1E9A23006C1A90 /* BCJAdditionalTypes.h in Headers */,
-				823C69391A1E9A23006C1A90 /* BCJJSONSource.h in Headers */,
 				823C69771A1E9A23006C1A90 /* BCLControlFlowContinuations.h in Headers */,
+				823C6A011A208A8E006C1A90 /* BCJGettersAndSetters.h in Headers */,
+				823C6A121A208A8E006C1A90 /* BCJJSONSourceConstants.h in Headers */,
+				823C6A391A208A8E006C1A90 /* BCJMapOptions.h in Headers */,
+				823C6A0D1A208A8E006C1A90 /* BCJJSONSource.h in Headers */,
 				823C69671A1E9A23006C1A90 /* BCLBlockContinuation.h in Headers */,
+				823C6A401A208A8E006C1A90 /* BCJValidation.h in Headers */,
+				823C6A2A1A208A8E006C1A90 /* BCJDeserialization.h in Headers */,
+				823C6A341A208A8E006C1A90 /* BCJMap.h in Headers */,
+				823C6A2F1A208A8E006C1A90 /* BCJAdditionalTypes.h in Headers */,
 				823C696E1A1E9A23006C1A90 /* BCLContinuations.h in Headers */,
-				823C693E1A1E9A23006C1A90 /* BCJLogging.h in Headers */,
 				823C69C01A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.h in Headers */,
-				823C69101A1E9A23006C1A90 /* BCJContainer.h in Headers */,
-				823C69151A1E9A23006C1A90 /* BCJDefines.h in Headers */,
 				823C69721A1E9A23006C1A90 /* BCLContinuationsClass.h in Headers */,
-				823C69261A1E9A23006C1A90 /* BCJGettersAndSetters.h in Headers */,
+				823C6A281A208A8E006C1A90 /* BCJContainerProtocol.h in Headers */,
 				823C69621A1E9A23006C1A90 /* BCJMapperClass.h in Headers */,
-				823C69541A1E9A23006C1A90 /* BCJJSONSourceConstants.h in Headers */,
-				823C694F1A1E9A23006C1A90 /* BCJPropertyTarget.h in Headers */,
-				823C69211A1E9A23006C1A90 /* BCJError.h in Headers */,
-				823C695D1A1E9A23006C1A90 /* BCJValidation.h in Headers */,
-				823C69481A1E9A23006C1A90 /* BCJMapOptions.h in Headers */,
+				823C6A061A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.h in Headers */,
+				823C69F71A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.h in Headers */,
+				823C6A141A208A8E006C1A90 /* BCJLogging.h in Headers */,
+				823C6A0B1A208A8E006C1A90 /* BCJJSONSource+OptionsAdditons.h in Headers */,
+				823C6A191A208A8E006C1A90 /* BCJPropertyTarget.h in Headers */,
+				823C69F01A208A8E006C1A90 /* BCJConstants.h in Headers */,
+				823C69F51A208A8E006C1A90 /* BCJDefines.h in Headers */,
+				823C69EE1A208A8E006C1A90 /* BCJJSONContinuations.h in Headers */,
+				823C6A1E1A208A8E006C1A90 /* BCJContainer.h in Headers */,
+				823C6A231A208A8E006C1A90 /* BCJContainerJSONSource.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,35 +545,35 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				823C69381A1E9A23006C1A90 /* BCJJSONSource+OptionsAdditons.h in Headers */,
+				823C69FD1A208A8E006C1A90 /* BCJError.h in Headers */,
+				823C6A3C1A208A8E006C1A90 /* BCJStandardTypes.h in Headers */,
 				823C696D1A1E9A23006C1A90 /* BCLContinuationProtocol.h in Headers */,
-				823C69181A1E9A23006C1A90 /* BCJDeserialization.h in Headers */,
 				823C69711A1E9A23006C1A90 /* BCLContinuationsClass+AdditionalControlFlow.h in Headers */,
-				823C690C1A1E9A23006C1A90 /* BCJConstants.h in Headers */,
-				823C69331A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.h in Headers */,
-				823C69441A1E9A23006C1A90 /* BCJMap.h in Headers */,
-				823C691D1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.h in Headers */,
-				823C69311A1E9A23006C1A90 /* BCJJSONContinuations.h in Headers */,
-				823C69591A1E9A23006C1A90 /* BCJStandardTypes.h in Headers */,
-				823C69071A1E9A23006C1A90 /* BCJAdditionalTypes.h in Headers */,
-				823C693A1A1E9A23006C1A90 /* BCJJSONSource.h in Headers */,
 				823C69781A1E9A23006C1A90 /* BCLControlFlowContinuations.h in Headers */,
+				823C6A021A208A8E006C1A90 /* BCJGettersAndSetters.h in Headers */,
+				823C6A131A208A8E006C1A90 /* BCJJSONSourceConstants.h in Headers */,
+				823C6A3A1A208A8E006C1A90 /* BCJMapOptions.h in Headers */,
+				823C6A0E1A208A8E006C1A90 /* BCJJSONSource.h in Headers */,
 				823C69681A1E9A23006C1A90 /* BCLBlockContinuation.h in Headers */,
+				823C6A411A208A8E006C1A90 /* BCJValidation.h in Headers */,
+				823C6A2B1A208A8E006C1A90 /* BCJDeserialization.h in Headers */,
+				823C6A351A208A8E006C1A90 /* BCJMap.h in Headers */,
+				823C6A301A208A8E006C1A90 /* BCJAdditionalTypes.h in Headers */,
 				823C696F1A1E9A23006C1A90 /* BCLContinuations.h in Headers */,
-				823C693F1A1E9A23006C1A90 /* BCJLogging.h in Headers */,
-				823C69B71A1FE217006C1A90 /* BCJContainerProtocol.h in Headers */,
-				823C69111A1E9A23006C1A90 /* BCJContainer.h in Headers */,
-				823C69161A1E9A23006C1A90 /* BCJDefines.h in Headers */,
 				823C69731A1E9A23006C1A90 /* BCLContinuationsClass.h in Headers */,
-				823C69271A1E9A23006C1A90 /* BCJGettersAndSetters.h in Headers */,
 				823C69631A1E9A23006C1A90 /* BCJMapperClass.h in Headers */,
-				823C69551A1E9A23006C1A90 /* BCJJSONSourceConstants.h in Headers */,
-				823C69501A1E9A23006C1A90 /* BCJPropertyTarget.h in Headers */,
+				823C6A291A208A8E006C1A90 /* BCJContainerProtocol.h in Headers */,
 				823C69C11A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.h in Headers */,
-				823C69221A1E9A23006C1A90 /* BCJError.h in Headers */,
-				823C695E1A1E9A23006C1A90 /* BCJValidation.h in Headers */,
-				823C69BA1A1FE237006C1A90 /* BCJContainerJSONSource.h in Headers */,
-				823C69491A1E9A23006C1A90 /* BCJMapOptions.h in Headers */,
+				823C6A071A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.h in Headers */,
+				823C69F81A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.h in Headers */,
+				823C6A151A208A8E006C1A90 /* BCJLogging.h in Headers */,
+				823C6A0C1A208A8E006C1A90 /* BCJJSONSource+OptionsAdditons.h in Headers */,
+				823C6A1A1A208A8E006C1A90 /* BCJPropertyTarget.h in Headers */,
+				823C69F11A208A8E006C1A90 /* BCJConstants.h in Headers */,
+				823C69F61A208A8E006C1A90 /* BCJDefines.h in Headers */,
+				823C69EF1A208A8E006C1A90 /* BCJJSONContinuations.h in Headers */,
+				823C6A1F1A208A8E006C1A90 /* BCJContainer.h in Headers */,
+				823C6A241A208A8E006C1A90 /* BCJContainerJSONSource.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,29 +744,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				823C69131A1E9A23006C1A90 /* BCJContainer.m in Sources */,
-				823C691A1A1E9A23006C1A90 /* BCJDeserialization.m in Sources */,
+				823C6A101A208A8E006C1A90 /* BCJJSONSource.m in Sources */,
 				823C69961A1F6F37006C1A90 /* BCJStackPropertyTarget.m in Sources */,
+				823C6A371A208A8E006C1A90 /* BCJMap.m in Sources */,
 				823C69751A1E9A23006C1A90 /* BCLContinuationsClass.m in Sources */,
-				823C693C1A1E9A23006C1A90 /* BCJJSONSource.m in Sources */,
+				823C6A171A208A8E006C1A90 /* BCJLogging.m in Sources */,
+				823C6A321A208A8E006C1A90 /* BCJAdditionalTypes.m in Sources */,
+				823C6A261A208A8E006C1A90 /* BCJContainerJSONSource.m in Sources */,
+				823C69FA1A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.m in Sources */,
 				823C69951A1F6F37006C1A90 /* BCJStackJSONSource.m in Sources */,
-				823C69601A1E9A23006C1A90 /* BCJValidation.m in Sources */,
-				823C69351A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.m in Sources */,
 				823C696A1A1E9A23006C1A90 /* BCLBlockContinuation.m in Sources */,
+				823C69FF1A208A8E006C1A90 /* BCJError.m in Sources */,
 				823C69651A1E9A23006C1A90 /* BCJMapperClass.m in Sources */,
+				823C6A3E1A208A8E006C1A90 /* BCJStandardTypes.m in Sources */,
+				823C6A211A208A8E006C1A90 /* BCJContainer.m in Sources */,
+				823C6A2D1A208A8E006C1A90 /* BCJDeserialization.m in Sources */,
+				823C6A1C1A208A8E006C1A90 /* BCJPropertyTarget.m in Sources */,
 				823C69C31A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.m in Sources */,
-				823C691F1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.m in Sources */,
 				823C69941A1F6F37006C1A90 /* BCJMappingContinuations.m in Sources */,
-				823C69411A1E9A23006C1A90 /* BCJLogging.m in Sources */,
-				823C69091A1E9A23006C1A90 /* BCJAdditionalTypes.m in Sources */,
-				823C69241A1E9A23006C1A90 /* BCJError.m in Sources */,
-				823C69BC1A1FE304006C1A90 /* BCJContainerJSONSource.m in Sources */,
-				823C695B1A1E9A23006C1A90 /* BCJStandardTypes.m in Sources */,
-				823C69461A1E9A23006C1A90 /* BCJMap.m in Sources */,
+				823C69F31A208A8E006C1A90 /* BCJConstants.m in Sources */,
 				823C697A1A1E9A23006C1A90 /* BCLControlFlowContinuations.m in Sources */,
-				823C69291A1E9A23006C1A90 /* BCJGettersAndSetters.m in Sources */,
-				823C690E1A1E9A23006C1A90 /* BCJConstants.m in Sources */,
-				823C69521A1E9A23006C1A90 /* BCJPropertyTarget.m in Sources */,
+				823C6A091A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.m in Sources */,
+				823C6A041A208A8E006C1A90 /* BCJGettersAndSetters.m in Sources */,
+				823C6A431A208A8E006C1A90 /* BCJValidation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,29 +793,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				823C69121A1E9A23006C1A90 /* BCJContainer.m in Sources */,
-				823C69191A1E9A23006C1A90 /* BCJDeserialization.m in Sources */,
+				823C6A0F1A208A8E006C1A90 /* BCJJSONSource.m in Sources */,
 				823C69991A1F6F38006C1A90 /* BCJStackPropertyTarget.m in Sources */,
+				823C6A361A208A8E006C1A90 /* BCJMap.m in Sources */,
 				823C69741A1E9A23006C1A90 /* BCLContinuationsClass.m in Sources */,
-				823C693B1A1E9A23006C1A90 /* BCJJSONSource.m in Sources */,
+				823C6A161A208A8E006C1A90 /* BCJLogging.m in Sources */,
+				823C6A311A208A8E006C1A90 /* BCJAdditionalTypes.m in Sources */,
+				823C6A251A208A8E006C1A90 /* BCJContainerJSONSource.m in Sources */,
+				823C69F91A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.m in Sources */,
 				823C69981A1F6F38006C1A90 /* BCJStackJSONSource.m in Sources */,
-				823C695F1A1E9A23006C1A90 /* BCJValidation.m in Sources */,
-				823C69341A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.m in Sources */,
 				823C69691A1E9A23006C1A90 /* BCLBlockContinuation.m in Sources */,
+				823C69FE1A208A8E006C1A90 /* BCJError.m in Sources */,
 				823C69641A1E9A23006C1A90 /* BCJMapperClass.m in Sources */,
+				823C6A3D1A208A8E006C1A90 /* BCJStandardTypes.m in Sources */,
+				823C6A201A208A8E006C1A90 /* BCJContainer.m in Sources */,
+				823C6A2C1A208A8E006C1A90 /* BCJDeserialization.m in Sources */,
+				823C6A1B1A208A8E006C1A90 /* BCJPropertyTarget.m in Sources */,
 				823C69C21A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.m in Sources */,
-				823C691E1A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.m in Sources */,
 				823C69971A1F6F38006C1A90 /* BCJMappingContinuations.m in Sources */,
-				823C69401A1E9A23006C1A90 /* BCJLogging.m in Sources */,
-				823C69081A1E9A23006C1A90 /* BCJAdditionalTypes.m in Sources */,
-				823C69231A1E9A23006C1A90 /* BCJError.m in Sources */,
-				823C69BD1A1FE305006C1A90 /* BCJContainerJSONSource.m in Sources */,
-				823C695A1A1E9A23006C1A90 /* BCJStandardTypes.m in Sources */,
-				823C69451A1E9A23006C1A90 /* BCJMap.m in Sources */,
+				823C69F21A208A8E006C1A90 /* BCJConstants.m in Sources */,
 				823C69791A1E9A23006C1A90 /* BCLControlFlowContinuations.m in Sources */,
-				823C69281A1E9A23006C1A90 /* BCJGettersAndSetters.m in Sources */,
-				823C690D1A1E9A23006C1A90 /* BCJConstants.m in Sources */,
-				823C69511A1E9A23006C1A90 /* BCJPropertyTarget.m in Sources */,
+				823C6A081A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.m in Sources */,
+				823C6A031A208A8E006C1A90 /* BCJGettersAndSetters.m in Sources */,
+				823C6A421A208A8E006C1A90 /* BCJValidation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -807,29 +823,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				823C69141A1E9A23006C1A90 /* BCJContainer.m in Sources */,
-				823C691B1A1E9A23006C1A90 /* BCJDeserialization.m in Sources */,
+				823C6A111A208A8E006C1A90 /* BCJJSONSource.m in Sources */,
 				823C69931A1F6F36006C1A90 /* BCJStackPropertyTarget.m in Sources */,
+				823C6A381A208A8E006C1A90 /* BCJMap.m in Sources */,
 				823C69761A1E9A23006C1A90 /* BCLContinuationsClass.m in Sources */,
-				823C693D1A1E9A23006C1A90 /* BCJJSONSource.m in Sources */,
+				823C6A181A208A8E006C1A90 /* BCJLogging.m in Sources */,
+				823C6A331A208A8E006C1A90 /* BCJAdditionalTypes.m in Sources */,
+				823C6A271A208A8E006C1A90 /* BCJContainerJSONSource.m in Sources */,
+				823C69FB1A208A8E006C1A90 /* BCJEnumerateJSONPathComponents.m in Sources */,
 				823C69921A1F6F36006C1A90 /* BCJStackJSONSource.m in Sources */,
-				823C69611A1E9A23006C1A90 /* BCJValidation.m in Sources */,
-				823C69361A1E9A23006C1A90 /* BCJJSONSource+DeferredClassCheck.m in Sources */,
 				823C696B1A1E9A23006C1A90 /* BCLBlockContinuation.m in Sources */,
+				823C6A001A208A8E006C1A90 /* BCJError.m in Sources */,
 				823C69661A1E9A23006C1A90 /* BCJMapperClass.m in Sources */,
+				823C6A3F1A208A8E006C1A90 /* BCJStandardTypes.m in Sources */,
+				823C6A221A208A8E006C1A90 /* BCJContainer.m in Sources */,
+				823C6A2E1A208A8E006C1A90 /* BCJDeserialization.m in Sources */,
+				823C6A1D1A208A8E006C1A90 /* BCJPropertyTarget.m in Sources */,
 				823C69C41A1FE6B9006C1A90 /* BCJPropertyTarget+ExpectedType.m in Sources */,
-				823C69201A1E9A23006C1A90 /* BCJEnumerateJSONPathComponents.m in Sources */,
 				823C69911A1F6F36006C1A90 /* BCJMappingContinuations.m in Sources */,
-				823C69421A1E9A23006C1A90 /* BCJLogging.m in Sources */,
-				823C690A1A1E9A23006C1A90 /* BCJAdditionalTypes.m in Sources */,
-				823C69251A1E9A23006C1A90 /* BCJError.m in Sources */,
-				823C69BB1A1FE237006C1A90 /* BCJContainerJSONSource.m in Sources */,
-				823C695C1A1E9A23006C1A90 /* BCJStandardTypes.m in Sources */,
-				823C69471A1E9A23006C1A90 /* BCJMap.m in Sources */,
+				823C69F41A208A8E006C1A90 /* BCJConstants.m in Sources */,
 				823C697B1A1E9A23006C1A90 /* BCLControlFlowContinuations.m in Sources */,
-				823C692A1A1E9A23006C1A90 /* BCJGettersAndSetters.m in Sources */,
-				823C690F1A1E9A23006C1A90 /* BCJConstants.m in Sources */,
-				823C69531A1E9A23006C1A90 /* BCJPropertyTarget.m in Sources */,
+				823C6A0A1A208A8E006C1A90 /* BCJJSONSource+DeferredClassCheck.m in Sources */,
+				823C6A051A208A8E006C1A90 /* BCJGettersAndSetters.m in Sources */,
+				823C6A441A208A8E006C1A90 /* BCJValidation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,9 +14,10 @@
 
 
 @interface TestObject : NSObject
+@property NSArray *array;
 @property NSInteger number;
 @property NSString *string;
-@property NSArray *array;
+
 @property NSDate *date;
 @property NSURL *url;
 @end
@@ -53,47 +54,49 @@ void demo(void) {
     //Mapper-style
     NSError *mappingError =
     [BCJMapper mapJSONData:jsonData intoObject:target options:BCJNoOptions usingContinuations:
-     BCJ_MAP(@"jsonPath", string),
-     BCJ_MAP(@"jsonPath", date),
-     BCJSetString(BCJSource(@"jsonPath"), BCJTarget(@"property")),
+     BCJ_MAP(@"array", array),
+     BCJ_MAP(@"number", number),
+     BCJ_MAP(@"array[0]", string),
+
+//     BCJSetString(BCJSource(@"jsonPath"), BCJTarget(@"property")),
      nil];
 
-    //Continuations-style
-    BCJContainer *json = [BCJContainer new]; //Create a container to store the deserialized JSON in.
-    NSError *continuationsError =
-    [BCLContinuations untilError:
-         //Deserialization:
-         BCJDeserializeJSON(json, jsonData),
-
-         //StandardTypes:
-         BCJSetString(BCJSource(json, @"string"), BCJ_TARGET(target, string)),
-         BCJSetNumber(BCJSource(json, @"number"), BCJ_TARGET(target, number)),
-
-         //AdditionalTypes:
-         BCJSetURL(BCJSource(json, @"array[3].url"), BCJ_TARGET(target, url)),
-         BCJSetDateFromTimeIntervalSince1970(BCJSource(json, @"date", BCJJSONSourceModeStrict), BCJ_TARGET(target, date)),
-
-         //Map:
-         BCJSetMap(BCJSource(json, @"dict"), BCJ_TARGET(target, array), NSNumber.class, BCJMapOptionIgnoreFailedMappings, BCJ_SORT_DESCRIPTORS(@"self"), ^id(NSString *key, NSNumber *number, NSError **outError){
-            //Map a number to a textural description of number * 1000
-            static NSNumberFormatter *formatter = nil;
-            static dispatch_once_t onceToken;
-            dispatch_once(&onceToken, ^{
-                formatter = [NSNumberFormatter new];
-                formatter.numberStyle = NSNumberFormatterSpellOutStyle;
-            });
-            return [formatter stringFromNumber:@(number.integerValue * 1000)];
-        }),
-
-         //Generic getter:
-         BCJGetValue(BCJSource(json, @"missingString", NSString.class, BCJJSONSourceModeDefaultable, @"default"), ^BOOL(NSString *string, NSError **outError){
-            //Validation
-            if (!BCJValidate(string, @"self MATCHES '.*'", outError)) return NO;
-            stackString = string;
-            return YES;
-        }),
-
-     nil];
+//    //Continuations-style
+//    BCJContainer *json = [BCJContainer new]; //Create a container to store the deserialized JSON in.
+//    NSError *continuationsError =
+//    [BCLContinuations untilError:
+//         //Deserialization:
+//         BCJDeserializeJSON(json, jsonData),
+//
+//         //StandardTypes:
+//         BCJSetString(BCJSource(json, @"string"), BCJ_TARGET(target, string)),
+//         BCJSetNumber(BCJSource(json, @"number"), BCJ_TARGET(target, number)),
+//
+//         //AdditionalTypes:
+//         BCJSetURL(BCJSource(json, @"array[3].url"), BCJ_TARGET(target, url)),
+//         BCJSetDateFromTimeIntervalSince1970(BCJSource(json, @"date", BCJJSONSourceModeStrict), BCJ_TARGET(target, date)),
+//
+//         //Map:
+//         BCJSetMap(BCJSource(json, @"dict"), BCJ_TARGET(target, array), NSNumber.class, BCJMapOptionIgnoreFailedMappings, BCJ_SORT_DESCRIPTORS(@"self"), ^id(NSString *key, NSNumber *number, NSError **outError){
+//            //Map a number to a textural description of number * 1000
+//            static NSNumberFormatter *formatter = nil;
+//            static dispatch_once_t onceToken;
+//            dispatch_once(&onceToken, ^{
+//                formatter = [NSNumberFormatter new];
+//                formatter.numberStyle = NSNumberFormatterSpellOutStyle;
+//            });
+//            return [formatter stringFromNumber:@(number.integerValue * 1000)];
+//        }),
+//
+//         //Generic getter:
+//         BCJGetValue(BCJSource(json, @"missingString", NSString.class, BCJJSONSourceModeDefaultable, @"default"), ^BOOL(NSString *string, NSError **outError){
+//            //Validation
+//            if (!BCJValidate(string, @"self MATCHES '.*'", outError)) return NO;
+//            stackString = string;
+//            return YES;
+//        }),
+//
+//     nil];
 
     //Log results
     NSLog(@"target.string: %@", target.string);
@@ -105,7 +108,7 @@ void demo(void) {
     NSLog(@"stackString: %@", stackString);
 
     NSLog(@"error: %@", mappingError);
-    NSLog(@"error: %@", continuationsError);
+//    NSLog(@"error: %@", continuationsError);
 }
 
 

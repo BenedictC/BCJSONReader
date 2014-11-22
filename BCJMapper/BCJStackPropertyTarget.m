@@ -24,6 +24,13 @@
     return [super initWithObject:tempTarget key:key];
 }
 
+
+
+-(id)object
+{
+    return BCJTopTargetObject();
+}
+
 @end
 
 
