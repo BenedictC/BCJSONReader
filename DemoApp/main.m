@@ -54,9 +54,9 @@ void demo(void) {
     //Mapper-style
     NSError *mappingError =
     [BCJMapper mapJSONData:jsonData intoObject:target options:BCJNoOptions usingContinuations:
-     BCJ_MAP(@"array", array),
-     BCJ_MAP(@"number", number),
-     BCJ_MAP(@"array[0]", string),
+     BCJ_SET(@"array", array),
+     BCJ_SET(@"number", number),
+     BCJ_SET(@"array[0]", string),
 
 //     BCJSetString(BCJSource(@"jsonPath"), BCJTarget(@"property")),
      nil];

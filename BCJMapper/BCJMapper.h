@@ -11,7 +11,7 @@
 
 //Core Mapper functionality
 #import "BCJMapperClass.h"
-#import "BCJMappingContinuations.h"
+#import "BCJPropertyContinuations.h"
 
 //Extra Mapper functionality
 #import "BCJStackJSONSource.h"
