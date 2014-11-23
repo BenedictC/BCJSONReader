@@ -77,7 +77,7 @@ BCJJSONContinuations is a library for processing the crazy JSON structures that 
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/BenedictC/BCJSONMapper.git", :commit => "3815d380b2560d953102941bb7e2bc722f76bdae" }
+  s.source       = { :git => "https://github.com/BenedictC/BCJSONMapper.git", :tag => "0.0.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
