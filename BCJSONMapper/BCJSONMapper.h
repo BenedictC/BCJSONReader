@@ -10,14 +10,16 @@
 #define BCJJSONContinuations_BCJMapper_h
 
 //Core Mapper functionality
-#import "BCJMapperClass.h"
+#import "BCJMapper.h"
 #import "BCJPropertyContinuations.h"
 
-//Extra Mapper functionality
+//Stack source and targets
 #import "BCJStackJSONSource.h"
 #import "BCJStackPropertyTarget.h"
 
-//BCJJSONContinuations
+//Type-specific continuations (borrowed from BCJJSONContinuations)
+#import "BCJStandardTypes.h"
+#import "BCJAdditionalTypes.h"
 #import "BCJMap.h"
 
 #endif

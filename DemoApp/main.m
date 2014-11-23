@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BCJMapper.h"
-#import "BCJJSONContinuations.h"
+#import "BCJSONMapper.h"
 
 
 
@@ -54,11 +53,13 @@ void demo(void) {
     //Mapper-style
     NSError *mappingError =
     [BCJMapper mapJSONData:jsonData intoObject:target options:BCJNoOptions usingContinuations:
-     BCJ_SET(@"array", array),
-     BCJ_SET(@"number", number),
-     BCJ_SET(@"array[0]", string),
-
-//     BCJSetString(BCJSource(@"jsonPath"), BCJTarget(@"property")),
+         BCJSetString(BCJSource(@"string"), BCJTarget(BCJ_KEY(string))),
+         BCJ_SET(@"number", number),
+         BCJ_SET(@"date", date),
+         BCJSetMap(@"dict", BCJ_KEY(array), NSNumber.class, BCJNoOptions, BCJ_SORT_DESCRIPTORS(@"description"), ^id(id elementKey, id elementValue, NSError *__autoreleasing *outError) {
+            return elementKey;
+         }),
+         BCJ_SET(@"array[0].url", url),
      nil];
 
 //    //Continuations-style
@@ -99,13 +100,13 @@ void demo(void) {
 //     nil];
 
     //Log results
-    NSLog(@"target.string: %@", target.string);
-    NSLog(@"target.number: %@", @(target.number));
-    NSLog(@"target.date: %@", target.date);
-    NSLog(@"target.array: %@", target.array);
-    NSLog(@"target.url: %@", target.url);
+    NSLog(@"target.string: <%@> %@", target.string.class, target.string);
+    NSLog(@"target.number: <NSNumber> %@", @(target.number));
+    NSLog(@"target.date: <%@> %@", target.date.class, target.date);
+    NSLog(@"target.array: <%@> %@", target.array.class, target.array);
+    NSLog(@"target.url: <%@> %@", target.url.class, target.url);
 
-    NSLog(@"stackString: %@", stackString);
+    NSLog(@"stackString: <%@> %@", stackString.class, stackString);
 
     NSLog(@"error: %@", mappingError);
 //    NSLog(@"error: %@", continuationsError);

@@ -2,9 +2,12 @@
 //  BCJConstants.h
 //  BCJJSONContinuations
 //
-//  Created by Benedict Cohen on 31/10/2014.
+//  Created by Benedict Cohen on 22/11/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
+
+#ifndef BCJJSONContinuations_BCJConstants_h
+#define BCJJSONContinuations_BCJConstants_h
 
 #import <Foundation/Foundation.h>
 
@@ -61,3 +64,6 @@ enum : NSUInteger {
     BCJNoOptions = 0,
 };
 
+
+
+#endif

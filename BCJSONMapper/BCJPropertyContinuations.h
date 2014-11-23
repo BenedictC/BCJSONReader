@@ -52,8 +52,17 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJJSONSource *source, BCJPr
  @return <#return value description#>
  */
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(NSString *sourceJsonPath, NSString *targetPropertyKey) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
-//Selector-checked mapping macro
-#define BCJ_SET(JSONPATH, PROPERTY) BCJSetProperty(JSONPATH, BCJ_KEY(PROPERTY))
+
+
+/**
+ <#Description#>
+
+ @param sourceJsonPath    <#sourceJsonPath description#>
+ @param targetPropertyKey <#targetPropertyKey description#>
+
+ @return <#return value description#>
+ */
+#define BCJ_SET(sourceJsonPath, targetPropertyKey) BCJSetProperty(sourceJsonPath, BCJ_KEY(targetPropertyKey))
 
 
 

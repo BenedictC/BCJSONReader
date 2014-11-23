@@ -1,6 +1,6 @@
 //
-//  BCJJSONContinuations.h
-//  BCJJSONContinuations
+//  BCJSONContinuations.h
+//  BCJSONContinuations
 //
 //  Created by Benedict Cohen on 01/11/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.

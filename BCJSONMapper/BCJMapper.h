@@ -1,5 +1,5 @@
 //
-//  BCJMapperClass.h
+//  BCJMapper.h
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 20/11/2014.
@@ -7,6 +7,8 @@
 //
 
 #import "BCLContinuationProtocol.h"
+
+#import "BCJConstants.h"
 
 
 

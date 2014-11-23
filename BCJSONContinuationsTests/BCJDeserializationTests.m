@@ -7,7 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "BCJJSONContinuations.h"
+#import "BCJSONContinuations.h"
+#import "BCJConstants.h"
 
 
 

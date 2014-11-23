@@ -20,7 +20,7 @@
 @interface BCJPropertyTarget : NSObject
 
 /**
- Creates an instance of BCJPropertyTarget. the BCJ_TARGET macro should be used in favour of this method as it provides compile-time checking that the key is valid.
+ Creates an instance of BCJPropertyTarget. BCJTarget constructor function should be used in favour of this method.
 
  @param object The object to set the value on.
  @param key    The key of the property to set.
@@ -52,7 +52,3 @@
 
 
 BCJPropertyTarget * BCJ_OVERLOADABLE BCJTarget(id object, NSString *key) BCJ_WARN_UNUSED BCJ_REQUIRED(1,2);
-
-
-
-#define BCJ_TARGET(OBJECT, KEY) BCJTarget(OBJECT, BCJ_KEY(KEY))

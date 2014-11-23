@@ -14,14 +14,6 @@
 
 @implementation BCJError
 
--(instancetype)init
-{
-    [NSException raise:NSInternalInconsistencyException format:@"BCJError should not be instantiated."];
-    return nil;
-}
-
-
-
 +(NSError *)missingValueErrorWithJSONSource:(BCJJSONSource *)source component:(NSString *)component componentIndex:(NSUInteger)componentIndex
 {
     NSString *format = NSLocalizedString(@"Could not fetch object for component %lu (%@) of JSONPath %@.", nil);

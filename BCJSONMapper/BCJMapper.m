@@ -1,12 +1,12 @@
 //
-//  BCJMapperClass.m
+//  BCJMapper.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 20/11/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCJMapperClass.h"
+#import "BCJMapper.h"
 #import "BCJStackJSONSource.h"
 #import "BCJStackPropertyTarget.h"
 #import "BCLContinuationsClass+AdditionalControlFlow.h"

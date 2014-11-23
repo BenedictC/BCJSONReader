@@ -13,8 +13,7 @@
 #import "BCJMap.h"
 #import "BCJStackJSONSource.h"
 #import "BCJStackPropertyTarget.h"
-
-#import "BCJPropertyTarget+ExpectedClass.h"
+#import "BCJPropertyTarget+ValueIntrospection.h"
 
 #import "BCLBlockContinuation.h"
 
@@ -38,17 +37,25 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJJSONSource *source, BCJPr
                 break;
         }
 
-        //1. Attempt to set the value
-        if ([target canReceiveValue:value]) {
-            return [target setValue:value error:outError];
+        //Attempt to set the value
+        switch ([target canReceiveValue:value]) {
+            case BCJPropertyTargetValueEligabilityStatusPermitted:
+                return [target setValue:value error:outError];
+            case BCJPropertyTargetValueEligabilityStatusUnknown:
+                return [target setValue:value error:outError];
+
+            case BCJPropertyTargetValueEligabilityStatusForbidden:
+                break;
         }
 
-        //2. Check for special cases
+        //Try and fix up value so that it is acceptable.
         Class expectedClass = [target expectedClass];
+        BOOL isValueAString = [value isKindOfClass:NSString.class];
+        BOOL isValueANumber = [value isKindOfClass:NSNumber.class];
+        BOOL isTargetAURL = [expectedClass isEqual:NSURL.class];
+        BOOL isTargetADate = [expectedClass isEqual:NSDate.class];
 
         //a. String->URL
-        BOOL isValueAString = [value isKindOfClass:NSString.class];
-        BOOL isTargetAURL = [expectedClass isEqual:NSURL.class]; //TODO: Should we consider NSURL subclasses too?
         if (isValueAString && isTargetAURL) {
             NSURL *url = [NSURL URLWithString:value];
             if (url == nil) {
@@ -59,8 +66,6 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJJSONSource *source, BCJPr
         }
 
         //b. Number->Date
-        BOOL isValueANumber = [value isKindOfClass:NSNumber.class];
-        BOOL isTargetADate = [expectedClass isEqual:NSDate.class];  //TODO: Should we consider NSURL subclasses too?
         if (isValueANumber && isTargetADate) {
             NSDate *date = [NSDate dateWithTimeIntervalSince1970:[value integerValue]];
             return [target setValue:date error:outError];
@@ -76,9 +81,9 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJJSONSource *source, BCJPr
             return [target setValue:date error:outError];
         }
 
-        //3. Bust! Nothing left to try.
-        if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO: source is not compatible with target" code:0 userInfo:nil];
-        return NO;
+        //2. We were unable to convert value to a known good value. This is a hail Mary.
+        //TODO: Would it be better to just fail?
+        return [target setValue:value error:outError];
     });
 }
 
