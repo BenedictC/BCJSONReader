@@ -15,12 +15,14 @@ Pod::Spec.new do |s|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  s.name         = "BCJJSONContinuations"
+  s.name         = "BCJSONMapper"
   s.version      = "0.0.1"
   s.summary      = "An Objective-C library for handling real world JSON."
 
   s.description  = <<-DESC
-                   A longer description of BCJJSONContinuations in Markdown format.
+BCJJSONContinuations is a library for processing the crazy JSON structures that exist in the real world. Its key features are:
++ Flexible. Provides functionality for handling many JSON usage styles.
++ Extensible. Easy to integrate new processing (e.g. peculiar date formats).
 
                    * Think: Why did you write this? What is the focus? What does it do?
                    * CocoaPods will be using this to generate tags, and improve search results.
