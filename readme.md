@@ -57,7 +57,7 @@ void demo(void) {
     NSError *mappingError =
     [BCJMapper mapJSONData:jsonData intoObject:target options:BCJNoOptions usingContinuations:
          BCJ_SET(@"number", number), //Fetches the value of the jsonPath, 'number' and sets the 'number' property of target.
-         BCJSetProperty(@"date", @"date"),  //The previous line uses the BCJ_SET macro which is just a wrapper arround BCJSetProperty to add runtime selector checking. Note that the date is being  implicitly converted from a number to a date. BCJSetProperty supports such conversions. number->date, string->date & string->url.
+         BCJSetProperty(@"date", @"date"),  //The previous line uses the BCJ_SET macro which is just a wrapper arround BCJSetProperty to add runtime selector checking. Note that the date is being  implicitly converted from a number to a date. BCJSetProperty supports three such conversions. number->date, string->date & string->url.
          BCJ_SET(@"array[0].url", url), //Fetches the value from a JSON path and implicitly converts it to the correct type.
          BCJSetString(BCJSource(@"string", BCJJSONSourceModeStrict), BCJTarget(BCJ_KEY(string))), //Unlike BCJSetProperty, BCJSetString (and the other type-specific continuation constructors) does not perform 'magic'. It expects the source to be a string and the destination to be a string property. The source has its option set to BCJJSONSourceModeStrict so that it will fail if the value is not found.
          
