@@ -77,7 +77,7 @@ BCJJSONContinuations is a library for processing the crazy JSON structures that 
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/BenedictC/BCJJSONContinuations.git", :commit => "3815d380b2560d953102941bb7e2bc722f76bdae" }
+  s.source       = { :git => "https://github.com/BenedictC/BCJSONMapper.git", :commit => "3815d380b2560d953102941bb7e2bc722f76bdae" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -88,37 +88,10 @@ BCJJSONContinuations is a library for processing the crazy JSON structures that 
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "BCJJSONContinuations", "BCJJSONContinuations/**/*.{h,m}", "BCLContinuations", "BCLContinuations/**/*.{h,m}"
+  s.source_files  = "BCJSONMapper", "BCJSONMapper/**/*.{h,m}" "BCJSONContinuations", "BCJSONContinuations/**/*.{h,m}", "BCLContinuations", "BCLContinuations/**/*.{h,m}"
   s.exclude_files = "Classes/Exclude"
 
-  # s.public_header_files = "Classes/**/*.h"
-
-
-  # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  A list of resources included with the Pod. These are copied into the
-  #  target bundle with a build phase script. Anything else will be cleaned.
-  #  You can preserve files from being cleaned, please don't preserve
-  #  non-essential files like tests, examples and documentation.
-  #
-
-  # s.resource  = "icon.png"
-  # s.resources = "Resources/*.png"
-
-  # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
-
-
-  # ――― Project Linking ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
-  #
-  #  Link your library with frameworks, or libraries. Libraries do not include
-  #  the lib prefix of their name.
-  #
-
-  # s.framework  = "SomeFramework"
-  # s.frameworks = "SomeFramework", "AnotherFramework"
-
-  # s.library   = "iconv"
-  # s.libraries = "iconv", "xml2"
+  # s.public_header_files = "**/*.h"
 
 
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -127,7 +100,7 @@ BCJJSONContinuations is a library for processing the crazy JSON structures that 
   #  where they will only apply to your library. If you depend on other Podspecs
   #  you can include multiple dependencies to ensure it works.
 
-  # s.requires_arc = true
+  s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
