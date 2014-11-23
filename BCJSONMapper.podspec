@@ -1,5 +1,5 @@
 #
-#  Be sure to run `pod spec lint BCJJSONContinuations.podspec' to ensure this is a
+#  Be sure to run `pod spec lint BCJSONMapper.podspec' to ensure this is a
 #  valid spec and to remove all comments including this before submitting the spec.
 #
 #  To learn more about Podspec attributes see http://docs.cocoapods.org/specification.html
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.summary      = "An Objective-C library for handling real world JSON."
 
   s.description  = <<-DESC
-BCJJSONContinuations is a library for processing the crazy JSON structures that exist in the real world. Its key features are:
+BCJSONMapper is a library for processing the crazy JSON structures that exist in the real world. Its key features are:
 + Flexible. Provides functionality for handling many JSON usage styles.
 + Extensible. Easy to integrate new processing (e.g. peculiar date formats).
 
@@ -30,7 +30,7 @@ BCJJSONContinuations is a library for processing the crazy JSON structures that 
                    * Finally, don't worry about the indent, CocoaPods strips it!
                    DESC
 
-  s.homepage     = "https://github.com/BenedictC/BCJJSONContinuations"
+  s.homepage     = "https://github.com/BenedictC/BCJSONMapper"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
 
 
