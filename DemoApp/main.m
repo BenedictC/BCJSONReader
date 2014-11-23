@@ -38,10 +38,14 @@ void demo(void) {
                                            @"four": @(4),
                                            @"five": @(5)
                                            },
-                                   @"array": @[@{@"url": @"http://johnlennon.com"},
-                                               @{@"url": @"http://paulmccartney.com"},
-                                               @{@"url": @"http://georgeharrison.com"},
-                                               @{@"url": @"http://ringostarr.com"}],
+                                   @"array": @[@{@"name": @"John Lennon",
+                                                 @"url": @"http://johnlennon.com"},
+                                               @{@"name": @"Paul McCartney",
+                                                 @"url": @"http://paulmccartney.com"},
+                                               @{@"name": @"George Harrison",
+                                                 @"url": @"http://georgeharrison.com"},
+                                               @{@"name": @"Ringo Starr",
+                                                 @"url": @"http://ringostarr.com"}],
                                    @"date" : @([[NSDate new] timeIntervalSince1970]), //Unix timestamp-style date
                                    };
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:sourceObject options:kNilOptions error:NULL];
@@ -53,15 +57,21 @@ void demo(void) {
     //Mapper-style
     NSError *mappingError =
     [BCJMapper mapJSONData:jsonData intoObject:target options:BCJNoOptions usingContinuations:
-         BCJSetString(BCJSource(@"string"), BCJTarget(BCJ_KEY(string))),
-         BCJ_SET(@"number", number),
-         BCJ_SET(@"date", date),
-         BCJSetMap(@"dict", BCJ_KEY(array), NSNumber.class, BCJNoOptions, BCJ_SORT_DESCRIPTORS(@"description"), ^id(id elementKey, id elementValue, NSError *__autoreleasing *outError) {
-            return elementKey;
-         }),
-         BCJ_SET(@"array[0].url", url),
-     nil];
+     BCJ_SET(@"number", number), //Fetches the value of the jsonPath, 'number' and sets the 'number' property of target.
+     BCJSetProperty(@"date", @"date"),  //The previous line uses the BCJ_SET macro which is just a wrapper arround BCJSetProperty to add runtime selector checking. Note that the date is being  implicitly converted from a number to a date. BCJSetProperty supports such conversions. number->date, string->date & string->url.
+     BCJ_SET(@"array[0].url", url), //Fetches the value from a JSON path and implicitly converts it to the correct type.
+     BCJSetString(BCJSource(@"string", BCJJSONSourceModeStrict), BCJTarget(BCJ_KEY(string))), //Unlike BCJSetProperty, BCJSetString (and the other type-specific continuation constructors) does not perform 'magic'. It expects the source to be a string and the destination to be a string property. The source has its option set to BCJJSONSourceModeStrict so that it will fail if the value is not found.
 
+     //BCJSetMap. There's a lot going on here:
+     //A map takes a collection (i.e. an array or a dictionary) and creates an array. In these case we're taking an array of dictionaries and creating an array of urls.
+     //The last parameter of BCJSetMap is a block which creates the element to include in the resulting array. In this case we're using BCJGetURL to get the value of the 'url' key and return a URL.
+     BCJSetMap(@"array", BCJ_KEY(array), NSDictionary.class, BCJNoOptions, ^id(NSUInteger elementIdx, NSDictionary *elementValue, NSError *__autoreleasing *outError) {
+        NSURL *url;
+        BCJJSONSourceResult result = BCJGetURL(BCJSource(elementValue, @"url"), &url, outError);
+        return (result == BCJJSONSourceResultSuccess) ? url : nil;
+    }),
+     nil];
+    
 //    //Continuations-style
 //    BCJContainer *json = [BCJContainer new]; //Create a container to store the deserialized JSON in.
 //    NSError *continuationsError =
