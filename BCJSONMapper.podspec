@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "BCJSONMapper"
-  s.version      = "0.0.2"
+  s.version      = "0.0.3"
   s.summary      = "An Objective-C library for handling real world JSON."
 
   s.description  = <<-DESC
@@ -31,7 +31,7 @@ BCJSONMapper is a library for processing the crazy JSON structures that exist in
                    DESC
 
   s.homepage     = "https://github.com/BenedictC/BCJSONMapper"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
+
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -77,7 +77,7 @@ BCJSONMapper is a library for processing the crazy JSON structures that exist in
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/BenedictC/BCJSONMapper.git", :tag => "0.0.2" }
+  s.source       = { :git => "https://github.com/BenedictC/BCJSONMapper.git", :tag => "0.0.3" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -88,8 +88,8 @@ BCJSONMapper is a library for processing the crazy JSON structures that exist in
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "BCJSONMapper", "BCJSONMapper/**/*.{h,m}" "BCJSONContinuations", "BCJSONContinuations/**/*.{h,m}", "BCLContinuations", "BCLContinuations/**/*.{h,m}"
-  s.exclude_files = "Classes/Exclude"
+  s.source_files  = "BCJSONMapper", "BCJSONMapper/**/*.{h,m}", "BCJSONContinuations", "BCJSONContinuations/**/*.{h,m}", "BCLContinuations", "BCLContinuations/**/*.{h,m}"
+  # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "**/*.h"
 
