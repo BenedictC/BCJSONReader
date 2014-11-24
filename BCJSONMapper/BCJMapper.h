@@ -9,6 +9,7 @@
 #import "BCLContinuationProtocol.h"
 
 #import "BCJConstants.h"
+#import "BCJDefines.h"
 
 
 
@@ -22,9 +23,9 @@ typedef NS_OPTIONS(NSUInteger, BCJMapperOptions) {
 
 @interface BCJMapper : NSObject
 
-+(NSError *)mapJSONData:(NSData *)jsonData intoObject:(id)targetObject options:(BCJMapperOptions)options usingContinuations:(id<BCLContinuation>)firstContinuation, ...;
++(NSError *)mapJSONData:(NSData *)jsonData intoObject:(id)targetObject options:(BCJMapperOptions)options usingContinuations:(id<BCLContinuation>)firstContinuation, ... BCJ_REQUIRED(1,2);
 
-+(NSError *)mapSourceObject:(id)sourceObject intoObject:(id)targetObject options:(BCJMapperOptions)options usingContinuations:(id<BCLContinuation>)firstContinuation, ...;
++(NSError *)mapSourceObject:(id)sourceObject intoObject:(id)targetObject options:(BCJMapperOptions)options usingContinuations:(id<BCLContinuation>)firstContinuation, ... BCJ_REQUIRED(1,2);
 
 //Source and target object stacks access.
 +(id)sourceObject;
