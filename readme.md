@@ -9,9 +9,9 @@ BCJSONMapper is a library for processing the crazy JSON structures that exist in
 
 
 
-Examples:
+### Example
 
-````
+```objc
 @interface TestObject : NSObject
 @property NSArray *array;
 @property NSInteger number;
@@ -72,18 +72,17 @@ void demo(void) {
      nil];
 }
 
-````
-
+```
 
 
 ## There are lots of other libraries for handling JSON, why not use one of them?
-Other JSON libraries tends to make simplifying assumptions about the JSON structures that they'll be faced with. Theseassumptions may be suitable for a specific JSON structure but not for all. The promise of these libraries tend to break down when faced with JSON that does not conform to the assumptions. When these assumptions fail we're left in a worse position that if we hadn't used the library: first we must figure out how to breakout of the library and only then can we write the manual code that the library claimed to help use avoid. Other undesirable and common patterns in JSONlibraries are:
+Other JSON libraries tends to make simplifying assumptions about the JSON structures that they'll be faced with. These assumptions may be suitable for a specific JSON structure but not for all. The promise of these libraries tend to break down when faced with JSON that does not conform to the assumptions. When these assumptions fail we're left in a worse position that if we hadn't used the library: first we must figure out how to breakout of the library and only then can we write the manual code that the library claimed to help use avoid. Other undesirable and common patterns in JSON libraries are:
 
-- Forcing the model objects being coupled with either the JSON library (e.g. by requiring inheriting from a specfic class).
-- Implicitly coupling model objects to the JSON structure by encouraging 'magical' mapping (e.g. by implictly reading the keys in a dictionary and finding a property on the object with a matching name). Such magic becomes painful when debugging.
+- Forcing the model objects being coupled with either the JSON library (e.g. by requiring inheriting from a specific class).
+- Implicitly coupling model objects to the JSON structure by encouraging 'magical' mapping (e.g. by implicitly reading the keys in a dictionary and finding a property on the object with a matching name). Such magic becomes painful when debugging.
 
 
 ## So what's different about BCJSONMapper?
-First and foremost BCJSONMapper provides the infrastructure for processing JSON (this infrastructure is actually provided by another library, BCLContinuations, which is included with BCJSONMapper). BCJSONMapper then builds on top this infrastructure and provides functions for the common steps that occur whenprocessing JSON. 
+First and foremost BCJSONMapper provides the infrastructure for processing JSON (this infrastructure is actually provided by another library, BCLContinuations, which is included with BCJSONMapper). BCJSONMapper then builds on top this infrastructure and provides functions for the common steps that occur when processing JSON. 
 
-If you're lucky enough to be dealing with well structed JSON then you may be better off using a simplier library.
+If you're lucky enough to be dealing with well structed JSON then you may be better off using a simpler library.
