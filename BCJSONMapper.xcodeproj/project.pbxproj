@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		820420C31A24D6D200AE3309 /* BCLNonBlockingBlockContinuation.m in Sources */ = {isa = PBXBuildFile; fileRef = 820420C21A24D6D200AE3309 /* BCLNonBlockingBlockContinuation.m */; };
 		823452021A12658000E19D74 /* libBCJSONMapperOSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 828555C31A0E147D00FCBF61 /* libBCJSONMapperOSX.dylib */; };
 		823C69671A1E9A23006C1A90 /* BCLBlockContinuation.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68FD1A1E9A23006C1A90 /* BCLBlockContinuation.h */; };
 		823C69681A1E9A23006C1A90 /* BCLBlockContinuation.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68FD1A1E9A23006C1A90 /* BCLBlockContinuation.h */; };
@@ -203,6 +204,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		820420C11A24D6D200AE3309 /* BCLNonBlockingBlockContinuation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLNonBlockingBlockContinuation.h; sourceTree = "<group>"; };
+		820420C21A24D6D200AE3309 /* BCLNonBlockingBlockContinuation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLNonBlockingBlockContinuation.m; sourceTree = "<group>"; };
 		821C2B201A05A4AA00C56BC3 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		823C68FD1A1E9A23006C1A90 /* BCLBlockContinuation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLBlockContinuation.h; sourceTree = "<group>"; };
 		823C68FE1A1E9A23006C1A90 /* BCLBlockContinuation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLBlockContinuation.m; sourceTree = "<group>"; };
@@ -351,6 +354,8 @@
 			children = (
 				823C68FD1A1E9A23006C1A90 /* BCLBlockContinuation.h */,
 				823C68FE1A1E9A23006C1A90 /* BCLBlockContinuation.m */,
+				820420C11A24D6D200AE3309 /* BCLNonBlockingBlockContinuation.h */,
+				820420C21A24D6D200AE3309 /* BCLNonBlockingBlockContinuation.m */,
 				823C68FF1A1E9A23006C1A90 /* BCLContinuationProtocol.h */,
 				823C69001A1E9A23006C1A90 /* BCLContinuations.h */,
 				823C69011A1E9A23006C1A90 /* BCLContinuationsClass+AdditionalControlFlow.h */,
@@ -909,6 +914,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				820420C31A24D6D200AE3309 /* BCLNonBlockingBlockContinuation.m in Sources */,
 				82D3B1A019FBF8D3003C4EB5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

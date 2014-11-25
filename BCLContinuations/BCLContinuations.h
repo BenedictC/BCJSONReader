@@ -10,4 +10,5 @@
 #import "BCLContinuationsClass.h"
 
 #import "BCLBlockContinuation.h"
+#import "BCLNonBlockingBlockContinuation.h"
 #import "BCLControlFlowContinuations.h"
