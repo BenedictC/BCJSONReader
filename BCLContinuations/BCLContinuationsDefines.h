@@ -1,12 +1,14 @@
 //
-//  BCLContinuationsClass+AdditionalControlFlow.h
+//  BCLContinuationsDefines.h
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 30/10/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCLContinuations.h"
+#ifndef BCLContinuationsDefines_h_
+#define BCLContinuationsDefines_h_
+
 
 
 #pragma mark - helper macros
@@ -27,14 +29,4 @@ __continuations__; \
 
 
 
-@interface BCLContinuations (AdditionalControlFlow)
-
-+(void)continueUntilEnd:(NSArray *)continuations errors:(NSArray *)errors completionHandler:(void (^)(BOOL didSucceed, NSError *error))completionHandler;
-
-+(void)continueUntilError:(NSArray *)continuations completionHandler:(void (^)(BOOL didSucceed, NSError *error))completionHandler;
-
-+(NSError *)untilEndWithContinuations:(NSArray *)continuations;
-
-+(NSError *)untilErrorWithContinuations:(NSArray *)continuations;
-
-@end
+#endif

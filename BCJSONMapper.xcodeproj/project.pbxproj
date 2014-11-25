@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		820420C31A24D6D200AE3309 /* BCLNonBlockingBlockContinuation.m in Sources */ = {isa = PBXBuildFile; fileRef = 820420C21A24D6D200AE3309 /* BCLNonBlockingBlockContinuation.m */; };
+		820420C71A24EAEC00AE3309 /* BCLContinuationsDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 820420C61A24EAEC00AE3309 /* BCLContinuationsDefines.h */; };
+		820420C81A24EAEC00AE3309 /* BCLContinuationsDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 820420C61A24EAEC00AE3309 /* BCLContinuationsDefines.h */; };
 		823452021A12658000E19D74 /* libBCJSONMapperOSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 828555C31A0E147D00FCBF61 /* libBCJSONMapperOSX.dylib */; };
 		823C69671A1E9A23006C1A90 /* BCLBlockContinuation.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68FD1A1E9A23006C1A90 /* BCLBlockContinuation.h */; };
 		823C69681A1E9A23006C1A90 /* BCLBlockContinuation.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68FD1A1E9A23006C1A90 /* BCLBlockContinuation.h */; };
@@ -18,8 +20,6 @@
 		823C696D1A1E9A23006C1A90 /* BCLContinuationProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C68FF1A1E9A23006C1A90 /* BCLContinuationProtocol.h */; };
 		823C696E1A1E9A23006C1A90 /* BCLContinuations.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69001A1E9A23006C1A90 /* BCLContinuations.h */; };
 		823C696F1A1E9A23006C1A90 /* BCLContinuations.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69001A1E9A23006C1A90 /* BCLContinuations.h */; };
-		823C69701A1E9A23006C1A90 /* BCLContinuationsClass+AdditionalControlFlow.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69011A1E9A23006C1A90 /* BCLContinuationsClass+AdditionalControlFlow.h */; };
-		823C69711A1E9A23006C1A90 /* BCLContinuationsClass+AdditionalControlFlow.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69011A1E9A23006C1A90 /* BCLContinuationsClass+AdditionalControlFlow.h */; };
 		823C69721A1E9A23006C1A90 /* BCLContinuationsClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69021A1E9A23006C1A90 /* BCLContinuationsClass.h */; };
 		823C69731A1E9A23006C1A90 /* BCLContinuationsClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C69021A1E9A23006C1A90 /* BCLContinuationsClass.h */; };
 		823C69741A1E9A23006C1A90 /* BCLContinuationsClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C69031A1E9A23006C1A90 /* BCLContinuationsClass.m */; };
@@ -206,12 +206,12 @@
 /* Begin PBXFileReference section */
 		820420C11A24D6D200AE3309 /* BCLNonBlockingBlockContinuation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLNonBlockingBlockContinuation.h; sourceTree = "<group>"; };
 		820420C21A24D6D200AE3309 /* BCLNonBlockingBlockContinuation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLNonBlockingBlockContinuation.m; sourceTree = "<group>"; };
+		820420C61A24EAEC00AE3309 /* BCLContinuationsDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLContinuationsDefines.h; sourceTree = "<group>"; };
 		821C2B201A05A4AA00C56BC3 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		823C68FD1A1E9A23006C1A90 /* BCLBlockContinuation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLBlockContinuation.h; sourceTree = "<group>"; };
 		823C68FE1A1E9A23006C1A90 /* BCLBlockContinuation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLBlockContinuation.m; sourceTree = "<group>"; };
 		823C68FF1A1E9A23006C1A90 /* BCLContinuationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLContinuationProtocol.h; sourceTree = "<group>"; };
 		823C69001A1E9A23006C1A90 /* BCLContinuations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLContinuations.h; sourceTree = "<group>"; };
-		823C69011A1E9A23006C1A90 /* BCLContinuationsClass+AdditionalControlFlow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "BCLContinuationsClass+AdditionalControlFlow.h"; sourceTree = "<group>"; };
 		823C69021A1E9A23006C1A90 /* BCLContinuationsClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLContinuationsClass.h; sourceTree = "<group>"; };
 		823C69031A1E9A23006C1A90 /* BCLContinuationsClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCLContinuationsClass.m; sourceTree = "<group>"; };
 		823C69041A1E9A23006C1A90 /* BCLControlFlowContinuations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCLControlFlowContinuations.h; sourceTree = "<group>"; };
@@ -357,8 +357,8 @@
 				820420C11A24D6D200AE3309 /* BCLNonBlockingBlockContinuation.h */,
 				820420C21A24D6D200AE3309 /* BCLNonBlockingBlockContinuation.m */,
 				823C68FF1A1E9A23006C1A90 /* BCLContinuationProtocol.h */,
+				820420C61A24EAEC00AE3309 /* BCLContinuationsDefines.h */,
 				823C69001A1E9A23006C1A90 /* BCLContinuations.h */,
-				823C69011A1E9A23006C1A90 /* BCLContinuationsClass+AdditionalControlFlow.h */,
 				823C69021A1E9A23006C1A90 /* BCLContinuationsClass.h */,
 				823C69031A1E9A23006C1A90 /* BCLContinuationsClass.m */,
 				823C69041A1E9A23006C1A90 /* BCLControlFlowContinuations.h */,
@@ -594,7 +594,6 @@
 				823C6AFE1A22196C006C1A90 /* BCJJSONSource.h in Headers */,
 				823C6AED1A22196C006C1A90 /* BCJDefines.h in Headers */,
 				823C6A6C1A2213EC006C1A90 /* BCJStackJSONSource.h in Headers */,
-				823C69701A1E9A23006C1A90 /* BCLContinuationsClass+AdditionalControlFlow.h in Headers */,
 				823C6B201A22196C006C1A90 /* BCJDeserialization.h in Headers */,
 				823C6A601A2213EC006C1A90 /* BCJMapper.h in Headers */,
 				823C6B2F1A22196C006C1A90 /* BCJMap.h in Headers */,
@@ -609,6 +608,7 @@
 				823C69671A1E9A23006C1A90 /* BCLBlockContinuation.h in Headers */,
 				823C6AE81A22196C006C1A90 /* BCJConstants.h in Headers */,
 				823C696E1A1E9A23006C1A90 /* BCLContinuations.h in Headers */,
+				820420C71A24EAEC00AE3309 /* BCLContinuationsDefines.h in Headers */,
 				823C6B0A1A22196C006C1A90 /* BCJPropertyTarget+ValueIntrospection.h in Headers */,
 				823C6B031A22196C006C1A90 /* BCJJSONSourceConstants.h in Headers */,
 				823C69721A1E9A23006C1A90 /* BCLContinuationsClass.h in Headers */,
@@ -633,7 +633,6 @@
 				823C6AFF1A22196C006C1A90 /* BCJJSONSource.h in Headers */,
 				823C6AEE1A22196C006C1A90 /* BCJDefines.h in Headers */,
 				823C6A6D1A2213EC006C1A90 /* BCJStackJSONSource.h in Headers */,
-				823C69711A1E9A23006C1A90 /* BCLContinuationsClass+AdditionalControlFlow.h in Headers */,
 				823C6B211A22196C006C1A90 /* BCJDeserialization.h in Headers */,
 				823C6A611A2213EC006C1A90 /* BCJMapper.h in Headers */,
 				823C6B301A22196C006C1A90 /* BCJMap.h in Headers */,
@@ -648,6 +647,7 @@
 				823C69681A1E9A23006C1A90 /* BCLBlockContinuation.h in Headers */,
 				823C6AE91A22196C006C1A90 /* BCJConstants.h in Headers */,
 				823C696F1A1E9A23006C1A90 /* BCLContinuations.h in Headers */,
+				820420C81A24EAEC00AE3309 /* BCLContinuationsDefines.h in Headers */,
 				823C6B0B1A22196C006C1A90 /* BCJPropertyTarget+ValueIntrospection.h in Headers */,
 				823C6B041A22196C006C1A90 /* BCJJSONSourceConstants.h in Headers */,
 				823C69731A1E9A23006C1A90 /* BCLContinuationsClass.h in Headers */,

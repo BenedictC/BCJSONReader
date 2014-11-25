@@ -7,7 +7,6 @@
 //
 
 #import "BCLContinuationsClass.h"
-#import "BCLContinuationsClass+AdditionalControlFlow.h"
 
 
 
@@ -19,43 +18,21 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
 
 @interface BCLContinuations ()
 
-@property(nonatomic, readonly) NSArray *continuations;
-
 @end
 
 
 
 @implementation BCLContinuations
 
-#pragma mark - Additional control flow
-
-+(NSError *)untilEndWithContinuations:(NSArray *)continuations
+#pragma mark - Non-blocking
++(void)untilEndWithContinuations:(NSArray *)continuations completionHandler:(void(^)(BOOL didSucceed, NSError *error))completionHandler
 {
-    __block NSError *returnError = nil;
-
-    [self continueUntilError:continuations completionHandler:^(BOOL didSucceed, NSError *error) {
-        returnError = (didSucceed) ? nil : error;
-    }];
-
-    return returnError;
+    [BCLContinuations untilEndWithContinuations:continuations errors:@[] completionHandler:completionHandler];
 }
 
 
 
-+(NSError *)untilErrorWithContinuations:(NSArray *)continuations
-{
-    __block NSError *returnError = nil;
-
-    [self continueUntilError:continuations completionHandler:^(BOOL didSucceed, NSError *error) {
-        returnError = (didSucceed) ? nil : error;
-    }];
-
-    return returnError;
-}
-
-
-
-+(void)continueUntilEnd:(NSArray *)continuations errors:(NSArray *)errors completionHandler:(void (^)(BOOL didSucceed, NSError *error))completionHandler
++(void)untilEndWithContinuations:(NSArray *)continuations errors:(NSArray *)errors completionHandler:(void (^)(BOOL didSucceed, NSError *error))completionHandler
 {
     id<BCLContinuation> continuation = [continuations firstObject];
     if (continuation == nil) {
@@ -68,13 +45,13 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
     [continuation executeWithCompletionHandler:^(BOOL didSucceed, NSError *error) {
         NSArray *nextErrors = (!didSucceed && error == nil) ? [errors arrayByAddingObject:error] : errors;
         NSArray *remainingContinuations = [continuations subarrayWithRange:(NSRange){.location = 1, .length = continuations.count-1}];
-        [BCLContinuations continueUntilEnd:remainingContinuations errors:nextErrors completionHandler:completionHandler];
+        [BCLContinuations untilEndWithContinuations:remainingContinuations errors:nextErrors completionHandler:completionHandler];
     }];
 }
 
 
 
-+(void)continueUntilError:(NSArray *)continuations completionHandler:(void (^)(BOOL didSucceed, NSError *error))completionHandler
++(void)untilErrorWithContinuations:(NSArray *)continuations completionHandler:(void (^)(BOOL didSucceed, NSError *error))completionHandler
 {
     id<BCLContinuation> continuation = [continuations firstObject];
     if (continuation == nil) {
@@ -89,33 +66,23 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
         }
 
         NSArray *remainingContinuations = [continuations subarrayWithRange:(NSRange){.location = 1, .length = continuations.count-1}];
-        [BCLContinuations continueUntilError:remainingContinuations completionHandler:completionHandler];
+        [BCLContinuations untilErrorWithContinuations:remainingContinuations completionHandler:completionHandler];
     }];
 }
 
 
 
-#pragma mark - Public control flow
-+(void)untilEndWithCompletionHandler:(void(^)(BOOL didSucceed, NSError *error))completionHandler continuations:(id<BCLContinuation>)firstContinuation, ...
-{
-    NSArray *continuations = BCJ_CONTINUATIONS_ARRAY_FROM_VARGS(firstContinuation);
-    [self continueUntilEnd:continuations errors:@[] completionHandler:completionHandler];
-}
-
-
-
-+(void)untilErrorWithCompletionHandler:(void(^)(BOOL didSucceed, NSError *error))completionHandler continuations:(id<BCLContinuation>)firstContinuation, ...
-{
-    NSArray *continuations = BCJ_CONTINUATIONS_ARRAY_FROM_VARGS(firstContinuation);
-    [self continueUntilError:continuations completionHandler:completionHandler];
-}
-
-
-
+#pragma mark - Blocking
 +(NSError *)untilEnd:(id<BCLContinuation>)firstContinuation, ...
 {
     NSArray *continuations = BCJ_CONTINUATIONS_ARRAY_FROM_VARGS(firstContinuation);
-    return [BCLContinuations untilEndWithContinuations:continuations];
+    __block NSError *returnError = nil;
+
+    [self untilEndWithContinuations:continuations errors:@[] completionHandler:^(BOOL didSucceed, NSError *error) {
+        returnError = (didSucceed) ? nil : error;
+    }];
+
+    return returnError;
 }
 
 
@@ -123,7 +90,13 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
 +(NSError *)untilError:(id<BCLContinuation>)firstContinuation, ...
 {
     NSArray *continuations = BCJ_CONTINUATIONS_ARRAY_FROM_VARGS(firstContinuation);
-    return [BCLContinuations untilErrorWithContinuations:continuations];
+    __block NSError *returnError = nil;
+
+    [self untilErrorWithContinuations:continuations completionHandler:^(BOOL didSucceed, NSError *error) {
+        returnError = (didSucceed) ? nil : error;
+    }];
+
+    return returnError;
 }
 
 @end
