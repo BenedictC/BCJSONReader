@@ -15,7 +15,7 @@
  @param BOOL    <#BOOL description#>
  @param NSError <#NSError description#>
  */
-typedef void(^BCLContinuationBlock)(BOOL, NSError *);
+typedef void(^BCLFinishContinuation)(BOOL, NSError *);
 
 
 /**
@@ -30,12 +30,12 @@ typedef void(^BCLContinuationBlock)(BOOL, NSError *);
  @return An initalized continuation.
  */
 
--(instancetype)initWithBlock:(void(^)(BCLContinuationBlock))block;
+-(instancetype)initWithBlock:(void(^)(BCLFinishContinuation))block;
 
-@property(nonatomic, readonly, copy) void(^block)(BCLContinuationBlock);
+@property(nonatomic, readonly, copy) void(^block)(BCLFinishContinuation);
 
 @end
 
 
 
-id<BCLContinuation> BCLNonBlockingContinuationWithBlock(void(^continueBlock)(BCLContinuationBlock)) __attribute__((warn_unused_result));
+id<BCLContinuation> BCLNonBlockingContinuationWithBlock(void(^continueBlock)(BCLFinishContinuation)) __attribute__((warn_unused_result));

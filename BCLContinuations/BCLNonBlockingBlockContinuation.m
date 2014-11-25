@@ -19,7 +19,7 @@
 
 
 
--(instancetype)initWithBlock:(void(^)(BCLContinuationBlock))block
+-(instancetype)initWithBlock:(void(^)(BCLFinishContinuation))block
 {
     NSCParameterAssert(block != NULL);
 
@@ -42,7 +42,7 @@
 
 
 
-id<BCLContinuation> BCLNonBlockingContinuationWithBlock(void(^block)(BCLContinuationBlock)) {
+id<BCLContinuation> BCLNonBlockingContinuationWithBlock(void(^block)(BCLFinishContinuation)) {
 
     return [[BCLNonBlockingBlockContinuation alloc] initWithBlock:block];
 }
