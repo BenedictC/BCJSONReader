@@ -56,6 +56,10 @@ enum : NSInteger {
 +(NSError *)untilError:(id<BCLContinuation>)firstContinuation, ... NS_REQUIRES_NIL_TERMINATION;
 
 
-//TODO: Asynchronous execution so that the invoking thread is not blocked.
+
+//Asynchronous execution so that the invoking thread is not blocked.
++(void)untilEndWithCompletionHandler:(void(^)(BOOL didSucceed, NSError *error))completionHandler continuations:(id<BCLContinuation>)firstContinuation, ...;
+
++(void)untilErrorWithCompletionHandler:(void(^)(BOOL didSucceed, NSError *error))completionHandler continuations:(id<BCLContinuation>)firstContinuation, ...;
 
 @end

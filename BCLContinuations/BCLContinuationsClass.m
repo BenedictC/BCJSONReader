@@ -20,8 +20,6 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
 @interface BCLContinuations ()
 
 @property(nonatomic, readonly) NSArray *continuations;
-@property(nonatomic) BOOL shouldAbort;
-@property(nonatomic) NSError *abortionError;
 
 @end
 
@@ -29,141 +27,94 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
 
 @implementation BCLContinuations
 
-#pragma mark - Continuations Stack
-+(NSMutableArray *)continuationsStack
-{
-    static NSString * const key = @"BCLContinuation.continuationsStack";
-    NSMutableArray *stack = [[NSThread currentThread] threadDictionary][key];
-
-    if (stack == nil) {
-        stack = [NSMutableArray new];
-        [[NSThread currentThread] threadDictionary][key] = stack;
-    }
-
-    return stack;
-}
-
-
-
-+(void)pushContinuations:(BCLContinuations *)continuations
-{
-    [[BCLContinuations continuationsStack] addObject:continuations];
-}
-
-
-
-+(void)popContinuations
-{
-    [[BCLContinuations continuationsStack] removeLastObject];
-}
-
-
-
-+(BCLContinuations *)currentContinuations
-{
-    return [[BCLContinuations continuationsStack] lastObject];
-}
-
-
-
-#pragma mark - instance life cycle
--(instancetype)initWithContinuations:(NSArray *)continuations
-{
-    self = [super init];
-
-    if (self == nil) return nil;
-
-    _continuations = [continuations copy];
-
-    return self;
-}
-
-
-
-#pragma mark - Private control flow
--(NSError *)executeUntilEnd
-{
-    NSMutableArray *errors = [NSMutableArray new];
-
-    [BCLContinuations pushContinuations:self];
-
-    for (id<BCLContinuation> currentContinuation in self.continuations) {
-
-        //Check that we should continue
-        if (self.shouldAbort) {
-            NSError *error = (self.abortionError) ?: [NSError errorWithDomain:BCLErrorDomain code:BCLUnknownError userInfo:nil];
-            [errors addObject:error];
-            goto AuRevoir;
-        }
-
-        //Execute the continuation
-        [currentContinuation executeWithCompletionHandler:^(BOOL didSucceed, NSError *error) {
-            if (!didSucceed && error != nil) [errors addObject:error];
-        }];
-    }
-
-    AuRevoir:
-
-    [BCLContinuations popContinuations];
-
-    NSError *error = (errors.count > 0) ? [NSError errorWithDomain:BCLErrorDomain code:BCLMultipleErrorsError userInfo:@{BCLDetailedErrorsKey:errors}] : nil;
-    return error;
-}
-
-
-
--(NSError *)executeUntilError
-{
-    __block NSError *exitError = nil;
-
-    [BCLContinuations pushContinuations:self];
-
-    for (id<BCLContinuation> currentContinuation in self.continuations) {
-
-        //Check that we should continue
-        if (self.shouldAbort) {
-            exitError = (self.abortionError) ?: [NSError errorWithDomain:BCLErrorDomain code:BCLUnknownError userInfo:nil];
-            goto AuRevoir;
-        }
-
-        //Execute the continuation
-        __block BOOL shouldExit = NO;
-        [currentContinuation executeWithCompletionHandler:^(BOOL didSucceed, NSError *error) {
-            shouldExit = !didSucceed;
-            exitError = error;
-        }];
-        if (shouldExit) goto AuRevoir;
-    }
-
-    AuRevoir:
-
-    [BCLContinuations popContinuations];
-
-    return exitError;
-}
-
-
-
 #pragma mark - Additional control flow
+
 +(NSError *)untilEndWithContinuations:(NSArray *)continuations
 {
-    return [[[BCLContinuations alloc] initWithContinuations:continuations] executeUntilEnd];
+    __block NSError *returnError = nil;
+
+    [self continueUntilError:continuations completionHandler:^(BOOL didSucceed, NSError *error) {
+        returnError = (didSucceed) ? nil : error;
+    }];
+
+    return returnError;
 }
 
 
 
 +(NSError *)untilErrorWithContinuations:(NSArray *)continuations
 {
-    return [[[BCLContinuations alloc] initWithContinuations:continuations] executeUntilError];
+    __block NSError *returnError = nil;
+
+    [self continueUntilError:continuations completionHandler:^(BOOL didSucceed, NSError *error) {
+        returnError = (didSucceed) ? nil : error;
+    }];
+
+    return returnError;
+}
+
+
+
++(void)continueUntilEnd:(NSArray *)continuations errors:(NSArray *)errors completionHandler:(void (^)(BOOL didSucceed, NSError *error))completionHandler
+{
+    id<BCLContinuation> continuation = [continuations firstObject];
+    if (continuation == nil) {
+        BOOL didSucceed = errors.count == 0;
+        NSError *error = (didSucceed) ? nil : [NSError errorWithDomain:BCLErrorDomain code:BCLMultipleErrorsError userInfo:@{BCLDetailedErrorsKey:errors}];
+        completionHandler(YES, error);
+        return;
+    }
+
+    [continuation executeWithCompletionHandler:^(BOOL didSucceed, NSError *error) {
+        NSArray *nextErrors = (!didSucceed && error == nil) ? [errors arrayByAddingObject:error] : errors;
+        NSArray *remainingContinuations = [continuations subarrayWithRange:(NSRange){.location = 1, .length = continuations.count-1}];
+        [BCLContinuations continueUntilEnd:remainingContinuations errors:nextErrors completionHandler:completionHandler];
+    }];
+}
+
+
+
++(void)continueUntilError:(NSArray *)continuations completionHandler:(void (^)(BOOL didSucceed, NSError *error))completionHandler
+{
+    id<BCLContinuation> continuation = [continuations firstObject];
+    if (continuation == nil) {
+        completionHandler(YES, nil);
+        return;
+    }
+
+    [continuation executeWithCompletionHandler:^(BOOL didSucceed, NSError *error) {
+        if (!didSucceed) {
+            completionHandler(NO, error);
+            return;
+        }
+
+        NSArray *remainingContinuations = [continuations subarrayWithRange:(NSRange){.location = 1, .length = continuations.count-1}];
+        [BCLContinuations continueUntilError:remainingContinuations completionHandler:completionHandler];
+    }];
 }
 
 
 
 #pragma mark - Public control flow
++(void)untilEndWithCompletionHandler:(void(^)(BOOL didSucceed, NSError *error))completionHandler continuations:(id<BCLContinuation>)firstContinuation, ...
+{
+    NSArray *continuations = BCJ_CONTINUATIONS_ARRAY_FROM_VARGS(firstContinuation);
+    [self continueUntilEnd:continuations errors:@[] completionHandler:completionHandler];
+}
+
+
+
++(void)untilErrorWithCompletionHandler:(void(^)(BOOL didSucceed, NSError *error))completionHandler continuations:(id<BCLContinuation>)firstContinuation, ...
+{
+    NSArray *continuations = BCJ_CONTINUATIONS_ARRAY_FROM_VARGS(firstContinuation);
+    [self continueUntilError:continuations completionHandler:completionHandler];
+}
+
+
+
 +(NSError *)untilEnd:(id<BCLContinuation>)firstContinuation, ...
 {
     NSArray *continuations = BCJ_CONTINUATIONS_ARRAY_FROM_VARGS(firstContinuation);
-
     return [BCLContinuations untilEndWithContinuations:continuations];
 }
 
@@ -172,18 +123,7 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
 +(NSError *)untilError:(id<BCLContinuation>)firstContinuation, ...
 {
     NSArray *continuations = BCJ_CONTINUATIONS_ARRAY_FROM_VARGS(firstContinuation);
-
     return [BCLContinuations untilErrorWithContinuations:continuations];
-}
-
-
-
-//TODO: Why do we need this method? Why would we want to cancel a continuation rather than just have a continutation fail?
--(void)abortWithError:(NSError *)error
-{
-    self.shouldAbort = YES;
-    //We only store the first abortion error
-    if (self.abortionError == nil) self.abortionError = error;
 }
 
 @end

@@ -28,21 +28,13 @@ __continuations__; \
 
 
 @interface BCLContinuations (AdditionalControlFlow)
-/**
- Synchronous execution the supplied continuations. If one or more errors occurs then the returned error will be an NSError with code BCLMultipleErrorsError.
 
- @param continuations an NSArray of id<BCLContinuation> objects.
++(void)continueUntilEnd:(NSArray *)continuations errors:(NSArray *)errors completionHandler:(void (^)(BOOL didSucceed, NSError *error))completionHandler;
 
- @return On success nil, otherwise and NSError.
- */
++(void)continueUntilError:(NSArray *)continuations completionHandler:(void (^)(BOOL didSucceed, NSError *error))completionHandler;
+
 +(NSError *)untilEndWithContinuations:(NSArray *)continuations;
-/**
- Synchronous execution the supplied continuations. If an error occurs then the continutions are abort and the error returned.
 
- @param continuations an NSArray of id<BCLContinuation> objects.
-
- @return On success nil, otherwise and NSError.
- */
 +(NSError *)untilErrorWithContinuations:(NSArray *)continuations;
 
 @end

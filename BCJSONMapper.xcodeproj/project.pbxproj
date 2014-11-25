@@ -1324,6 +1324,7 @@
 				823C6B6B1A221B0A006C1A90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		823C6B791A221B1D006C1A90 /* Build configuration list for PBXNativeTarget "BCJSONContinuationsTests" */ = {
 			isa = XCConfigurationList;
@@ -1332,6 +1333,7 @@
 				823C6B7B1A221B1D006C1A90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		823C6B891A221B2B006C1A90 /* Build configuration list for PBXNativeTarget "BCLContinuationsTests" */ = {
 			isa = XCConfigurationList;
@@ -1340,6 +1342,7 @@
 				823C6B8B1A221B2B006C1A90 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8282CEB919F5987200555BB0 /* Build configuration list for PBXProject "BCJSONMapper" */ = {
 			isa = XCConfigurationList;
