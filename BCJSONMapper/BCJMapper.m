@@ -9,7 +9,8 @@
 #import "BCJMapper.h"
 #import "BCJStackJSONSource.h"
 #import "BCJStackPropertyTarget.h"
-#import "BCLContinuationsClass+AdditionalControlFlow.h"
+#import "BCLContinuations.h"
+#import "BCLContinuationsDefines.h"
 
 
 

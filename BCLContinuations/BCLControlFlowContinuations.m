@@ -7,7 +7,7 @@
 //
 
 #import "BCLContinuationsClass.h"
-#import "BCLContinuationsClass+AdditionalControlFlow.h"
+#import "BCLContinuationsDefines.h"
 #import "BCLBlockContinuation.h"
 
 

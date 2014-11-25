@@ -7,6 +7,7 @@
 //
 
 #import "BCLContinuationsClass.h"
+#import "BCLContinuationsDefines.h"
 
 
 
@@ -73,6 +74,32 @@ NSString * const BCLDetailedErrorsKey = @"BCLDetailedErrorsKey";
 
 
 #pragma mark - Blocking
++(NSError *)untilEndWithContinuations:(NSArray *)continuations
+{
+    __block NSError *returnError = nil;
+
+    [self untilEndWithContinuations:continuations errors:@[] completionHandler:^(BOOL didSucceed, NSError *error) {
+        returnError = (didSucceed) ? nil : error;
+    }];
+
+    return returnError;
+}
+
+
+
++(NSError *)untilErrorWithContinuations:(NSArray *)continuations
+{
+    __block NSError *returnError = nil;
+
+    [self untilErrorWithContinuations:continuations completionHandler:^(BOOL didSucceed, NSError *error) {
+        returnError = (didSucceed) ? nil : error;
+    }];
+
+    return returnError;
+}
+
+
+
 +(NSError *)untilEnd:(id<BCLContinuation>)firstContinuation, ...
 {
     NSArray *continuations = BCJ_CONTINUATIONS_ARRAY_FROM_VARGS(firstContinuation);

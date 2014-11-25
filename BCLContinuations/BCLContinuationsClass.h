@@ -57,6 +57,12 @@ enum : NSInteger {
 
 
 
++(NSError *)untilEndWithContinuations:(NSArray *)continuations;
+
++(NSError *)untilErrorWithContinuations:(NSArray *)continuations;
+
+
+
 //execution so that the invoking thread is not blocked.
 +(void)untilEndWithContinuations:(NSArray *)continuations completionHandler:(void(^)(BOOL didSucceed, NSError *error))completionHandler;
 
