@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "BCJSONMapper"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "An Objective-C library for handling real world JSON."
 
   s.description  = <<-DESC
@@ -24,10 +24,6 @@ BCJSONMapper is a library for processing the crazy JSON structures that exist in
 + Flexible. Provides functionality for handling many JSON usage styles.
 + Extensible. Easy to integrate new processing (e.g. peculiar date formats).
 
-                   * Think: Why did you write this? What is the focus? What does it do?
-                   * CocoaPods will be using this to generate tags, and improve search results.
-                   * Try to keep it short, snappy and to the point.
-                   * Finally, don't worry about the indent, CocoaPods strips it!
                    DESC
 
   s.homepage     = "https://github.com/BenedictC/BCJSONMapper"
@@ -77,7 +73,7 @@ BCJSONMapper is a library for processing the crazy JSON structures that exist in
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/BenedictC/BCJSONMapper.git", :tag => "0.0.3" }
+  s.source       = { :git => "https://github.com/BenedictC/BCJSONMapper.git", :tag => "0.0.4" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -88,7 +84,7 @@ BCJSONMapper is a library for processing the crazy JSON structures that exist in
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "BCJSONMapper", "BCJSONMapper/**/*.{h,m}", "BCJSONContinuations", "BCJSONContinuations/**/*.{h,m}", "BCLContinuations", "BCLContinuations/**/*.{h,m}"
+  s.source_files  = "BCJSONMapper", "BCJSONMapper/**/*.{h,m}", "BCJSONContinuations", "BCJSONContinuations/**/*.{h,m}"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "**/*.h"
@@ -103,6 +99,6 @@ BCJSONMapper is a library for processing the crazy JSON structures that exist in
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  # s.dependency "JSONKit", "~> 1.4"
+  s.dependency "BCLContinuations", "0.1"
 
 end
