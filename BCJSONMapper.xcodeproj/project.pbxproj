@@ -142,6 +142,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		820421391A26369100AE3309 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 820421331A26369100AE3309 /* BCLContinuations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 820420E61A2623B600AE3309;
+			remoteInfo = BCLContinuations;
+		};
+		8204213B1A26369100AE3309 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 820421331A26369100AE3309 /* BCLContinuations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 820420F61A26243400AE3309;
+			remoteInfo = BCLContinuationsOSX;
+		};
+		8204213D1A26369100AE3309 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 820421331A26369100AE3309 /* BCLContinuations.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 820421001A26243400AE3309;
+			remoteInfo = BCLContinuationsTests;
+		};
 		823C6B671A221B0A006C1A90 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8282CEB619F5987200555BB0 /* Project object */;
@@ -178,6 +199,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		820421331A26369100AE3309 /* BCLContinuations.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = BCLContinuations.xcodeproj; path = BCLContinuations/BCLContinuations.xcodeproj; sourceTree = "<group>"; };
 		821C2B201A05A4AA00C56BC3 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		823C6A571A2213EC006C1A90 /* BCJMapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJMapper.h; sourceTree = "<group>"; };
 		823C6A581A2213EC006C1A90 /* BCJMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJMapper.m; sourceTree = "<group>"; };
@@ -308,6 +330,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		820421341A26369100AE3309 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8204213A1A26369100AE3309 /* BCLContinuations */,
+				8204213C1A26369100AE3309 /* libBCLContinuationsOSX.dylib */,
+				8204213E1A26369100AE3309 /* BCLContinuationsOSXTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		823C6A561A2213EC006C1A90 /* BCJSONMapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -459,6 +491,7 @@
 				82D3B19E19FBF8D3003C4EB5 /* DemoApp */,
 				823C6A561A2213EC006C1A90 /* BCJSONMapper */,
 				823C6ABB1A22196C006C1A90 /* BCJSONContinuations */,
+				820421331A26369100AE3309 /* BCLContinuations.xcodeproj */,
 				823C6BC01A221C58006C1A90 /* BCJSONMapperTests */,
 				823C6B981A221B74006C1A90 /* BCJSONContinuationsTests */,
 				8282CEBF19F5987200555BB0 /* Products */,
@@ -733,6 +766,12 @@
 			mainGroup = 8282CEB519F5987200555BB0;
 			productRefGroup = 8282CEBF19F5987200555BB0 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 820421341A26369100AE3309 /* Products */;
+					ProjectRef = 820421331A26369100AE3309 /* BCLContinuations.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				8282CEBD19F5987200555BB0 /* DemoApp */,
@@ -745,6 +784,31 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		8204213A1A26369100AE3309 /* BCLContinuations */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = BCLContinuations;
+			remoteRef = 820421391A26369100AE3309 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8204213C1A26369100AE3309 /* libBCLContinuationsOSX.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = libBCLContinuationsOSX.dylib;
+			remoteRef = 8204213B1A26369100AE3309 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8204213E1A26369100AE3309 /* BCLContinuationsOSXTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			name = BCLContinuationsOSXTests.xctest;
+			path = BCLContinuationsTests.xctest;
+			remoteRef = 8204213D1A26369100AE3309 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		823C6B5E1A221B0A006C1A90 /* Resources */ = {
