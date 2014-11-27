@@ -15,7 +15,7 @@
 #import "BCJStackPropertyTarget.h"
 #import "BCJPropertyTarget+ValueIntrospection.h"
 
-#import "BCLBlockContinuation.h"
+#import <BCLContinuations/BCLBlockContinuation.h>
 
 
 

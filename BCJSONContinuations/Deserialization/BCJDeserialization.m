@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCLContinuations.h"
+#import <BCLContinuations/BCLContinuations.h>
 #import "BCJDeserialization.h"
 #import "BCJPropertyTarget.h"
 #import "BCJContainer.h"

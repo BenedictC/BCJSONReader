@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCLContinuations.h"
+#import <BCLContinuations/BCLContinuations.h>
 #import "BCJDefines.h"
 #import "BCJMapOptions.h"
 #import "BCJJSONSourceConstants.h"

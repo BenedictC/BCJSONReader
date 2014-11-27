@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BCLContinuations.h"
+#import <BCLContinuations/BCLContinuations.h>
 #import "BCJDefines.h"
 #import "BCJJSONSource.h"
 

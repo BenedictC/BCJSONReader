@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "BCLContinuationProtocol.h"
+#import <BCLContinuations/BCLContinuationProtocol.h>
 #import "BCJDefines.h"
 
 @class BCJContainer;
