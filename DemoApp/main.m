@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "BCJSONMapper.h"
+#import "BCJSONContinuations.h"
 
 
 
@@ -69,6 +70,10 @@ void demo(void) {
         NSURL *url;
         BCJJSONSourceResult result = BCJGetURL(BCJSource(elementValue, @"url"), &url, outError);
         return (result == BCJJSONSourceResultSuccess) ? url : nil;
+    }),
+     BCJEnumerateDictionary(BCJSource(@"dict"), NSString.class, NSNumber.class, ^BOOL(NSString *key, NSNumber *value, NSError *__autoreleasing *outError) {
+        NSLog(@"%@ -> %@", key, value);
+        return NO;
     }),
      nil];
     
