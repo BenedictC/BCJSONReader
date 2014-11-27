@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCLContinuationProtocol.h"
+#import <BCLContinuations/BCLContinuations.h>
 
 #import "BCJConstants.h"
 #import "BCJDefines.h"
@@ -26,6 +26,10 @@ typedef NS_OPTIONS(NSUInteger, BCJMapperOptions) {
 +(NSError *)mapJSONData:(NSData *)jsonData intoObject:(id)targetObject options:(BCJMapperOptions)options usingContinuations:(id<BCLContinuation>)firstContinuation, ... BCJ_REQUIRED(1,2);
 
 +(NSError *)mapSourceObject:(id)sourceObject intoObject:(id)targetObject options:(BCJMapperOptions)options usingContinuations:(id<BCLContinuation>)firstContinuation, ... BCJ_REQUIRED(1,2);
+
++(NSError *)readJSONObject:(NSData *)jsonData options:(BCJMapperOptions)options usingContinuations:(id<BCLContinuation>)firstContinuation, ... BCJ_REQUIRED(1);
+
++(NSError *)readSourceObject:(id)sourceObject options:(BCJMapperOptions)options usingContinuations:(id<BCLContinuation>)firstContinuation, ... BCJ_REQUIRED(1);
 
 //Source and target object stacks access.
 +(id)sourceObject;
