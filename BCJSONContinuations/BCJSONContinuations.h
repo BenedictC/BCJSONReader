@@ -24,6 +24,7 @@
 #import "BCJContainerJSONSource.h"
 
 //Type-Specific Continuations
+#import "BCJEnumeration.h"
 #import "BCJStandardTypes.h"
 #import "BCJAdditionalTypes.h"
 #import "BCJMap.h"
