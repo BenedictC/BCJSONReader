@@ -99,6 +99,6 @@ BCJSONMapper is a library for processing the crazy JSON structures that exist in
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency "BCLContinuations", "0.1"
+  s.dependency "BCLContinuations", "0.2"
 
 end
