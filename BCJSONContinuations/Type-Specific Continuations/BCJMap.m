@@ -36,14 +36,11 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDiction
     //Get the value
     id enumKey;
     BCJJSONSourceResult result = [source getValue:&enumKey error:outError];
-    switch (result) {
-        case BCJJSONSourceResultValueNotFound: return YES;
-        case BCJJSONSourceResultFailure: return NO;
-        case BCJJSONSourceResultSuccess:
-            break;
+    if (result != BCJJSONSourceResultSuccess) {
+        return result;
     }
-
-    //We don't have a key but that's fine because otherwise the getter out have complained.
+    
+    //We don't have a key but that's fine because otherwise the getter would have complained.
     if (enumKey == nil) return BCJJSONSourceResultSuccess;
 
     //Get the value
