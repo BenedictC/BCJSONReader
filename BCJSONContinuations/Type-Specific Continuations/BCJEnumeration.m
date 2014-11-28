@@ -23,10 +23,8 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateArray(BCJJSONSource *source, Cl
         switch (result) {
             case BCJJSONSourceResultFailure:
                 return NO;
-
             case BCJJSONSourceResultValueNotFound:
-                return YES;
-                
+                return YES;                
             case BCJJSONSourceResultSuccess:
                 break;
         }

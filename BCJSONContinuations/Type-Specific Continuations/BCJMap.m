@@ -36,7 +36,12 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDiction
     //Get the value
     id enumKey;
     BCJJSONSourceResult result = [source getValue:&enumKey error:outError];
-    if (result != BCJJSONSourceResultSuccess) return result;
+    switch (result) {
+        case BCJJSONSourceResultValueNotFound: return YES;
+        case BCJJSONSourceResultFailure: return NO;
+        case BCJJSONSourceResultSuccess:
+            break;
+    }
 
     //We don't have a key but that's fine because otherwise the getter out have complained.
     if (enumKey == nil) return BCJJSONSourceResultSuccess;
@@ -65,7 +70,15 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJJSONSource *source, BCJProper
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
-        if (!BCJGetEnum(source, enumMapping, &value, outError)) return NO;
+        BCJJSONSourceResult result = BCJGetEnum(source, enumMapping, &value, outError);
+        switch (result) {
+            case BCJJSONSourceResultValueNotFound:
+                return YES;
+            case BCJJSONSourceResultFailure:
+                return NO;
+            case BCJJSONSourceResultSuccess:
+                break;
+        }
         return [target setValue:value error:outError];
     });
 }
@@ -199,13 +212,19 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONSource *source, BCJPropert
 
         //Get the container
         NSDictionary *container;
-        if (![source getValue:&container ofKind:NSDictionary.class error:outError]) return NO;
+        BCJJSONSourceResult result = [source getValue:&container ofKind:NSDictionary.class error:outError];
+        switch (result) {
+            case BCJJSONSourceResultValueNotFound: return YES;
+            case BCJJSONSourceResultFailure: return NO;
+            case BCJJSONSourceResultSuccess:
+                break;
+        }
 
         //Perform the mapping
         NSArray *values = BCJGetMap(container, elementClass, options, sortDescriptors, fromDictionaryMap, outError);
         BOOL didMappingSucceed = (values != nil);
         if (!didMappingSucceed) return NO;
-
+        
         //Set the value
         return [target setValue:values error:outError];
     });

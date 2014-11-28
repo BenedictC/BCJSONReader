@@ -26,7 +26,14 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJJSON
     //Get value
     NSNumber *timeInterval;
     BCJJSONSourceResult result = [source getValue:&timeInterval ofKind:NSNumber.class error:outError];
-    if (result != BCJJSONSourceResultSuccess) return result;
+    switch (result) {
+        case BCJJSONSourceResultFailure:
+            return NO;
+        case BCJJSONSourceResultValueNotFound:
+            return YES;
+        case BCJJSONSourceResultSuccess:
+            break;
+    }
 
     //If we don't have a value then we don't need to create a date
     if (timeInterval == nil) return BCJJSONSourceResultSuccess;
@@ -85,9 +92,16 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *
     BCJJSONSource *stringSource = [[BCJJSONSource alloc] initWithObject:source.object JSONPath:source.JSONPath expectedClass:NSString.class options:source.options defaultValue:defaultString];
 
     NSString *dateString;
-    //TODO: Should we return a different error?
     BCJJSONSourceResult result = [stringSource getValue:&dateString ofKind:nil error:outError];
-    if (result != BCJJSONSourceResultSuccess) return result;
+    switch (result) {
+        case BCJJSONSourceResultFailure:
+            //TODO: Should we return a different error?            
+            return NO;
+        case BCJJSONSourceResultValueNotFound:
+            return YES;
+        case BCJJSONSourceResultSuccess:
+            break;
+    }
 
     //If we don't have a value then the getter was happy with a nil value so we don't need to create a date.
     if (dateString == nil) return BCJJSONSourceResultSuccess;
@@ -146,7 +160,14 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **ou
     id fetchedValue;
     //TODO: Should we return a different error?
     BCJJSONSourceResult result = [source getValue:&fetchedValue ofKind:nil error:outError];
-    if (result != BCJJSONSourceResultSuccess) return result;
+    switch (result) {
+        case BCJJSONSourceResultFailure:
+            return NO;
+        case BCJJSONSourceResultValueNotFound:
+            return YES;
+        case BCJJSONSourceResultSuccess:
+            break;
+    }
 
     //If the getter succeed with a nil then we're done
     if (fetchedValue == nil) return BCJJSONSourceResultSuccess;
