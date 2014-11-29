@@ -1,5 +1,5 @@
 //
-//  BCJStackPropertyTarget.h
+//  BCJStackTarget.h
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 21/11/2014.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BCJDefines.h"
 
-@class BCJPropertyTarget;
+@class BCJTarget;
 
 
 
@@ -20,4 +20,4 @@ void BCJPopTargetObject(void);
 
 
 
-BCJPropertyTarget * BCJ_OVERLOADABLE BCJTarget(NSString *key) BCJ_WARN_UNUSED BCJ_REQUIRED(1);
+BCJTarget * BCJ_OVERLOADABLE BCJCreateTarget(NSString *key) BCJ_WARN_UNUSED BCJ_REQUIRED(1);

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class BCJJSONSource;
+@class BCJSource;
 
 
 /**
@@ -18,12 +18,12 @@
  */
 @interface BCJError : NSError
 
-+(NSError *)missingValueErrorWithJSONSource:(BCJJSONSource *)source component:(NSString *)component componentIndex:(NSUInteger)componentIndex;
-+(NSError *)unexpectedTypeErrorWithJSONSource:(BCJJSONSource *)source value:(id)value expectedClass:(Class)expectedClass;
-+(NSError *)unknownKeyForEnumMappingErrorWithJSONSource:(BCJJSONSource *)source enumMapping:(NSDictionary *)enumMapping key:(id)enumKey;
++(NSError *)missingValueErrorWithJSONSource:(BCJSource *)source component:(NSString *)component componentIndex:(NSUInteger)componentIndex;
++(NSError *)unexpectedTypeErrorWithJSONSource:(BCJSource *)source value:(id)value expectedClass:(Class)expectedClass;
++(NSError *)unknownKeyForEnumMappingErrorWithJSONSource:(BCJSource *)source enumMapping:(NSDictionary *)enumMapping key:(id)enumKey;
 +(NSError *)unexpectedElementTypeErrorWithElement:(id)element subscript:(id)subscript expectedElementClass:(Class)expectedElementClass;
 +(NSError *)mappingErrorWithElement:(id)element subscript:(id)subscript underlyingError:(NSError *)underlyingError;
-+(NSError *)invalidValueErrorWithJSONSource:(BCJJSONSource *)source value:(id)value criteria:(NSString *)criteria;
++(NSError *)invalidValueErrorWithJSONSource:(BCJSource *)source value:(id)value criteria:(NSString *)criteria;
 +(NSError *)invalidJSONPathErrorWithInvalidJSONPath:(NSString *)JSONPath errorPosition:(NSUInteger)position;
 +(NSError *)invalidJSONDataErrorWithData:(NSData *)data;
 

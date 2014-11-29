@@ -1,27 +1,27 @@
 //
-//  BCJStackPropertyTarget.m
+//  BCJStackTarget.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 21/11/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCJStackPropertyTarget.h"
-#import "BCJPropertyTarget.h"
+#import "BCJStackTarget.h"
+#import "BCJTarget.h"
 
 
 
-@interface BCJStackPropertyTarget : BCJPropertyTarget
+@interface BCJStackTarget : BCJTarget
 @end
 
 
 
-@implementation BCJStackPropertyTarget
+@implementation BCJStackTarget
 
--(instancetype)initWithKey:(NSString *)key
+-(instancetype)initWithKeyPath:(NSString *)keyPath
 {
     id tempTarget = @{};
-    return [super initWithObject:tempTarget key:key];
+    return [super initWithObject:tempTarget keyPath:keyPath];
 }
 
 
@@ -68,6 +68,6 @@ void BCJPopTargetObject() {
 
 
 
-BCJPropertyTarget * BCJ_OVERLOADABLE BCJTarget(NSString *key) {
-    return [[BCJStackPropertyTarget alloc] initWithKey:key];
+BCJTarget * BCJ_OVERLOADABLE BCJCreateTarget(NSString *keyPath) {
+    return [[BCJStackTarget alloc] initWithKeyPath:keyPath];
 }

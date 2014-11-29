@@ -1,5 +1,5 @@
 //
-//  BCJJSONSourceObjectProtocol.h
+//  BCJSourceObjectProtocol.h
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 17/11/2014.
@@ -16,7 +16,7 @@
 @protocol BCJContainer <NSObject>
 
 /**
- The object that BCJJSONSource should use to evaluate a JSONPath.
+ The object that BCJSource should use to evaluate a JSONPath.
 
  @return An object.
  */

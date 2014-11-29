@@ -7,24 +7,24 @@
 //
 
 #import "BCJGettersAndSetters.h"
-#import "BCJJSONSource.h"
-#import "BCJPropertyTarget.h"
+#import "BCJSource.h"
+#import "BCJTarget.h"
 
 
 
 #pragma mark - Get arbitary object continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJJSONSource *source, BOOL(^successBlock)(id value, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJSource *source, BOOL(^successBlock)(id value, NSError **outError)) {
     NSCParameterAssert(source != nil);
     NSCParameterAssert(successBlock != nil);
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
-        BCJJSONSourceResult result = [source getValue:&value error:outError];
+        BCJSourceResult result = [source getValue:&value error:outError];
         switch (result) {
-            case BCJJSONSourceResultValueNotFound: return YES;
-            case BCJJSONSourceResultSuccess: return successBlock(value, outError);
+            case BCJSourceResultValueNotFound: return YES;
+            case BCJSourceResultSuccess: return successBlock(value, outError);
             default: //This isn't necessary but I'm paranoid.
-            case BCJJSONSourceResultFailure: return NO;
+            case BCJSourceResultFailure: return NO;
         }
     });
 }
@@ -32,18 +32,23 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJJSONSource *source, BOOL(^su
 
 
 #pragma mark - Set arbitary object continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJJSONSource *source, BCJPropertyTarget *target) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJSource *source, BCJTarget *target) {
     NSCParameterAssert(target != nil);
     NSCParameterAssert(source != nil);
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
-        BCJJSONSourceResult result = [source getValue:&value error:outError];
+        BCJSourceResult result = [source getValue:&value error:outError];
         switch (result) {
-            case BCJJSONSourceResultValueNotFound: return YES;
-            case BCJJSONSourceResultSuccess: return [target setValue:value error:outError];
-            default: //This isn't necessary but I'm paranoid.
-            case BCJJSONSourceResultFailure: return NO;
+            case BCJSourceResultValueNotFound:
+                return YES;
+
+            case BCJSourceResultSuccess:
+#pragma message "TODO: Warn if attempting to set nil for a scalar value on an object that does not respond to setNilValueForKey:"                
+                return [target setValue:value error:outError];
+
+            case BCJSourceResultFailure:
+                return NO;
         }
     });
 }

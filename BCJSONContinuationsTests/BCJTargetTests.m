@@ -1,5 +1,5 @@
 //
-//  BCJPropertyTargetTests.m
+//  BCJTargetTests.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 07/11/2014.
@@ -7,30 +7,30 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "BCJPropertyTarget.h"
+#import "BCJTarget.h"
 
 
 
-@interface BCJPropertyTargetTests : XCTestCase
+@interface BCJTargetTests : XCTestCase
 
 @end
 
 
 
-@implementation BCJPropertyTargetTests
+@implementation BCJTargetTests
 
 - (void)testConstructors
 {
     //Given
     NSMutableString *object = [NSMutableString new];
-    NSString *key = @"string";
+    NSString *keyPath = @"string";
 
     //When
-    BCJPropertyTarget *target = [[BCJPropertyTarget alloc] initWithObject:object key:key];
+    BCJTarget *target = [[BCJTarget alloc] initWithObject:object keyPath:keyPath];
 
     //Then
     XCTAssertEqualObjects(target.object, object, @"Constructor failed to set object");
-    XCTAssertEqualObjects(target.key, key, @"Constructor failed to set key");
+    XCTAssertEqualObjects(target.keyPath, keyPath, @"Constructor failed to set key");
 }
 
 

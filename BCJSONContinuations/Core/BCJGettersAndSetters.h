@@ -11,8 +11,8 @@
 #import <BCLContinuations/BCLContinuations.h>
 #import "BCJDefines.h"
 
-@class BCJJSONSource;
-@class BCJPropertyTarget;
+@class BCJSource;
+@class BCJTarget;
 
 
 
@@ -25,7 +25,7 @@
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJJSONSource *source, BOOL(^successBlock)(id value, NSError **outError)) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJSource *source, BOOL(^successBlock)(id value, NSError **outError)) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 
 
 
@@ -38,4 +38,4 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJJSONSource *source, BOOL(^su
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJJSONSource *source, BCJPropertyTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetValue(BCJSource *source, BCJTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;

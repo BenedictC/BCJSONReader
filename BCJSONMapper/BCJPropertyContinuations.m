@@ -8,18 +8,18 @@
 
 #import "BCJPropertyContinuations.h"
 
-#import "BCJJSONSource.h"
+#import "BCJSource.h"
 #import "BCJAdditionalTypes.h"
 #import "BCJMap.h"
-#import "BCJStackJSONSource.h"
-#import "BCJStackPropertyTarget.h"
-#import "BCJPropertyTarget+ValueIntrospection.h"
+#import "BCJStackSource.h"
+#import "BCJStackTarget.h"
+#import "BCJTarget+ValueIntrospection.h"
 
 #import <BCLContinuations/BCLBlockContinuation.h>
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJJSONSource *source, BCJPropertyTarget *target) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJSource *source, BCJTarget *target) {
     NSCParameterAssert(source != nil);
     NSCParameterAssert(target != nil);
 
@@ -27,24 +27,25 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJJSONSource *source, BCJPr
 
         //0. Get the value
         id value;
-        BCJJSONSourceResult result = [source getValue:&value error:outError];
+        BCJSourceResult result = [source getValue:&value error:outError];
         switch (result) {
-            case BCJJSONSourceResultValueNotFound:
+            case BCJSourceResultValueNotFound:
                 return YES;
-            case BCJJSONSourceResultFailure:
+            case BCJSourceResultFailure:
                 return NO;
-            case BCJJSONSourceResultSuccess:
+            case BCJSourceResultSuccess:
                 break;
         }
 
         //Attempt to set the value
+#pragma message "TODO: Warn if attempting to set nil for a scalar value on an object that does not respond to setNilValueForKey:"        
         switch ([target canReceiveValue:value]) {
-            case BCJPropertyTargetValueEligabilityStatusPermitted:
+            case BCJTargetValueEligabilityStatusPermitted:
                 return [target setValue:value error:outError];
-            case BCJPropertyTargetValueEligabilityStatusUnknown:
+            case BCJTargetValueEligabilityStatusUnknown:
                 return [target setValue:value error:outError];
 
-            case BCJPropertyTargetValueEligabilityStatusForbidden:
+            case BCJTargetValueEligabilityStatusForbidden:
                 break;
         }
 
@@ -90,24 +91,24 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJJSONSource *source, BCJPr
 
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(NSString *jsonPath, NSString *propertyKey) {
-    return BCJSetProperty(BCJSource(jsonPath), BCJTarget(propertyKey));
+    return BCJSetProperty(BCJCreateSource(jsonPath), BCJCreateTarget(propertyKey));
 }
 
 
 
 #pragma mark - Convienince constructors that implicitly take the current target
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(NSString *sourceJSONPath, NSString *targetPropertyKey, NSDictionary *enumMapping)  {
-    return BCJSetEnum(BCJSource(sourceJSONPath), BCJTarget(targetPropertyKey), enumMapping);
+    return BCJSetEnum(BCJCreateSource(sourceJSONPath), BCJCreateTarget(targetPropertyKey), enumMapping);
 }
 
 
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(NSString *sourceJSONPath, NSString *targetPropertyKey, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError))  {
-    return BCJSetMap(BCJSource(sourceJSONPath), BCJTarget(targetPropertyKey), elementClass, options, fromArrayMap);
+    return BCJSetMap(BCJCreateSource(sourceJSONPath), BCJCreateTarget(targetPropertyKey), elementClass, options, fromArrayMap);
 }
 
 
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(NSString *sourceJSONPath, NSString *targetPropertyKey, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError))  {
-    return BCJSetMap(BCJSource(sourceJSONPath), BCJTarget(targetPropertyKey), elementClass, options, sortDescriptors, fromDictionaryMap);
+    return BCJSetMap(BCJCreateSource(sourceJSONPath), BCJCreateTarget(targetPropertyKey), elementClass, options, sortDescriptors, fromDictionaryMap);
 }

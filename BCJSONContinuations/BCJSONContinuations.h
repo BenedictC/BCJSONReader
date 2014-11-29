@@ -11,8 +11,8 @@
 #import "BCJDefines.h"
 
 //Core
-#import "BCJJSONSource.h"
-#import "BCJPropertyTarget.h"
+#import "BCJSource.h"
+#import "BCJTarget.h"
 
 #import "BCJGettersAndSetters.h"
 
@@ -21,7 +21,7 @@
 //Deserialization
 #import "BCJDeserialization.h"
 #import "BCJContainer.h"
-#import "BCJContainerJSONSource.h"
+#import "BCJContainerSource.h"
 
 //Type-Specific Continuations
 #import "BCJEnumeration.h"

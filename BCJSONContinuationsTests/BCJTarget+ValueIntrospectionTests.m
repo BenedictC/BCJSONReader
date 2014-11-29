@@ -1,5 +1,5 @@
 //
-//  BCJPropertyTarget+ValueIntrospectionTests.m
+//  BCJTarget+ValueIntrospectionTests.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 22/11/2014.
@@ -8,11 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
-#import "BCJPropertyTarget+ValueIntrospection.h"
+#import "BCJTarget+ValueIntrospection.h"
 
 
 
-@interface BCJPropertyTarget_ValueIntrospectionTests : XCTestCase
+@interface BCJTarget_ValueIntrospectionTests : XCTestCase
 
 @end
 
@@ -37,13 +37,13 @@
 
 
 
-@implementation BCJPropertyTarget_ValueIntrospectionTests
+@implementation BCJTarget_ValueIntrospectionTests
 
 - (void)testValidObjectProperty
 {
     //Given (setup environment)
-    id object = [TestObject new];
-    BCJPropertyTarget *target = BCJTarget(object, BCJ_KEY(array));
+    id object = @{@"arf":[TestObject new]};
+    BCJTarget *target = BCJCreateTarget(object, @"arf.array");
     id value = @[];
 
     //When (perform the action)
@@ -60,7 +60,7 @@
 {
     //Given (setup environment)
     id object = [TestObject new];
-    BCJPropertyTarget *target = BCJTarget(object, BCJ_KEY(array));
+    BCJTarget *target = BCJCreateTarget(object, BCJ_KEY(array));
     id value = @"";
 
     //When (perform the action)
@@ -77,7 +77,7 @@
 {
     //Given (setup environment)
     id object = [TestObject new];
-    BCJPropertyTarget *target = BCJTarget(object, BCJ_KEY(integer));
+    BCJTarget *target = BCJCreateTarget(object, BCJ_KEY(integer));
     id value = @123456789;
 
     //When (perform the action)
@@ -94,7 +94,7 @@
 {
     //Given (setup environment)
     id object = [TestObject new];
-    BCJPropertyTarget *target = BCJTarget(object, BCJ_KEY(integer));
+    BCJTarget *target = BCJCreateTarget(object, BCJ_KEY(integer));
     id value = @(123456789.234567);
 
     //When (perform the action)
@@ -111,7 +111,7 @@
 {
     //Given (setup environment)
     id object = [TestObject new];
-    BCJPropertyTarget *target = BCJTarget(object, BCJ_KEY(number));
+    BCJTarget *target = BCJCreateTarget(object, BCJ_KEY(number));
     float dbl = 12345.98765432;
     id value = @(dbl);
 

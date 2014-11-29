@@ -1,23 +1,23 @@
 //
-//  BCJJSONSource+DeferredClassCheck.m
+//  BCJSource+DeferredClassCheck.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 08/11/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCJJSONSource+DeferredClassCheck.h"
+#import "BCJSource+DeferredClassCheck.h"
 #import "BCJError.h"
 
 
 
-@implementation BCJJSONSource (DeferredClassCheck)
+@implementation BCJSource (DeferredClassCheck)
 
--(BCJJSONSourceResult)getValue:(id *)value ofKind:(Class)class error:(NSError **)outError
+-(BCJSourceResult)getValue:(id *)value ofKind:(Class)class error:(NSError **)outError
 {
     //We only need to do the check if a value has be fetched
-    BCJJSONSourceResult result = [self getValue:value error:outError];
-    if (result != BCJJSONSourceResultSuccess) return result;
+    BCJSourceResult result = [self getValue:value error:outError];
+    if (result != BCJSourceResultSuccess) return result;
 
     //Perform the check
     BOOL shouldCheckClass = *value != nil;
@@ -29,10 +29,10 @@
         }
         //Reset the value and fail
         *value = nil;
-        return BCJJSONSourceResultFailure;
+        return BCJSourceResultFailure;
     }
 
-    return BCJJSONSourceResultSuccess;
+    return BCJSourceResultSuccess;
 }
 
 @end

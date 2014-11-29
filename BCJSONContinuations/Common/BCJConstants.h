@@ -20,9 +20,9 @@
 extern NSString * const BCJErrorDomain;
 
 /**
- userInfo key for the BCJJSONSource instance involved in the error.
+ userInfo key for the BCJSource instance involved in the error.
  */
-extern NSString * const BCJJSONSourceErrorKey;
+extern NSString * const BCJSourceErrorKey;
 
 /**
  userInfo key for the enumMapping NSDictionary involved in a BCJUnknownEnumMappingKeyError error.

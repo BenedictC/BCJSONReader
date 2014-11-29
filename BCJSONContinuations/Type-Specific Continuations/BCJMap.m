@@ -8,8 +8,8 @@
 
 #import "BCJMap.h"
 #import "BCJError.h"
-#import "BCJJSONSource+DeferredClassCheck.h"
-#import "BCJPropertyTarget.h"
+#import "BCJSource+DeferredClassCheck.h"
+#import "BCJTarget.h"
 
 
 
@@ -21,7 +21,7 @@ static inline BOOL isOptionSet(NSInteger option, NSInteger options) {
 
 
 #pragma mark - Get Enum
-BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDictionary *enumMapping, id *outValue, NSError **outError) {
+BCJSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJSource *source, NSDictionary *enumMapping, id *outValue, NSError **outError) {
     NSCParameterAssert(source != nil);
     NSCParameterAssert(enumMapping != nil);
     NSCParameterAssert(outValue != nil);
@@ -35,13 +35,13 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDiction
 
     //Get the value
     id enumKey;
-    BCJJSONSourceResult result = [source getValue:&enumKey error:outError];
-    if (result != BCJJSONSourceResultSuccess) {
+    BCJSourceResult result = [source getValue:&enumKey error:outError];
+    if (result != BCJSourceResultSuccess) {
         return result;
     }
     
     //We don't have a key but that's fine because otherwise the getter would have complained.
-    if (enumKey == nil) return BCJJSONSourceResultSuccess;
+    if (enumKey == nil) return BCJSourceResultSuccess;
 
     //Get the value
     id value = enumMapping[enumKey];
@@ -49,16 +49,16 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJJSONSource *source, NSDiction
     //If the value is nil then the mapping was incomplete.
     if (value == nil) {
         if (outError != NULL) *outError = [BCJError unknownKeyForEnumMappingErrorWithJSONSource:source enumMapping:enumMapping key:enumKey];
-        return BCJJSONSourceResultFailure;
+        return BCJSourceResultFailure;
     }
 
     *outValue = value;
-    return BCJJSONSourceResultSuccess;
+    return BCJSourceResultSuccess;
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJJSONSource *source, BCJPropertyTarget *target, NSDictionary *enumMapping) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJSource *source, BCJTarget *target, NSDictionary *enumMapping) {
     //Perform additional checks that couldn't be performed when source and target are created
     NSCParameterAssert(target != nil);
     NSCParameterAssert(source != nil);
@@ -67,13 +67,13 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJJSONSource *source, BCJProper
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
-        BCJJSONSourceResult result = BCJGetEnum(source, enumMapping, &value, outError);
+        BCJSourceResult result = BCJGetEnum(source, enumMapping, &value, outError);
         switch (result) {
-            case BCJJSONSourceResultValueNotFound:
+            case BCJSourceResultValueNotFound:
                 return YES;
-            case BCJJSONSourceResultFailure:
+            case BCJSourceResultFailure:
                 return NO;
-            case BCJJSONSourceResultSuccess:
+            case BCJSourceResultSuccess:
                 break;
         }
         return [target setValue:value error:outError];
@@ -169,7 +169,7 @@ BCJ_OVERLOADABLE NSArray *BCJGetMap(NSDictionary *fromDict, Class elementClass, 
 
 
 #pragma mark - Set Map continuations
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONSource *source, BCJPropertyTarget *target, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJSource *source, BCJTarget *target, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) {
     NSCParameterAssert(target != nil);
     NSCParameterAssert(source != nil);
     NSCParameterAssert(fromArrayMap != nil);
@@ -179,11 +179,11 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONSource *source, BCJPropert
 
         //Get the container
         NSArray *container;
-        BCJJSONSourceResult result = [source getValue:&container ofKind:NSArray.class error:outError];
+        BCJSourceResult result = [source getValue:&container ofKind:NSArray.class error:outError];
         switch (result) {
-            case BCJJSONSourceResultValueNotFound: return YES;
-            case BCJJSONSourceResultFailure: return NO;
-            case BCJJSONSourceResultSuccess:
+            case BCJSourceResultValueNotFound: return YES;
+            case BCJSourceResultFailure: return NO;
+            case BCJSourceResultSuccess:
                 break;
         }
 
@@ -199,7 +199,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONSource *source, BCJPropert
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONSource *source, BCJPropertyTarget *target, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJSource *source, BCJTarget *target, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) {
     NSCParameterAssert(target != nil);
     NSCParameterAssert(source != nil);
     NSCParameterAssert(fromDictionaryMap != nil);
@@ -209,11 +209,11 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJJSONSource *source, BCJPropert
 
         //Get the container
         NSDictionary *container;
-        BCJJSONSourceResult result = [source getValue:&container ofKind:NSDictionary.class error:outError];
+        BCJSourceResult result = [source getValue:&container ofKind:NSDictionary.class error:outError];
         switch (result) {
-            case BCJJSONSourceResultValueNotFound: return YES;
-            case BCJJSONSourceResultFailure: return NO;
-            case BCJJSONSourceResultSuccess:
+            case BCJSourceResultValueNotFound: return YES;
+            case BCJSourceResultFailure: return NO;
+            case BCJSourceResultSuccess:
                 break;
         }
 

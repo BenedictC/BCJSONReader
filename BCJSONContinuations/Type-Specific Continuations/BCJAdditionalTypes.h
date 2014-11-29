@@ -10,12 +10,12 @@
 
 #import <BCLContinuations/BCLContinuations.h>
 #import "BCJDefines.h"
-#import "BCJJSONSource.h"
+#import "BCJSource.h"
 
-@class BCJPropertyTarget;
+@class BCJTarget;
 
 
-
+#pragma message "Add getter continuations"
 #pragma mark - NSDate from 1970
 /**
  Return by reference an NSDate created by fetching an NSNumber from source and using it as the argument to dateWithTimeIntervalSince1970:.
@@ -24,9 +24,9 @@
  @param outDate  On success contains an NSDate, otherwise nil.
  @param outError On failure contains an NSError that describes the reason for failure, otherwise nil.
 
- @return The result of getting the value from the source or BCJJSONSourceResultFailure if the result could not be converted to a date.
+ @return The result of getting the value from the source or BCJSourceResultFailure if the result could not be converted to a date.
  */
-BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJJSONSource *source, NSDate **outDate, NSError **outError) BCJ_REQUIRED(1,2,3);
+BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJSource *source, NSDate **outDate, NSError **outError) BCJ_REQUIRED(1,2,3);
 /**
  Return a continuation that fetches an NSNumber from source, uses the NSNumber to create an NSDate with dateWithTimeIntervalSince1970: and if a value was fetched invokes setValue:outError: on target with the NSDate.
 
@@ -35,7 +35,7 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJJSON
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJJSONSource *source, BCJPropertyTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJSource *source, BCJTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 
 #pragma mark - NSDate from ISO 8601
 /**
@@ -53,9 +53,9 @@ NSDate *BCJDateFromISO8601String(NSString *dateString) BCJ_REQUIRED(1);
  @param outDate  On success contains an NSDate, otherwise nil.
  @param outError On failure contains an NSError that describes the reason for failure, otherwise nil.
 
- @return The result of getting the value from the source or BCJJSONSourceResultFailure if the result could not be converted to a date.
+ @return The result of getting the value from the source or BCJSourceResultFailure if the result could not be converted to a date.
  */
-BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *source, NSDate **outDate, NSError **outError) BCJ_REQUIRED(1,2);
+BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJSource *source, NSDate **outDate, NSError **outError) BCJ_REQUIRED(1,2);
 /**
  Returns a continuation that calls BCJGetDateFromISO8601String and if a value was fetched invokes setValue:outError: on target with the NSDate.
 
@@ -64,7 +64,7 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJJSONSource *
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONSource *source, BCJPropertyTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJSource *source, BCJTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
 
 #pragma mark - NSURL
 /**
@@ -74,9 +74,9 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJJSONSource *
  @param outURL   On success contains an NSURL, otherwise nil.
  @param outError On failure contains an NSError that describes the reason for failure, otherwise nil.
 
- @return The result of getting the value from the source or BCJJSONSourceResultFailure if the result could not be converted to a URL.
+ @return The result of getting the value from the source or BCJSourceResultFailure if the result could not be converted to a URL.
  */
-BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **outURL, NSError **outError) BCJ_REQUIRED(1,2,3);
+BCJSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJSource *source, NSURL **outURL, NSError **outError) BCJ_REQUIRED(1,2,3);
 /**
   Returns a continuation that calls BCJGetURL and if a value was fetched invokes setValue:outError: on target with the NSURL.
 
@@ -85,4 +85,4 @@ BCJJSONSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJJSONSource *source, NSURL **ou
 
  @return A continuation.
  */
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJJSONSource *source, BCJPropertyTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;
+id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJSource *source, BCJTarget *target) BCJ_REQUIRED(1,2) BCJ_WARN_UNUSED;

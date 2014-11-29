@@ -1,22 +1,46 @@
 //
-//  BCJPropertyTarget+ValueIntrospection.m
+//  BCJTarget+ValueIntrospection.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 21/11/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCJPropertyTarget+ValueIntrospection.h"
+#import "BCJTarget+ValueIntrospection.h"
 #import <objc/runtime.h>
 
 
 
-@implementation BCJPropertyTarget (ValueIntrospection)
+@implementation BCJTarget (ValueIntrospection)
+
+-(id)receiver
+{
+    NSString *fullKeyPath = self.keyPath;
+    NSRange lastDotRange = [fullKeyPath rangeOfString:@"." options:NSBackwardsSearch];
+    if (lastDotRange.location == NSNotFound) {
+        return self.object;
+    }
+
+    NSString *croppedKeyPath = [fullKeyPath substringToIndex:lastDotRange.location];
+    return [self.object valueForKeyPath:croppedKeyPath];
+}
+
+
+
+-(NSString *)key
+{
+    NSString *keyPath = self.keyPath;
+    NSRange lastDotRange = [keyPath rangeOfString:@"." options:NSBackwardsSearch];
+
+    return (lastDotRange.location == NSNotFound) ? keyPath : [keyPath substringFromIndex:1 + lastDotRange.location];
+}
+
+
 
 -(NSString *)expectedObjCType
 {
     NSString *key = self.key;
-    id class = [self.object class];
+    id class = [self.receiver class];
 
     if (class == nil) return nil;
 
@@ -94,20 +118,20 @@
 
 
 
--(BCJPropertyTargetValueEligabilityStatus)canReceiveValue:(id)value
+-(BCJTargetValueEligabilityStatus)canReceiveValue:(id)value
 {
-    if (value == nil) return BCJPropertyTargetValueEligabilityStatusPermitted;
+    if (value == nil) return BCJTargetValueEligabilityStatusPermitted;
 
     //class checking
     Class expectedClass = self.expectedClass;
-    if (expectedClass == Nil) return BCJPropertyTargetValueEligabilityStatusUnknown;
-    if ([value isKindOfClass:expectedClass]) return BCJPropertyTargetValueEligabilityStatusPermitted;
+    if (expectedClass == Nil) return BCJTargetValueEligabilityStatusUnknown;
+    if ([value isKindOfClass:expectedClass]) return BCJTargetValueEligabilityStatusPermitted;
 
     //Special case for NSValue
     BOOL shouldCompareScalarType = (expectedClass == Nil) && [value isKindOfClass:NSValue.class];
-    if (shouldCompareScalarType && [self canReceiveScalarValue:value]) return BCJPropertyTargetValueEligabilityStatusPermitted;
+    if (shouldCompareScalarType && [self canReceiveScalarValue:value]) return BCJTargetValueEligabilityStatusPermitted;
 
-    return BCJPropertyTargetValueEligabilityStatusForbidden;
+    return BCJTargetValueEligabilityStatusForbidden;
 }
 
 

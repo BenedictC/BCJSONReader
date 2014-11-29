@@ -14,12 +14,17 @@
 #import "BCJPropertyContinuations.h"
 
 //Stack source and targets
-#import "BCJStackJSONSource.h"
-#import "BCJStackPropertyTarget.h"
+#import "BCJStackSource.h"
+#import "BCJStackTarget.h"
 
 //Type-specific continuations (borrowed from BCJJSONContinuations)
-#import "BCJStandardTypes.h"
 #import "BCJAdditionalTypes.h"
+#import "BCJEnumeration.h"
 #import "BCJMap.h"
+#import "BCJStandardTypes.h"
+
+#import "BCJValidation.h"
+
+
 
 #endif

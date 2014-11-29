@@ -1,5 +1,5 @@
 //
-//  BCJPropertyTarget.h
+//  BCJTarget.h
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 04/11/2014.
@@ -12,22 +12,22 @@
 
 
 /**
- BCJPropertyTarget encapsulates the setting of an instance property using KVC. setValue:error: first performs validation with validateValue:forKey:error: and if successful sets the value using setValue:forKey:.
+ BCJTarget encapsulates the setting of an instance property using KVC. setValue:error: first performs validation with validateValue:forKey:error: and if successful sets the value using setValue:forKey:.
  
  DEBUG builds perform an additional type check to ensure that the property being assigned to is of the correct type. If there's a type mismatch then an exception is raised.
 
  */
-@interface BCJPropertyTarget : NSObject
+@interface BCJTarget : NSObject
 
 /**
- Creates an instance of BCJPropertyTarget. BCJTarget constructor function should be used in favour of this method.
+ Creates an instance of BCJTarget. BCJTarget constructor function should be used in favour of this method.
 
  @param object The object to set the value on.
  @param key    The key of the property to set.
 
- @return an instance of BCJPropertyTarget.
+ @return an instance of BCJTarget.
  */
--(instancetype)initWithObject:(id)object key:(NSString *)key;
+-(instancetype)initWithObject:(id)object keyPath:(NSString *)keyPath;
 /**
  The object that the value will be set on.
  */
@@ -35,7 +35,7 @@
 /**
  The key of the property to set.
  */
-@property(nonatomic, readonly) NSString *key;
+@property(nonatomic, readonly) NSString *keyPath;
 
 /**
  Sets the value of object to value.
@@ -51,4 +51,4 @@
 
 
 
-BCJPropertyTarget * BCJ_OVERLOADABLE BCJTarget(id object, NSString *key) BCJ_WARN_UNUSED BCJ_REQUIRED(1,2);
+BCJTarget * BCJ_OVERLOADABLE BCJCreateTarget(id object, NSString *keyPath) BCJ_WARN_UNUSED BCJ_REQUIRED(1,2);

@@ -1,5 +1,5 @@
 //
-//  BCJJSONSourceTests.m
+//  BCJSourceTests.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 07/11/2014.
@@ -7,18 +7,18 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "BCJJSONSource+DeferredClassCheck.h"
+#import "BCJSource+DeferredClassCheck.h"
 #import <objc/runtime.h>
 
 
 
-@interface BCJJSONSourceTests : XCTestCase
+@interface BCJSourceTests : XCTestCase
 
 @end
 
 
 
-@implementation BCJJSONSourceTests
+@implementation BCJSourceTests
 
 -(void)testValidDesignatedInitalizer
 {
@@ -26,11 +26,11 @@
     NSMutableString *object = [NSMutableString stringWithString:@"arf"];
     NSString *JSONPath = @"self";
     Class defaultExpectedClass = NSString.class;
-    BCJJSONSourceOptions options = BCJJSONSourceModeDefaultable;
+    BCJSourceOptions options = BCJSourceModeDefaultable;
     id defaultValue = @"default";
 
     //When
-    BCJJSONSource *source = [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:defaultExpectedClass options:options defaultValue:defaultValue];
+    BCJSource *source = [[BCJSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:defaultExpectedClass options:options defaultValue:defaultValue];
 
     //Then
     XCTAssertEqualObjects(object, source.object, @"Constructor failed to set object.");
@@ -48,7 +48,7 @@
 //    NSMutableString *object = [NSMutableString stringWithString:@"arf"];
 //    NSString *JSONPath = @"self";
 //    Class defaultExpectedClass = NSString.class;
-//    BCJJSONSourceOptions options = BCJJSONSourceModeDefaultable;
+//    BCJSourceOptions options = BCJSourceModeDefaultable;
 //    id defaultValue = @"default";
 //
 //    //When
@@ -66,17 +66,17 @@
 //    NSDictionary *object = @{@"number": @123456};
 //    NSString *path = @"number";
 //    Class expectedClass = nil;
-//    BCJJSONSourceMode mode = BCJJSONSourceModeOptional;
+//    BCJSourceMode mode = BCJSourceModeOptional;
 //    id defaultValue = nil;
-//    BCJJSONSource *source = BCJJSONSource(object, path, expectedClass, mode, defaultValue);
+//    BCJSource *source = BCJSource(object, path, expectedClass, mode, defaultValue);
 //
 //    //When (perform the action)
 //    id actualValue;
 //    NSError *error;
-//    BCJJSONSourceResult actualResult = [source getValue:&actualValue error:&error];
+//    BCJSourceResult actualResult = [source getValue:&actualValue error:&error];
 //
 //    //Then (verify the action had the expected result)
-//    BCJJSONSourceResult expectedResult = BCJJSONSourceResultSuccess;
+//    BCJSourceResult expectedResult = BCJSourceResultSuccess;
 //    XCTAssertEqual(actualResult, expectedResult, @"Incorrect result");
 //
 //    id expectedValue = @123456;
@@ -91,17 +91,17 @@
     NSDictionary *object = @{@"number": @123456};
     NSString *path = @"notAnumber";
     Class expectedClass = nil;
-    BCJJSONSourceMode mode = BCJJSONSourceModeOptional;
+    BCJSourceMode mode = BCJSourceModeOptional;
     id defaultValue = nil;
-    BCJJSONSource *source = BCJSource(object, path, expectedClass, mode, defaultValue);
+    BCJSource *source = BCJCreateSource(object, path, expectedClass, mode, defaultValue);
 
     //When (perform the action)
     id actualValue;
     NSError *error;
-    BCJJSONSourceResult actualResult = [source getValue:&actualValue error:&error];
+    BCJSourceResult actualResult = [source getValue:&actualValue error:&error];
 
     //Then (verify the action had the expected result)
-    BCJJSONSourceResult expectedResult = BCJJSONSourceResultValueNotFound;
+    BCJSourceResult expectedResult = BCJSourceResultValueNotFound;
     XCTAssertEqual(actualResult, expectedResult, @"Incorrect result");
 
     id expectedValue = nil;

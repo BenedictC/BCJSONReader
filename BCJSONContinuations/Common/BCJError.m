@@ -8,42 +8,42 @@
 
 #import "BCJError.h"
 #import "BCJConstants.h"
-#import "BCJJSONSource.h"
+#import "BCJSource.h"
 
 
 
 @implementation BCJError
 
-+(NSError *)missingValueErrorWithJSONSource:(BCJJSONSource *)source component:(NSString *)component componentIndex:(NSUInteger)componentIndex
++(NSError *)missingValueErrorWithJSONSource:(BCJSource *)source component:(NSString *)component componentIndex:(NSUInteger)componentIndex
 {
     NSString *format = NSLocalizedString(@"Could not fetch object for component %lu (%@) of JSONPath %@.", nil);
     NSString *description = [NSString stringWithFormat:format, (long unsigned)componentIndex, component, source.JSONPath];
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:description forKey:NSLocalizedDescriptionKey];
-    if (source != nil) userInfo[BCJJSONSourceErrorKey] = source;
+    if (source != nil) userInfo[BCJSourceErrorKey] = source;
 
     return [NSError errorWithDomain:BCJErrorDomain code:BCJMissingValueError userInfo:userInfo];
 }
 
 
 
-+(NSError *)unexpectedTypeErrorWithJSONSource:(BCJJSONSource *)source value:(id)value expectedClass:(Class)expectedClass
++(NSError *)unexpectedTypeErrorWithJSONSource:(BCJSource *)source value:(id)value expectedClass:(Class)expectedClass
 {
     NSString *format = NSLocalizedString(@"The value for JSONPath %@ is of type %@ but is expected to be of type %@.", nil);
     NSString *description = [NSString stringWithFormat:format, source.JSONPath, NSStringFromClass([value class]), NSStringFromClass(expectedClass)];
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:description forKey:NSLocalizedDescriptionKey];
-    if (source != nil) userInfo[BCJJSONSourceErrorKey] = source;
+    if (source != nil) userInfo[BCJSourceErrorKey] = source;
 
     return [NSError errorWithDomain:BCJErrorDomain code:BCJUnexpectedTypeError userInfo:userInfo];
 }
 
 
 
-+(NSError *)unknownKeyForEnumMappingErrorWithJSONSource:(BCJJSONSource *)source enumMapping:(NSDictionary *)enumMapping key:(id)enumKey
++(NSError *)unknownKeyForEnumMappingErrorWithJSONSource:(BCJSource *)source enumMapping:(NSDictionary *)enumMapping key:(id)enumKey
 {
     NSString *format = NSLocalizedString(@"EnumMapping does not contain key <%@>.", nil);
     NSString *description = [NSString stringWithFormat:format, enumKey];
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:description forKey:NSLocalizedDescriptionKey];
-    if (source != nil) userInfo[BCJJSONSourceErrorKey] = source;
+    if (source != nil) userInfo[BCJSourceErrorKey] = source;
     if (enumMapping != nil) userInfo[BCJEnumMappingErrorKey] = enumMapping;
 
     return [NSError errorWithDomain:BCJErrorDomain code:BCJUnknownEnumMappingKeyError userInfo:userInfo];
@@ -74,12 +74,12 @@
 
 
 
-+(NSError *)invalidValueErrorWithJSONSource:(BCJJSONSource *)source value:(id)value criteria:(NSString *)criteria
++(NSError *)invalidValueErrorWithJSONSource:(BCJSource *)source value:(id)value criteria:(NSString *)criteria
 {
     NSString *format = NSLocalizedString(@"The value for JSONPath %@ does not match the criteria '%@'.", nil);
     NSString *description = [NSString stringWithFormat:format, source.JSONPath, criteria];
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:description forKey:NSLocalizedDescriptionKey];
-    if (source != nil) userInfo[BCJJSONSourceErrorKey] = source;
+    if (source != nil) userInfo[BCJSourceErrorKey] = source;
 
     return [NSError errorWithDomain:BCJErrorDomain code:BCJInvalidValueError userInfo:userInfo];
 }

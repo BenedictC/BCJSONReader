@@ -1,12 +1,12 @@
 //
-//  BCJJSONSource.m
+//  BCJSource.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 04/11/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCJJSONSource.h"
+#import "BCJSource.h"
 #import "BCJEnumerateJSONPathComponents.h"
 #import "BCJLogging.h"
 #import "BCJError.h"
@@ -14,26 +14,26 @@
 
 
 #pragma mark - options
-static inline BOOL BCJTreatValueNotFoundAsSuccess(BCJJSONSourceOptions options) {
-    return (options & BCJJSONSourceOptionTreatValueNotFoundAsSuccess) != 0;
+static inline BOOL BCJTreatValueNotFoundAsSuccess(BCJSourceOptions options) {
+    return (options & BCJSourceOptionTreatValueNotFoundAsSuccess) != 0;
 }
 
 
 
-static inline BOOL BCJPathMustEvaluateToValue(BCJJSONSourceOptions options) {
-    return (options & BCJJSONSourceOptionPathMustEvaluateToValue) != 0;
+static inline BOOL BCJPathMustEvaluateToValue(BCJSourceOptions options) {
+    return (options & BCJSourceOptionPathMustEvaluateToValue) != 0;
 }
 
 
 
-static inline BOOL BCJReplaceNullWithNil(BCJJSONSourceOptions options) {
-    return (options & BCJJSONSourceOptionReplaceNullWithNil) != 0;
+static inline BOOL BCJReplaceNullWithNil(BCJSourceOptions options) {
+    return (options & BCJSourceOptionReplaceNullWithNil) != 0;
 }
 
 
 
 #pragma mark - Asserts/Logging
-static inline void BCJAssertValidGetterOptions(id object, NSString *JSONPath, Class expectedClass, BCJJSONSourceOptions options, id defaultValue) {
+static inline void BCJAssertValidGetterOptions(id object, NSString *JSONPath, Class expectedClass, BCJSourceOptions options, id defaultValue) {
     NSCParameterAssert(object != nil);
 
     NSCParameterAssert(JSONPath != nil);
@@ -48,7 +48,7 @@ static inline void BCJAssertValidGetterOptions(id object, NSString *JSONPath, Cl
 
 
 
-static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Class expectedClass, BCJJSONSourceOptions options, id defaultValue) {
+static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Class expectedClass, BCJSourceOptions options, id defaultValue) {
 #pragma message "TODO: Add logging"
 //    BOOL shouldReplaceNilWithDefaultValue = BCJShouldReplaceNilWithDefaultValue(options);
 //    BOOL isDefaultValuePointless = (!shouldReplaceNilWithDefaultValue && defaultValue != nil);
@@ -65,7 +65,7 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
 
 
 
-@implementation BCJJSONSource
+@implementation BCJSource
 
 -(instancetype)init
 {
@@ -74,7 +74,7 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
 
 
 
--(instancetype)initWithObject:(id)object JSONPath:(NSString *)JSONPath expectedClass:(Class)expectedClass options:(BCJJSONSourceOptions)options defaultValue:(id)defaultValue
+-(instancetype)initWithObject:(id)object JSONPath:(NSString *)JSONPath expectedClass:(Class)expectedClass options:(BCJSourceOptions)options defaultValue:(id)defaultValue
 {
     BCJAssertValidGetterOptions(object, JSONPath, expectedClass, options, defaultValue);
 
@@ -94,7 +94,7 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
 
 
 
--(BCJJSONSourceResult)getValue:(id *)outValue error:(NSError **)outError
+-(BCJSourceResult)getValue:(id *)outValue error:(NSError **)outError
 {
     //Reset outValue
     *outValue = nil;
@@ -143,7 +143,7 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
     BOOL didFailPathEvaluation = (failedComponentIdx != NSNotFound);
     if (didFailPathEvaluation && BCJPathMustEvaluateToValue(self.options)) {
         if (outError != NULL )*outError = [BCJError missingValueErrorWithJSONSource:self component:failedComponent componentIndex:failedComponentIdx];
-        return BCJJSONSourceResultFailure;
+        return BCJSourceResultFailure;
     }
 
     //2. Fix up null
@@ -154,7 +154,7 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
     //3. No-op on nil
     //Note that we could still return nil because the defaultValue may be nil.
     if (value == nil && !BCJTreatValueNotFoundAsSuccess(self.options)) {
-        return BCJJSONSourceResultValueNotFound;
+        return BCJSourceResultValueNotFound;
     }
 
     //4. Replace nil with defaultValue
@@ -171,12 +171,12 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
             NSString *criteria = [NSString stringWithFormat:@"value.class != %@", NSStringFromClass(expectedClass)];
             *outError = [BCJError invalidValueErrorWithJSONSource:self value:value criteria:criteria];
         }
-        return BCJJSONSourceResultFailure;
+        return BCJSourceResultFailure;
     }
 
     //6. We ran the gauntlet!
     *outValue = value;
-    return BCJJSONSourceResultSuccess;
+    return BCJSourceResultSuccess;
 }
 
 @end
@@ -184,24 +184,24 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
 
 
 #pragma mark - Constructors
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, Class expectClass, BCJJSONSourceOptions options, id defaultValue) {
-    return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:expectClass options:options defaultValue:defaultValue];
+BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id object, NSString *JSONPath, Class expectClass, BCJSourceOptions options, id defaultValue) {
+    return [[BCJSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:expectClass options:options defaultValue:defaultValue];
 }
 
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, BCJJSONSourceOptions options, id defaultValue) {
-    return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:nil options:options defaultValue:nil];
+BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id object, NSString *JSONPath, BCJSourceOptions options, id defaultValue) {
+    return [[BCJSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:nil options:options defaultValue:nil];
 }
 
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath, BCJJSONSourceOptions options) {
-    return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:nil options:BCJJSONSourceModeOptional defaultValue:nil];
+BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id object, NSString *JSONPath, BCJSourceOptions options) {
+    return [[BCJSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:nil options:BCJSourceModeOptional defaultValue:nil];
 }
 
 
 
-BCJJSONSource * BCJ_OVERLOADABLE BCJSource(id object, NSString *JSONPath) {
-    return [[BCJJSONSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:nil options:BCJJSONSourceModeOptional defaultValue:nil];
+BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id object, NSString *JSONPath) {
+    return [[BCJSource alloc] initWithObject:object JSONPath:JSONPath expectedClass:nil options:BCJSourceModeOptional defaultValue:nil];
 }

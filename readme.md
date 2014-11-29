@@ -59,15 +59,15 @@ void demo(void) {
          BCJ_SET(@"number", number), //Fetches the value of the jsonPath, 'number' and sets the 'number' property of target.
          BCJSetProperty(@"date", @"date"),  //The previous line uses the BCJ_SET macro which is just a wrapper arround BCJSetProperty to add runtime selector checking. Note that the date is being  implicitly converted from a number to a date. BCJSetProperty supports three such conversions. number->date, string->date & string->url.
          BCJ_SET(@"array[0].url", url), //Fetches the value from a JSON path and implicitly converts it to the correct type.
-         BCJSetString(BCJSource(@"string", BCJJSONSourceModeStrict), BCJTarget(BCJ_KEY(string))), //Unlike BCJSetProperty, BCJSetString (and the other type-specific continuation constructors) does not perform 'magic'. It expects the source to be a string and the destination to be a string property. The source has its option set to BCJJSONSourceModeStrict so that it will fail if the value is not found.
+         BCJSetString(BCJCreateSource(@"string", BCJSourceModeStrict), BCJCreateTarget(BCJ_KEY(string))), //Unlike BCJSetProperty, BCJSetString (and the other type-specific continuation constructors) does not perform 'magic'. It expects the source to be a string and the destination to be a string property. The source has its option set to BCJSourceModeStrict so that it will fail if the value is not found.
          
          //BCJSetMap. There's a lot going on here:
             //A map takes a collection (i.e. an array or a dictionary) and creates an array. In these case we're taking an array of dictionaries and creating an array of urls.
             //The last parameter of BCJSetMap is a block which creates the element to include in the resulting array. In this case we're using BCJGetURL to get the value of the 'url' key and return a URL.
          BCJSetMap(@"array", BCJ_KEY(array), NSDictionary.class, BCJNoOptions, ^id(NSUInteger elementIdx, NSDictionary *elementValue, NSError *__autoreleasing *outError) {
             NSURL *url;
-            BCJJSONSourceResult result = BCJGetURL(BCJSource(elementValue, @"url"), &url, outError);
-            return (result == BCJJSONSourceResultSuccess) ? url : nil;
+            BCJSourceResult result = BCJGetURL(BCJCreateSource(elementValue, @"url"), &url, outError);
+            return (result == BCJSourceResultSuccess) ? url : nil;
          }),
      nil];
 }

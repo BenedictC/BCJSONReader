@@ -7,25 +7,25 @@
 //
 
 #import "BCJEnumeration.h"
-#import "BCJJSONSource+DeferredClassCheck.h"
+#import "BCJSource+DeferredClassCheck.h"
 #import "BCJValidation.h"
 #import "BCJError.h"
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateArray(BCJJSONSource *source, Class elementClass, BOOL(^enumerator)(NSUInteger idx, id value, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateArray(BCJSource *source, Class elementClass, BOOL(^enumerator)(NSUInteger idx, id value, NSError **outError)) {
     NSCParameterAssert(source != nil);
     NSCParameterAssert(enumerator != nil);
 
     return BCLContinuationWithBlock(@(__FUNCTION__), ^BOOL(NSError *__autoreleasing *outError) {
         NSArray *array;
-        BCJJSONSourceResult result = [source getValue:&array ofKind:NSArray.class error:outError];
+        BCJSourceResult result = [source getValue:&array ofKind:NSArray.class error:outError];
         switch (result) {
-            case BCJJSONSourceResultFailure:
+            case BCJSourceResultFailure:
                 return NO;
-            case BCJJSONSourceResultValueNotFound:
+            case BCJSourceResultValueNotFound:
                 return YES;                
-            case BCJJSONSourceResultSuccess:
+            case BCJSourceResultSuccess:
                 break;
         }
 
@@ -56,21 +56,21 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateArray(BCJJSONSource *source, Cl
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateDictionary(BCJJSONSource *source, Class keyClass, Class elementClass, BOOL(^enumerator)(id key, id value, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateDictionary(BCJSource *source, Class keyClass, Class elementClass, BOOL(^enumerator)(id key, id value, NSError **outError)) {
     NSCParameterAssert(source != nil);
     NSCParameterAssert(enumerator != nil);
 
     return BCLContinuationWithBlock(@(__FUNCTION__), ^BOOL(NSError *__autoreleasing *outError) {
         NSDictionary *dictionary;
-        BCJJSONSourceResult result = [source getValue:&dictionary ofKind:NSDictionary.class error:outError];
+        BCJSourceResult result = [source getValue:&dictionary ofKind:NSDictionary.class error:outError];
         switch (result) {
-            case BCJJSONSourceResultFailure:
+            case BCJSourceResultFailure:
                 return NO;
 
-            case BCJJSONSourceResultValueNotFound:
+            case BCJSourceResultValueNotFound:
                 return YES;
 
-            case BCJJSONSourceResultSuccess:
+            case BCJSourceResultSuccess:
                 break;
         }
 

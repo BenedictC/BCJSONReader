@@ -1,16 +1,16 @@
 //
-//  BCJJSONSource+DeferredClassCheck.h
+//  BCJSource+DeferredClassCheck.h
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 08/11/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCJJSONSource.h"
+#import "BCJSource.h"
 
 
 
-@interface BCJJSONSource (DeferredClassCheck)
+@interface BCJSource (DeferredClassCheck)
 
 /**
  Calls getValue:error: and then performs an additional type check. This method is used by type-specific continuations so that sources can be created without an expectedClass.
@@ -21,6 +21,6 @@
 
  @return The result status.
  */
--(BCJJSONSourceResult)getValue:(id *)value ofKind:(Class)class error:(NSError **)outError;
+-(BCJSourceResult)getValue:(id *)value ofKind:(Class)class error:(NSError **)outError;
 
 @end

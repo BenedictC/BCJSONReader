@@ -7,8 +7,9 @@
 //
 
 #import "BCJMapper.h"
-#import "BCJStackJSONSource.h"
-#import "BCJStackPropertyTarget.h"
+#import "BCJStackSource.h"
+#import "BCJStackTarget.h"
+#import "BCJError.h"
 #import <BCLContinuations/BCLContinuations.h>
 #import <BCLContinuations/BCLContinuationsDefines.h>
 
@@ -39,8 +40,11 @@
 
 +(NSError *)mapJSONData:(NSData *)jsonData intoObject:(id)targetObject options:(BCJMapperOptions)options usingContinuations:(id<BCLContinuation>)firstContinuation, ...
 {
-    NSCParameterAssert(jsonData != nil);
     NSCParameterAssert(targetObject != nil);
+
+    if (jsonData == nil) {
+        return [BCJError invalidJSONDataErrorWithData:nil];
+    }
 
     NSJSONReadingOptions jsonOptions = NSJSONReadingAllowFragments;
     jsonOptions ^= (options & BCJMapperOptionMutipleLeaves) ? NSJSONReadingMutableLeaves : 0;
@@ -48,7 +52,7 @@
     NSError *error;
     id sourceObject = [NSJSONSerialization JSONObjectWithData:jsonData options:jsonOptions error:&error];
 
-    BOOL didDeserialize = sourceObject != nil;
+    BOOL didDeserialize = (sourceObject != nil);
     if (!didDeserialize) {
         return error;
     }
