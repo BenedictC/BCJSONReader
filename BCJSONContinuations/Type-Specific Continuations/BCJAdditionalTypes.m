@@ -147,7 +147,7 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJSource *source, NSURL **outURL, NS
     if (outError != NULL) *outError = nil;
 
     id fetchedValue;
-    //TODO: Should we return a different error?
+#pragma message "TODO: Should we return a different error?"
     BCJSourceResult result = [source getValue:&fetchedValue ofKind:nil error:outError];
     if (result != BCJSourceResultSuccess) {
         return result;

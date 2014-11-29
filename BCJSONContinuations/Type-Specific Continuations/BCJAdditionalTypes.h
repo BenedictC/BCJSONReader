@@ -27,6 +27,17 @@
  @return The result of getting the value from the source or BCJSourceResultFailure if the result could not be converted to a date.
  */
 BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJSource *source, NSDate **outDate, NSError **outError) BCJ_REQUIRED(1,2,3);
+
+/**
+ <#Description#>
+
+ @param source <#source description#>
+ @param ^block <#^block description#>
+
+ @return <#return value description#>
+ */
+id<BCLContinuation> BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJSource *source, BOOL(^block)(NSDate *date, NSError **outError)) BCJ_REQUIRED(1,2);
+
 /**
  Return a continuation that fetches an NSNumber from source, uses the NSNumber to create an NSDate with dateWithTimeIntervalSince1970: and if a value was fetched invokes setValue:outError: on target with the NSDate.
 
@@ -46,6 +57,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJSour
  @return On success an NSDate representation of the supplied string, otherwise nil.
  */
 NSDate *BCJDateFromISO8601String(NSString *dateString) BCJ_REQUIRED(1);
+
 /**
  Returns by reference an NSDate created by fetching an NSString from source and uses it to create a date with BCJDateFromISO8601String.
 
@@ -56,6 +68,17 @@ NSDate *BCJDateFromISO8601String(NSString *dateString) BCJ_REQUIRED(1);
  @return The result of getting the value from the source or BCJSourceResultFailure if the result could not be converted to a date.
  */
 BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJSource *source, NSDate **outDate, NSError **outError) BCJ_REQUIRED(1,2);
+
+/**
+ <#Description#>
+
+ @param source <#source description#>
+ @param block  <#block description#>
+
+ @return <#return value description#>
+ */
+id<BCLContinuation> BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJSource *source, BOOL(^block)(NSDate *date, NSError **outError)) BCJ_REQUIRED(1,2);
+
 /**
  Returns a continuation that calls BCJGetDateFromISO8601String and if a value was fetched invokes setValue:outError: on target with the NSDate.
 
@@ -77,6 +100,17 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJSource *sour
  @return The result of getting the value from the source or BCJSourceResultFailure if the result could not be converted to a URL.
  */
 BCJSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJSource *source, NSURL **outURL, NSError **outError) BCJ_REQUIRED(1,2,3);
+
+/**
+ <#Description#>
+
+ @param source <#source description#>
+ @param ^block <#^block description#>
+
+ @return <#return value description#>
+ */
+id<BCLContinuation> BCJ_OVERLOADABLE BCJGetURL(BCJSource *source, BOOL(^block)(NSURL *URL, NSError **outError)) BCJ_REQUIRED(1,2);
+
 /**
   Returns a continuation that calls BCJGetURL and if a value was fetched invokes setValue:outError: on target with the NSURL.
 
