@@ -83,3 +83,9 @@ BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id object, NSString *JSONPath, Clas
 BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id object, NSString *JSONPath, BCJSourceOptions options, id defaultValue) BCJ_REQUIRED(1,2);
 BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id object, NSString *JSONPath, BCJSourceOptions options) BCJ_REQUIRED(1,2);
 BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id object, NSString *JSONPath) BCJ_REQUIRED(1,2);
+
+
+
+#pragma mark - Convienince marco
+#define BCJ_S(...) BCJCreateSource(__VA_ARGS__)
+

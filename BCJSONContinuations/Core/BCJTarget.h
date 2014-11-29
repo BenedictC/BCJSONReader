@@ -52,3 +52,8 @@
 
 
 BCJTarget * BCJ_OVERLOADABLE BCJCreateTarget(id object, NSString *keyPath) BCJ_WARN_UNUSED BCJ_REQUIRED(1,2);
+
+
+
+#pragma mark - Convienince marco
+#define BCJ_T(...) BCJCreateTarget(__VA_ARGS__)
