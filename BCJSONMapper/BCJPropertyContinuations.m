@@ -91,12 +91,6 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJSource *source, BCJTarget
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(NSString *jsonPath, NSString *propertyKey) {
-    return BCJSetProperty(BCJCreateSource(jsonPath), BCJCreateTarget(propertyKey));
-}
-
-
-
 #pragma mark - Convienince constructors that implicitly take the current target
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(NSString *sourceJSONPath, NSString *targetPropertyKey, NSDictionary *enumMapping)  {
     return BCJSetEnum(BCJCreateSource(sourceJSONPath), BCJCreateTarget(targetPropertyKey), enumMapping);
