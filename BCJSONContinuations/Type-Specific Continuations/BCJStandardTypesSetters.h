@@ -1,5 +1,5 @@
 //
-//  BCJStandardTypes.h
+//  BCJStandardTypesSetters.h
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 31/10/2014.
@@ -14,7 +14,6 @@
 @class BCJTarget;
 
 
-#pragma message "Add getter continuations"
 /**
  Returns a continuation that attempts to get an NSArray from source and if successful attempts to set the value of target with the fetched value.
 

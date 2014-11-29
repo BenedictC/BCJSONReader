@@ -1,12 +1,12 @@
 //
-//  BCJStandardTypes.m
+//  BCJStandardTypesSetters.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 31/10/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
 //
 
-#import "BCJStandardTypes.h"
+#import "BCJStandardTypesSetters.h"
 #import "BCJSource+DeferredClassCheck.h"
 #import "BCJTarget.h"
 
