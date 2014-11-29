@@ -40,8 +40,9 @@
 
 -(BOOL)setValue:(id)value error:(NSError **)outError;
 {
-    //KVC will work regardless of type which means type mismatch bugs can occur. We add type checking for DEBUG builds to catch these bugs early.
-    BCJExpectation([self canReceiveValue:value] != BCJTargetValueEligabilityStatusForbidden, @"Attempted to set an object of type <%@> to an ivar of type <%@> for key <%@> of object <%@>.", NSStringFromClass([value class]), NSStringFromClass([self expectedClass]), self.key, self.object);
+    //KVC will work regardless of type which means type mismatch bugs can occur.
+    //Note that this is an NSAssert and not an BCJExpectation, therefore this will not crash non-DEBUG builds.
+    NSAssert([self canReceiveValue:value] != BCJTargetValueEligabilityStatusForbidden, @"Attempted to set an object of type <%@> to an ivar of type <%@> for key <%@> of object <%@>.", NSStringFromClass([value class]), NSStringFromClass([self expectedClass]), self.key, self.object);
 
     //Validate using KVC
     id validatedValue = value;

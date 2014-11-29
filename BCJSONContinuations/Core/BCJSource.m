@@ -33,34 +33,34 @@ static inline BOOL BCJReplaceNullWithNil(BCJSourceOptions options) {
 
 
 #pragma mark - Asserts/Logging
-static inline void BCJExpectationValidGetterOptions(id object, NSString *JSONPath, Class expectedClass, BCJSourceOptions options, id defaultValue) {
-    BCJParameterExpectation(object != nil);
+static inline void BCJValidateOptions(id object, NSString *JSONPath, Class expectedClass, BCJSourceOptions options, id defaultValue) {
 
+    BOOL pathMustEvaluateToValue = (options ^ BCJSourceOptionPathMustEvaluateToValue) != 0;
+    BOOL treatValueNotFoundAsSuccess = (options ^ BCJSourceOptionTreatValueNotFoundAsSuccess) != 0;
+//    BOOL replaceNullWithNil = (options ^ BCJSourceOptionReplaceNullWithNil) != 0;
+
+    BCJParameterExpectation(object != nil);
     BCJParameterExpectation(JSONPath != nil);
     BCJParameterExpectation(JSONPath.length > 0);
+#ifdef DEBUG
     NSError *pathError = BCJEnumerateJSONPathComponents(JSONPath, ^(id component, NSUInteger idx, BOOL *stop) {});
     BCJExpectation(pathError == nil, @"Invalid JSONPath: %@", pathError);
-
+#endif
     BCJExpectation(expectedClass == Nil || defaultValue == nil || [defaultValue isKindOfClass:expectedClass], @"Conflicting arguments: defaultValue is invalid as it is not of type expectedClass.");
-
-#pragma message "TODO: Check options are valid"
+    BCJExpectation(!(pathMustEvaluateToValue && treatValueNotFoundAsSuccess), @"Conflicting options. BCJSourceOptionPathMustEvaluateToValue and BCJSourceOptionTreatValueNotFoundAsSuccess cannot both be set.");
 }
 
 
 
 static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Class expectedClass, BCJSourceOptions options, id defaultValue) {
-#pragma message "TODO: Add logging"
-//    BOOL shouldReplaceNilWithDefaultValue = BCJShouldReplaceNilWithDefaultValue(options);
-//    BOOL isDefaultValuePointless = (!shouldReplaceNilWithDefaultValue && defaultValue != nil);
-//    if (isDefaultValuePointless) {
-//        //TODO: Include details about the object and JSONPath
-//        BCJLog(@"%@: Default value has been given but BCJGetterOptionReplaceNilWithDefaultValue is not set.", nil);
-//    }
-//
-//    if (shouldReplaceNilWithDefaultValue && defaultValue == nil) {
-//        //TODO: Include details about the object and JSONPath
-//        BCJLog(@"%@: Default value has replacement has been specified but default value == nil.", nil);
-//    }
+    BOOL pathMustEvaluateToValue = (options ^ BCJSourceOptionPathMustEvaluateToValue) != 0;
+//    BOOL treatValueNotFoundAsSuccess = (options ^ BCJSourceOptionTreatValueNotFoundAsSuccess) != 0;
+    BOOL replaceNullWithNil = (options ^ BCJSourceOptionReplaceNullWithNil) != 0;
+
+    BOOL isDefaultValuePointless = pathMustEvaluateToValue && !replaceNullWithNil && defaultValue != nil;
+    if (isDefaultValuePointless) {
+        BCJLog(@"Suspicious argument combination for JSONPath %@: BCJSourceOptionPathMustEvaluateToValue and BCJSourceOptionReplaceNullWithNil have been set but defaultValue is non-nil. This option combination means that the defaultValue will never be used.", JSONPath);
+    }
 }
 
 
@@ -76,7 +76,7 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
 
 -(instancetype)initWithObject:(id)object JSONPath:(NSString *)JSONPath expectedClass:(Class)expectedClass options:(BCJSourceOptions)options defaultValue:(id)defaultValue
 {
-    BCJExpectationValidGetterOptions(object, JSONPath, expectedClass, options, defaultValue);
+    BCJValidateOptions(object, JSONPath, expectedClass, options, defaultValue);
 
     self = [super init];
     if (self == nil) return nil;

@@ -31,7 +31,3 @@
  @return nil if the JSONPath was valid or if the parsing was stopped before an invalid compoent, other wise an NSError describing the location of the invalid component.
  */
 NSError *BCJEnumerateJSONPathComponents(NSString *JSONPath, void(^enumerator)(id component, NSUInteger componentIdx, BOOL *stop));
-
-
-
-//TODO: Provide an BNF for JSONPaths
