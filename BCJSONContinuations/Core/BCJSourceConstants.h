@@ -40,17 +40,17 @@ typedef NS_ENUM(NSUInteger, BCJSourceResult){
  */
 typedef NS_OPTIONS(NSUInteger, BCJSourceOptions){
     /**
-     If the JSONPath evaluates to nil then the source will return BCJSourceResultFailure,
+     If the JSONPath evaluates to nil then the source will return BCJSourceResultFailure instead of BCJSourceResultValueNotFound.
      */
     BCJSourceOptionPathMustEvaluateToValue     = (1UL << 0),
     /**
+     If the JSONPath evaluates to nil then the source will return BCJSourceResultSuccess instead of BCJSourceResultValueNotFound.
+     */
+    BCJSourceOptionTreatValueNotFoundAsSuccess = (1UL << 1),
+    /**
      If the JSONPath evaluates to NSNull then this will be replaced with nil.
      */
-    BCJSourceOptionReplaceNullWithNil          = (1UL << 1),
-    /**
-     If the JSONPath evaluates to nil then the source will not return BCJSourceResultValueNotFound.
-     */
-    BCJSourceOptionTreatValueNotFoundAsSuccess = (1UL << 2),
+    BCJSourceOptionReplaceNullWithNil          = (1UL << 2),
 };
 
 
