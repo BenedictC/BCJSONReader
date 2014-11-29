@@ -15,7 +15,7 @@
 @class BCJTarget;
 
 
-#pragma message "Add getter continuations"
+
 #pragma mark - NSDate from 1970
 /**
  Return by reference an NSDate created by fetching an NSNumber from source and using it as the argument to dateWithTimeIntervalSince1970:.

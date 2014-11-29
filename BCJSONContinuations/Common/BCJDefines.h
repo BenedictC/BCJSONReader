@@ -20,6 +20,6 @@
 #endif
 
 
-#pragma message "Replace NS*Assert with BCJ*Assert so that they are not removed in release builds"
+#pragma message "TODO: Replace NS*Assert with BCJ*Assert so that they are not removed in release builds"
 //#define BCJParameterAssert()
 //#define BCJAssert()
