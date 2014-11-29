@@ -51,7 +51,6 @@
     }
 
     //Note that we're using the validatedValue
-#pragma message "TODO: Change this to setValue:forKeyPath:. Rename the class and update the value introspection to parse the path"
     [self.object setValue:validatedValue forKeyPath:self.key];
     return YES;
 }
