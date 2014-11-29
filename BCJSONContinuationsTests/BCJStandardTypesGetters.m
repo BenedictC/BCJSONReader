@@ -1,5 +1,5 @@
 //
-//  BCJStandardTypesTests.m
+//  BCJStandardTypesGettersTests.m
 //  BCJJSONContinuations
 //
 //  Created by Benedict Cohen on 07/11/2014.
@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "BCJStandardTypes.h"
+#import "BCJStandardTypesGetters.h"
 
 
 
