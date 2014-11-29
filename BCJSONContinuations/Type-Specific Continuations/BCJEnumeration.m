@@ -34,6 +34,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateArray(BCJSource *source, Class 
             //Validate
             if (!BCJIsOfKindClass(element, elementClass, outError)) {
                 if (*outError == nil) {
+#pragma message "TODO: populate error"
                     *outError = [BCJError errorWithDomain:@"TODO: Unknown enumeration error" code:0 userInfo:nil];
                 }
              return NO;
@@ -42,6 +43,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateArray(BCJSource *source, Class 
             //Enumerate
             if (!enumerator(idx, element, outError)) {
                 if (*outError == nil) {
+#pragma message "TODO: populate error"
                     *outError = [BCJError errorWithDomain:@"TODO: Unknown enumeration error" code:0 userInfo:nil];
                 }
                 return NO;
@@ -81,6 +83,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateDictionary(BCJSource *source, C
             BOOL didValidate = BCJIsOfKindClass(key, keyClass, &enumerationError) && BCJIsOfKindClass(element, elementClass, &enumerationError);
             if (!didValidate) {
                     if (enumerationError == nil) {
+#pragma message "TODO: populate error"
                         enumerationError = [BCJError errorWithDomain:@"TODO: Unknown enumeration error" code:0 userInfo:nil];
                     }
                     *stop = YES;
@@ -91,6 +94,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateDictionary(BCJSource *source, C
             //Enumerate
             if (!enumerator(key, element, &enumerationError)) {
                 if (enumerationError == nil) {
+#pragma message "TODO: populate error"
                     enumerationError = [BCJError errorWithDomain:@"TODO: Unknown enumeration error" code:0 userInfo:nil];
                 }
                 *stop = YES;

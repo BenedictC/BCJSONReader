@@ -60,6 +60,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJSource *source, BCJTarget
         if (isValueAString && isTargetAURL) {
             NSURL *url = [NSURL URLWithString:value];
             if (url == nil) {
+#pragma message "TODO: populate error"
                 if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO" code:0 userInfo:nil];
                 return NO;
             }
@@ -76,14 +77,14 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJSource *source, BCJTarget
         if (isValueAString && isTargetADate) {
             NSDate *date = BCJDateFromISO8601String(value);
             if (date == nil) {
+#pragma message "TODO: populate error"
                 if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO" code:0 userInfo:nil];
                 return NO;
             }
             return [target setValue:date error:outError];
         }
 
-        //2. We were unable to convert value to a known good value. This is a hail Mary.
-        //TODO: Would it be better to just fail?
+        //2. We were unable to convert value to a known good value. This call will fail and populat the error.
         return [target setValue:value error:outError];
     });
 }
