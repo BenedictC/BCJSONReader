@@ -90,8 +90,6 @@
 		823C6B1B1A22196C006C1A90 /* BCJContainerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6AD51A22196C006C1A90 /* BCJContainerSource.m */; };
 		823C6B1C1A22196C006C1A90 /* BCJContainerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6AD51A22196C006C1A90 /* BCJContainerSource.m */; };
 		823C6B1D1A22196C006C1A90 /* BCJContainerSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6AD51A22196C006C1A90 /* BCJContainerSource.m */; };
-		823C6B1E1A22196C006C1A90 /* BCJContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C6AD61A22196C006C1A90 /* BCJContainerProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		823C6B1F1A22196C006C1A90 /* BCJContainerProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C6AD61A22196C006C1A90 /* BCJContainerProtocol.h */; };
 		823C6B201A22196C006C1A90 /* BCJDeserialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C6AD71A22196C006C1A90 /* BCJDeserialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		823C6B211A22196C006C1A90 /* BCJDeserialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 823C6AD71A22196C006C1A90 /* BCJDeserialization.h */; };
 		823C6B221A22196C006C1A90 /* BCJDeserialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6AD81A22196C006C1A90 /* BCJDeserialization.m */; };
@@ -231,7 +229,6 @@
 		823C6AD31A22196C006C1A90 /* BCJContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJContainer.m; sourceTree = "<group>"; };
 		823C6AD41A22196C006C1A90 /* BCJContainerSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJContainerSource.h; sourceTree = "<group>"; };
 		823C6AD51A22196C006C1A90 /* BCJContainerSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJContainerSource.m; sourceTree = "<group>"; };
-		823C6AD61A22196C006C1A90 /* BCJContainerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJContainerProtocol.h; sourceTree = "<group>"; };
 		823C6AD71A22196C006C1A90 /* BCJDeserialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJDeserialization.h; sourceTree = "<group>"; };
 		823C6AD81A22196C006C1A90 /* BCJDeserialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJDeserialization.m; sourceTree = "<group>"; };
 		823C6ADA1A22196C006C1A90 /* BCJAdditionalTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = BCJAdditionalTypes.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -398,7 +395,6 @@
 				823C6AD31A22196C006C1A90 /* BCJContainer.m */,
 				823C6AD41A22196C006C1A90 /* BCJContainerSource.h */,
 				823C6AD51A22196C006C1A90 /* BCJContainerSource.m */,
-				823C6AD61A22196C006C1A90 /* BCJContainerProtocol.h */,
 				823C6AD71A22196C006C1A90 /* BCJDeserialization.h */,
 				823C6AD81A22196C006C1A90 /* BCJDeserialization.m */,
 			);
@@ -546,7 +542,6 @@
 				823C6A6A1A2213EC006C1A90 /* BCJSONMapper.h in Headers */,
 				823C6B361A22196C006C1A90 /* BCJStandardTypes.h in Headers */,
 				823C6B251A22196C006C1A90 /* BCJAdditionalTypes.h in Headers */,
-				823C6B1E1A22196C006C1A90 /* BCJContainerProtocol.h in Headers */,
 				823C6AE81A22196C006C1A90 /* BCJConstants.h in Headers */,
 				823C6B0A1A22196C006C1A90 /* BCJTarget+ValueIntrospection.h in Headers */,
 				823C6B031A22196C006C1A90 /* BCJSourceConstants.h in Headers */,
@@ -579,7 +574,6 @@
 				823C6A6B1A2213EC006C1A90 /* BCJSONMapper.h in Headers */,
 				823C6B371A22196C006C1A90 /* BCJStandardTypes.h in Headers */,
 				823C6B261A22196C006C1A90 /* BCJAdditionalTypes.h in Headers */,
-				823C6B1F1A22196C006C1A90 /* BCJContainerProtocol.h in Headers */,
 				823C6AE91A22196C006C1A90 /* BCJConstants.h in Headers */,
 				823C6B0B1A22196C006C1A90 /* BCJTarget+ValueIntrospection.h in Headers */,
 				823C6B041A22196C006C1A90 /* BCJSourceConstants.h in Headers */,

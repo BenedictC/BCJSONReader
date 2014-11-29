@@ -20,7 +20,7 @@
 
 -(id)object
 {
-    return [super.object containedObject];
+    return [super.object content];
 }
 
 @end
@@ -28,24 +28,24 @@
 
 
 #pragma mark - Constructors
-BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id<BCJContainer> objectContainer, NSString *JSONPath, Class expectClass, BCJSourceOptions options, id defaultValue) {
+BCJSource * BCJ_OVERLOADABLE BCJCreateSource(BCJContainer *objectContainer, NSString *JSONPath, Class expectClass, BCJSourceOptions options, id defaultValue) {
     return [[BCJContainerSource alloc] initWithObject:objectContainer JSONPath:JSONPath expectedClass:expectClass options:options defaultValue:defaultValue];
 }
 
 
 
-BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id<BCJContainer> objectContainer, NSString *JSONPath, BCJSourceOptions options, id defaultValue) {
+BCJSource * BCJ_OVERLOADABLE BCJCreateSource(BCJContainer *objectContainer, NSString *JSONPath, BCJSourceOptions options, id defaultValue) {
     return [[BCJContainerSource alloc] initWithObject:objectContainer JSONPath:JSONPath expectedClass:nil options:options defaultValue:nil];
 }
 
 
 
-BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id<BCJContainer> objectContainer, NSString *JSONPath, BCJSourceOptions options) {
+BCJSource * BCJ_OVERLOADABLE BCJCreateSource(BCJContainer *objectContainer, NSString *JSONPath, BCJSourceOptions options) {
     return [[BCJContainerSource alloc] initWithObject:objectContainer JSONPath:JSONPath expectedClass:nil options:BCJSourceModeOptional defaultValue:nil];
 }
 
 
 
-BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id<BCJContainer> objectContainer, NSString *JSONPath) {
+BCJSource * BCJ_OVERLOADABLE BCJCreateSource(BCJContainer *objectContainer, NSString *JSONPath) {
     return [[BCJContainerSource alloc] initWithObject:objectContainer JSONPath:JSONPath expectedClass:nil options:BCJSourceModeOptional defaultValue:nil];
 }

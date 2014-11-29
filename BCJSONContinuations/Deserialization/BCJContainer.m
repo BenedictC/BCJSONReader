@@ -42,12 +42,4 @@
     return _content != nil;
 }
 
-
-
-#pragma mark - BCJContainerProtocol
--(id)containedObject
-{
-    return _content;
-}
-
 @end

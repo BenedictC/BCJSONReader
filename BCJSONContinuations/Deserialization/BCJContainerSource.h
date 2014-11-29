@@ -10,18 +10,18 @@
 #define BCJContainer_h_
 
 #import "BCJDefines.h"
-#import "BCJContainerProtocol.h"
 #import "BCJSourceConstants.h"
+#import "BCJContainer.h"
 
 @class BCJSource;
 
 
 
 #pragma mark - Constructors
-BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id<BCJContainer> objectContainer, NSString *JSONPath, Class expectClass, BCJSourceOptions options, id defaultValue) BCJ_REQUIRED(1,2);
-BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id<BCJContainer> objectContainer, NSString *JSONPath, BCJSourceOptions options, id defaultValue) BCJ_REQUIRED(1,2);
-BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id<BCJContainer> objectContainer, NSString *JSONPath, BCJSourceOptions options) BCJ_REQUIRED(1,2);
-BCJSource * BCJ_OVERLOADABLE BCJCreateSource(id<BCJContainer> objectContainer, NSString *JSONPath) BCJ_REQUIRED(1,2);
+BCJSource * BCJ_OVERLOADABLE BCJCreateSource(BCJContainer *objectContainer, NSString *JSONPath, Class expectClass, BCJSourceOptions options, id defaultValue) BCJ_REQUIRED(1,2);
+BCJSource * BCJ_OVERLOADABLE BCJCreateSource(BCJContainer *objectContainer, NSString *JSONPath, BCJSourceOptions options, id defaultValue) BCJ_REQUIRED(1,2);
+BCJSource * BCJ_OVERLOADABLE BCJCreateSource(BCJContainer *objectContainer, NSString *JSONPath, BCJSourceOptions options) BCJ_REQUIRED(1,2);
+BCJSource * BCJ_OVERLOADABLE BCJCreateSource(BCJContainer *objectContainer, NSString *JSONPath) BCJ_REQUIRED(1,2);
 
 
 
