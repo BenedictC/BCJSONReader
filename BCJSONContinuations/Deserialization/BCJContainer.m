@@ -7,7 +7,7 @@
 //
 
 #import "BCJContainer.h"
-
+#import "BCJError.h"
 #import "BCJSource.h"
 
 
@@ -17,7 +17,7 @@
 #pragma mark - instance life cycle
 -(instancetype)initWithContent:(id)content
 {
-    NSParameterAssert(content);
+    BCJParameterExpectation(content);
     if (self == nil) return nil;
 
     _content = content;
@@ -30,8 +30,8 @@
 #pragma mark - properties
 -(void)setContentAndSeal:(id)content
 {
-    NSParameterAssert(content);
-    NSAssert(_content == nil, @"Attempting to set content after container has been sealed.");
+    BCJParameterExpectation(content);
+    BCJExpectation(_content == nil, @"Attempting to set content after container has been sealed.");
     _content = content;
 }
 

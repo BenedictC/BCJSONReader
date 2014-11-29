@@ -7,7 +7,7 @@
 //
 
 #import "BCJStackSource.h"
-
+#import "BCJError.h"
 #import "BCJSource.h"
 
 
@@ -27,7 +27,7 @@ static inline NSMutableArray *BCJSourceStack() {
 
 
 void BCJPushSourceObject(id sourceObject) {
-    NSCParameterAssert(sourceObject != nil);
+    BCJParameterExpectation(sourceObject != nil);
     [BCJSourceStack() addObject:sourceObject];
 }
 

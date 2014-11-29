@@ -25,7 +25,7 @@ extern NSString * const BCJErrorDomain;
 extern NSString * const BCJSourceErrorKey;
 
 /**
- userInfo key for the enumMapping NSDictionary involved in a BCJUnknownEnumMappingKeyError error.
+ userInfo key for the enumMapping NSDictionary involved in a BCJMissingKeyForEnumMappingError error.
  */
 extern NSString * const BCJEnumMappingErrorKey;
 
@@ -47,14 +47,28 @@ extern NSString * const BCJInvalidJSONDataErrorKey;
 
 
 enum : NSInteger {
-    BCJUnknownEnumMappingKeyError,
-    BCJUnexpectedElementTypeError,
-    BCJElementMappingError,
-    BCJUnexpectedTypeError,
-    BCJMissingValueError,
-    BCJInvalidValueError,
-    BCJInvalidJSONPathError,
+#pragma mark - Invalid compile time input
+    BCJInvalidJSONPathError = 1000,
+
+#pragma mark - Missing data
+    BCJMissingSourceValueError,
+    BCJMissingKeyForEnumMappingError,
+
+#pragma mark - Unexpected data/value (wrong type or value)
+//Invalid value errors
     BCJInvalidJSONDataError,
+    BCJInvalidValueError,
+
+//Value type errors
+    BCJUnexpectedTypeError,
+
+//Collection type errors
+    BCJUnexpectedKeyTypeError,
+    BCJUnexpectedElementTypeError,
+
+#pragma mark - Failed completion block errors
+    BCJElementMappingError,
+    BCJUnknownError,
 };
 
 

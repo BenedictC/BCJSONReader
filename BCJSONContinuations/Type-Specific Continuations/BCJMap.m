@@ -22,10 +22,10 @@ static inline BOOL isOptionSet(NSInteger option, NSInteger options) {
 
 #pragma mark - Get Enum
 BCJSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJSource *source, NSDictionary *enumMapping, id *outValue, NSError **outError) {
-    NSCParameterAssert(source != nil);
-    NSCParameterAssert(enumMapping != nil);
-    NSCParameterAssert(outValue != nil);
-    NSCParameterAssert(outError != nil);
+    BCJParameterExpectation(source != nil);
+    BCJParameterExpectation(enumMapping != nil);
+    BCJParameterExpectation(outValue != nil);
+    BCJParameterExpectation(outError != nil);
     //Note that we don't need to check the source type because it will be used as a key to access an enum and we don't
     //care what the enum keys are.
 
@@ -48,7 +48,7 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJSource *source, NSDictionary *enu
 
     //If the value is nil then the mapping was incomplete.
     if (value == nil) {
-        if (outError != NULL) *outError = [BCJError unknownKeyForEnumMappingErrorWithJSONSource:source enumMapping:enumMapping key:enumKey];
+        if (outError != NULL) *outError = [BCJError missingKeyForEnumMappingErrorWithJSONSource:source enumMapping:enumMapping key:enumKey];
         return BCJSourceResultFailure;
     }
 
@@ -60,9 +60,9 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetEnum(BCJSource *source, NSDictionary *enu
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJSource *source, BCJTarget *target, NSDictionary *enumMapping) {
     //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(target != nil);
-    NSCParameterAssert(source != nil);
-    NSCParameterAssert(enumMapping != nil);
+    BCJParameterExpectation(target != nil);
+    BCJParameterExpectation(source != nil);
+    BCJParameterExpectation(enumMapping != nil);
     //Note that we don't need to check the source type because it will be used as a key to access an enum and we don't
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
@@ -84,8 +84,8 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(BCJSource *source, BCJTarget *ta
 
 #pragma mark - Map functions
 BCJ_OVERLOADABLE NSArray *BCJGetMap(NSArray *fromArray, Class elementClass, BCJMapOptions options, id(^mapFromArray)(NSUInteger elementIdx, id elementValue, NSError **outError), NSError **outError) {
-    NSCParameterAssert(fromArray != nil);
-    NSCParameterAssert(mapFromArray != nil);
+    BCJParameterExpectation(fromArray != nil);
+    BCJParameterExpectation(mapFromArray != nil);
 
     //Apply the mapping to the elements
     NSMutableArray *values = [NSMutableArray new];
@@ -107,7 +107,7 @@ BCJ_OVERLOADABLE NSArray *BCJGetMap(NSArray *fromArray, Class elementClass, BCJM
             BOOL shouldDiscardMappingError = isOptionSet(BCJMapOptionIgnoreFailedMappings, options);
             if (!shouldDiscardMappingError) {
                 if (outError != NULL) {
-                    *outError = [BCJError mappingErrorWithElement:elementValue subscript:@(elementIdx) underlyingError:elementOutError];
+                    *outError = [BCJError elementMappingErrorWithElement:elementValue subscript:@(elementIdx) underlyingError:elementOutError];
                 }
                 didError = YES;
                 *stop = YES;
@@ -125,8 +125,8 @@ BCJ_OVERLOADABLE NSArray *BCJGetMap(NSArray *fromArray, Class elementClass, BCJM
 
 
 BCJ_OVERLOADABLE NSArray *BCJGetMap(NSDictionary *fromDict, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^mapFromDictionary)(id elementKey, id elementValue, NSError **outError), NSError **outError) {
-    NSCParameterAssert(fromDict != nil);
-    NSCParameterAssert(mapFromDictionary != nil);
+    BCJParameterExpectation(fromDict != nil);
+    BCJParameterExpectation(mapFromDictionary != nil);
 
     //Apply the mapping to the elements
     NSMutableArray *values = [NSMutableArray new];
@@ -148,7 +148,7 @@ BCJ_OVERLOADABLE NSArray *BCJGetMap(NSDictionary *fromDict, Class elementClass, 
             BOOL shouldDiscardMappingError = isOptionSet(BCJMapOptionIgnoreFailedMappings, options);
             if (!shouldDiscardMappingError) {
                 if (outError != NULL) {
-                    *outError = [BCJError mappingErrorWithElement:elementValue subscript:elementKey underlyingError:elementOutError];
+                    *outError = [BCJError elementMappingErrorWithElement:elementValue subscript:elementKey underlyingError:elementOutError];
                 }
                 didError = YES;
                 *stop = YES;
@@ -170,10 +170,10 @@ BCJ_OVERLOADABLE NSArray *BCJGetMap(NSDictionary *fromDict, Class elementClass, 
 
 #pragma mark - Set Map continuations
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJSource *source, BCJTarget *target, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError)) {
-    NSCParameterAssert(target != nil);
-    NSCParameterAssert(source != nil);
-    NSCParameterAssert(fromArrayMap != nil);
-    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
+    BCJParameterExpectation(target != nil);
+    BCJParameterExpectation(source != nil);
+    BCJParameterExpectation(fromArrayMap != nil);
+    BCJExpectation(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
 
@@ -200,10 +200,10 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJSource *source, BCJTarget *tar
 
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(BCJSource *source, BCJTarget *target, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError)) {
-    NSCParameterAssert(target != nil);
-    NSCParameterAssert(source != nil);
-    NSCParameterAssert(fromDictionaryMap != nil);
-    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
+    BCJParameterExpectation(target != nil);
+    BCJParameterExpectation(source != nil);
+    BCJParameterExpectation(fromDictionaryMap != nil);
+    BCJExpectation(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
 

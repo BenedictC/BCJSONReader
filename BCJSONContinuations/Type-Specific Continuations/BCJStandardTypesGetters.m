@@ -9,14 +9,15 @@
 #import "BCJStandardTypesGetters.h"
 #import "BCJSource+DeferredClassCheck.h"
 #import "BCJTarget.h"
+#import "BCJError.h"
 
 
 
 #pragma mark - (private) generic setter
 static inline id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJSource *source, BOOL(^block)(id, NSError **), Class expectedClass) {
-    NSCParameterAssert(source != nil);
-    NSCParameterAssert(block != NULL);
-    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
+    BCJParameterExpectation(source != nil);
+    BCJParameterExpectation(block != NULL);
+    BCJExpectation(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id value;
@@ -75,7 +76,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNumber(BCJSource *source, BOOL(^block
 
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNull(BCJSource *source, BOOL(^block)(NSNull *null, NSError **outError)) {
-    NSCAssert(({
+    BCJExpectation(({
         BOOL isReplaceNullSet = (source.options & BCJSourceOptionReplaceNullWithNil) != 0;
         isReplaceNullSet;
     }), @"Invalid option <BCJGetterOptionReplaceNullWithNil> is not permitted when setting NSNull");

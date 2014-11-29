@@ -244,7 +244,7 @@
     XCTAssertEqual(actualResult, expectedResult, @"Incorrect result");
     XCTAssertNil(actualValue, @"Incorrect value");
     XCTAssertNotNil(error);
-    XCTAssertEqual(error.code, BCJUnknownEnumMappingKeyError, @"Incorrect error");
+    XCTAssertEqual(error.code, BCJMissingKeyForEnumMappingError, @"Incorrect error");
 }
 
 

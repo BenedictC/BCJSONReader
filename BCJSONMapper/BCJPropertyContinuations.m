@@ -8,22 +8,26 @@
 
 #import "BCJPropertyContinuations.h"
 
+#import <BCLContinuations/BCLBlockContinuation.h>
+
+#import "BCJDefines.h"
 #import "BCJSource.h"
 #import "BCJAdditionalTypes.h"
 #import "BCJMap.h"
 #import "BCJStackSource.h"
 #import "BCJStackTarget.h"
 #import "BCJTarget+ValueIntrospection.h"
+#import "BCJError.h"
 
-#import <BCLContinuations/BCLBlockContinuation.h>
 
 
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJSource *source, BCJTarget *target) {
-    NSCParameterAssert(source != nil);
-    NSCParameterAssert(target != nil);
+    BCJParameterExpectation(source != nil);
+    BCJParameterExpectation(target != nil);
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
+        BCJWarnIfPossibleToSetScalarPropertyToNil(source, target);
 
         //0. Get the value
         id value;
@@ -38,7 +42,6 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJSource *source, BCJTarget
         }
 
         //Attempt to set the value
-#pragma message "TODO: Warn if attempting to set nil for a scalar value on an object that does not respond to setNilValueForKey:"        
         switch ([target canReceiveValue:value]) {
             case BCJTargetValueEligabilityStatusPermitted:
                 return [target setValue:value error:outError];
@@ -60,8 +63,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJSource *source, BCJTarget
         if (isValueAString && isTargetAURL) {
             NSURL *url = [NSURL URLWithString:value];
             if (url == nil) {
-#pragma message "TODO: populate error"
-                if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO" code:0 userInfo:nil];
+                if (outError != NULL) *outError = [BCJError invalidValueErrorWithJSONSource:source value:value criteria:@"is a valid URL"];
                 return NO;
             }
             return [target setValue:url error:outError];
@@ -77,8 +79,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJSource *source, BCJTarget
         if (isValueAString && isTargetADate) {
             NSDate *date = BCJDateFromISO8601String(value);
             if (date == nil) {
-#pragma message "TODO: populate error"
-                if (outError != NULL) *outError = [NSError errorWithDomain:@"TODO" code:0 userInfo:nil];
+                if (outError != NULL) *outError = [BCJError invalidValueErrorWithJSONSource:source value:value criteria:@"is a valid ISO 8601 date"];
                 return NO;
             }
             return [target setValue:date error:outError];

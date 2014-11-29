@@ -18,8 +18,3 @@
 #else
 #define BCJ_KEY(NAME) @"" #NAME
 #endif
-
-
-#pragma message "TODO: Replace NS*Assert with BCJ*Assert so that they are not removed in release builds"
-//#define BCJParameterAssert()
-//#define BCJAssert()

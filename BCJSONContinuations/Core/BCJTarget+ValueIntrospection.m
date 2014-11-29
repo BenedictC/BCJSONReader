@@ -7,6 +7,7 @@
 //
 
 #import "BCJTarget+ValueIntrospection.h"
+#import "BCJError.h"
 #import <objc/runtime.h>
 
 
@@ -138,7 +139,7 @@
 
 -(BOOL)canReceiveScalarValue:(NSValue *)value
 {
-    NSParameterAssert(value != nil);
+    BCJParameterExpectation(value != nil);
 
     NSString *expected = [self expectedObjCType];
     if (expected == nil) return YES;

@@ -24,8 +24,8 @@
 
 -(instancetype)initWithObject:(id)object keyPath:(NSString *)keyPath;
 {
-    NSParameterAssert(object != nil);
-    NSParameterAssert(keyPath != nil && keyPath.length > 0);
+    BCJParameterExpectation(object != nil);
+    BCJParameterExpectation(keyPath != nil && keyPath.length > 0);
 
     self = [super init];
     if (self == nil) return nil;
@@ -41,7 +41,7 @@
 -(BOOL)setValue:(id)value error:(NSError **)outError;
 {
     //KVC will work regardless of type which means type mismatch bugs can occur. We add type checking for DEBUG builds to catch these bugs early.
-    NSAssert([self canReceiveValue:value] != BCJTargetValueEligabilityStatusForbidden, @"Attempted to set an object of type <%@> to an ivar of type <%@> for key <%@> of object <%@>.", NSStringFromClass([value class]), NSStringFromClass([self expectedClass]), self.key, self.object);
+    BCJExpectation([self canReceiveValue:value] != BCJTargetValueEligabilityStatusForbidden, @"Attempted to set an object of type <%@> to an ivar of type <%@> for key <%@> of object <%@>.", NSStringFromClass([value class]), NSStringFromClass([self expectedClass]), self.key, self.object);
 
     //Validate using KVC
     id validatedValue = value;

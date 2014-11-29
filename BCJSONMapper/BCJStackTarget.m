@@ -8,6 +8,7 @@
 
 #import "BCJStackTarget.h"
 #import "BCJTarget.h"
+#import "BCJError.h"
 
 
 
@@ -50,7 +51,7 @@ static inline NSMutableArray *BCJTargetStack() {
 
 
 void BCJPushTargetObject(id targetObject) {
-    NSCParameterAssert(targetObject != nil);
+    BCJParameterExpectation(targetObject != nil);
     [BCJTargetStack() addObject:targetObject];
 }
 

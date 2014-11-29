@@ -33,15 +33,15 @@ static inline BOOL BCJReplaceNullWithNil(BCJSourceOptions options) {
 
 
 #pragma mark - Asserts/Logging
-static inline void BCJAssertValidGetterOptions(id object, NSString *JSONPath, Class expectedClass, BCJSourceOptions options, id defaultValue) {
-    NSCParameterAssert(object != nil);
+static inline void BCJExpectationValidGetterOptions(id object, NSString *JSONPath, Class expectedClass, BCJSourceOptions options, id defaultValue) {
+    BCJParameterExpectation(object != nil);
 
-    NSCParameterAssert(JSONPath != nil);
-    NSCParameterAssert(JSONPath.length > 0);
+    BCJParameterExpectation(JSONPath != nil);
+    BCJParameterExpectation(JSONPath.length > 0);
     NSError *pathError = BCJEnumerateJSONPathComponents(JSONPath, ^(id component, NSUInteger idx, BOOL *stop) {});
-    NSCAssert(pathError == nil, @"Invalid JSONPath: %@", pathError);
+    BCJExpectation(pathError == nil, @"Invalid JSONPath: %@", pathError);
 
-    NSCAssert(expectedClass == Nil || defaultValue == nil || [defaultValue isKindOfClass:expectedClass], @"Conflicting arguments: defaultValue is invalid as it is not of type expectedClass.");
+    BCJExpectation(expectedClass == Nil || defaultValue == nil || [defaultValue isKindOfClass:expectedClass], @"Conflicting arguments: defaultValue is invalid as it is not of type expectedClass.");
 
 #pragma message "TODO: Check options are valid"
 }
@@ -76,7 +76,7 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
 
 -(instancetype)initWithObject:(id)object JSONPath:(NSString *)JSONPath expectedClass:(Class)expectedClass options:(BCJSourceOptions)options defaultValue:(id)defaultValue
 {
-    BCJAssertValidGetterOptions(object, JSONPath, expectedClass, options, defaultValue);
+    BCJExpectationValidGetterOptions(object, JSONPath, expectedClass, options, defaultValue);
 
     self = [super init];
     if (self == nil) return nil;
@@ -133,7 +133,7 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
         if (pathError != nil) {
             failedComponent = self.JSONPath;
             failedComponentIdx = 0;
-            NSAssert(pathError == nil, @"Error in JSON path: %@", pathError);
+            BCJExpectation(pathError == nil, @"Error in JSON path: %@", pathError);
         }
 
         lastValue;
@@ -142,7 +142,7 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
     //1. Check that path did evaluate
     BOOL didFailPathEvaluation = (failedComponentIdx != NSNotFound);
     if (didFailPathEvaluation && BCJPathMustEvaluateToValue(self.options)) {
-        if (outError != NULL )*outError = [BCJError missingValueErrorWithJSONSource:self component:failedComponent componentIndex:failedComponentIdx];
+        if (outError != NULL )*outError = [BCJError missingSourceValueErrorWithSource:self JSONPathComponent:failedComponent componentIndex:failedComponentIdx];
         return BCJSourceResultFailure;
     }
 

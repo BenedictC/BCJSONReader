@@ -20,8 +20,8 @@
 #pragma mark - mapping
 +(NSError *)mapSourceObject:(id)sourceObject intoObject:(id)targetObject options:(BCJMapperOptions)options usingContinuationsArray:(NSArray *)continuations
 {
-    NSCParameterAssert(sourceObject != nil);
-    NSCParameterAssert(targetObject != nil);
+    BCJParameterExpectation(sourceObject != nil);
+    BCJParameterExpectation(targetObject != nil);
 
     BCJPushSourceObject(sourceObject);
     BCJPushTargetObject(targetObject);
@@ -40,7 +40,7 @@
 
 +(NSError *)mapJSONData:(NSData *)jsonData intoObject:(id)targetObject options:(BCJMapperOptions)options usingContinuations:(id<BCLContinuation>)firstContinuation, ...
 {
-    NSCParameterAssert(targetObject != nil);
+    BCJParameterExpectation(targetObject != nil);
 
     if (jsonData == nil) {
         return [BCJError invalidJSONDataErrorWithData:nil];
@@ -90,7 +90,7 @@
 
 +(NSError *)readJSONObject:(NSData *)jsonData options:(BCJMapperOptions)options usingContinuations:(id<BCLContinuation>)firstContinuation, ...
 {
-    NSCParameterAssert(jsonData != nil);
+    BCJParameterExpectation(jsonData != nil);
 
     NSJSONReadingOptions jsonOptions = NSJSONReadingAllowFragments;
     jsonOptions ^= (options & BCJMapperOptionMutipleLeaves) ? NSJSONReadingMutableLeaves : 0;

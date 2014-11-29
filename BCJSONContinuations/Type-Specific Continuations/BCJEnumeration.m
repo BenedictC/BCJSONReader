@@ -14,8 +14,8 @@
 
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateArray(BCJSource *source, Class elementClass, BOOL(^enumerator)(NSUInteger idx, id value, NSError **outError)) {
-    NSCParameterAssert(source != nil);
-    NSCParameterAssert(enumerator != nil);
+    BCJParameterExpectation(source != nil);
+    BCJParameterExpectation(enumerator != nil);
 
     return BCLContinuationWithBlock(@(__FUNCTION__), ^BOOL(NSError *__autoreleasing *outError) {
         NSArray *array;
@@ -34,8 +34,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateArray(BCJSource *source, Class 
             //Validate
             if (!BCJIsOfKindClass(element, elementClass, outError)) {
                 if (*outError == nil) {
-#pragma message "TODO: populate error"
-                    *outError = [BCJError errorWithDomain:@"TODO: Unknown enumeration error" code:0 userInfo:nil];
+                    *outError = [BCJError unexpectedElementTypeErrorWithElement:element subscript:@(idx) expectedElementClass:elementClass];
                 }
              return NO;
             }
@@ -43,8 +42,7 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateArray(BCJSource *source, Class 
             //Enumerate
             if (!enumerator(idx, element, outError)) {
                 if (*outError == nil) {
-#pragma message "TODO: populate error"
-                    *outError = [BCJError errorWithDomain:@"TODO: Unknown enumeration error" code:0 userInfo:nil];
+                    *outError = [BCJError unknownErrorWithDescription:@"Enumerator failed but did not give an error."];
                 }
                 return NO;
             }
@@ -58,9 +56,9 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateArray(BCJSource *source, Class 
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateDictionary(BCJSource *source, Class keyClass, Class elementClass, BOOL(^enumerator)(id key, id value, NSError **outError)) {
-    NSCParameterAssert(source != nil);
-    NSCParameterAssert(enumerator != nil);
+id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateDictionary(BCJSource *source, Class keyClass, Class valueClass, BOOL(^enumerator)(id key, id value, NSError **outError)) {
+    BCJParameterExpectation(source != nil);
+    BCJParameterExpectation(enumerator != nil);
 
     return BCLContinuationWithBlock(@(__FUNCTION__), ^BOOL(NSError *__autoreleasing *outError) {
         NSDictionary *dictionary;
@@ -78,24 +76,29 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateDictionary(BCJSource *source, C
 
         __block BOOL didError = NO;
         __block NSError *enumerationError = nil;
-        [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id element, BOOL *stop) {
+        [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
             //Validate
-            BOOL didValidate = BCJIsOfKindClass(key, keyClass, &enumerationError) && BCJIsOfKindClass(element, elementClass, &enumerationError);
-            if (!didValidate) {
-                    if (enumerationError == nil) {
-#pragma message "TODO: populate error"
-                        enumerationError = [BCJError errorWithDomain:@"TODO: Unknown enumeration error" code:0 userInfo:nil];
-                    }
-                    *stop = YES;
-                    didError = YES;
-                    return;
+            if (!BCJIsOfKindClass(key, keyClass, &enumerationError)) {
+                if (enumerationError == nil) {
+                    *outError = [BCJError unexpectedKeyTypeErrorWithKey:key expectedKeyClass:keyClass];
                 }
+                *stop = YES;
+                didError = YES;
+                return;
+            }
+            if (!BCJIsOfKindClass(value, valueClass, &enumerationError)) {
+                if (enumerationError == nil) {
+                    *outError = [BCJError unexpectedElementTypeErrorWithElement:value subscript:key expectedElementClass:valueClass];
+                }
+                *stop = YES;
+                didError = YES;
+                return;
+            }
 
             //Enumerate
-            if (!enumerator(key, element, &enumerationError)) {
+            if (!enumerator(key, value, &enumerationError)) {
                 if (enumerationError == nil) {
-#pragma message "TODO: populate error"
-                    enumerationError = [BCJError errorWithDomain:@"TODO: Unknown enumeration error" code:0 userInfo:nil];
+                    *outError = [BCJError unknownErrorWithDescription:@"Enumerator failed but did not give an error."];
                 }
                 *stop = YES;
                 didError = YES;

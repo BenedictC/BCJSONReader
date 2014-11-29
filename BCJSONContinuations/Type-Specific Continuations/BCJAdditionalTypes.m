@@ -16,8 +16,8 @@
 #pragma mark - NSDate from 1970
 BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJSource *source, NSDate **outDate, NSError **outError) {
     //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(source != nil);
-    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
+    BCJParameterExpectation(source != nil);
+    BCJExpectation(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     //Reset outValue
     *outDate = nil;
@@ -42,9 +42,9 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromTimeIntervalSince1970(BCJSource *
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromTimeIntervalSince1970(BCJSource *source, BCJTarget *target) {
     //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(target !=nil);
-    NSCParameterAssert(source != nil);
-    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
+    BCJParameterExpectation(target !=nil);
+    BCJParameterExpectation(source != nil);
+    BCJExpectation(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSDate *date;
@@ -75,8 +75,8 @@ NSDate *BCJDateFromISO8601String(NSString *dateString) {
 
 BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJSource *source, NSDate **outDate, NSError **outError) {
     //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(source != nil);
-    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
+    BCJParameterExpectation(source != nil);
+    BCJExpectation(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     //Reset outValue
     *outDate = nil;
@@ -122,9 +122,9 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetDateFromISO8601String(BCJSource *source, 
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJSource *source, BCJTarget *target) {
     //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(target != nil);
-    NSCParameterAssert(source != nil);
-    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
+    BCJParameterExpectation(target != nil);
+    BCJParameterExpectation(source != nil);
+    BCJExpectation(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSDate *date;
@@ -139,15 +139,14 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDateFromISO8601String(BCJSource *sour
 #pragma mark - Get NSURL
 BCJSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJSource *source, NSURL **outURL, NSError **outError) {
     //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(source != nil);
-    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
+    BCJParameterExpectation(source != nil);
+    BCJExpectation(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     //Reset outValue
     *outURL = nil;
     if (outError != NULL) *outError = nil;
 
     id fetchedValue;
-#pragma message "TODO: Should we return a different error?"
     BCJSourceResult result = [source getValue:&fetchedValue ofKind:nil error:outError];
     if (result != BCJSourceResultSuccess) {
         return result;
@@ -175,7 +174,7 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJSource *source, NSURL **outURL, NS
     }
 
     //The fetch Value was of the wrong type
-    if (outError != NULL) *outError = [BCJError unexpectedTypeErrorWithJSONSource:source value:fetchedValue expectedClass:NSString.class];
+    if (outError != NULL) *outError = [BCJError unexpectedTypeErrorWithSource:source value:fetchedValue expectedClass:NSString.class];
     return BCJSourceResultFailure;
 }
 
@@ -183,9 +182,9 @@ BCJSourceResult BCJ_OVERLOADABLE BCJGetURL(BCJSource *source, NSURL **outURL, NS
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJSetURL(BCJSource *source, BCJTarget *target) {
     //Perform additional checks that couldn't be performed when source and target are created
-    NSCParameterAssert(target != nil);
-    NSCParameterAssert(source != nil);
-    NSCAssert(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
+    BCJParameterExpectation(target != nil);
+    BCJParameterExpectation(source != nil);
+    BCJExpectation(source.expectedClass == nil, @"A source must not have a defaultExpectedClass when passed to a type-specific getter or setter.");
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         NSURL *value;

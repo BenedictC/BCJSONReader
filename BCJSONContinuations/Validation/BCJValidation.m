@@ -15,7 +15,7 @@
 
 #pragma mark - Type checking continuations
 BOOL BCJ_OVERLOADABLE BCJIsOfKindClass(id value, Class class, NSError **outError) {
-    NSCParameterAssert(class != nil);
+    BCJParameterExpectation(class != nil);
     BOOL isValid = [value isKindOfClass:class];
     if (!isValid) {
         if (outError != NULL) {
@@ -32,7 +32,7 @@ BOOL BCJ_OVERLOADABLE BCJIsOfKindClass(id value, Class class, NSError **outError
 
 #pragma mark - Validation functions
 BOOL BCJ_OVERLOADABLE BCJValidate(id value, NSPredicate *predicate, NSError **outError) {
-    NSCParameterAssert(predicate != nil);
+    BCJParameterExpectation(predicate != nil);
     BOOL isValid = [predicate evaluateWithObject:value];
     if (!isValid) {
         if (outError != NULL) *outError = [BCJError invalidValueErrorWithJSONSource:nil value:value criteria:predicate.predicateFormat];

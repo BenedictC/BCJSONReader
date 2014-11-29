@@ -9,24 +9,25 @@
 #import "BCJError.h"
 #import "BCJConstants.h"
 #import "BCJSource.h"
+#import "BCJLogging.h"
 
 
 
 @implementation BCJError
 
-+(NSError *)missingValueErrorWithJSONSource:(BCJSource *)source component:(NSString *)component componentIndex:(NSUInteger)componentIndex
++(NSError *)missingSourceValueErrorWithSource:(BCJSource *)source JSONPathComponent:(NSString *)component componentIndex:(NSUInteger)componentIndex
 {
     NSString *format = NSLocalizedString(@"Could not fetch object for component %lu (%@) of JSONPath %@.", nil);
     NSString *description = [NSString stringWithFormat:format, (long unsigned)componentIndex, component, source.JSONPath];
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:description forKey:NSLocalizedDescriptionKey];
     if (source != nil) userInfo[BCJSourceErrorKey] = source;
 
-    return [NSError errorWithDomain:BCJErrorDomain code:BCJMissingValueError userInfo:userInfo];
+    return [NSError errorWithDomain:BCJErrorDomain code:BCJMissingSourceValueError userInfo:userInfo];
 }
 
 
 
-+(NSError *)unexpectedTypeErrorWithJSONSource:(BCJSource *)source value:(id)value expectedClass:(Class)expectedClass
++(NSError *)unexpectedTypeErrorWithSource:(BCJSource *)source value:(id)value expectedClass:(Class)expectedClass
 {
     NSString *format = NSLocalizedString(@"The value for JSONPath %@ is of type %@ but is expected to be of type %@.", nil);
     NSString *description = [NSString stringWithFormat:format, source.JSONPath, NSStringFromClass([value class]), NSStringFromClass(expectedClass)];
@@ -38,7 +39,7 @@
 
 
 
-+(NSError *)unknownKeyForEnumMappingErrorWithJSONSource:(BCJSource *)source enumMapping:(NSDictionary *)enumMapping key:(id)enumKey
++(NSError *)missingKeyForEnumMappingErrorWithJSONSource:(BCJSource *)source enumMapping:(NSDictionary *)enumMapping key:(id)enumKey
 {
     NSString *format = NSLocalizedString(@"EnumMapping does not contain key <%@>.", nil);
     NSString *description = [NSString stringWithFormat:format, enumKey];
@@ -46,7 +47,7 @@
     if (source != nil) userInfo[BCJSourceErrorKey] = source;
     if (enumMapping != nil) userInfo[BCJEnumMappingErrorKey] = enumMapping;
 
-    return [NSError errorWithDomain:BCJErrorDomain code:BCJUnknownEnumMappingKeyError userInfo:userInfo];
+    return [NSError errorWithDomain:BCJErrorDomain code:BCJMissingKeyForEnumMappingError userInfo:userInfo];
 }
 
 
@@ -62,7 +63,18 @@
 
 
 
-+(NSError *)mappingErrorWithElement:(id)element subscript:(id)subscript underlyingError:(NSError *)underlyingError
++(NSError *)unexpectedKeyTypeErrorWithKey:(id)key expectedKeyClass:(Class)expectedKeyClass
+{
+    NSString *format = NSLocalizedString(@"key is of type %@ but is expected to be of type %@.", nil);
+    NSString *description = [NSString stringWithFormat:format, NSStringFromClass([key class]), NSStringFromClass(expectedKeyClass)];
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:description forKey:NSLocalizedDescriptionKey];
+
+    return [NSError errorWithDomain:BCJErrorDomain code:BCJUnexpectedKeyTypeError userInfo:userInfo];
+}
+
+
+
++(NSError *)elementMappingErrorWithElement:(id)element subscript:(id)subscript underlyingError:(NSError *)underlyingError
 {
     NSString *format = NSLocalizedString(@"Error while mapping elemeny for subscript %@.", nil);
     NSString *description = [NSString stringWithFormat:format, subscript];
@@ -108,4 +120,26 @@
     return [NSError errorWithDomain:BCJErrorDomain code:BCJInvalidJSONDataError userInfo:userInfo];
 }
 
+
+
++(NSError *)unknownErrorWithDescription:(NSString *)description
+{
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:description forKey:NSLocalizedDescriptionKey];
+
+    return [NSError errorWithDomain:BCJErrorDomain code:BCJInvalidJSONDataError userInfo:userInfo];
+}
+
 @end
+
+
+
+void BCJWarnIfPossibleToSetScalarPropertyToNil(BCJSource *source, BCJTarget *target)
+{
+    BOOL shouldTreatValueNotFoundAsSuccess = (source.options ^ BCJSourceOptionTreatValueNotFoundAsSuccess) != 0;
+    BOOL canReturnNil = shouldTreatValueNotFoundAsSuccess && source.defaultValue == nil;
+    if (!canReturnNil) return;
+
+    BCJLog(@"Source <%@> may return nil which may be incompatible with target <%@> which resolves to a scalar value. This can be fixed by providing a defaultValue to the source.", source, target);
+}
+
+

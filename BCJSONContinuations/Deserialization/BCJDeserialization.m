@@ -7,6 +7,7 @@
 //
 
 #import <BCLContinuations/BCLContinuations.h>
+#import "BCJDefines.h"
 #import "BCJDeserialization.h"
 #import "BCJTarget.h"
 #import "BCJContainer.h"
@@ -41,7 +42,7 @@ BOOL BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, Class expectedClass, BCJJ
 
     //Check the type
     if (expectedClass != nil && ![jsonObject isKindOfClass:expectedClass]) {
-        if (outError != NULL) *outError = [BCJError unexpectedTypeErrorWithJSONSource:nil value:jsonObject expectedClass:expectedClass];
+        if (outError != NULL) *outError = [BCJError unexpectedTypeErrorWithSource:nil value:jsonObject expectedClass:expectedClass];
         return NO;
     }
 
@@ -55,9 +56,9 @@ BOOL BCJ_OVERLOADABLE BCJDeserializeJSON(NSData *data, Class expectedClass, BCJJ
 #pragma mark - JSON Deserialization continuations
 //BCJContainer result-style
 id<BCLContinuation> BCJ_OVERLOADABLE BCJDeserializeJSON(BCJContainer *emptyContainer, NSData *data, BCJJSONReadingOptions options) {
-    NSCParameterAssert(emptyContainer != nil);
-    NSCParameterAssert(!emptyContainer.isSealed);
-    NSCParameterAssert(data != nil);
+    BCJParameterExpectation(emptyContainer != nil);
+    BCJParameterExpectation(!emptyContainer.isSealed);
+    BCJParameterExpectation(data != nil);
 
     return BCLContinuationWithBlock(^BOOL(NSError *__autoreleasing *outError) {
         id content;
