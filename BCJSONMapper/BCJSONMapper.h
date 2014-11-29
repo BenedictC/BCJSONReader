@@ -17,14 +17,26 @@
 #import "BCJStackSource.h"
 #import "BCJStackTarget.h"
 
-//Type-specific continuations (borrowed from BCJJSONContinuations)
+//Type-specific continuations (borrowed from BCJSONContinuations)
 #import "BCJAdditionalTypes.h"
 #import "BCJEnumeration.h"
 #import "BCJMap.h"
-#import "BCJStandardTypes.h"
+#import "BCJStandardTypesGetters.h"
+#import "BCJStandardTypesSetters.h"
 
+//Validation (borrowed from BCJSONContinuations)
 #import "BCJValidation.h"
 
+//Logging (borrowed from BCJSONContinuations)
+#import "BCJLogging.h"
 
+//Other BCJSONContinuations (not included because they don't BCJMapper provides all the functionality)
+//#import "BCJSource.h"
+//#import "BCJTarget.h"
+//#import "BCJGettersAndSetters.h"
+//
+//#import "BCJDeserialization.h"
+//#import "BCJContainer.h"
+//#import "BCJContainerSource.h"
 
 #endif

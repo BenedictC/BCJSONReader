@@ -24,10 +24,11 @@
 #import "BCJContainerSource.h"
 
 //Type-Specific Continuations
-#import "BCJEnumeration.h"
-#import "BCJStandardTypes.h"
 #import "BCJAdditionalTypes.h"
+#import "BCJEnumeration.h"
 #import "BCJMap.h"
+#import "BCJStandardTypesGetters.h"
+#import "BCJStandardTypesSetters.h"
 
 //Validation
 #import "BCJValidation.h"
