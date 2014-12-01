@@ -54,10 +54,10 @@ static inline void BCJValidateOptions(id object, NSString *JSONPath, Class expec
 
 static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Class expectedClass, BCJSourceOptions options, id defaultValue) {
     BOOL pathMustEvaluateToValue = (options & BCJSourceOptionPathMustEvaluateToValue) != 0;
-//    BOOL treatValueNotFoundAsSuccess = (options & BCJSourceOptionTreatValueNotFoundAsSuccess) != 0;
+    BOOL treatValueNotFoundAsSuccess = (options & BCJSourceOptionTreatValueNotFoundAsSuccess) != 0;
     BOOL replaceNullWithNil = (options & BCJSourceOptionReplaceNullWithNil) != 0;
 
-    BOOL isDefaultValuePointless = pathMustEvaluateToValue && !replaceNullWithNil && defaultValue != nil;
+    BOOL isDefaultValuePointless = (pathMustEvaluateToValue)  && !replaceNullWithNil && defaultValue != nil;
     if (isDefaultValuePointless) {
         BCJLog(@"Suspicious argument combination for JSONPath %@: BCJSourceOptionPathMustEvaluateToValue and BCJSourceOptionReplaceNullWithNil have been set but defaultValue is non-nil. This option combination means that the defaultValue will never be used.", JSONPath);
     }
@@ -70,6 +70,13 @@ static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Clas
 -(instancetype)init
 {
     return [self initWithObject:nil JSONPath:nil expectedClass:Nil options:0 defaultValue:nil];
+}
+
+
+
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p> JSONPath = '%@', source = %@", NSStringFromClass(self.class), self, self.JSONPath, self.object];
 }
 
 

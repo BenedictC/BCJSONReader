@@ -135,8 +135,12 @@
 
 void BCJWarnIfPossibleToSetScalarPropertyToNil(BCJSource *source, BCJTarget *target)
 {
-    BOOL shouldTreatValueNotFoundAsSuccess = (source.options ^ BCJSourceOptionTreatValueNotFoundAsSuccess) != 0;
-    BOOL canReturnNil = shouldTreatValueNotFoundAsSuccess && source.defaultValue == nil;
+    BCJSourceOptions options = source.options;
+    BOOL pathMustEvaluateToValue = (options & BCJSourceOptionPathMustEvaluateToValue) != 0;
+    BOOL treatValueNotFoundAsSuccess = (options & BCJSourceOptionTreatValueNotFoundAsSuccess) != 0;
+    BOOL replaceNullWithNil = (options & BCJSourceOptionReplaceNullWithNil) != 0;
+
+    BOOL canReturnNil = (source.defaultValue == nil) && ((pathMustEvaluateToValue && replaceNullWithNil) || (treatValueNotFoundAsSuccess));
     if (!canReturnNil) return;
 
     BCJLog(@"Source <%@> may return nil which may be incompatible with target <%@> which resolves to a scalar value. This can be fixed by providing a defaultValue to the source.", source, target);

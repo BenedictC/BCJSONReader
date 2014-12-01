@@ -38,6 +38,13 @@
 
 
 
+-(NSString *)description
+{
+    return [NSString stringWithFormat:@"<%@: %p> keyPath = '%@', object = %@", NSStringFromClass(self.class), self, self.keyPath, self.object];
+}
+
+
+
 -(BOOL)setValue:(id)value error:(NSError **)outError;
 {
     //KVC will work regardless of type which means type mismatch bugs can occur.
