@@ -35,9 +35,9 @@ static inline BOOL BCJReplaceNullWithNil(BCJSourceOptions options) {
 #pragma mark - Asserts/Logging
 static inline void BCJValidateOptions(id object, NSString *JSONPath, Class expectedClass, BCJSourceOptions options, id defaultValue) {
 
-    BOOL pathMustEvaluateToValue = (options ^ BCJSourceOptionPathMustEvaluateToValue) != 0;
-    BOOL treatValueNotFoundAsSuccess = (options ^ BCJSourceOptionTreatValueNotFoundAsSuccess) != 0;
-//    BOOL replaceNullWithNil = (options ^ BCJSourceOptionReplaceNullWithNil) != 0;
+    BOOL pathMustEvaluateToValue = (options & BCJSourceOptionPathMustEvaluateToValue) != 0;
+    BOOL treatValueNotFoundAsSuccess = (options & BCJSourceOptionTreatValueNotFoundAsSuccess) != 0;
+//    BOOL replaceNullWithNil = (options & BCJSourceOptionReplaceNullWithNil) != 0;
 
     BCJParameterExpectation(object != nil);
     BCJParameterExpectation(JSONPath != nil);
@@ -53,9 +53,9 @@ static inline void BCJValidateOptions(id object, NSString *JSONPath, Class expec
 
 
 static inline void BCJLogSuspiciousArguments(id object, NSString *JSONPath, Class expectedClass, BCJSourceOptions options, id defaultValue) {
-    BOOL pathMustEvaluateToValue = (options ^ BCJSourceOptionPathMustEvaluateToValue) != 0;
-//    BOOL treatValueNotFoundAsSuccess = (options ^ BCJSourceOptionTreatValueNotFoundAsSuccess) != 0;
-    BOOL replaceNullWithNil = (options ^ BCJSourceOptionReplaceNullWithNil) != 0;
+    BOOL pathMustEvaluateToValue = (options & BCJSourceOptionPathMustEvaluateToValue) != 0;
+//    BOOL treatValueNotFoundAsSuccess = (options & BCJSourceOptionTreatValueNotFoundAsSuccess) != 0;
+    BOOL replaceNullWithNil = (options & BCJSourceOptionReplaceNullWithNil) != 0;
 
     BOOL isDefaultValuePointless = pathMustEvaluateToValue && !replaceNullWithNil && defaultValue != nil;
     if (isDefaultValuePointless) {
