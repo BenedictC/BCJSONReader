@@ -33,49 +33,49 @@ static inline id<BCLContinuation> BCJ_OVERLOADABLE BCJGetValue(BCJSource *source
 
 
 #pragma mark - type specific setters
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetArray(BCJSource *source, BOOL(^block)(NSArray *array, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJGetArray(BCJSource *source, BOOL(^block)(NSArray *array, NSError **outError)) {
     return BCJGetValue(source, block, NSArray.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableArray(BCJSource *source, BOOL(^block)(NSMutableArray *array, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJGetMutableArray(BCJSource *source, BOOL(^block)(NSMutableArray *array, NSError **outError)) {
     return BCJGetValue(source, block, NSMutableArray.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetDictionary(BCJSource *source, BOOL(^block)(NSDictionary *dict, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJGetDictionary(BCJSource *source, BOOL(^block)(NSDictionary *dict, NSError **outError)) {
     return BCJGetValue(source, block, NSDictionary.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableDictionary(BCJSource *source, BOOL(^block)(NSMutableDictionary *dict, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJGetMutableDictionary(BCJSource *source, BOOL(^block)(NSMutableDictionary *dict, NSError **outError)) {
     return BCJGetValue(source, block, NSMutableDictionary.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetString(BCJSource *source, BOOL(^block)(NSString *string, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJGetString(BCJSource *source, BOOL(^block)(NSString *string, NSError **outError)) {
     return BCJGetValue(source, block, NSString.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMutableString(BCJSource *source, BOOL(^block)(NSMutableString *string, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJGetMutableString(BCJSource *source, BOOL(^block)(NSMutableString *string, NSError **outError)) {
     return BCJGetValue(source, block, NSMutableString.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNumber(BCJSource *source, BOOL(^block)(NSNumber *number, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJGetNumber(BCJSource *source, BOOL(^block)(NSNumber *number, NSError **outError)) {
     return BCJGetValue(source, block, NSNumber.class);
 }
 
 
 
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetNull(BCJSource *source, BOOL(^block)(NSNull *null, NSError **outError)) {
+id<BCLContinuation> BCJ_OVERLOADABLE BCJGetNull(BCJSource *source, BOOL(^block)(NSNull *null, NSError **outError)) {
     BCJExpectation(({
         BOOL isReplaceNullSet = (source.options & BCJSourceOptionReplaceNullWithNil) != 0;
         isReplaceNullSet;
