@@ -53,13 +53,13 @@
 
     //Validate using KVC
     id validatedValue = value;
-    if (![self.object validateValue:&validatedValue forKeyPath:self.key error:outError]) {
+    if (![self.object validateValue:&validatedValue forKeyPath:self.keyPath error:outError]) {
         //We don't need to populate outError because validateValue:forKey:error: has already done so.
         return NO;
     }
 
     //Note that we're using the validatedValue
-    [self.object setValue:validatedValue forKeyPath:self.key];
+    [self.object setValue:validatedValue forKeyPath:self.keyPath];
     return YES;
 }
 
