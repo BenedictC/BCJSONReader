@@ -89,13 +89,12 @@ BCJ_OVERLOADABLE NSArray *BCJGetMap(NSArray *fromArray, Class elementClass, BCJM
 
     //Apply the mapping to the elements
     NSMutableArray *values = [NSMutableArray new];
-    __block BOOL didError = NO;
+    __block NSError *error = nil; //We can't assign directly to the outparam from within the enumeration block because of a compiler bug.
 
     [fromArray enumerateObjectsUsingBlock:^(id elementValue, NSUInteger elementIdx, BOOL *stop) {
         //Check element is of correct kind
         if (![elementValue isKindOfClass:elementClass]) {
-            if (outError != NULL) *outError = [BCJError unexpectedElementTypeErrorWithElement:elementValue subscript:@(elementIdx) expectedElementClass:elementClass];
-            didError = YES;
+            error = [BCJError unexpectedElementTypeErrorWithElement:elementValue subscript:@(elementIdx) expectedElementClass:elementClass];
             *stop = YES;
             return; //from container enumaration
         }
@@ -106,10 +105,7 @@ BCJ_OVERLOADABLE NSArray *BCJGetMap(NSArray *fromArray, Class elementClass, BCJM
         if (mappedValue == nil) {
             BOOL shouldDiscardMappingError = isOptionSet(BCJMapOptionIgnoreFailedMappings, options);
             if (!shouldDiscardMappingError) {
-                if (outError != NULL) {
-                    *outError = [BCJError elementMappingErrorWithElement:elementValue subscript:@(elementIdx) underlyingError:elementOutError];
-                }
-                didError = YES;
+                error = [BCJError elementMappingErrorWithElement:elementValue subscript:@(elementIdx) underlyingError:elementOutError];
                 *stop = YES;
             }
             return; //from container enumaration
@@ -118,6 +114,11 @@ BCJ_OVERLOADABLE NSArray *BCJGetMap(NSArray *fromArray, Class elementClass, BCJM
         //Add the mappedValue
         [values addObject:mappedValue];
     }];
+
+    BOOL didError = error != nil;
+    if (didError && outError != NULL) {
+        *outError = error;
+    }
 
     return (didError) ? nil : values;
 }
@@ -130,13 +131,12 @@ BCJ_OVERLOADABLE NSArray *BCJGetMap(NSDictionary *fromDict, Class elementClass, 
 
     //Apply the mapping to the elements
     NSMutableArray *values = [NSMutableArray new];
-    __block BOOL didError = NO;
+    __block NSError *error = nil; //We can't assign directly to the outparam from within the enumeration block because of a compiler bug.
 
     [fromDict enumerateKeysAndObjectsUsingBlock:^(id elementKey, id elementValue, BOOL *stop) {
         //Check element is of correct kind
         if (![elementValue isKindOfClass:elementClass]) {
-            if (outError != NULL) *outError = [BCJError unexpectedElementTypeErrorWithElement:elementValue subscript:elementKey expectedElementClass:elementClass];
-            didError = YES;
+            error = [BCJError unexpectedElementTypeErrorWithElement:elementValue subscript:elementKey expectedElementClass:elementClass];
             *stop = YES;
             return; //from container enumaration
         }
@@ -147,10 +147,7 @@ BCJ_OVERLOADABLE NSArray *BCJGetMap(NSDictionary *fromDict, Class elementClass, 
         if (mappedValue == nil) {
             BOOL shouldDiscardMappingError = isOptionSet(BCJMapOptionIgnoreFailedMappings, options);
             if (!shouldDiscardMappingError) {
-                if (outError != NULL) {
-                    *outError = [BCJError elementMappingErrorWithElement:elementValue subscript:elementKey underlyingError:elementOutError];
-                }
-                didError = YES;
+                error = [BCJError elementMappingErrorWithElement:elementValue subscript:elementKey underlyingError:elementOutError];
                 *stop = YES;
             }
             return; //from container enumaration
@@ -160,8 +157,14 @@ BCJ_OVERLOADABLE NSArray *BCJGetMap(NSDictionary *fromDict, Class elementClass, 
         [values addObject:mappedValue];
     }];
 
+    BOOL didError = (error != nil);
+
+    if (didError && outError != NULL) {
+        *outError = error;
+    }
+
     //Apply sortDescriptors
-    [values sortUsingDescriptors:sortDescriptors];
+    if (!didError) [values sortUsingDescriptors:sortDescriptors];
 
     return (didError) ? nil : values;
 }

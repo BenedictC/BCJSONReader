@@ -74,39 +74,34 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJEnumerateDictionary(BCJSource *source, C
                 break;
         }
 
-        __block BOOL didError = NO;
-        __block NSError *enumerationError = nil;
+        __block NSError *error = nil;
         [dictionary enumerateKeysAndObjectsUsingBlock:^(id key, id value, BOOL *stop) {
+            NSError *enumerationError = nil;
             //Validate
             if (!BCJIsOfKindClass(key, keyClass, &enumerationError)) {
-                if (enumerationError == nil) {
-                    *outError = [BCJError unexpectedKeyTypeErrorWithKey:key expectedKeyClass:keyClass];
-                }
+                error = (enumerationError != nil) ? enumerationError : [BCJError unexpectedKeyTypeErrorWithKey:key expectedKeyClass:keyClass];
                 *stop = YES;
-                didError = YES;
                 return;
             }
             if (!BCJIsOfKindClass(value, valueClass, &enumerationError)) {
-                if (enumerationError == nil) {
-                    *outError = [BCJError unexpectedElementTypeErrorWithElement:value subscript:key expectedElementClass:valueClass];
-                }
+                error = (enumerationError != nil) ? enumerationError : [BCJError unexpectedElementTypeErrorWithElement:value subscript:key expectedElementClass:valueClass];
                 *stop = YES;
-                didError = YES;
                 return;
             }
 
             //Enumerate
             if (!enumerator(key, value, &enumerationError)) {
-                if (enumerationError == nil) {
-                    *outError = [BCJError unknownErrorWithDescription:@"Enumerator failed but did not give an error."];
-                }
+                error = (enumerationError != nil) ? enumerationError : [BCJError unknownErrorWithDescription:@"Enumerator failed but did not give an error."];
                 *stop = YES;
-                didError = YES;
                 return;
             }
         }];
 
-        *outError = enumerationError;
+        BOOL didError = error != nil;
+        if (didError && outError != NULL) {
+            *outError = error;
+        }
+
         return !didError;
     });
 }

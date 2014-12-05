@@ -129,9 +129,7 @@
 		823C6BAE1A221B74006C1A90 /* BCJTarget+ValueIntrospectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6BA01A221B74006C1A90 /* BCJTarget+ValueIntrospectionTests.m */; };
 		823C6BB01A221B74006C1A90 /* BCJStandardTypesGetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6BA21A221B74006C1A90 /* BCJStandardTypesGetters.m */; };
 		823C6BB11A221B74006C1A90 /* BCJValidationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6BA31A221B74006C1A90 /* BCJValidationTests.m */; };
-		823C6BB31A221B74006C1A90 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 823C6BA61A221B74006C1A90 /* Info.plist */; };
 		823C6BC41A221C58006C1A90 /* BCMapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6BC11A221C58006C1A90 /* BCMapperTests.m */; };
-		823C6BC51A221C58006C1A90 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 823C6BC31A221C58006C1A90 /* Info.plist */; };
 		827D3A791A29DE2600FEDF53 /* BCJStandardTypesSetters.h in Headers */ = {isa = PBXBuildFile; fileRef = 827D3A771A29DE2600FEDF53 /* BCJStandardTypesSetters.h */; };
 		827D3A7A1A29DE2600FEDF53 /* BCJStandardTypesSetters.h in Headers */ = {isa = PBXBuildFile; fileRef = 827D3A771A29DE2600FEDF53 /* BCJStandardTypesSetters.h */; };
 		827D3A7B1A29DE2600FEDF53 /* BCJStandardTypesSetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 827D3A781A29DE2600FEDF53 /* BCJStandardTypesSetters.m */; };
@@ -806,7 +804,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				823C6BC51A221C58006C1A90 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -814,7 +811,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				823C6BB31A221B74006C1A90 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
