@@ -13,13 +13,13 @@
 
 
 
-@interface BCJStandardTypesTests : XCTestCase
+@interface BCJStandardTypesGettersTests : XCTestCase
 
 @end
 
 
 
-@implementation BCJStandardTypesTests
+@implementation BCJStandardTypesGettersTests
 
 #pragma mark - GetArray
 -(void)testGetArrayWithSuccessSource

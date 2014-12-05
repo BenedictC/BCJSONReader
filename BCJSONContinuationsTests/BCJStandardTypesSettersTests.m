@@ -1,5 +1,5 @@
 //
-//  BCJStandardTypesSetters.m
+//  BCJStandardTypesSettersTests.m
 //  BCJSONMapper
 //
 //  Created by Benedict Cohen on 29/11/2014.
@@ -11,13 +11,13 @@
 
 
 
-@interface BCJStandardTypesSetters : XCTestCase
+@interface BCJStandardTypesSettersTests : XCTestCase
 
 @end
 
 
 
-@implementation BCJStandardTypesSetters
+@implementation BCJStandardTypesSettersTests
 
 - (void)testExample
 {

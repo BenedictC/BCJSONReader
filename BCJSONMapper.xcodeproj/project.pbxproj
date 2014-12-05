@@ -127,7 +127,7 @@
 		823C6BAC1A221B74006C1A90 /* BCJTargetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6B9E1A221B74006C1A90 /* BCJTargetTests.m */; };
 		823C6BAD1A221B74006C1A90 /* BCJMapTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6B9F1A221B74006C1A90 /* BCJMapTests.m */; };
 		823C6BAE1A221B74006C1A90 /* BCJTarget+ValueIntrospectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6BA01A221B74006C1A90 /* BCJTarget+ValueIntrospectionTests.m */; };
-		823C6BB01A221B74006C1A90 /* BCJStandardTypesGetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6BA21A221B74006C1A90 /* BCJStandardTypesGetters.m */; };
+		823C6BB01A221B74006C1A90 /* BCJStandardTypesGettersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6BA21A221B74006C1A90 /* BCJStandardTypesGettersTests.m */; };
 		823C6BB11A221B74006C1A90 /* BCJValidationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6BA31A221B74006C1A90 /* BCJValidationTests.m */; };
 		823C6BC41A221C58006C1A90 /* BCMapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823C6BC11A221C58006C1A90 /* BCMapperTests.m */; };
 		827D3A791A29DE2600FEDF53 /* BCJStandardTypesSetters.h in Headers */ = {isa = PBXBuildFile; fileRef = 827D3A771A29DE2600FEDF53 /* BCJStandardTypesSetters.h */; };
@@ -144,7 +144,7 @@
 		82F3E5F61A191B5C007C367E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 82F3E5F51A191B4C007C367E /* LICENSE */; };
 		82FBCA071A2A482300DAAED1 /* BCJEnumerationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FBCA061A2A482300DAAED1 /* BCJEnumerationTests.m */; };
 		82FBCA091A2A489000DAAED1 /* BCJSource+DeferredClassCheckTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FBCA081A2A489000DAAED1 /* BCJSource+DeferredClassCheckTests.m */; };
-		82FBCA0B1A2A48D100DAAED1 /* BCJStandardTypesSetters.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FBCA0A1A2A48D100DAAED1 /* BCJStandardTypesSetters.m */; };
+		82FBCA0B1A2A48D100DAAED1 /* BCJStandardTypesSettersTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FBCA0A1A2A48D100DAAED1 /* BCJStandardTypesSettersTests.m */; };
 		82FBCA0D1A2A48FF00DAAED1 /* BCJLoggingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FBCA0C1A2A48FF00DAAED1 /* BCJLoggingTests.m */; };
 		82FBCA0F1A2A495500DAAED1 /* BCJPropertyContinuationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FBCA0E1A2A495500DAAED1 /* BCJPropertyContinuationsTests.m */; };
 		82FBCA111A2A496500DAAED1 /* BCJStackSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 82FBCA101A2A496500DAAED1 /* BCJStackSourceTests.m */; };
@@ -259,7 +259,7 @@
 		823C6B9E1A221B74006C1A90 /* BCJTargetTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJTargetTests.m; sourceTree = "<group>"; };
 		823C6B9F1A221B74006C1A90 /* BCJMapTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJMapTests.m; sourceTree = "<group>"; };
 		823C6BA01A221B74006C1A90 /* BCJTarget+ValueIntrospectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCJTarget+ValueIntrospectionTests.m"; sourceTree = "<group>"; };
-		823C6BA21A221B74006C1A90 /* BCJStandardTypesGetters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJStandardTypesGetters.m; sourceTree = "<group>"; };
+		823C6BA21A221B74006C1A90 /* BCJStandardTypesGettersTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJStandardTypesGettersTests.m; sourceTree = "<group>"; };
 		823C6BA31A221B74006C1A90 /* BCJValidationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJValidationTests.m; sourceTree = "<group>"; };
 		823C6BA61A221B74006C1A90 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		823C6BC11A221C58006C1A90 /* BCMapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCMapperTests.m; sourceTree = "<group>"; };
@@ -277,7 +277,7 @@
 		82F3E5F51A191B4C007C367E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		82FBCA061A2A482300DAAED1 /* BCJEnumerationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJEnumerationTests.m; sourceTree = "<group>"; };
 		82FBCA081A2A489000DAAED1 /* BCJSource+DeferredClassCheckTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCJSource+DeferredClassCheckTests.m"; sourceTree = "<group>"; };
-		82FBCA0A1A2A48D100DAAED1 /* BCJStandardTypesSetters.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJStandardTypesSetters.m; sourceTree = "<group>"; };
+		82FBCA0A1A2A48D100DAAED1 /* BCJStandardTypesSettersTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJStandardTypesSettersTests.m; sourceTree = "<group>"; };
 		82FBCA0C1A2A48FF00DAAED1 /* BCJLoggingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJLoggingTests.m; sourceTree = "<group>"; };
 		82FBCA0E1A2A495500DAAED1 /* BCJPropertyContinuationsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJPropertyContinuationsTests.m; sourceTree = "<group>"; };
 		82FBCA101A2A496500DAAED1 /* BCJStackSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJStackSourceTests.m; sourceTree = "<group>"; };
@@ -458,8 +458,8 @@
 				823C6B9C1A221B74006C1A90 /* BCJGettersAndSettersTests.m */,
 				823C6B9F1A221B74006C1A90 /* BCJMapTests.m */,
 				823C6B9D1A221B74006C1A90 /* BCJSourceTests.m */,
-				823C6BA21A221B74006C1A90 /* BCJStandardTypesGetters.m */,
-				82FBCA0A1A2A48D100DAAED1 /* BCJStandardTypesSetters.m */,
+				823C6BA21A221B74006C1A90 /* BCJStandardTypesGettersTests.m */,
+				82FBCA0A1A2A48D100DAAED1 /* BCJStandardTypesSettersTests.m */,
 				82FBCA081A2A489000DAAED1 /* BCJSource+DeferredClassCheckTests.m */,
 				823C6BA01A221B74006C1A90 /* BCJTarget+ValueIntrospectionTests.m */,
 				823C6B9E1A221B74006C1A90 /* BCJTargetTests.m */,
@@ -844,11 +844,11 @@
 				82FBCA091A2A489000DAAED1 /* BCJSource+DeferredClassCheckTests.m in Sources */,
 				823C6BA91A221B74006C1A90 /* BCJEnumerateJSONPathComponentsTests.m in Sources */,
 				823C6BAC1A221B74006C1A90 /* BCJTargetTests.m in Sources */,
-				823C6BB01A221B74006C1A90 /* BCJStandardTypesGetters.m in Sources */,
+				823C6BB01A221B74006C1A90 /* BCJStandardTypesGettersTests.m in Sources */,
 				82FBCA0D1A2A48FF00DAAED1 /* BCJLoggingTests.m in Sources */,
 				82FBCA071A2A482300DAAED1 /* BCJEnumerationTests.m in Sources */,
 				823C6BA81A221B74006C1A90 /* BCJDeserializationTests.m in Sources */,
-				82FBCA0B1A2A48D100DAAED1 /* BCJStandardTypesSetters.m in Sources */,
+				82FBCA0B1A2A48D100DAAED1 /* BCJStandardTypesSettersTests.m in Sources */,
 				823C6BAA1A221B74006C1A90 /* BCJGettersAndSettersTests.m in Sources */,
 				823C6BAE1A221B74006C1A90 /* BCJTarget+ValueIntrospectionTests.m in Sources */,
 				823C6BB11A221B74006C1A90 /* BCJValidationTests.m in Sources */,
