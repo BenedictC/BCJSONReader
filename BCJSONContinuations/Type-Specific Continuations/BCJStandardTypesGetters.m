@@ -77,8 +77,8 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJGetNumber(BCJSource *source, BOOL(^block
 
 id<BCLContinuation> BCJ_OVERLOADABLE BCJGetNull(BCJSource *source, BOOL(^block)(NSNull *null, NSError **outError)) {
     BCJExpectation(({
-        BOOL isReplaceNullSet = (source.options & BCJSourceOptionReplaceNullWithNil) != 0;
-        isReplaceNullSet;
+        BOOL isReplaceNullWithNilSet = (source.options & BCJSourceOptionReplaceNullWithNil) != 0;
+        !isReplaceNullWithNilSet;
     }), @"Invalid option <BCJGetterOptionReplaceNullWithNil> is not permitted when setting NSNull");
     return BCJGetValue(source, block, NSNull.class);
 }
