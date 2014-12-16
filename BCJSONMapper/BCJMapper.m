@@ -88,7 +88,7 @@
 
 
 
-+(NSError *)readJSONObject:(NSData *)jsonData options:(BCJMapperOptions)options usingContinuations:(id<BCLContinuation>)firstContinuation, ...
++(NSError *)readJSONData:(NSData *)jsonData options:(BCJMapperOptions)options usingContinuations:(id<BCLContinuation>)firstContinuation, ...
 {
     BCJParameterExpectation(jsonData != nil);
 
