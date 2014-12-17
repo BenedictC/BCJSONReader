@@ -76,7 +76,7 @@
 
 +(NSError *)elementMappingErrorWithElement:(id)element subscript:(id)subscript underlyingError:(NSError *)underlyingError
 {
-    NSString *format = NSLocalizedString(@"Error while mapping elemeny for subscript %@.", nil);
+    NSString *format = NSLocalizedString(@"Error while mapping element for subscript %@.", nil);
     NSString *description = [NSString stringWithFormat:format, subscript];
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:description forKey:NSLocalizedDescriptionKey];
     if (underlyingError != nil) userInfo[BCJUnderlyingErrorKey] = underlyingError;
