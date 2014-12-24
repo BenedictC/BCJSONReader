@@ -19,7 +19,7 @@ BOOL BCJ_OVERLOADABLE BCJIsOfKindClass(id value, Class class, NSError **outError
     BOOL isValid = [value isKindOfClass:class];
     if (!isValid) {
         if (outError != NULL) {
-            NSString *criteria = [NSString stringWithFormat:@"value.class != %@", NSStringFromClass(class)];
+            NSString *criteria = [NSString stringWithFormat:@"value.class == %@", NSStringFromClass(class)];
             *outError = [BCJError invalidValueErrorWithJSONSource:nil value:value criteria:criteria];
         }
         return NO;
