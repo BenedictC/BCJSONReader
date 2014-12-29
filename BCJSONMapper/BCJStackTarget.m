@@ -12,7 +12,7 @@
 
 
 
-@interface BCJStackTarget : BCJTarget
+@interface BCJStackTarget : BCJKeyPathTarget
 @end
 
 

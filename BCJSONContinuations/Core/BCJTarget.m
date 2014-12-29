@@ -13,7 +13,22 @@
 
 
 
+#pragma mark - BCJTarget
+
 @implementation BCJTarget
+
+-(BOOL)setValue:(id)value error:(NSError **)outError;
+{
+    return NO;
+}
+
+@end
+
+
+
+#pragma mark - BCJKeyPathTarget
+
+@implementation BCJKeyPathTarget
 
 -(instancetype)init
 {
@@ -68,5 +83,40 @@
 
 
 BCJTarget * BCJ_OVERLOADABLE BCJCreateTarget(id object, NSString *keyPath) {
-    return [[BCJTarget alloc] initWithObject:object keyPath:keyPath];
+    return [[BCJKeyPathTarget alloc] initWithObject:object keyPath:keyPath];
 }
+
+
+
+
+#pragma mark - BCJPointerTarget
+
+@implementation BCJPointerTarget
+
+-(instancetype)initWithObjectPointer:(id __strong *)objectPointer
+{
+    BCJParameterExpectation(objectPointer != NULL);
+    self = [super init];
+
+    _objectPointer = objectPointer;
+
+    return self;
+}
+
+
+
+-(BOOL)setValue:(id)value error:(NSError **)outError
+{
+    *self.objectPointer = value;
+    return YES;
+}
+
+@end
+
+
+
+BCJTarget * BCJ_OVERLOADABLE BCJCreateTarget(id __strong * pointer) {
+    return [[BCJPointerTarget alloc] initWithObjectPointer:pointer];
+}
+
+

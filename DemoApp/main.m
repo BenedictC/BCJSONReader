@@ -56,9 +56,10 @@ void demo(void) {
     __block NSString *stackString = nil;
 
     //Mapper-style
+    NSString *string = nil;
     NSError *mappingError =
     [BCJMapper mapJSONData:jsonData intoObject:target options:BCJNoOptions usingContinuations:
-     BCJ_SET(@"number", number), //Fetches the value of the jsonPath, 'number' and sets the 'number' property of target. BCJ_SET is the simplestNote that the target is a NSInteger and the source is an NSNumber.
+     BCJSetString(BCJCreateSource(@"string"), BCJCreateTarget(&string)), //Fetches the value of the jsonPath, 'number' and sets the 'number' property of target. BCJ_SET is the simplestNote that the target is a NSInteger and the source is an NSNumber.
      BCJSetProperty(BCJCreateSource(@"date"), BCJCreateTarget(@"date")),  //The previous line uses the BCJ_SET macro which is just a wrapper arround BCJSetProperty. Note that the date is being implicitly converted from a number to a date. BCJSetProperty supports such conversions. number->date, string->date & string->url.
      BCJ_SET(@"array[0].url", url), //Fetches the value from a JSON path and implicitly converts it to the correct type.
      BCJSetString(BCJCreateSource(@"string", BCJSourceModeStrict), BCJCreateTarget(BCJ_KEY(string))), //Unlike BCJSetProperty, BCJSetString (and the other type-specific continuation constructors) does not perform 'magic'. It expects the source to be a string and the destination to be a string property. The source has its option set to BCJSourceModeStrict so that it will fail if the value is not found.
@@ -115,6 +116,7 @@ void demo(void) {
 //     nil];
 
     //Log results
+    NSLog(@"string: <%@> %@", string.class, string);
     NSLog(@"target.string: <%@> %@", target.string.class, target.string);
     NSLog(@"target.number: <NSNumber> %@", @(target.number));
     NSLog(@"target.date: <%@> %@", target.date.class, target.date);

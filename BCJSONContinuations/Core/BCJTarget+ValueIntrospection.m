@@ -14,23 +14,37 @@
 
 @implementation BCJTarget (ValueIntrospection)
 
+-(BCJKeyPathTarget *)keyPathTarget
+{
+    id target = [self isKindOfClass:[BCJKeyPathTarget class]] ? self : nil;
+    return target;
+}
+
+
+
 -(id)receiver
 {
-    NSString *fullKeyPath = self.keyPath;
+    BCJKeyPathTarget *target = self.keyPathTarget;
+    if (target == nil)  return nil;
+
+    NSString *fullKeyPath = target.keyPath;
     NSRange lastDotRange = [fullKeyPath rangeOfString:@"." options:NSBackwardsSearch];
     if (lastDotRange.location == NSNotFound) {
-        return self.object;
+        return target.object;
     }
 
     NSString *croppedKeyPath = [fullKeyPath substringToIndex:lastDotRange.location];
-    return [self.object valueForKeyPath:croppedKeyPath];
+    return [target.object valueForKeyPath:croppedKeyPath];
 }
 
 
 
 -(NSString *)key
 {
-    NSString *keyPath = self.keyPath;
+    BCJKeyPathTarget *target = self.keyPathTarget;
+    if (target == nil)  return nil;
+
+    NSString *keyPath = target.keyPath;
     NSRange lastDotRange = [keyPath rangeOfString:@"." options:NSBackwardsSearch];
 
     return (lastDotRange.location == NSNotFound) ? keyPath : [keyPath substringFromIndex:1 + lastDotRange.location];

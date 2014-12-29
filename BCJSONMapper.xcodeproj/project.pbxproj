@@ -1101,6 +1101,7 @@
 		8282CEC619F5987200555BB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/BCJSONMapper/BCLContinuations";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/BCJSONMapper/BCLContinuations",
 					"$(inherited)",
@@ -1114,6 +1115,7 @@
 		8282CEC719F5987200555BB0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/BCJSONMapper/BCLContinuations";
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/BCJSONMapper/BCLContinuations",
 					"$(inherited)",
@@ -1132,6 +1134,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/BCJSONMapper/BCLContinuations";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1149,6 +1152,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/BCJSONMapper/BCLContinuations";
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				PRODUCT_NAME = BCJSONMapperOSX;
 			};
