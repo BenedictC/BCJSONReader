@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "BCJSONMapper"
-  s.version      = "0.2.7"
+  s.version      = "0.2.8"
   s.summary      = "An Objective-C library for handling real world JSON."
 
   s.description  = <<-DESC
@@ -73,7 +73,7 @@ BCJSONMapper is a library for processing the crazy JSON structures that exist in
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/BenedictC/BCJSONMapper.git", :tag => "0.2.7" }
+  s.source       = { :git => "https://github.com/BenedictC/BCJSONMapper.git", :tag => "0.2.8" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
