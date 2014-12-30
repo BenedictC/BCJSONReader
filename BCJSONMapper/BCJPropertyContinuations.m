@@ -89,22 +89,3 @@ id<BCLContinuation> BCJ_OVERLOADABLE BCJSetProperty(BCJSource *source, BCJTarget
         return [target setValue:value error:outError];
     });
 }
-
-
-
-#pragma mark - Convienince constructors that implicitly take the current target
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetEnum(NSString *sourceJSONPath, NSString *targetPropertyKey, NSDictionary *enumMapping)  {
-    return BCJSetEnum(BCJCreateSource(sourceJSONPath), BCJCreateTarget(targetPropertyKey), enumMapping);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(NSString *sourceJSONPath, NSString *targetPropertyKey, Class elementClass, BCJMapOptions options, id(^fromArrayMap)(NSUInteger elementIndex, id elementValue, NSError **outError))  {
-    return BCJSetMap(BCJCreateSource(sourceJSONPath), BCJCreateTarget(targetPropertyKey), elementClass, options, fromArrayMap);
-}
-
-
-
-id<BCLContinuation> BCJ_OVERLOADABLE BCJSetMap(NSString *sourceJSONPath, NSString *targetPropertyKey, Class elementClass, BCJMapOptions options, NSArray *sortDescriptors, id(^fromDictionaryMap)(id elementKey, id elementValue, NSError **outError))  {
-    return BCJSetMap(BCJCreateSource(sourceJSONPath), BCJCreateTarget(targetPropertyKey), elementClass, options, sortDescriptors, fromDictionaryMap);
-}
