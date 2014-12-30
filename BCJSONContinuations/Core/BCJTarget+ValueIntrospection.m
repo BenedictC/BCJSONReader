@@ -67,9 +67,10 @@
 
     //from "Accessor Search Implementation Details"
     //> 1. The receiver’s class is searched for an accessor method whose name matches the pattern set<Key>:.
-    //The type information is not stored for the setter method so we have to look for a property which does store the information.
+    //The type information is not stored in the setter method so we have to look for a property which does store the information.
     objc_property_t property = class_getProperty(class, key.UTF8String);
-    if (property != NULL) {
+    BOOL isAbleToFetchTypeInfoFromProperty = property != NULL;
+    if (isAbleToFetchTypeInfoFromProperty) {
         NSString *attribs = @(property_getAttributes(property));
         NSRange commaRange = [attribs rangeOfString:@","];
         NSRange typeInfoRange = NSMakeRange(1, commaRange.location-1);
@@ -83,6 +84,7 @@
         return nil;
     }
 
+    //Checks a class for a given ivar name and if found assigns the type to expectedType
     __block NSString *expectedType = nil;
     BOOL (^setExpectedTypeForIvar)(NSString *) = ^BOOL(NSString *ivarName){
         Ivar ivar = class_getInstanceVariable(class, [ivarName UTF8String]);

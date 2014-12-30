@@ -20,7 +20,14 @@ typedef NS_OPTIONS(NSUInteger, BCJMapperOptions) {
 };
 
 
+/**
+ BCJMapper allows JSON data to be mapped to objects. The mappings are performed by the supplied continuations. 
 
+ BCJContinuations require a BCJSource and an optional BCJTarget which are created by BCJCreateSource and BCJCreateTarget.
+ 
+ BCJMapper manages a per-thread stack for source objects and target objects.  BCJMapper provides additional overloaded BCJCreateSource and BCJCreateTarget which uses the top object of these stack.s 
+
+ */
 @interface BCJMapper : NSObject
 
 +(NSError *)mapJSONData:(NSData *)jsonData intoObject:(id)targetObject options:(BCJMapperOptions)options usingContinuations:(id<BCLContinuation>)firstContinuation, ... BCJ_REQUIRED(1,2);
