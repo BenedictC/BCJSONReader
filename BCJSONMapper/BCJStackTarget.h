@@ -13,6 +13,14 @@
 
 
 
+/**
+
+ TODO:
+
+ */
+
+
+
 #pragma mark - Target pushing/popping
 void BCJPushTargetObject(id targetObject) BCJ_REQUIRED(1);
 id BCJTopTargetObject(void);
@@ -20,4 +28,4 @@ void BCJPopTargetObject(void);
 
 
 
-BCJTarget * BCJ_OVERLOADABLE BCJCreateTarget(NSString *key) BCJ_WARN_UNUSED BCJ_REQUIRED(1);
+BCJTarget * BCJ_OVERLOADABLE BCJCreateTarget(NSString *keyPath) BCJ_WARN_UNUSED BCJ_REQUIRED(1);

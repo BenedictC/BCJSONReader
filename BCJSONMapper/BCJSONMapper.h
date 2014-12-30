@@ -30,7 +30,7 @@
 //Logging (borrowed from BCJSONContinuations)
 #import "BCJLogging.h"
 
-//Other BCJSONContinuations (not included because they don't BCJMapper provides all the functionality)
+//Other BCJSONContinuations (not included because BCJMapper provides functionality that supersceeds this functionality.)
 //#import "BCJSource.h"
 //#import "BCJTarget.h"
 //#import "BCJGettersAndSetters.h"
