@@ -68,19 +68,19 @@ BCJTarget * BCJ_OVERLOADABLE BCJCreateTarget(id object, NSString *keyPath) BCJ_W
 
 
 
-/**
- <#Description#>
- */
-@interface BCJPointerTarget : BCJTarget
-
--(instancetype)initWithObjectPointer:(id __strong *)objectPointer;
-
-@property(nonatomic, readonly) id __strong * objectPointer;
-
-@end
-
-
-
-BCJTarget * BCJ_OVERLOADABLE BCJCreateTarget(id __strong * pointer) BCJ_WARN_UNUSED BCJ_REQUIRED(1);
+///**
+// <#Description#>
+// */
+//@interface BCJPointerTarget : BCJTarget
+//
+//-(instancetype)initWithObjectPointer:(id __strong *)objectPointer;
+//
+//@property(nonatomic, readonly) id __strong * objectPointer;
+//
+//@end
+//
+//
+//
+//BCJTarget * BCJ_OVERLOADABLE BCJCreateTarget(id __strong * pointer) BCJ_WARN_UNUSED BCJ_REQUIRED(1);
 
 

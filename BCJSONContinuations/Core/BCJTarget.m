@@ -66,6 +66,11 @@
     //Note that this is an NSAssert and not an BCJExpectation, therefore this will not crash non-DEBUG builds.
     NSAssert([self canReceiveValue:value] != BCJTargetValueEligabilityStatusForbidden, @"Attempted to set an object of type <%@> to an ivar of type <%@> for key <%@> of object <%@>.", NSStringFromClass([value class]), NSStringFromClass([self expectedClass]), self.key, self.object);
 
+//    NSAssert(({
+//        //TODO: check for a setter, then check for ivars if directIvarAccess is allowed.        
+//        YES;
+//    }), @"Instance of class <%@> do not support KVC access for key '%@'.", NSStringFromClass([value class]), self.key);
+
     //Validate using KVC
     id validatedValue = value;
     if (![self.object validateValue:&validatedValue forKeyPath:self.keyPath error:outError]) {
@@ -88,35 +93,32 @@ BCJTarget * BCJ_OVERLOADABLE BCJCreateTarget(id object, NSString *keyPath) {
 
 
 
-
-#pragma mark - BCJPointerTarget
-
-@implementation BCJPointerTarget
-
--(instancetype)initWithObjectPointer:(id __strong *)objectPointer
-{
-    BCJParameterExpectation(objectPointer != NULL);
-    self = [super init];
-
-    _objectPointer = objectPointer;
-
-    return self;
-}
-
-
-
--(BOOL)setValue:(id)value error:(NSError **)outError
-{
-    *self.objectPointer = value;
-    return YES;
-}
-
-@end
-
-
-
-BCJTarget * BCJ_OVERLOADABLE BCJCreateTarget(id __strong * pointer) {
-    return [[BCJPointerTarget alloc] initWithObjectPointer:pointer];
-}
-
-
+//#pragma mark - BCJPointerTarget
+//
+//@implementation BCJPointerTarget
+//
+//-(instancetype)initWithObjectPointer:(id __strong *)objectPointer
+//{
+//    BCJParameterExpectation(objectPointer != NULL);
+//    self = [super init];
+//
+//    _objectPointer = objectPointer;
+//
+//    return self;
+//}
+//
+//
+//
+//-(BOOL)setValue:(id)value error:(NSError **)outError
+//{
+//    *self.objectPointer = value;
+//    return YES;
+//}
+//
+//@end
+//
+//
+//
+//BCJTarget * BCJ_OVERLOADABLE BCJCreateTarget(id __strong * pointer) {
+//    return [[BCJPointerTarget alloc] initWithObjectPointer:pointer];
+//}
