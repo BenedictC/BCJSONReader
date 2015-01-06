@@ -82,7 +82,7 @@ BCJSONMapper has been retired. Please use BCJSONReader instead.
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = ""
+  s.source_files  = "LICENSE"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "**/*.h"
