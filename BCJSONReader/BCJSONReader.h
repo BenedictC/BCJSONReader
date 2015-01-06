@@ -158,7 +158,10 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 -(id)enumAt:(NSString *)jsonPath enumMapping:(NSDictionary *)enumMapping BCJ_REQUIRED();
 -(id)enumAt:(NSString *)jsonPath enumMapping:(NSDictionary *)enumMapping options:(BCJSONReaderOptions)options defaultKey:(id)defaultKey didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1,2);
 
+-(NSArray *)arrayFromArrayAt:(NSString *)jsonPath usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, NSUInteger elementIndex))block BCJ_REQUIRED();
 -(NSArray *)arrayFromArrayAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, NSUInteger elementIndex))block BCJ_REQUIRED(1,4);
+
+-(NSArray *)arrayFromDictionaryAt:(NSString *)jsonPath usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, id unsafeElementKey))block BCJ_REQUIRED();
 -(NSArray *)arrayFromDictionaryAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, id unsafeElementKey))block BCJ_REQUIRED(1,4);
 
 -(id)castObject:(id)object toClass:(Class)class didSucceed:(BOOL *)didSucceed;

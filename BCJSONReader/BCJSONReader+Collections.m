@@ -38,6 +38,13 @@
 
 
 
+-(NSArray *)arrayFromArrayAt:(NSString *)jsonPath usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, NSUInteger elementIndex))block
+{
+    return [self arrayFromArrayAt:jsonPath options:self.defaultOptions didSucceed:NULL usingElementReaderBlock:block];
+}
+
+
+
 -(NSArray *)arrayFromArrayAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, NSUInteger elementIndex))block
 {
     NSArray *sourceArray = [self arrayAt:jsonPath options:options defaultValue:nil didSucceed:didSucceed];
@@ -70,6 +77,13 @@
     }
 
     return mappedArray;
+}
+
+
+
+-(NSArray *)arrayFromDictionaryAt:(NSString *)jsonPath usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, id unsafeElementKey))block
+{
+    return [self arrayFromDictionaryAt:jsonPath options:self.defaultOptions didSucceed:NULL usingElementReaderBlock:block];
 }
 
 
