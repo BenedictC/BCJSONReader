@@ -1,7 +1,7 @@
-# BCJSONMapper
+# BCJSONReader
 
 ## TL;DR
-BCJSONMapper is a library for processing the crazy JSON structures that exist in the real world. Its key features are:
+ BCJSONReader is a library for processing the crazy JSON structures that exist in the real world. Its key features are:
 + Flexible. Provides functionality for handling many JSON usage styles.
 + Extensible. Easy to integrate new processing (e.g. peculiar date formats).
 //+ Documented.
@@ -55,7 +55,7 @@ void demo(void) {
 
     //Go!
     NSError *mappingError =
-    [BCJMapper mapJSONData:jsonData intoObject:target options:BCJNoOptions usingContinuations:
+    [ BCJReader mapJSONData:jsonData intoObject:target options:BCJNoOptions usingContinuations:
          BCJ_SET(@"number", number), //Fetches the value of the jsonPath, 'number' and sets the 'number' property of target.
          BCJSetProperty(BCJCreateSource(@"date"), BCJCreateTarget(BCJ_KEY(date))),  //The previous line uses the BCJ_SET macro which is just a wrapper arround BCJSetProperty to add runtime selector checking. Note that the date is being implicitly converted from a number to a date. BCJSetProperty supports three such conversions. number->date, string->date & string->url.
          BCJ_SET(@"array[0].url", url), //Fetches the value from a JSON path and implicitly converts it to the correct type.
@@ -82,7 +82,7 @@ Other JSON libraries tends to make simplifying assumptions about the JSON struct
 - Implicitly coupling the model objects to the JSON structure by use of 'magical' mapping (e.g. by implicitly reading the keys in a dictionary and finding a property on the object with a matching name).
 
 
-## So what's different about BCJSONMapper?
-First and foremost BCJSONMapper provides the infrastructure for processing JSON (this infrastructure is actually provided by another library, BCLContinuations, which is included with BCJSONMapper). BCJSONMapper then builds on top of this infrastructure and provides functions for processing JSON. 
+## So what's different about BCJSONReader?
+First and foremost BCJSONReader provides the infrastructure for processing JSON (this infrastructure is actually provided by another library, BCLContinuations, which is included with BCJSONReader). BCJSONReader then builds on top of this infrastructure and provides functions for processing JSON. 
 
 If you're lucky enough to be dealing with well structed JSON then you may be better off using a simpler library.
