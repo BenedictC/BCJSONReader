@@ -68,14 +68,25 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
  
  Values are extracted by calling the query methods on an BCJSONReader instance. The query methods come in 2 forms, short form, eg stringAt: and long form stringAt:options:defaultValue:outError:.
  
- The first parameter is a require JSONPath that is used to locate the object. Example JSONPaths are:
- - @"events"
- - @"events[0]"
- - @"events[0].date"
- - @"['events'][0]['date']"
- - @"['latest events']"
- - @"[.]"
- 
+ The first parameter is a require JSONPath that is used to locate the object. A valid JSONPath path is comprised of one or more path components. A path component takes one of the following forms:
+ - subscript component: square braces containing one of the following:
+    - an integer
+    - a single quote delimited string enclosed by square braces. Single quotes are escaped with the '`' character. Literal '`' are represented with as '``'.
+    - a ., eg "[.]"
+ - identifier component: a string that starts with the a character matching the regex a-z|A-Z|$|_ followed by zero of more characters matching a-z|A-Z|$|_|0-9 . Identifier components must be terminated with a '.' except if the component is the final component in the path.
+
+ Note that the allowable characters for an identifier component is a subset of the allowable characters for a Javascript identifier which allows for many unicode codepoints. If a unicode character is required then a subscript component should be used.
+
+ Example JSONPaths:
+ - @"events"                    Path consists of one component which is an identifier component.
+ - @"events[0]"                 Two component; an identifier component followed by a subscript component.
+ - @"events[0].date"            Identifier, subscript, identifer.
+ - @"['events'][0]['date']"     3 subscript components
+ - @"['latest events']"         One subscript component containing a string which cannot be represented by identifer component
+ - @"[.]"                       [.] represents the current object. @"[.]" will fetch the root object.
+ - @"['']"                      The empty string component
+ - @"$schema"                   $ and _ are valid in indentifer components
+
  The second parameter takes options which affect the behaviour of the method. There are options which affect how NSNull is handled and options which for affect how a method behaves if the value is not found. When using the short form self.defaultOptions are used.
  
  The third parameter is the defaultValue to use. This value is used if the path evaluates to nil. defaultValue may be nil.
@@ -145,7 +156,26 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 -(BOOL)hasErrors;
 
 #pragma mark - JSON path access
+/**
+ Queries the JSONObject for the JSONPath using the default options. The fetched object is then type check against expected class. If the fetch fails or the type check fails then an error is added to errors.
+
+ @param jsonPath      The JSON path to query.
+ @param expectedClass The class that the JSON path is expected to return or nil if type checking is not required.
+
+ @return if the query succeeds and the object matches the expected class then returns the object, otherwise nil.
+ */
 -(id)objectAt:(NSString *)jsonPath type:(Class)expectedClass BCJ_REQUIRED(1);
+/**
+ Queries the JSONObject for the JSONPath using options. The fetched object is then type check against expected class. If the fetch fails or the type check fails then an error is added to errors.
+
+ @param jsonPath      The JSON path to query.
+ @param expectedClass The class that the JSON path is expected to return or nil if type checking is not required.
+ @param options       The options used perform the fetch.
+ @param defaultValue  A default value to use if required. The object must be of type expectedClass.
+ @param didSucceed    On return contains YES if the method was successful, otherwise NO. Maybe NULL.
+
+ @return if the query succeeds and the object matches the expected class then returns the object, otherwise nil.
+ */
 -(id)objectAt:(NSString *)jsonPath type:(Class)expectedClass options:(BCJSONReaderOptions)options defaultValue:(id)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
 @end
