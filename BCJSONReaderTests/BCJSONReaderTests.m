@@ -1,5 +1,5 @@
 //
-//  BCJStackSourceTests.m
+//  BCJSONReaderTests.m
 //  BCJSONReader
 //
 //  Created by Benedict Cohen on 29/11/2014.
@@ -11,13 +11,13 @@
 
 
 
-@interface BCJStackSourceTests : XCTestCase
+@interface BCJSONReaderTests : XCTestCase
 
 @end
 
 
 
-@implementation BCJStackSourceTests
+@implementation BCJSONReaderTests
 
 - (void)testExample
 {

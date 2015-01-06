@@ -7,35 +7,38 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		823658671A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 823658571A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.h */; };
-		823658681A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 823658581A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.m */; };
-		8236586B1A5B5314009F5C96 /* BCJSONReader+AdditionalTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585B1A5B5314009F5C96 /* BCJSONReader+AdditionalTypes.m */; };
-		8236586C1A5B5314009F5C96 /* BCJSONReader+Collections.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585C1A5B5314009F5C96 /* BCJSONReader+Collections.m */; };
-		8236586D1A5B5314009F5C96 /* BCJSONReader+StandardTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585D1A5B5314009F5C96 /* BCJSONReader+StandardTypes.m */; };
-		8236586E1A5B5314009F5C96 /* BCJSONReader+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585E1A5B5314009F5C96 /* BCJSONReader+Validation.m */; };
-		8236586F1A5B5314009F5C96 /* BCJSONReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236585F1A5B5314009F5C96 /* BCJSONReader.h */; };
-		823658701A5B5314009F5C96 /* BCJSONReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 823658601A5B5314009F5C96 /* BCJSONReader.m */; };
-		8236587D1A5B5329009F5C96 /* BCJPropertyContinuationsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823658771A5B5329009F5C96 /* BCJPropertyContinuationsTests.m */; };
-		8236587E1A5B5329009F5C96 /* BCJStackSourceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823658781A5B5329009F5C96 /* BCJStackSourceTests.m */; };
-		8236587F1A5B5329009F5C96 /* BCJStackTargetTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823658791A5B5329009F5C96 /* BCJStackTargetTests.m */; };
-		823658801A5B5329009F5C96 /* BCMapperTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236587A1A5B5329009F5C96 /* BCMapperTests.m */; };
+		8202A0241A5C60E60049BCDF /* BCJEnumerateJSONPathComponentsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8202A0231A5C60E60049BCDF /* BCJEnumerateJSONPathComponentsTests.m */; };
+		8202A0251A5C613D0049BCDF /* BCJConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236588C1A5B5588009F5C96 /* BCJConstants.m */; };
+		8202A0261A5C613D0049BCDF /* BCJError.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236588F1A5B5588009F5C96 /* BCJError.m */; };
+		8202A0271A5C613D0049BCDF /* BCJEnumerateJSONPathComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 823658581A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.m */; };
+		8202A0281A5C613D0049BCDF /* BCJSONReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 823658601A5B5314009F5C96 /* BCJSONReader.m */; };
+		8202A0291A5C613D0049BCDF /* BCJSONReader+AdditionalTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585B1A5B5314009F5C96 /* BCJSONReader+AdditionalTypes.m */; };
+		8202A02A1A5C613D0049BCDF /* BCJSONReader+Collections.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585C1A5B5314009F5C96 /* BCJSONReader+Collections.m */; };
+		8202A02B1A5C613D0049BCDF /* BCJSONReader+StandardTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585D1A5B5314009F5C96 /* BCJSONReader+StandardTypes.m */; };
+		8202A02C1A5C613D0049BCDF /* BCJSONReader+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585E1A5B5314009F5C96 /* BCJSONReader+Validation.m */; };
+		8202A02D1A5C613D0049BCDF /* BCJConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236588C1A5B5588009F5C96 /* BCJConstants.m */; };
+		8202A02E1A5C613D0049BCDF /* BCJError.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236588F1A5B5588009F5C96 /* BCJError.m */; };
+		8202A02F1A5C613D0049BCDF /* BCJEnumerateJSONPathComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 823658581A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.m */; };
+		8202A0301A5C613D0049BCDF /* BCJSONReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 823658601A5B5314009F5C96 /* BCJSONReader.m */; };
+		8202A0311A5C613D0049BCDF /* BCJSONReader+AdditionalTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585B1A5B5314009F5C96 /* BCJSONReader+AdditionalTypes.m */; };
+		8202A0321A5C613D0049BCDF /* BCJSONReader+Collections.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585C1A5B5314009F5C96 /* BCJSONReader+Collections.m */; };
+		8202A0331A5C613D0049BCDF /* BCJSONReader+StandardTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585D1A5B5314009F5C96 /* BCJSONReader+StandardTypes.m */; };
+		8202A0341A5C613D0049BCDF /* BCJSONReader+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585E1A5B5314009F5C96 /* BCJSONReader+Validation.m */; };
+		8202A0351A5C618D0049BCDF /* BCJConstants.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8236588B1A5B5588009F5C96 /* BCJConstants.h */; };
+		8202A0361A5C618D0049BCDF /* BCJError.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8236588E1A5B5588009F5C96 /* BCJError.h */; };
+		8202A0371A5C618D0049BCDF /* BCJDefines.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8236588D1A5B5588009F5C96 /* BCJDefines.h */; };
+		8202A0381A5C618D0049BCDF /* BCJEnumerateJSONPathComponents.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 823658571A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.h */; };
+		8202A0391A5C618D0049BCDF /* BCJSONReader.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8236585F1A5B5314009F5C96 /* BCJSONReader.h */; };
+		8202A03A1A5C619C0049BCDF /* BCJConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236588B1A5B5588009F5C96 /* BCJConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8202A03B1A5C619C0049BCDF /* BCJError.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236588E1A5B5588009F5C96 /* BCJError.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8202A03C1A5C619C0049BCDF /* BCJDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236588D1A5B5588009F5C96 /* BCJDefines.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8202A03D1A5C619C0049BCDF /* BCJEnumerateJSONPathComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 823658571A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8202A03E1A5C619C0049BCDF /* BCJSONReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236585F1A5B5314009F5C96 /* BCJSONReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8202A03F1A5C61C10049BCDF /* libBCJSONReaderOSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 828555C31A0E147D00FCBF61 /* libBCJSONReaderOSX.dylib */; };
+		8236587D1A5B5329009F5C96 /* BCJSONReaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823658771A5B5329009F5C96 /* BCJSONReaderTests.m */; };
 		823658811A5B5329009F5C96 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8236587C1A5B5329009F5C96 /* Info.plist */; };
-		823658821A5B5474009F5C96 /* BCJEnumerateJSONPathComponents.m in Sources */ = {isa = PBXBuildFile; fileRef = 823658581A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.m */; };
-		823658841A5B5474009F5C96 /* BCJSONReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 823658601A5B5314009F5C96 /* BCJSONReader.m */; };
-		823658851A5B5474009F5C96 /* BCJSONReader+AdditionalTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585B1A5B5314009F5C96 /* BCJSONReader+AdditionalTypes.m */; };
-		823658861A5B5474009F5C96 /* BCJSONReader+Collections.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585C1A5B5314009F5C96 /* BCJSONReader+Collections.m */; };
-		823658871A5B5474009F5C96 /* BCJSONReader+StandardTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585D1A5B5314009F5C96 /* BCJSONReader+StandardTypes.m */; };
-		823658881A5B5474009F5C96 /* BCJSONReader+Validation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236585E1A5B5314009F5C96 /* BCJSONReader+Validation.m */; };
-		823658901A5B5588009F5C96 /* BCJConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236588B1A5B5588009F5C96 /* BCJConstants.h */; };
-		823658911A5B5588009F5C96 /* BCJConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236588C1A5B5588009F5C96 /* BCJConstants.m */; };
-		823658921A5B5588009F5C96 /* BCJConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236588C1A5B5588009F5C96 /* BCJConstants.m */; };
-		823658931A5B5588009F5C96 /* BCJDefines.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236588D1A5B5588009F5C96 /* BCJDefines.h */; };
-		823658941A5B5588009F5C96 /* BCJError.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236588E1A5B5588009F5C96 /* BCJError.h */; };
-		823658951A5B5588009F5C96 /* BCJError.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236588F1A5B5588009F5C96 /* BCJError.m */; };
-		823658961A5B5588009F5C96 /* BCJError.m in Sources */ = {isa = PBXBuildFile; fileRef = 8236588F1A5B5588009F5C96 /* BCJError.m */; };
 		823C6B661A221B0A006C1A90 /* libBCJSONReaderOSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 828555C31A0E147D00FCBF61 /* libBCJSONReaderOSX.dylib */; };
 		82D3B1A019FBF8D3003C4EB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D3B19F19FBF8D3003C4EB5 /* main.m */; };
-		82F3E5F61A191B5C007C367E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 82F3E5F51A191B4C007C367E /* LICENSE */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,12 +58,18 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
+				8202A0351A5C618D0049BCDF /* BCJConstants.h in CopyFiles */,
+				8202A0361A5C618D0049BCDF /* BCJError.h in CopyFiles */,
+				8202A0371A5C618D0049BCDF /* BCJDefines.h in CopyFiles */,
+				8202A0381A5C618D0049BCDF /* BCJEnumerateJSONPathComponents.h in CopyFiles */,
+				8202A0391A5C618D0049BCDF /* BCJSONReader.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8202A0231A5C60E60049BCDF /* BCJEnumerateJSONPathComponentsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJEnumerateJSONPathComponentsTests.m; sourceTree = "<group>"; };
 		821C2B201A05A4AA00C56BC3 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		823658571A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJEnumerateJSONPathComponents.h; sourceTree = "<group>"; };
 		823658581A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJEnumerateJSONPathComponents.m; sourceTree = "<group>"; };
@@ -70,10 +79,7 @@
 		8236585E1A5B5314009F5C96 /* BCJSONReader+Validation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCJSONReader+Validation.m"; sourceTree = "<group>"; };
 		8236585F1A5B5314009F5C96 /* BCJSONReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJSONReader.h; sourceTree = "<group>"; };
 		823658601A5B5314009F5C96 /* BCJSONReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJSONReader.m; sourceTree = "<group>"; };
-		823658771A5B5329009F5C96 /* BCJPropertyContinuationsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJPropertyContinuationsTests.m; sourceTree = "<group>"; };
-		823658781A5B5329009F5C96 /* BCJStackSourceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJStackSourceTests.m; sourceTree = "<group>"; };
-		823658791A5B5329009F5C96 /* BCJStackTargetTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJStackTargetTests.m; sourceTree = "<group>"; };
-		8236587A1A5B5329009F5C96 /* BCMapperTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCMapperTests.m; sourceTree = "<group>"; };
+		823658771A5B5329009F5C96 /* BCJSONReaderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJSONReaderTests.m; sourceTree = "<group>"; };
 		8236587C1A5B5329009F5C96 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8236588B1A5B5588009F5C96 /* BCJConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJConstants.h; sourceTree = "<group>"; };
 		8236588C1A5B5588009F5C96 /* BCJConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJConstants.m; sourceTree = "<group>"; };
@@ -86,7 +92,6 @@
 		828555C31A0E147D00FCBF61 /* libBCJSONReaderOSX.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = libBCJSONReaderOSX.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		82D3B19F19FBF8D3003C4EB5 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		82EBE79A19FCEEB0001F995B /* libBCJSONReaderIOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBCJSONReaderIOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		82F3E5B11A191ADC007C367E /* BCJSONReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = BCJSONReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		82F3E5F51A191B4C007C367E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +108,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8202A03F1A5C61C10049BCDF /* libBCJSONReaderOSX.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,13 +120,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		82EBE79719FCEEB0001F995B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		82F3E5AD1A191ADC007C367E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -153,10 +152,8 @@
 		823658761A5B5329009F5C96 /* BCJSONReaderTests */ = {
 			isa = PBXGroup;
 			children = (
-				823658771A5B5329009F5C96 /* BCJPropertyContinuationsTests.m */,
-				823658781A5B5329009F5C96 /* BCJStackSourceTests.m */,
-				823658791A5B5329009F5C96 /* BCJStackTargetTests.m */,
-				8236587A1A5B5329009F5C96 /* BCMapperTests.m */,
+				8202A0231A5C60E60049BCDF /* BCJEnumerateJSONPathComponentsTests.m */,
+				823658771A5B5329009F5C96 /* BCJSONReaderTests.m */,
 				8236587B1A5B5329009F5C96 /* Support Files */,
 			);
 			path = BCJSONReaderTests;
@@ -187,7 +184,6 @@
 				8282CEBE19F5987200555BB0 /* DemoApp */,
 				82EBE79A19FCEEB0001F995B /* libBCJSONReaderIOS.a */,
 				828555C31A0E147D00FCBF61 /* libBCJSONReaderOSX.dylib */,
-				82F3E5B11A191ADC007C367E /* BCJSONReader.framework */,
 				823C6B601A221B0A006C1A90 /* BCJSONReaderTests.xctest */,
 			);
 			name = Products;
@@ -218,18 +214,11 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		82F3E5AE1A191ADC007C367E /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				823658941A5B5588009F5C96 /* BCJError.h in Headers */,
-				823658901A5B5588009F5C96 /* BCJConstants.h in Headers */,
-				8236586F1A5B5314009F5C96 /* BCJSONReader.h in Headers */,
-				823658671A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.h in Headers */,
-				823658931A5B5588009F5C96 /* BCJDefines.h in Headers */,
+				8202A03A1A5C619C0049BCDF /* BCJConstants.h in Headers */,
+				8202A03B1A5C619C0049BCDF /* BCJError.h in Headers */,
+				8202A03C1A5C619C0049BCDF /* BCJDefines.h in Headers */,
+				8202A03D1A5C619C0049BCDF /* BCJEnumerateJSONPathComponents.h in Headers */,
+				8202A03E1A5C619C0049BCDF /* BCJSONReader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,24 +293,6 @@
 			productReference = 82EBE79A19FCEEB0001F995B /* libBCJSONReaderIOS.a */;
 			productType = "com.apple.product-type.library.static";
 		};
-		82F3E5B01A191ADC007C367E /* BCJSONReader */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 82F3E5C41A191ADC007C367E /* Build configuration list for PBXNativeTarget "BCJSONReader" */;
-			buildPhases = (
-				82F3E5AC1A191ADC007C367E /* Sources */,
-				82F3E5AD1A191ADC007C367E /* Frameworks */,
-				82F3E5AE1A191ADC007C367E /* Headers */,
-				82F3E5AF1A191ADC007C367E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = BCJSONReader;
-			productName = BCJJSONContinuation;
-			productReference = 82F3E5B11A191ADC007C367E /* BCJSONReader.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -343,9 +314,6 @@
 					82EBE79919FCEEB0001F995B = {
 						CreatedOnToolsVersion = 6.1;
 					};
-					82F3E5B01A191ADC007C367E = {
-						CreatedOnToolsVersion = 6.1;
-					};
 				};
 			};
 			buildConfigurationList = 8282CEB919F5987200555BB0 /* Build configuration list for PBXProject "BCJSONReader" */;
@@ -363,7 +331,6 @@
 				8282CEBD19F5987200555BB0 /* DemoApp */,
 				82EBE79919FCEEB0001F995B /* BCJSONReaderIOS */,
 				828555C21A0E147D00FCBF61 /* BCJSONReaderOSX */,
-				82F3E5B01A191ADC007C367E /* BCJSONReader */,
 				823C6B5F1A221B0A006C1A90 /* BCJSONReaderTests */,
 			);
 		};
@@ -378,14 +345,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		82F3E5AF1A191ADC007C367E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				82F3E5F61A191B5C007C367E /* LICENSE in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -393,10 +352,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8236587D1A5B5329009F5C96 /* BCJPropertyContinuationsTests.m in Sources */,
-				8236587F1A5B5329009F5C96 /* BCJStackTargetTests.m in Sources */,
-				8236587E1A5B5329009F5C96 /* BCJStackSourceTests.m in Sources */,
-				823658801A5B5329009F5C96 /* BCMapperTests.m in Sources */,
+				8236587D1A5B5329009F5C96 /* BCJSONReaderTests.m in Sources */,
+				8202A0241A5C60E60049BCDF /* BCJEnumerateJSONPathComponentsTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -404,15 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				823658911A5B5588009F5C96 /* BCJConstants.m in Sources */,
-				823658851A5B5474009F5C96 /* BCJSONReader+AdditionalTypes.m in Sources */,
-				823658821A5B5474009F5C96 /* BCJEnumerateJSONPathComponents.m in Sources */,
 				82D3B1A019FBF8D3003C4EB5 /* main.m in Sources */,
-				823658881A5B5474009F5C96 /* BCJSONReader+Validation.m in Sources */,
-				823658841A5B5474009F5C96 /* BCJSONReader.m in Sources */,
-				823658871A5B5474009F5C96 /* BCJSONReader+StandardTypes.m in Sources */,
-				823658951A5B5588009F5C96 /* BCJError.m in Sources */,
-				823658861A5B5474009F5C96 /* BCJSONReader+Collections.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,6 +369,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8202A0271A5C613D0049BCDF /* BCJEnumerateJSONPathComponents.m in Sources */,
+				8202A0291A5C613D0049BCDF /* BCJSONReader+AdditionalTypes.m in Sources */,
+				8202A0261A5C613D0049BCDF /* BCJError.m in Sources */,
+				8202A0251A5C613D0049BCDF /* BCJConstants.m in Sources */,
+				8202A02C1A5C613D0049BCDF /* BCJSONReader+Validation.m in Sources */,
+				8202A0281A5C613D0049BCDF /* BCJSONReader.m in Sources */,
+				8202A02B1A5C613D0049BCDF /* BCJSONReader+StandardTypes.m in Sources */,
+				8202A02A1A5C613D0049BCDF /* BCJSONReader+Collections.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,21 +384,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		82F3E5AC1A191ADC007C367E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				823658681A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.m in Sources */,
-				8236586C1A5B5314009F5C96 /* BCJSONReader+Collections.m in Sources */,
-				8236586E1A5B5314009F5C96 /* BCJSONReader+Validation.m in Sources */,
-				823658921A5B5588009F5C96 /* BCJConstants.m in Sources */,
-				823658701A5B5314009F5C96 /* BCJSONReader.m in Sources */,
-				823658961A5B5588009F5C96 /* BCJError.m in Sources */,
-				8236586B1A5B5314009F5C96 /* BCJSONReader+AdditionalTypes.m in Sources */,
-				8236586D1A5B5314009F5C96 /* BCJSONReader+StandardTypes.m in Sources */,
+				8202A02F1A5C613D0049BCDF /* BCJEnumerateJSONPathComponents.m in Sources */,
+				8202A0311A5C613D0049BCDF /* BCJSONReader+AdditionalTypes.m in Sources */,
+				8202A02E1A5C613D0049BCDF /* BCJError.m in Sources */,
+				8202A02D1A5C613D0049BCDF /* BCJConstants.m in Sources */,
+				8202A0341A5C613D0049BCDF /* BCJSONReader+Validation.m in Sources */,
+				8202A0301A5C613D0049BCDF /* BCJSONReader.m in Sources */,
+				8202A0331A5C613D0049BCDF /* BCJSONReader+StandardTypes.m in Sources */,
+				8202A0321A5C613D0049BCDF /* BCJSONReader+Collections.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,57 +589,6 @@
 			};
 			name = Release;
 		};
-		82F3E5C51A191ADC007C367E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = "BCJSONReaderFramework/Supporting Files/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = BCJSONReader;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		82F3E5C61A191ADC007C367E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
-				INFOPLIST_FILE = "BCJSONReaderFramework/Supporting Files/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = BCJSONReader;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -734,15 +633,6 @@
 			buildConfigurations = (
 				82EBE7AC19FCEEB1001F995B /* Debug */,
 				82EBE7AD19FCEEB1001F995B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		82F3E5C41A191ADC007C367E /* Build configuration list for PBXNativeTarget "BCJSONReader" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				82F3E5C51A191ADC007C367E /* Debug */,
-				82F3E5C61A191ADC007C367E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
