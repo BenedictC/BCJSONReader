@@ -85,20 +85,64 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
  */
 @interface BCJSONReader : NSObject
 
-#pragma mark - factory
+#pragma mark - convienence methods
+/**
+ Creates an instance using the supplied JSON data and options and invokes the supplied block. After the block has been executed the errors are taken from the reader and returned.
+
+ @param jsonData       A data object containing JSON data. The data may represent a JSON fragment.
+ @param defaultOptions The default options for the instance to use
+ @param block          A block to execute
+
+ @return If errors are reported by the reader instance while executing block then an error, otherwise nil.
+ */
 +(NSError *)readJSONData:(NSData *)jsonData defaultOptions:(BCJSONReaderOptions)defaultOptions usingBlock:(void(^)(BCJSONReader *reader))block BCJ_REQUIRED(1,3);
-+(NSError *)readJSONObject:(id)jsonObject   defaultOptions:(BCJSONReaderOptions)defaultOptions usingBlock:(void(^)(BCJSONReader *reader))block BCJ_REQUIRED(1,3);
+/**
+ Creates an instance using the supplied JSON data and options and invokes the supplied block. After the block has been executed the errors are taken from the reader and returned.
+
+ @param jsonObject     An object that is a valid JSON object types
+ @param defaultOptions The options used be short form query methods
+ @param block          A block to execute
+
+ @return If errors are reported by the reader instance while executing block then an error, otherwise nil.
+ */
++(NSError *)readJSONObject:(id)jsonObject defaultOptions:(BCJSONReaderOptions)defaultOptions usingBlock:(void(^)(BCJSONReader *reader))block BCJ_REQUIRED(1,3);
 
 #pragma mark - instance life cycle
+/**
+ Return an initalized instance.
+
+ @param jsonObject     An object that is a valid JSON object types
+ @param defaultOptions The options used be short form query methods
+
+ @return an instance
+ */
 -(instancetype)initWithJSONObject:(id)jsonObject defaultOptions:(BCJSONReaderOptions)defaultOptions BCJ_DESIGNATED_INIT BCJ_REQUIRED(1);
+/**
+ The JSON object to perform queries against.
+ */
 @property(nonatomic, readonly) id jsonObject;
+/**
+ The options used by short form query methods.
+ */
 @property(nonatomic, readonly) BCJSONReaderOptions defaultOptions;
 
 #pragma mark - errors
--(void)addError:(NSError *)error BCJ_REQUIRED();
--(BOOL)hasErrors;
--(void)resetErrors;
+/**
+ An array of NSError that have been reported by query methods or by addError:.
+ */
 @property(nonatomic, readonly) NSArray *errors;
+/**
+ Adds the given error to the errors array.
+
+ @param error the error object to add.
+ */
+-(void)addError:(NSError *)error BCJ_REQUIRED();
+/**
+ A boolean value that indicates if any errors have been reported.
+
+ @return returns YES if errors contains any errors.
+ */
+-(BOOL)hasErrors;
 
 #pragma mark - JSON path access
 -(id)objectAt:(NSString *)jsonPath type:(Class)expectedClass BCJ_REQUIRED(1);

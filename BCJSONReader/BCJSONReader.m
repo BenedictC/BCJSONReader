@@ -179,6 +179,13 @@
 
 
 #pragma mark - errors
+-(NSArray *)errors
+{
+    return [self.mutableErrors copy];
+}
+
+
+
 -(void)addError:(NSError *)error
 {
     if (error == nil) return;
@@ -190,20 +197,6 @@
 -(BOOL)hasErrors
 {
     return self.mutableErrors.count > 0;
-}
-
-
-
--(void)resetErrors
-{
-    [self.mutableErrors removeAllObjects];
-}
-
-
-
--(NSArray *)errors
-{
-    return [self.mutableErrors copy];
 }
 
 @end
