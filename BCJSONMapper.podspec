@@ -16,13 +16,11 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "BCJSONMapper"
-  s.version      = "0.2.8"
+  s.version      = "0.2.9"
   s.summary      = "An Objective-C library for handling real world JSON."
 
   s.description  = <<-DESC
-BCJSONMapper is a library for processing the crazy JSON structures that exist in the real world. Its key features are:
-+ Flexible. Provides functionality for handling many JSON usage styles.
-+ Extensible. Easy to integrate new processing (e.g. peculiar date formats).
+BCJSONMapper has been retired. Please use BCJSONReader instead.
 
                    DESC
 
@@ -73,7 +71,7 @@ BCJSONMapper is a library for processing the crazy JSON structures that exist in
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/BenedictC/BCJSONMapper.git", :tag => "0.2.8" }
+  s.source       = { :git => "https://github.com/BenedictC/BCJSONMapper.git", :tag => "0.2.9" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -84,7 +82,7 @@ BCJSONMapper is a library for processing the crazy JSON structures that exist in
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "BCJSONMapper", "BCJSONMapper/**/*.{h,m}", "BCJSONContinuations", "BCJSONContinuations/**/*.{h,m}"
+  s.source_files  = ""
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "**/*.h"
@@ -99,6 +97,5 @@ BCJSONMapper is a library for processing the crazy JSON structures that exist in
   s.requires_arc = true
 
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
-  s.dependency "BCLContinuations", "0.4"
 
 end
