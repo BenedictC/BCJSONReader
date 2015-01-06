@@ -32,7 +32,7 @@
 
 -(instancetype)initWithJSONObject:(id)jsonObject defaultOptions:(BCJSONReaderOptions)defaultOptions
 {
-    NSParameterAssert(jsonObject);
+    BCJParameterExpectation(jsonObject);
 
     self = [super init];
     if (self == nil) return nil;
@@ -51,7 +51,7 @@
 +(NSError *)readJSONData:(NSData *)jsonData defaultOptions:(BCJSONReaderOptions)defaultOptions usingBlock:(void(^)(BCJSONReader *reader))block
 {
     if (jsonData == nil) {
-        return [BCJError invalidJSONDataErrorWithData:nil];
+        return [BCJError invalidJSONDataErrorWithData:nil underlyingError:nil];
     }
 
     NSJSONReadingOptions jsonOptions = NSJSONReadingAllowFragments;
@@ -60,7 +60,7 @@
 
     BOOL didDeserialize = (sourceObject != nil);
     if (!didDeserialize) {
-        return error;
+        return [BCJError invalidJSONDataErrorWithData:nil underlyingError:error];
     }
 
     return [self readJSONObject:sourceObject defaultOptions:defaultOptions usingBlock:block];
@@ -79,9 +79,7 @@
 
     if (errors.count == 1)  return [errors lastObject];
 
-    NSError *masterError = [BCJError errorWithUnderlyingErrors:errors];
-
-    return masterError;
+    return [BCJError multipleErrorsErrorWithErrors:errors];
 }
 
 
@@ -144,7 +142,7 @@
     BOOL isRequiredToEvaluate =  (BCJSONReaderOptionPathMustEvaluateToValue & options) != 0;
     BOOL didFailToEvaluate = (failedComponentIdx != NSNotFound);
     if (isRequiredToEvaluate && didFailToEvaluate) {
-        NSError *error = [BCJError missingSourceValueErrorWithJSONPath:JSONPath JSONPathComponent:failedComponent componentIndex:failedComponentIdx];
+        NSError *error = [BCJError valueNotFoundErrorWithJSONPath:JSONPath JSONPathComponent:failedComponent componentIndex:failedComponentIdx];
         [self addError:error];
         if (didSucceed != NULL) *didSucceed = NO;
         return nil;

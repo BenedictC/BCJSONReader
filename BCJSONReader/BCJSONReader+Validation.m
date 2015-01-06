@@ -15,7 +15,7 @@
 
 -(NSError *)assertObject:(id)object isKindOfClass:(Class)class
 {
-    NSParameterAssert(class);
+    BCJParameterExpectation(class);
 
     if (object == nil) return nil;
     if ([object isKindOfClass:class]) return nil;

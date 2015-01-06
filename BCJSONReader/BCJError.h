@@ -12,28 +12,21 @@
 
 @interface BCJError : NSError
 
-#pragma mark - Invalid compile time input
-+(NSError *)invalidJSONPathErrorWithInvalidJSONPath:(NSString *)JSONPath errorPosition:(NSUInteger)position;
++(NSError *)invalidJSONDataErrorWithData:(NSData *)data underlyingError:(NSError *)underlyingError;
 
-#pragma mark - Missing data
-+(NSError *)missingSourceValueErrorWithJSONPath:(NSString *)JSONPath JSONPathComponent:(NSString *)component componentIndex:(NSUInteger)componentIndex;
-+(NSError *)missingKeyForEnumMappingErrorWithJSONPath:(NSString *)JSONPath enumMapping:(NSDictionary *)enumMapping key:(id)enumKey;
++(NSError *)invalidJSONPathErrorWithJSONPath:(NSString *)JSONPath errorPosition:(NSUInteger)position;
 
-#pragma mark - Unexpected data/value (wrong type or value)
-//Invalid value errors
-+(NSError *)invalidJSONDataErrorWithData:(NSData *)data;
-+(NSError *)invalidValueErrorWithJSONPath:(NSString *)JSONPath value:(id)value criteria:(NSString *)criteria;
-//Value type errors
++(NSError *)valueNotFoundErrorWithJSONPath:(NSString *)JSONPath JSONPathComponent:(NSString *)component componentIndex:(NSUInteger)componentIndex;
+
 +(NSError *)unexpectedTypeErrorWithJSONPath:(NSString *)JSONPath value:(id)value expectedClass:(Class)expectedClass;
-//Collection type errors
-+(NSError *)unexpectedKeyTypeErrorWithKey:(id)key expectedKeyClass:(Class)expectedKeyClass;
-+(NSError *)unexpectedElementTypeErrorWithElement:(id)element subscript:(id)subscript expectedElementClass:(Class)expectedElementClass;
 
-+(NSError *)errorWithUnderlyingErrors:(NSArray *)underlyingErrors;
++(NSError *)missingEnumMappingKeyErrorWithJSONPath:(NSString *)JSONPath enumMapping:(NSDictionary *)enumMapping key:(id)enumKey;
 
-#pragma mark - Failed mapping errors
-+(NSError *)elementMappingErrorWithElement:(id)element subscript:(id)subscript underlyingError:(NSError *)underlyingError;
-+(NSError *)unknownErrorWithDescription:(NSString *)description;
++(NSError *)invalidValueErrorWithJSONPath:(NSString *)JSONPath value:(id)value criteria:(NSString *)criteria;
+
++(NSError *)collectionMappingErrorWithJSONPath:(NSString *)JSONPath elementSubscript:(id)subscript elementError:(NSError *)elementError;
+
++(NSError *)multipleErrorsErrorWithErrors:(NSArray *)errors;
 
 @end
 

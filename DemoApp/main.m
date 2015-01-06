@@ -1,6 +1,6 @@
 //
 //  main.m
-//  TypeCheckedCollectionAccess
+//  BCJSONReader
 //
 //  Created by Benedict Cohen on 20/10/2014.
 //  Copyright (c) 2014 Benedict Cohen. All rights reserved.
@@ -58,7 +58,7 @@ void demo(void) {
         target.string = [reader stringAt:@"data[0]" options:BCJSONReaderModeRequired defaultValue:@"BOOM! default" didSucceed:NULL];
         target.date = [reader dateFromTimeIntervalSince1970At:@"date"];
         target.url = [reader URLAt:@"array[0].url"];
-        target.array = [reader arrayFromArrayAt:@"array" options:BCJSONReaderModeRequired didSucceed:NULL usingElementReaderBlock:^id(BCJSONReader *elementReader, NSUInteger elementIdx){
+        target.array = [reader arrayFromDictionaryAt:@"dict" options:BCJSONReaderModeRequired didSucceed:NULL usingElementReaderBlock:^id(BCJSONReader *elementReader, id elementKey){
             return [elementReader stringAt:@"name"];
         }];
     }];

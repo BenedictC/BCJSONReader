@@ -180,7 +180,7 @@ NSError *BCJEnumerateJSONPathComponents(NSString *JSONPath, void(^enumerator)(id
         //If we don't have a component after calling the scan functions then the path must be invalid.
         id component = scanComponent(scanner);
         if (component == nil) {
-            return [BCJError invalidJSONPathErrorWithInvalidJSONPath:JSONPath errorPosition:scanner.scanLocation];
+            return [BCJError invalidJSONPathErrorWithJSONPath:JSONPath errorPosition:scanner.scanLocation];
         }
 
         //Call the enumerator

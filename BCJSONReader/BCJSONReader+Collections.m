@@ -27,7 +27,7 @@
 
     id value = enumMapping[key];
     if (value == nil) {
-        NSError *error = [BCJError missingKeyForEnumMappingErrorWithJSONPath:jsonPath enumMapping:enumMapping key:key];
+        NSError *error = [BCJError missingEnumMappingKeyErrorWithJSONPath:jsonPath enumMapping:enumMapping key:key];
         [self addError:error];
         if (didSucceed != NULL) *didSucceed = NO;
         return nil;
@@ -54,7 +54,7 @@
 
         //Handle element error
         if (elementError != nil) {
-            NSError *mappingError = [BCJError elementMappingErrorWithElement:element subscript:@(elementIdx) underlyingError:elementError];
+            NSError *mappingError = [BCJError collectionMappingErrorWithJSONPath:jsonPath elementSubscript:@(elementIdx) elementError:elementError];
             [self addError:mappingError];
             if (didSucceed != NULL) *didSucceed = NO;
             return nil;
@@ -74,7 +74,7 @@
 
 
 
--(NSArray *)arrayFromDictionaryAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, id elementKey))block
+-(NSArray *)arrayFromDictionaryAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, id unsafeElementKey))block
 {
     NSDictionary *sourceDict = [self dictionaryAt:jsonPath options:options defaultValue:nil didSucceed:didSucceed];
     if (sourceDict == nil) return nil;
@@ -91,7 +91,7 @@
 
         //Handle element error
         if (elementError != nil) {
-            NSError *mappingError = [BCJError elementMappingErrorWithElement:elementKey subscript:elementKey underlyingError:elementError];
+            NSError *mappingError = [BCJError collectionMappingErrorWithJSONPath:jsonPath elementSubscript:elementKey elementError:elementError];
             [self addError:mappingError];
             if (didSucceed != NULL) *didSucceed = NO;
             return nil;
@@ -107,7 +107,25 @@
     }
     
     return mappedArray;
+}
 
+
+
+-(id)castObject:(id)object toClass:(Class)class didSucceed:(BOOL *)didSucceed
+{
+    BCJParameterExpectation(class);
+
+    BOOL isValid = object == nil || [object isKindOfClass:class];
+
+    if (didSucceed != NULL) *didSucceed = isValid;
+
+    if (!isValid) {
+        NSError *error = [BCJError unexpectedTypeErrorWithJSONPath:nil value:object expectedClass:class];
+        [self addError:error];
+        return nil;
+    }
+
+    return object;
 }
 
 @end

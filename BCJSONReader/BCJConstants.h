@@ -13,19 +13,49 @@
 
 
 
-#pragma mark - Errors
+#pragma mark - Options
+enum : NSUInteger {
+    BCJNoOptions = 0,
+};
+
+
+
+#pragma mark - Error domain
 /**
  The BCJSONReader error domain.
  */
 extern NSString * const BCJErrorDomain;
 
-/**
- userInfo key for the BCJSource instance involved in the error.
- */
-extern NSString * const BCJSourceErrorKey;
+
+
+#pragma mark - Error codes
+enum : NSInteger {
+    BCJInvalidJSONDataError = 1000,
+    BCJInvalidJSONPathError,
+    BCJValueNotFoundError,
+    BCJUnexpectedTypeError,
+    BCJMissingEnumMappingKeyError,
+    BCJInvalidValueError,
+    BCJCollectionMappingError,
+    BCJMultipleErrorsError,
+};
+
+
+
+#pragma mark - Error userInfo keys
 
 /**
- userInfo key for the enumMapping NSDictionary involved in a BCJMissingKeyForEnumMappingError error.
+ userInfo key for the invalid JSON data
+ */
+extern NSString * const BCJInvalidJSONDataErrorKey;
+
+/**
+ userInfo key for the NSNumber position.
+ */
+extern NSString * const BCJInvalidJSONPathFailurePositionErrorKey;
+
+/**
+ userInfo key for the enumMapping NSDictionary included in a BCJMissingEnumMappingKeyError error.
  */
 extern NSString * const BCJEnumMappingErrorKey;
 
@@ -35,49 +65,13 @@ extern NSString * const BCJEnumMappingErrorKey;
 extern NSString * const BCJUnderlyingErrorKey;
 
 /**
- userInfo key for the NSNumber position.
+ <#Description#>
  */
-extern NSString * const BCJInvalidJSONPathFailurePositionErrorKey;
+extern NSString * const BCJMultipleErrorsKey;
 
 /**
- userInfo key for the invalid JSON data
+ <#Description#>
  */
-extern NSString * const BCJInvalidJSONDataErrorKey;
-
-
-
-enum : NSInteger {
-#pragma mark - Invalid compile time input
-    BCJInvalidJSONPathError = 1000,
-
-#pragma mark - Missing data
-    BCJMissingSourceValueError,
-    BCJMissingKeyForEnumMappingError,
-
-#pragma mark - Unexpected data/value (wrong type or value)
-//Invalid value errors
-    BCJInvalidJSONDataError,
-    BCJInvalidValueError,
-
-//Value type errors
-    BCJUnexpectedTypeError,
-
-//Collection type errors
-    BCJUnexpectedKeyTypeError,
-    BCJUnexpectedElementTypeError,
-
-#pragma mark - Failed completion block errors
-    BCJElementMappingError,
-    BCJUnknownError,
-};
-
-
-
-#pragma mark - options
-enum : NSUInteger {
-    BCJNoOptions = 0,
-};
-
-
+extern NSString * const BCJElementErrorKey;
 
 #endif
