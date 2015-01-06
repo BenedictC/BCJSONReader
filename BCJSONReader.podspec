@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.description  = <<-DESC
 BCJSONReader is a library for processing the crazy JSON structures that exist in the real world. Its key features are:
 + Flexible. Provides functionality for handling many JSON usage styles.
-+ Extensible. Easy to integrate new processing (e.g. peculiar date formats).
++ Extensible. Easy to integrate own code and still use BCJSONReader intrastructure.
 
                    DESC
 
