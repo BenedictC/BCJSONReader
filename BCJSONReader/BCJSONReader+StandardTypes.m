@@ -28,13 +28,20 @@
 
 -(NSNull *)nullAt:(NSString *)jsonPath
 {
-    return [self objectAt:jsonPath type:NSNull.class options:self.defaultOptions defaultValue:nil didSucceed:NULL];
+    BCJSONReaderOptions options = self.defaultOptions;
+    options = options & ~BCJSONReaderOptionReplaceNullWithNil; //Remove BCJSONReaderOptionReplaceNullWithNil
+    return [self objectAt:jsonPath type:NSNull.class options:options defaultValue:nil didSucceed:NULL];
 }
 
 
 
 -(NSNull *)nullAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed
 {
+    BOOL isInvalidOptions = (options & BCJSONReaderOptionReplaceNullWithNil) != 0;
+    if (isInvalidOptions) {
+        [NSException raise:NSInvalidArgumentException format:@"BCJSONReaderOptionReplaceNullWithNil is not permitted when attempting to fetch null."];
+        return nil;
+    }
     return [self objectAt:jsonPath type:NSNull.class options:options defaultValue:nil didSucceed:didSucceed];
 }
 
@@ -84,42 +91,45 @@
 
 -(BOOL)boolAt:(NSString *)jsonPath
 {
-    return [[self objectAt:jsonPath type:NSNumber.class options:self.defaultOptions defaultValue:nil didSucceed:NULL] boolValue];
+    return [self boolAt:jsonPath options:self.defaultOptions defaultValue:NO didSucceed:NULL];
 }
 
 
 
 -(BOOL)boolAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(BOOL)defaultValue didSucceed:(BOOL *)didSucceed
 {
-    return [[self objectAt:jsonPath type:NSNumber.class options:options defaultValue:@(defaultValue) didSucceed:didSucceed] boolValue];
+    NSNumber *number = [self objectAt:jsonPath type:NSNumber.class options:options defaultValue:@(defaultValue) didSucceed:didSucceed];
+    return (number == nil) ? defaultValue : [number boolValue];
 }
 
 
 
 -(int64_t)integerAt:(NSString *)jsonPath
 {
-    return [[self objectAt:jsonPath type:NSNumber.class options:self.defaultOptions defaultValue:nil didSucceed:NULL] longLongValue];
+    return [self integerAt:jsonPath options:self.defaultOptions defaultValue:0 didSucceed:NULL];
 }
 
 
 
 -(int64_t)integerAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(int64_t)defaultValue didSucceed:(BOOL *)didSucceed
 {
-    return [[self objectAt:jsonPath type:NSNumber.class options:options defaultValue:@(defaultValue) didSucceed:didSucceed] longLongValue];
+    NSNumber *number = [self objectAt:jsonPath type:NSNumber.class options:options defaultValue:@(defaultValue) didSucceed:didSucceed];
+    return (number == nil) ? defaultValue : [number longLongValue];
 }
 
 
 
 -(double)doubleAt:(NSString *)jsonPath
 {
-    return [[self objectAt:jsonPath type:NSNumber.class options:self.defaultOptions defaultValue:nil didSucceed:NULL] doubleValue];
+    return [self doubleAt:jsonPath options:self.defaultOptions defaultValue:0 didSucceed:NULL];
 }
 
 
 
 -(double)doubleAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(double)defaultValue didSucceed:(BOOL *)didSucceed
 {
-    return [[self objectAt:jsonPath type:NSNumber.class options:options defaultValue:@(defaultValue) didSucceed:didSucceed] doubleValue];
+    NSNumber *number = [self objectAt:jsonPath type:NSNumber.class options:options defaultValue:@(defaultValue) didSucceed:didSucceed];
+    return (number == nil) ? defaultValue : [number doubleValue];
 }
 
 @end

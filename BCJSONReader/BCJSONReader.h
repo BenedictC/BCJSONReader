@@ -157,24 +157,24 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
 #pragma mark - JSON path access
 /**
- Queries the JSONObject for the JSONPath using the default options. The fetched object is then type check against expected class. If the fetch fails or the type check fails then an error is added to errors.
+ Queries the JSONObject for the object at JSONPath using the default options. The fetched object is then type check against expected class. If the fetch fails or the type check fails then an error is added to errors.
 
  @param jsonPath      The JSON path to query.
  @param expectedClass The class that the JSON path is expected to return or nil if type checking is not required.
 
- @return if the query succeeds and the object matches the expected class then returns the object, otherwise nil.
+ @return if the query matches an object and the object is of the expected class then returns the object, otherwise nil.
  */
 -(id)objectAt:(NSString *)jsonPath type:(Class)expectedClass BCJ_REQUIRED(1);
 /**
- Queries the JSONObject for the JSONPath using options. The fetched object is then type check against expected class. If the fetch fails or the type check fails then an error is added to errors.
+ Queries the JSONObject for the object at JSONPath using options. The fetched object is then type check against expected class. If the fetch fails or the type check fails then an error is added to errors.
 
  @param jsonPath      The JSON path to query.
  @param expectedClass The class that the JSON path is expected to return or nil if type checking is not required.
  @param options       The options used perform the fetch.
- @param defaultValue  A default value to use if required. The object must be of type expectedClass.
- @param didSucceed    On return contains YES if the method was successful, otherwise NO. Maybe NULL.
+ @param defaultValue  A default value to return if required. The object must be of type expectedClass.
+ @param didSucceed    On return contains YES if the method was successful, otherwise NO. NULL is permitted.
 
- @return if the query succeeds and the object matches the expected class then returns the object, otherwise nil.
+ @return If the query matches an object of the expected class then returns the object, otherwise nil or defaultValue depending on options.
  */
 -(id)objectAt:(NSString *)jsonPath type:(Class)expectedClass options:(BCJSONReaderOptions)options defaultValue:(id)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
@@ -184,28 +184,153 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
 @interface BCJSONReader (StandardTypeQueries)
 
+/**
+ Queries the JSONObject for a string at JSONPath using the default options. If the fetch fails then an error is added to errors.
+
+ @param jsonPath The JSON path to query.
+
+ @return If the query matches a string then returns the string, otherwise nil or defaultValue depending on options.
+ */
 -(NSString *)stringAt:(NSString *)jsonPath BCJ_REQUIRED();
+/**
+ Queries the JSONObject for a string at JSONPath using options and default value. If the fetch fails then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+ @param options      The options used to perform the fetch.
+ @param defaultValue A default value to return if required.
+ @param didSucceed   On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+
+ @return If the query matches a string then returns the string, otherwise nil or defaultValue depending on options.
+ */
 -(NSString *)stringAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSString *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
+/**
+ Queries the JSONObject for null at JSONPath using the default options. If the default options include BCJSONReaderOptionReplaceNullWithNil then it is ignored. If the fetch fails then an error is added to errors.
+
+ @param jsonPath The JSON path to query.
+
+ @return If the query matches null then returns null, otherwise nil.
+ */
 -(NSNull *)nullAt:(NSString *)jsonPath BCJ_REQUIRED();
+/**
+ Queries the JSONObject for a string at JSONPath using options. If the fetch fails then an error is added to errors.
+
+ @param jsonPath   The JSON path to query.
+ @param options    The options used to perform the fetch. An exception is raised if BCJSONReaderOptionReplaceNullWithNil is specified.
+ @param didSucceed On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+
+ @return If the query matches NSNull then returns NSNull, otherwise nil.
+ */
 -(NSNull *)nullAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
+/**
+ Queries the JSONObject for an array at JSONPath using the default options. If the fetch fails then an error is added to errors.
+
+ @param jsonPath The JSON path to query.
+
+ @return If the query matches an array then returns the array, otherwise nil or defaultValue depending on options.
+ */
 -(NSArray *)arrayAt:(NSString *)jsonPath BCJ_REQUIRED();
+/**
+ Queries the JSONObject for an array at JSONPath using options and default value. If the fetch fails then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+ @param options      The options used to perform the fetch.
+ @param defaultValue A default value to return if required.
+ @param didSucceed   On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+
+ @return If the query matches an array then returns the array, otherwise nil or defaultValue depending on options.
+ */
 -(NSArray *)arrayAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSArray *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
+/**
+ Queries the JSONObject for a dictionary at JSONPath using the default options. If the fetch fails then an error is added to errors.
+
+ @param jsonPath The JSON path to query.
+
+ @return If the query matches a dictionary then returns the dictionary, otherwise nil or defaultValue depending on options.
+ */
 -(NSDictionary *)dictionaryAt:(NSString *)jsonPath BCJ_REQUIRED();
+/**
+ Queries the JSONObject for a dictionary at JSONPath using options and default value. If the fetch fails then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+ @param options      The options used to perform the fetch.
+ @param defaultValue A default value to return if required.
+ @param didSucceed   On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+
+ @return If the query matches a dictionary then returns the dictionary, otherwise nil or defaultValue depending on options.
+ */
 -(NSDictionary *)dictionaryAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSDictionary *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
+/**
+ Queries the JSONObject for a number at JSONPath using the default options. If the fetch fails then an error is added to errors.
+
+ @param jsonPath The JSON path to query.
+
+ @return If the query matches a number then returns the number, otherwise nil or defaultValue depending on options.
+ */
 -(NSNumber *)numberAt:(NSString *)jsonPath BCJ_REQUIRED();
 -(NSNumber *)numberAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSNumber *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
+/**
+ Queries the JSONObject for an NSNumber at JSONPath using the default options. If the fetch fails then an error is added to errors.
+
+ @param jsonPath The JSON path to query.
+
+ @return If the query matches an NSNumber then returns the boolean value of the number, otherwise NO.
+ */
 -(BOOL)boolAt:(NSString *)jsonPath BCJ_REQUIRED();
+/**
+ Queries the JSONObject for an NSNumber at JSONPath using options and default value. If the fetch fails then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+ @param options      The options used to perform the fetch.
+ @param defaultValue A default value to return if required.
+ @param didSucceed   On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+
+ @return If the query matches an NSNumber then returns the boolean value of the number, otherwise the defaultValue.
+ */
 -(BOOL)boolAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(BOOL)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
+/**
+ Queries the JSONObject for an NSNumber at JSONPath using the default options. If the fetch fails then an error is added to errors.
+
+ @param jsonPath The JSON path to query.
+
+ @return If the query matches an NSNumber then returns the integer value of the number, otherwise 0.
+ */
 -(int64_t)integerAt:(NSString *)jsonPath BCJ_REQUIRED();
+/**
+ Queries the JSONObject for an NSNumber at JSONPath using options and default value. If the fetch fails then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+ @param options      The options used to perform the fetch.
+ @param defaultValue A default value to return if required.
+ @param didSucceed   On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+
+ @return If the query matches an NSNumber then returns the integer value of the number, otherwise the defaultValue.
+ */
 -(int64_t)integerAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(int64_t)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
+/**
+ Queries the JSONObject for an NSNumber at JSONPath using the default options. If the fetch fails then an error is added to errors.
+
+ @param jsonPath The JSON path to query.
+
+ @return If the query matches an NSNumber then returns the double value of the number, otherwise 0.
+ */
 -(double)doubleAt:(NSString *)jsonPath BCJ_REQUIRED();
+/**
+ Queries the JSONObject for an NSNumber at JSONPath using options and default value. If the fetch fails then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+ @param options      The options used to perform the fetch.
+ @param defaultValue A default value to return if required.
+ @param didSucceed   On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+
+ @return If the query matches an NSNumber then returns the double value of the number, otherwise the defaultValue.
+ */
 -(double)doubleAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(double)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
 @end
