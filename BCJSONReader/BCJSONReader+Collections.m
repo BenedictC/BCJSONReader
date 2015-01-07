@@ -125,7 +125,7 @@
 
 
 
--(id)castObject:(id)object toClass:(Class)class didSucceed:(BOOL *)didSucceed
+-(id)verifyObject:(id)object isKindOfClass:(Class)class didSucceed:(BOOL *)didSucceed
 {
     BCJParameterExpectation(class);
 

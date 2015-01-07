@@ -337,7 +337,7 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
 
 
-@interface BCJSONReader (AdditionalTypeQueries)
+@interface BCJSONReader (TransformedTypeQueries)
 
 /**
  Queries the JSONObject for an NSNumber at JSONPath using the default options. If an NSNumber is found then an NSDate is created using dateWithTimeIntervalSince1970: and returned. If the fetch fails then an error is added to errors.
@@ -386,7 +386,7 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
  @return If the query matches an NSString then return an NSURL, otherwise nil.
  */
--(NSURL *)URLAt:(NSString *)jsonPath BCJ_REQUIRED();
+-(NSURL *)URLFromStringAt:(NSString *)jsonPath BCJ_REQUIRED();
 /**
  Queries the JSONObject for an NSString at JSONPath using the options and default value. If an NSString is found and it is a valid URL then an NSURL is created and returned. If the fetch fails or the string is not a valid URL then an error is added to errors.
 
@@ -397,24 +397,118 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
  @return If the query matches an NSString then return an NSURL, otherwise nil or defaultValue depending on options.
  */
--(NSURL *)URLAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSURL *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
+-(NSURL *)URLFromStringAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSURL *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED >= 70000 || __MAC_OS_X_VERSION_MIN_REQUIRED >= 1090)
+/**
+ Queries the JSONObject for an NSString at JSONPath using the default options. If an NSString is found and it is valid base64 encoded data then an NSData is created and returned. If the fetch fails or the string is not a valid URL then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+
+ @return If the query matches an NSString then return an NSData, otherwise nil.
+ */
+-(NSData *)dataFromBase64EncodedStringAt:(NSString *)jsonPath BCJ_REQUIRED();
+/**
+ Queries the JSONObject for an NSString at JSONPath using options and default value. If an NSString is found and it is valid base64 encoded data then an NSData is created and returned. If the fetch fails or the string is not a valid URL then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+ @param options      The options used to perform the fetch.
+ @param defaultValue A default value to return if required.
+ @param didSucceed   On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+
+ @return If the query matches an NSString then return an NSData, otherwise nil or defaultValue depending on options.
+ */
+-(NSData *)dataFromBase64EncodedStringAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSData *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
+#else
+#pragma message "TODO: Find a public domain implementation of Base64 decoder so we can support back to OS X 10.7 and iOS 5."
+#endif
 @end
 
 
 
 @interface BCJSONReader (Collections)
 
+/**
+ Queries the JSONObject for an object at JSONPath using the default options. If an object is found or the default key is specifed then the a look up is performed on enumMapping. If the fetch fails or a value is not found in enumMapping then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+ @param enumMapping  A dictionary containing keys that match fetched objects and associated values to return.
+
+ @return If the enumMapping look up succeeds then an object, otherwise nil.
+ */
 -(id)enumAt:(NSString *)jsonPath enumMapping:(NSDictionary *)enumMapping BCJ_REQUIRED();
+/**
+ Queries the JSONObject for an object at JSONPath using the options and default key. If an object is found or the default key is specifed then the a look up is performed on enumMapping. If the fetch fails or a value is not found in enumMapping then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+ @param enumMapping  A dictionary containing keys that match fetched objects and associated values to return.
+ @param options      The options used to perform the fetch.
+ @param defaultKey   A default key to use if required.
+ @param didSucceed   On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+
+ @return If the enumMapping look up succeeds then an object, otherwise nil.
+ */
 -(id)enumAt:(NSString *)jsonPath enumMapping:(NSDictionary *)enumMapping options:(BCJSONReaderOptions)options defaultKey:(id)defaultKey didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1,2);
 
--(NSArray *)arrayFromArrayAt:(NSString *)jsonPath usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, NSUInteger elementIndex))block BCJ_REQUIRED();
--(NSArray *)arrayFromArrayAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, NSUInteger elementIndex))block BCJ_REQUIRED(1,4);
+/**
+ Queries the JSONObject for an array at JSONPath using the default options. If an array is found then the elementReaderBlock is invoked for each element. The BCJSONReader passed to the elementReaderBlock is initialized with the element and default options. The objects returned by the elementReaderBlock are collated into a new array which is then returned. If the fetch fails or any of the elementReader contain errors then an error is added to errors.
 
--(NSArray *)arrayFromDictionaryAt:(NSString *)jsonPath usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, id unsafeElementKey))block BCJ_REQUIRED();
--(NSArray *)arrayFromDictionaryAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, id unsafeElementKey))block BCJ_REQUIRED(1,4);
+ @param jsonPath           The JSON path to query.
+ @param elementReaderBlock A block that returns a object to add to the output array. This block is invoked once for each element. It may return nil.
 
--(id)castObject:(id)object toClass:(Class)class didSucceed:(BOOL *)didSucceed;
+ @return If the query matches an array and each element in the array is successfully mapped then returns an array, otherwise nil.
+ */
+-(NSArray *)arrayFromArrayAt:(NSString *)jsonPath usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, NSUInteger elementIndex))elementReaderBlock BCJ_REQUIRED();
+/**
+ Queries the JSONObject for an array at JSONPath using options. If an array is found then the elementReaderBlock is invoked for each element. The BCJSONReader passed to the elementReaderBlock is initialized with the element and options. The objects returned by the elementReaderBlock are collated into a new array which is then returned. If the fetch fails or any of the elementReader contain errors then an error is added to errors.
+
+ @param jsonPath           The JSON path to query.
+ @param options            The options used to perform the fetch.
+ @param didSucceed         On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+ @param elementReaderBlock A block that returns a object to add to the output array. This block is invoked once for each element. It may return nil.
+
+ @return If the query matches an array and each element in the array is successfully mapped then returns an array, otherwise nil.
+ */
+-(NSArray *)arrayFromArrayAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, NSUInteger elementIndex))elementReaderBlock BCJ_REQUIRED(1,4);
+
+/**
+ Queries the JSONObject for a dictionary at JSONPath using the default options. If a dictionary is found then the elementReaderBlock is invoked for each element. The BCJSONReader passed to the elementReaderBlock is initialized with the element and the default options. The objects returned by the elementReaderBlock are collated into a new array which is then returned. If the fetch fails or any of the elementReader contain errors then an error is added to errors.
+
+ The unsafeElementKey of elementReaderBlock can be made safe by calling verifyObject:isKindOfClass:didSucceed:. In most cases the key will be an NSString (the JSON spec only always keys to be strings), this however is not enforced by BCJSONReader allowing it to be useful for handing a super-set of the what is permitted by the JSON spec. Note that the order in which the elements are enumerated is not specified.
+
+ @param jsonPath           The JSON path to query.
+ @param elementReaderBlock A block that returns a object to add to the output array. This block is invoked once for each element. It may return nil.
+
+ @return If the query matches an array and each element in the array is successfully mapped then returns an array, otherwise nil.
+ */
+-(NSArray *)arrayFromDictionaryAt:(NSString *)jsonPath usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, id unsafeElementKey))elementReaderBlock BCJ_REQUIRED();
+
+/**
+ Queries the JSONObject for a dictionary at JSONPath using options. If a dictionary is found then the elementReaderBlock is invoked for each element. The BCJSONReader passed to the elementReaderBlock is initialized with the element and options. The objects returned by the elementReaderBlock are collated into a new array which is then returned. If the fetch fails or any of the elementReader contain errors then an error is added to errors.
+ 
+ The unsafeElementKey of elementReaderBlock can be made safe by calling verifyObject:isKindOfClass:didSucceed:. In most cases the key will be an NSString (the JSON spec only always keys to be strings), this however is not enforced by BCJSONReader allowing it to be useful for handing a super-set of the what is permitted by the JSON spec. Note that the order in which the elements are enumerated is not specified.
+
+ @param jsonPath           The JSON path to query.
+ @param options            The options used to perform the fetch.
+ @param didSucceed         On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+ @param elementReaderBlock A block that returns a object to add to the output array. This block is invoked once for each element. It may return nil.
+
+ @return If the query matches an array and each element in the array is successfully mapped then returns an array, otherwise nil.
+ */
+-(NSArray *)arrayFromDictionaryAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, id unsafeElementKey))elementReaderBlock BCJ_REQUIRED(1,4);
+
+/**
+ Verifies that object is of kind of class class. If it is not the an error is added to errors.
+
+ @param object     The object to verify.
+ @param class      The class that object is expected to be. If this is Nil then an exception is raised.
+ @param didSucceed On return contains YES if object is nil or is of type class, otherwise nil.
+
+ @return If successful then object otherwise nil.
+ @see arrayFromDictionaryAt:usingElementReaderBlock:
+ @see arrayFromDictionaryAt:options:didSucceed:usingElementReaderBlock:
+ */
+-(id)verifyObject:(id)object isKindOfClass:(Class)class didSucceed:(BOOL *)didSucceed;
 
 @end
 
@@ -425,5 +519,17 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 -(NSError *)assertObject:(id)object isKindOfClass:(Class)class BCJ_REQUIRED();
 -(NSError *)assertPredicate:(NSPredicate *)predicate BCJ_REQUIRED();
 -(NSError *)assertPredicateWithFormat:(NSString *)predicateFormat, ...  BCJ_PRINTF_FORMAT_STYLE(1,2) BCJ_REQUIRED(1);
+
+@end
+
+
+
+@interface BCJSONReader (PropertyListAdditions)
+
+-(NSData *)dataAt:(NSString *)jsonPath BCJ_REQUIRED();
+-(NSData *)dataAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSData *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
+
+-(NSDate *)dateAt:(NSString *)jsonPath BCJ_REQUIRED();
+-(NSDate *)dateAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSDate *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
 @end

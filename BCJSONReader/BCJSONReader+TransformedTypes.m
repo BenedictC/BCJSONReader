@@ -1,5 +1,5 @@
 //
-//  BCJReader+AdditionalTypes.m
+//  BCJReader+TransformedTypes.m
 //  BCJSONReader
 //
 //  Created by Benedict Cohen on 05/01/2015.
@@ -11,7 +11,7 @@
 
 
 
-@implementation BCJSONReader (AdditionalTypes)
+@implementation BCJSONReader (TransformedTypes)
 
 -(NSDate *)dateFromTimeIntervalSince1970At:(NSString *)jsonPath
 {
@@ -68,7 +68,7 @@
     BOOL didFailToCreateDate = (possibleDate == nil);
     if (didFailToCreateDate) {
         NSString *criteria = [NSString stringWithFormat:@"is a valid ISO 8601 date"];
-        NSError *error = [BCJError invalidValueErrorWithJSONPath:jsonPath value:possibleDate criteria:criteria];
+        NSError *error = [BCJError invalidValueErrorWithJSONPath:jsonPath value:dateString criteria:criteria];
         [self addError:error];
         if (didSucceed != NULL) *didSucceed = NO;
         return nil;
@@ -79,14 +79,14 @@
 
 
 
--(NSURL *)URLAt:(NSString *)jsonPath
+-(NSURL *)URLFromStringAt:(NSString *)jsonPath
 {
-    return [self URLAt:jsonPath options:self.defaultOptions defaultValue:nil didSucceed:NULL];
+    return [self URLFromStringAt:jsonPath options:self.defaultOptions defaultValue:nil didSucceed:NULL];
 }
 
 
 
--(NSURL *)URLAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSURL *)defaultValue didSucceed:(BOOL *)didSucceed
+-(NSURL *)URLFromStringAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSURL *)defaultValue didSucceed:(BOOL *)didSucceed
 {
     NSString *urlString = [self stringAt:jsonPath options:options defaultValue:defaultValue.absoluteString didSucceed:didSucceed];
     if (urlString == nil) return nil;
@@ -101,5 +101,44 @@
 
     return url;
 }
+
+
+
+#if (__IPHONE_OS_VERSION_MIN_REQUIRED >= 70000 || __MAC_OS_X_VERSION_MIN_REQUIRED >= 1090)
+-(NSData *)dataFromBase64EncodedStringAt:(NSString *)jsonPath
+{
+    return [self dataFromBase64EncodedStringAt:jsonPath options:self.defaultOptions defaultValue:nil didSucceed:NULL];
+}
+
+
+
+-(NSData *)dataFromBase64EncodedStringAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSData *)defaultValue didSucceed:(BOOL *)didSucceed
+{
+    //We don't want to create an string from the data because that would be wasteful. Instead we use a sentinal and substitute it if needed.
+    //However we have to be careful not to mistake the sentinal for a fetched value (unlikely but possible). We do this by using a mutable string (to avoiding uniquing) and use pointer comparison.
+    NSMutableString *sentinal = [@"SENTINAL" mutableCopy];
+    NSString *defaultString = (defaultValue == nil) ? nil : sentinal;
+    NSString *dataString = [self stringAt:jsonPath options:options defaultValue:defaultString didSucceed:didSucceed];
+    if (dataString == nil) return nil;
+
+    //Did the getter return our sentinal?
+    BOOL shouldUseDefault = (dataString == sentinal); //See comment above declaration of 'sentinal'.
+    if (shouldUseDefault) return defaultValue;
+
+    //We specify NSDataBase64DecodingIgnoreUnknownCharacters so that we can handle line breaks
+    NSData *possibleData = [[NSData alloc] initWithBase64EncodedString:dataString options:NSDataBase64DecodingIgnoreUnknownCharacters];
+
+    BOOL didFailToCreateData = (possibleData == nil);
+    if (didFailToCreateData) {
+        NSString *criteria = [NSString stringWithFormat:@"is valid base 64 encoded data"];
+        NSError *error = [BCJError invalidValueErrorWithJSONPath:jsonPath value:dataString criteria:criteria];
+        [self addError:error];
+        if (didSucceed != NULL) *didSucceed = NO;
+        return nil;
+    }
+
+    return possibleData;
+}
+#endif
 
 @end
