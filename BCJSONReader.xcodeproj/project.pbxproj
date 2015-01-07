@@ -36,6 +36,7 @@
 		8202A03E1A5C619C0049BCDF /* BCJSONReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236585F1A5B5314009F5C96 /* BCJSONReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8202A03F1A5C61C10049BCDF /* libBCJSONReaderOSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 828555C31A0E147D00FCBF61 /* libBCJSONReaderOSX.dylib */; };
 		8202A0411A5DAD170049BCDF /* BCJSONReader+PropertyListAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8202A0401A5DAD170049BCDF /* BCJSONReader+PropertyListAdditions.m */; };
+		8202A04A1A5DF4E10049BCDF /* BCJDataFromBase64StringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8202A0491A5DF4E10049BCDF /* BCJDataFromBase64StringTests.m */; };
 		8236587D1A5B5329009F5C96 /* BCJSONReaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823658771A5B5329009F5C96 /* BCJSONReaderTests.m */; };
 		823C6B661A221B0A006C1A90 /* libBCJSONReaderOSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 828555C31A0E147D00FCBF61 /* libBCJSONReaderOSX.dylib */; };
 		82D3B1A019FBF8D3003C4EB5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 82D3B19F19FBF8D3003C4EB5 /* main.m */; };
@@ -71,6 +72,8 @@
 /* Begin PBXFileReference section */
 		8202A0231A5C60E60049BCDF /* BCJEnumerateJSONPathComponentsTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJEnumerateJSONPathComponentsTests.m; sourceTree = "<group>"; };
 		8202A0401A5DAD170049BCDF /* BCJSONReader+PropertyListAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "BCJSONReader+PropertyListAdditions.m"; sourceTree = "<group>"; };
+		8202A0481A5DEDAE0049BCDF /* BCJDataFromBase64String.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BCJDataFromBase64String.h; sourceTree = "<group>"; };
+		8202A0491A5DF4E10049BCDF /* BCJDataFromBase64StringTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJDataFromBase64StringTests.m; sourceTree = "<group>"; };
 		821C2B201A05A4AA00C56BC3 /* readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		823658571A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BCJEnumerateJSONPathComponents.h; sourceTree = "<group>"; };
 		823658581A5B5314009F5C96 /* BCJEnumerateJSONPathComponents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BCJEnumerateJSONPathComponents.m; sourceTree = "<group>"; };
@@ -154,6 +157,7 @@
 				8236585D1A5B5314009F5C96 /* BCJSONReader+StandardTypes.m */,
 				8236585E1A5B5314009F5C96 /* BCJSONReader+Validation.m */,
 				8202A0401A5DAD170049BCDF /* BCJSONReader+PropertyListAdditions.m */,
+				8202A0481A5DEDAE0049BCDF /* BCJDataFromBase64String.h */,
 				8202A0421A5DB34E0049BCDF /* Base64 */,
 			);
 			path = BCJSONReader;
@@ -163,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				8202A0231A5C60E60049BCDF /* BCJEnumerateJSONPathComponentsTests.m */,
+				8202A0491A5DF4E10049BCDF /* BCJDataFromBase64StringTests.m */,
 				823658771A5B5329009F5C96 /* BCJSONReaderTests.m */,
 				8236587B1A5B5329009F5C96 /* Support Files */,
 			);
@@ -364,6 +369,7 @@
 				8236587D1A5B5329009F5C96 /* BCJSONReaderTests.m in Sources */,
 				8202A0241A5C60E60049BCDF /* BCJEnumerateJSONPathComponentsTests.m in Sources */,
 				8202A0411A5DAD170049BCDF /* BCJSONReader+PropertyListAdditions.m in Sources */,
+				8202A04A1A5DF4E10049BCDF /* BCJDataFromBase64StringTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

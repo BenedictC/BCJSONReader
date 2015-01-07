@@ -399,7 +399,6 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
  */
 -(NSURL *)URLFromStringAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSURL *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED >= 70000 || __MAC_OS_X_VERSION_MIN_REQUIRED >= 1090)
 /**
  Queries the JSONObject for an NSString at JSONPath using the default options. If an NSString is found and it is valid base64 encoded data then an NSData is created and returned. If the fetch fails or the string is not a valid URL then an error is added to errors.
 
@@ -419,9 +418,6 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
  @return If the query matches an NSString then return an NSData, otherwise nil or defaultValue depending on options.
  */
 -(NSData *)dataFromBase64EncodedStringAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSData *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
-#else
-#pragma message "TODO: Find a public domain implementation of Base64 decoder so we can support back to OS X 10.7 and iOS 5."
-#endif
 @end
 
 

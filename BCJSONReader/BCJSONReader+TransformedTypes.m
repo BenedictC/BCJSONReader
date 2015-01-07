@@ -8,6 +8,7 @@
 
 #import "BCJSONReader.h"
 #import "BCJError.h"
+#import "BCJDataFromBase64String.h"
 
 
 
@@ -104,7 +105,6 @@
 
 
 
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED >= 70000 || __MAC_OS_X_VERSION_MIN_REQUIRED >= 1090)
 -(NSData *)dataFromBase64EncodedStringAt:(NSString *)jsonPath
 {
     return [self dataFromBase64EncodedStringAt:jsonPath options:self.defaultOptions defaultValue:nil didSucceed:NULL];
@@ -118,20 +118,20 @@
     //However we have to be careful not to mistake the sentinal for a fetched value (unlikely but possible). We do this by using a mutable string (to avoiding uniquing) and use pointer comparison.
     NSMutableString *sentinal = [@"SENTINAL" mutableCopy];
     NSString *defaultString = (defaultValue == nil) ? nil : sentinal;
-    NSString *dataString = [self stringAt:jsonPath options:options defaultValue:defaultString didSucceed:didSucceed];
-    if (dataString == nil) return nil;
+    NSString *base64String = [self stringAt:jsonPath options:options defaultValue:defaultString didSucceed:didSucceed];
+    if (base64String == nil) return nil;
 
     //Did the getter return our sentinal?
-    BOOL shouldUseDefault = (dataString == sentinal); //See comment above declaration of 'sentinal'.
+    BOOL shouldUseDefault = (base64String == sentinal); //See comment above declaration of 'sentinal'.
     if (shouldUseDefault) return defaultValue;
 
     //We specify NSDataBase64DecodingIgnoreUnknownCharacters so that we can handle line breaks
-    NSData *possibleData = [[NSData alloc] initWithBase64EncodedString:dataString options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    NSData *possibleData = BCJDataFromBase64String(base64String);
 
     BOOL didFailToCreateData = (possibleData == nil);
     if (didFailToCreateData) {
         NSString *criteria = [NSString stringWithFormat:@"is valid base 64 encoded data"];
-        NSError *error = [BCJError invalidValueErrorWithJSONPath:jsonPath value:dataString criteria:criteria];
+        NSError *error = [BCJError invalidValueErrorWithJSONPath:jsonPath value:base64String criteria:criteria];
         [self addError:error];
         if (didSucceed != NULL) *didSucceed = NO;
         return nil;
@@ -139,6 +139,5 @@
 
     return possibleData;
 }
-#endif
 
 @end
