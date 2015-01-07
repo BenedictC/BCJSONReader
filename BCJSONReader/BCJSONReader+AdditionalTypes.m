@@ -37,7 +37,9 @@
 
 -(NSDate *)dateFromISO8601StringAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSDate *)defaultValue didSucceed:(BOOL *)didSucceed
 {
-    static NSString * const sentinal = @"SENTINAL";
+    //We don't want to create an string from the date because that may be lossy. Instead we use a sentinal and substitute it if needed.
+    //However we have to be careful not to mistake the sentinal for a fetched value (unlikely but possible). We do this by using a mutable string (to avoiding uniquing) and use pointer comparison.
+    NSMutableString *sentinal = [@"SENTINAL" mutableCopy];
     NSString *defaultString = (defaultValue == nil) ? nil : sentinal;
 
     NSString *dateString = [self stringAt:jsonPath options:options defaultValue:defaultString didSucceed:didSucceed];
@@ -46,7 +48,7 @@
     if (dateString == nil) return nil;
 
     //Did the getter return our sentinal?
-    BOOL shouldUseDefault = [dateString isEqualToString:sentinal];
+    BOOL shouldUseDefault = (dateString == sentinal); //See comment above declaration of 'sentinal'.
     if (shouldUseDefault) return defaultValue;
 
     //Attempt to create a string from the fetched string
