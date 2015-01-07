@@ -521,11 +521,44 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
 
 @interface BCJSONReader (PropertyListAdditions)
+/**
+ Queries the JSONObject for an NSData at JSONPath using the default options. If the fetch fails then an error is added to errors.
 
+ @param jsonPath The JSON path to query.
+
+ @return If the query matches an NSData then returns the data, otherwise nil;
+ */
 -(NSData *)dataAt:(NSString *)jsonPath BCJ_REQUIRED();
+/**
+ Queries the JSONObject for an NSData at JSONPath using options and default value. If the fetch fails then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+ @param options      The options used to perform the fetch.
+ @param defaultValue A default value to return if required.
+ @param didSucceed   On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+
+ @return If the query matches an NSData then returns the data, otherwise nil or defaultValue depending on options.
+ */
 -(NSData *)dataAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSData *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
+/**
+ Queries the JSONObject for an NSDate at JSONPath using the default options. If the fetch fails then an error is added to errors.
+
+ @param jsonPath The JSON path to query.
+
+ @return If the query matches an NSDate then returns the date, otherwise nil;
+ */
 -(NSDate *)dateAt:(NSString *)jsonPath BCJ_REQUIRED();
+/**
+ Queries the JSONObject for an NSDate at JSONPath using options and default value. If the fetch fails then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+ @param options      The options used to perform the fetch.
+ @param defaultValue A default value to return if required.
+ @param didSucceed   On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+
+ @return If the query matches an NSDate then returns the date, otherwise nil or defaultValue depending on options.
+ */
 -(NSDate *)dateAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSDate *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
 @end
