@@ -189,7 +189,7 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
  @param jsonPath The JSON path to query.
 
- @return If the query matches a string then returns the string, otherwise nil or defaultValue depending on options.
+ @return If the query matches a string then returns the string, otherwise nil;
  */
 -(NSString *)stringAt:(NSString *)jsonPath BCJ_REQUIRED();
 /**
@@ -228,7 +228,7 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
  @param jsonPath The JSON path to query.
 
- @return If the query matches an array then returns the array, otherwise nil or defaultValue depending on options.
+ @return If the query matches an array then returns the array, otherwise nil;
  */
 -(NSArray *)arrayAt:(NSString *)jsonPath BCJ_REQUIRED();
 /**
@@ -248,7 +248,7 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
  @param jsonPath The JSON path to query.
 
- @return If the query matches a dictionary then returns the dictionary, otherwise nil or defaultValue depending on options.
+ @return If the query matches a dictionary then returns the dictionary, otherwise nil;
  */
 -(NSDictionary *)dictionaryAt:(NSString *)jsonPath BCJ_REQUIRED();
 /**
@@ -339,13 +339,64 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
 @interface BCJSONReader (AdditionalTypeQueries)
 
+/**
+ Queries the JSONObject for an NSNumber at JSONPath using the default options. If an NSNumber is found then an NSDate is created using dateWithTimeIntervalSince1970: and returned. If the fetch fails then an error is added to errors.
+
+ @param jsonPath The JSON path to query.
+
+ @return If the query matches an NSNumber then return an NSDate, otherwise nil.
+ */
 -(NSDate *)dateFromTimeIntervalSince1970At:(NSString *)jsonPath BCJ_REQUIRED();
+/**
+ Queries the JSONObject for an NSNumber at JSONPath using options and default. If an NSNumber is found then an NSDate is created using dateWithTimeIntervalSince1970: and returned. If the fetch fails then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+ @param options      The options used to perform the fetch.
+ @param defaultValue A default value to return if required.
+ @param didSucceed   On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+
+ @return If the query matches an NSNumber then return an NSDate, otherwise nil or defaultValue depending on options.
+ */
 -(NSDate *)dateFromTimeIntervalSince1970At:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSDate *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
+/**
+ Queries the JSONObject for an NSString at JSONPath using the default options. If an NSString is found and it matches the date format yyyy-MM-dd'T'HH:mm:ss.SSSZ then an NSDate is created and returned. If the fetch fails or the string does not conform to the correct format then an error is added to errors.
+
+ @param jsonPath The JSON path to query.
+
+ @return If the query matches an NSNumber then return an NSDate, otherwise nil.
+ */
 -(NSDate *)dateFromISO8601StringAt:(NSString *)jsonPath BCJ_REQUIRED();
+/**
+ Queries the JSONObject for an NSString at JSONPath using options and default value. If an NSString is found and it matches the date format yyyy-MM-dd'T'HH:mm:ss.SSSZ then an NSDate is created and returned. If the fetch fails or the string does not conform to the correct format then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+ @param options      The options used to perform the fetch.
+ @param defaultValue A default value to return if required.
+ @param didSucceed   On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+
+ @return If the query matches an NSString in the correct format then return an NSDate, otherwise nil or defaultValue depending on options.
+ */
 -(NSDate *)dateFromISO8601StringAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSDate *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
+/**
+ Queries the JSONObject for an NSString at JSONPath using the default options. If an NSString is found and it is a valid URL then an NSURL is created and returned. If the fetch fails or the string is not a valid URL then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+
+ @return If the query matches an NSString then return an NSURL, otherwise nil.
+ */
 -(NSURL *)URLAt:(NSString *)jsonPath BCJ_REQUIRED();
+/**
+ Queries the JSONObject for an NSString at JSONPath using the options and default value. If an NSString is found and it is a valid URL then an NSURL is created and returned. If the fetch fails or the string is not a valid URL then an error is added to errors.
+
+ @param jsonPath     The JSON path to query.
+ @param options      The options used to perform the fetch.
+ @param defaultValue A default value to return if required.
+ @param didSucceed   On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+
+ @return If the query matches an NSString then return an NSURL, otherwise nil or defaultValue depending on options.
+ */
 -(NSURL *)URLAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options defaultValue:(NSURL *)defaultValue didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1);
 
 @end
