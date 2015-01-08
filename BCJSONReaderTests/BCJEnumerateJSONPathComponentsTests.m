@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "BCJEnumerateJSONPathComponents.h"
+#import "BCJSONPathParsing.h"
 #import "BCJConstants.h"
 
 
@@ -81,7 +81,7 @@
 - (void)testValidSelfSubscript
 {
     //Given (setup environment)
-    NSString *path = @"[.]";
+    NSString *path = @"[self]";
 
     //When (perform the action)
     __block id actualComponent = nil;

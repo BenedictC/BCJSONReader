@@ -8,40 +8,42 @@
 
 #import "BCJSONReader.h"
 #import "BCJError.h"
+#import "BCJValidationProxy.h"
 
 
 
 @implementation BCJSONReader (Validation)
 
--(NSError *)assertObject:(id)object isKindOfClass:(Class)class
+-(BOOL)assertObject:(id)object isKindOfClass:(Class)class
 {
     BCJParameterExpectation(class);
 
-    if (object == nil) return nil;
-    if ([object isKindOfClass:class]) return nil;
+    if (object == nil) return YES;
+    if ([object isKindOfClass:class]) return YES;
 
     NSError *error = [BCJError invalidValueErrorWithJSONPath:nil value:object criteria:[NSString stringWithFormat:@"is kind of class <%@>", NSStringFromClass(class)]];
     [self addError:error];
 
-    return error;
+    return NO;
 }
 
 
 
--(NSError *)assertPredicate:(NSPredicate *)predicate
+-(BOOL)assertPredicate:(NSPredicate *)predicate
 {
-    BOOL didPass = [predicate evaluateWithObject:nil];
-    if (didPass) return nil;
+    BCJValidationProxy *proxy = [BCJValidationProxy proxyWithObject:self.jsonObject];
+    BOOL didPass = [predicate evaluateWithObject:proxy];
+    if (didPass) return YES;
 
     NSError *error = [BCJError invalidValueErrorWithJSONPath:nil value:nil criteria:predicate.predicateFormat];
     [self addError:error];
 
-    return error;
+    return NO;
 }
 
 
 
--(NSError *)assertPredicateWithFormat:(NSString *)predicateFormat, ...
+-(BOOL)assertPredicateWithFormat:(NSString *)predicateFormat, ...
 {
     va_list list;
     va_start(list, predicateFormat);

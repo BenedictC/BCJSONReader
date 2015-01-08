@@ -57,7 +57,7 @@ void demo(void) {
         target.number = [reader integerAt:@"number"];
         target.string = [reader stringAt:@"data[0]" options:BCJSONReaderModeRequired defaultValue:@"BOOM! default" didSucceed:NULL];
         target.date = [reader dateFromTimeIntervalSince1970At:@"date"];
-        target.url = [reader URLFromStringAt:@"array[0].url"];
+        target.url = [reader URLFromStringAt:@"[self]array[0].url"];
         target.array = [reader arrayFromDictionaryAt:@"dict" options:BCJSONReaderModeRequired didSucceed:NULL usingElementReaderBlock:^id(BCJSONReader *elementReader, id elementKey){
             return [elementReader stringAt:@"name"];
         }];
