@@ -12,7 +12,7 @@
 
 @interface BCJError : NSError
 
-+(NSError *)invalidJSONDataErrorWithData:(NSData *)data underlyingError:(NSError *)underlyingError;
++(NSError *)invalidSourceDataErrorWithData:(NSData *)data expectedDataFormatName:(NSString *)dataFormatName underlyingError:(NSError *)underlyingError;
 
 +(NSError *)invalidJSONPathErrorWithJSONPath:(NSString *)JSONPath errorPosition:(NSUInteger)position;
 

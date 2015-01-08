@@ -16,7 +16,7 @@ NSString * const BCJErrorDomain = @"BCJErrorDomain";
 
 
 #pragma mark - Error userInfo keys
-NSString * const BCJInvalidJSONDataErrorKey = @"BCJInvalidJSONDataErrorKey";
+NSString * const BCJInvalidSourceDataErrorKey = @"BCJInvalidJSONDataErrorKey";
 NSString * const BCJInvalidJSONPathFailurePositionErrorKey = @"BCJInvalidJSONPathFailurePositionErrorKey";
 NSString * const BCJEnumMappingErrorKey = @"BCJEnumMappingErrorKey";
 NSString * const BCJUnderlyingErrorKey = @"BCJUnderlyingErrorKey";

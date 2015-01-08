@@ -35,7 +35,6 @@
 		8202A03D1A5C619C0049BCDF /* BCJSONPathParsing.h in Headers */ = {isa = PBXBuildFile; fileRef = 823658571A5B5314009F5C96 /* BCJSONPathParsing.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8202A03E1A5C619C0049BCDF /* BCJSONReader.h in Headers */ = {isa = PBXBuildFile; fileRef = 8236585F1A5B5314009F5C96 /* BCJSONReader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8202A03F1A5C61C10049BCDF /* libBCJSONReaderOSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 828555C31A0E147D00FCBF61 /* libBCJSONReaderOSX.dylib */; };
-		8202A0411A5DAD170049BCDF /* BCJSONReader+PropertyListAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8202A0401A5DAD170049BCDF /* BCJSONReader+PropertyListAdditions.m */; };
 		8202A04A1A5DF4E10049BCDF /* BCJDataFromBase64StringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8202A0491A5DF4E10049BCDF /* BCJDataFromBase64StringTests.m */; };
 		8236587D1A5B5329009F5C96 /* BCJSONReaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 823658771A5B5329009F5C96 /* BCJSONReaderTests.m */; };
 		823C6B661A221B0A006C1A90 /* libBCJSONReaderOSX.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 828555C31A0E147D00FCBF61 /* libBCJSONReaderOSX.dylib */; };
@@ -45,6 +44,8 @@
 		82F8A10B1A5EAEB40027C28C /* BCJSONPathEvaluation.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F8A1071A5EAB570027C28C /* BCJSONPathEvaluation.m */; };
 		82F8A10C1A5EAED10027C28C /* BCJValidationProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F8A1041A5EA2CC0027C28C /* BCJValidationProxy.m */; };
 		82F8A10D1A5EAED10027C28C /* BCJValidationProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 82F8A1041A5EA2CC0027C28C /* BCJValidationProxy.m */; };
+		82F8A10E1A5EC8F20027C28C /* BCJSONReader+PropertyListAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8202A0401A5DAD170049BCDF /* BCJSONReader+PropertyListAdditions.m */; };
+		82F8A10F1A5EC8F20027C28C /* BCJSONReader+PropertyListAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 8202A0401A5DAD170049BCDF /* BCJSONReader+PropertyListAdditions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -384,7 +385,6 @@
 				82F8A1021A5DFB2B0027C28C /* BCJSONReader_Validations_Tests.m in Sources */,
 				8236587D1A5B5329009F5C96 /* BCJSONReaderTests.m in Sources */,
 				8202A0241A5C60E60049BCDF /* BCJEnumerateJSONPathComponentsTests.m in Sources */,
-				8202A0411A5DAD170049BCDF /* BCJSONReader+PropertyListAdditions.m in Sources */,
 				8202A04A1A5DF4E10049BCDF /* BCJDataFromBase64StringTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -411,6 +411,7 @@
 				8202A02B1A5C613D0049BCDF /* BCJSONReader+StandardTypes.m in Sources */,
 				8202A02A1A5C613D0049BCDF /* BCJSONReader+Collections.m in Sources */,
 				82F8A10D1A5EAED10027C28C /* BCJValidationProxy.m in Sources */,
+				82F8A10E1A5EC8F20027C28C /* BCJSONReader+PropertyListAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,6 +429,7 @@
 				8202A0331A5C613D0049BCDF /* BCJSONReader+StandardTypes.m in Sources */,
 				8202A0321A5C613D0049BCDF /* BCJSONReader+Collections.m in Sources */,
 				82F8A10C1A5EAED10027C28C /* BCJValidationProxy.m in Sources */,
+				82F8A10F1A5EC8F20027C28C /* BCJSONReader+PropertyListAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

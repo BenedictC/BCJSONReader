@@ -108,15 +108,15 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
  */
 +(NSError *)readJSONData:(NSData *)jsonData defaultOptions:(BCJSONReaderOptions)defaultOptions usingBlock:(void(^)(BCJSONReader *reader))block BCJ_REQUIRED(1,3);
 /**
- Creates an instance using the supplied JSON data and options and invokes the supplied block. After the block has been executed the errors are taken from the reader and returned.
+ Creates an instance using the supplied object and options and invokes the supplied block. After the block has been executed the errors are taken from the reader and returned.
 
- @param jsonObject     An object that is a valid JSON object types
+ @param object         An object that to perform JSONPath queries against
  @param defaultOptions The options used be short form query methods
  @param block          A block to execute
 
  @return If errors are reported by the reader instance while executing block then an error, otherwise nil.
  */
-+(NSError *)readJSONObject:(id)jsonObject defaultOptions:(BCJSONReaderOptions)defaultOptions usingBlock:(void(^)(BCJSONReader *reader))block BCJ_REQUIRED(1,3);
++(NSError *)readObject:(id)jsonObject defaultOptions:(BCJSONReaderOptions)defaultOptions usingBlock:(void(^)(BCJSONReader *reader))block BCJ_REQUIRED(1,3);
 
 #pragma mark - instance life cycle
 /**
@@ -127,11 +127,11 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
  @return an instance
  */
--(instancetype)initWithJSONObject:(id)jsonObject defaultOptions:(BCJSONReaderOptions)defaultOptions BCJ_DESIGNATED_INIT BCJ_REQUIRED(1);
+-(instancetype)initWithObject:(id)object defaultOptions:(BCJSONReaderOptions)defaultOptions BCJ_DESIGNATED_INIT BCJ_REQUIRED(1);
 /**
- The JSON object to perform queries against.
+ The object to perform JSONPath queries against.
  */
-@property(nonatomic, readonly) id jsonObject;
+@property(nonatomic, readonly) id object;
 /**
  The options used by short form query methods.
  */
@@ -552,6 +552,17 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
 
 @interface BCJSONReader (PropertyListAdditions)
+/**
+ Creates an instance using the supplied JSON data and options and invokes the supplied block. After the block has been executed the errors are taken from the reader and returned.
+
+ @param jsonData       A data object containing JSON data. The data may represent a JSON fragment.
+ @param defaultOptions The default options for the instance to use
+ @param block          A block to execute
+
+ @return If errors are reported by the reader instance while executing block then an error, otherwise nil.
+ */
++(NSError *)readPropertyListData:(NSData *)propertyListData defaultOptions:(BCJSONReaderOptions)defaultOptions usingBlock:(void(^)(BCJSONReader *reader))block BCJ_REQUIRED(1,3);
+
 /**
  Queries the JSONObject for an NSData at JSONPath using the default options. If the fetch fails then an error is added to errors.
 

@@ -31,7 +31,7 @@
 
 -(BOOL)assertPredicate:(NSPredicate *)predicate
 {
-    BCJValidationProxy *proxy = [BCJValidationProxy proxyWithObject:self.jsonObject];
+    BCJValidationProxy *proxy = [BCJValidationProxy proxyWithObject:self.object];
     BOOL didPass = [predicate evaluateWithObject:proxy];
     if (didPass) return YES;
 

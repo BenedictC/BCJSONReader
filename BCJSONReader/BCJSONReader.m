@@ -25,19 +25,19 @@
 -(instancetype)init
 {
     id object = nil;
-    return [self initWithJSONObject:object defaultOptions:BCJNoOptions];
+    return [self initWithObject:object defaultOptions:BCJNoOptions];
 }
 
 
 
--(instancetype)initWithJSONObject:(id)jsonObject defaultOptions:(BCJSONReaderOptions)defaultOptions
+-(instancetype)initWithObject:(id)object defaultOptions:(BCJSONReaderOptions)defaultOptions
 {
-    BCJParameterExpectation(jsonObject);
+    BCJParameterExpectation(object);
 
     self = [super init];
     if (self == nil) return nil;
 
-    _jsonObject =  jsonObject;
+    _object =  object;
     _defaultOptions = defaultOptions;
 
     _mutableErrors = [NSMutableArray new];
@@ -51,7 +51,7 @@
 +(NSError *)readJSONData:(NSData *)jsonData defaultOptions:(BCJSONReaderOptions)defaultOptions usingBlock:(void(^)(BCJSONReader *reader))block
 {
     if (jsonData == nil) {
-        return [BCJError invalidJSONDataErrorWithData:nil underlyingError:nil];
+        return [BCJError invalidSourceDataErrorWithData:nil expectedDataFormatName:@"JSON" underlyingError:nil];
     }
 
     NSJSONReadingOptions jsonOptions = NSJSONReadingAllowFragments;
@@ -60,17 +60,17 @@
 
     BOOL didDeserialize = (sourceObject != nil);
     if (!didDeserialize) {
-        return [BCJError invalidJSONDataErrorWithData:nil underlyingError:error];
+        return [BCJError invalidSourceDataErrorWithData:nil expectedDataFormatName:@"JSON" underlyingError:error];
     }
 
-    return [self readJSONObject:sourceObject defaultOptions:defaultOptions usingBlock:block];
+    return [self readObject:sourceObject defaultOptions:defaultOptions usingBlock:block];
 }
 
 
 
-+(NSError *)readJSONObject:(id)jsonObject   defaultOptions:(BCJSONReaderOptions)defaultOptions usingBlock:(void(^)(BCJSONReader *reader))block
++(NSError *)readObject:(id)jsonObject   defaultOptions:(BCJSONReaderOptions)defaultOptions usingBlock:(void(^)(BCJSONReader *reader))block
 {
-    BCJSONReader *reader = [[self alloc] initWithJSONObject:jsonObject defaultOptions:defaultOptions];
+    BCJSONReader *reader = [[self alloc] initWithObject:jsonObject defaultOptions:defaultOptions];
     
     block(reader);
 
@@ -101,7 +101,7 @@
     //Fetch value
     NSUInteger failedComponentIdx;
     id failedComponent;
-    id value = BCJEvaluateJSONPath(JSONPath, self.jsonObject, &failedComponentIdx, &failedComponent);
+    id value = BCJEvaluateJSONPath(JSONPath, self.object, &failedComponentIdx, &failedComponent);
 
     //1. Check that path did evaluate
     BOOL isRequiredToEvaluate =  (BCJSONReaderOptionPathMustEvaluateToValue & options) != 0;

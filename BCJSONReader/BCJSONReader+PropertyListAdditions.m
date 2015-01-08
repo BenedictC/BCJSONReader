@@ -12,6 +12,25 @@
 
 
 @implementation BCJSONReader (PropertyListAdditions)
++(NSError *)readPropertyListData:(NSData *)propertyListData defaultOptions:(BCJSONReaderOptions)defaultOptions usingBlock:(void(^)(BCJSONReader *reader))block
+{
+    if (propertyListData == nil) {
+        return [BCJError invalidSourceDataErrorWithData:nil expectedDataFormatName:@"Property List" underlyingError:nil];
+    }
+
+    NSPropertyListReadOptions options = NSPropertyListImmutable;
+    NSError *error;
+    id sourceObject = [NSPropertyListSerialization propertyListWithData:propertyListData options:options format:NULL error:&error];
+
+    BOOL didDeserialize = (sourceObject != nil);
+    if (!didDeserialize) {
+        return [BCJError invalidSourceDataErrorWithData:nil expectedDataFormatName:@"Property List" underlyingError:error];
+    }
+
+    return [self readObject:sourceObject defaultOptions:defaultOptions usingBlock:block];
+}
+
+
 
 -(NSData *)dataAt:(NSString *)jsonPath
 {

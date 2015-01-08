@@ -13,12 +13,12 @@
 
 @implementation BCJError
 
-+(NSError *)invalidJSONDataErrorWithData:(NSData *)data underlyingError:(NSError *)underlyingError
++(NSError *)invalidSourceDataErrorWithData:(NSData *)data expectedDataFormatName:(NSString *)dataFormatName underlyingError:(NSError *)underlyingError
 {
-    NSString *format = NSLocalizedString(@"The data does not contain valid JSON data.", nil);
-    NSString *description = [NSString stringWithFormat:format, nil];
+    NSString *format = NSLocalizedString(@"The data does not contain valid %@ data.", nil);
+    NSString *description = [NSString stringWithFormat:format, dataFormatName, nil];
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObject:description forKey:NSLocalizedDescriptionKey];
-    if (data != nil) userInfo[BCJInvalidJSONDataErrorKey] = data;
+    if (data != nil) userInfo[BCJInvalidSourceDataErrorKey] = data;
     if (underlyingError) userInfo[NSUnderlyingErrorKey] = underlyingError;
 
     return [NSError errorWithDomain:BCJErrorDomain code:BCJInvalidJSONDataError userInfo:userInfo];

@@ -47,7 +47,7 @@ enum : NSInteger {
 /**
  userInfo key for the invalid JSON data
  */
-extern NSString * const BCJInvalidJSONDataErrorKey;
+extern NSString * const BCJInvalidSourceDataErrorKey;
 
 /**
  userInfo key for the NSNumber position.

@@ -41,7 +41,7 @@
                                    @"date" : @([[NSDate new] timeIntervalSince1970]), //Unix timestamp-style date
                                    };
 
-    NSError *error = [BCJSONReader readJSONObject:sourceObject defaultOptions:BCJNoOptions usingBlock:^(BCJSONReader *reader) {
+    NSError *error = [BCJSONReader readObject:sourceObject defaultOptions:BCJNoOptions usingBlock:^(BCJSONReader *reader) {
 //        [reader assertPredicateWithFormat:@"%K == 'WAY-OH!' && boring == 'string' ", @"BOOM[0]"];
 //        [reader assertPredicateWithFormat:@"%K == 3", @"dict['t h r e e']"];
 //        [reader assertPredicateWithFormat:@"(self['dict']['t h r e e'][10] == 2)"];

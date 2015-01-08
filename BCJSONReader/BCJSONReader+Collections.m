@@ -55,7 +55,7 @@
 
     for (id element in sourceArray) {
         __block id mappedElement = nil;
-        NSError *elementError = [BCJSONReader readJSONObject:element defaultOptions:options usingBlock:^(BCJSONReader *elementReader) {
+        NSError *elementError = [BCJSONReader readObject:element defaultOptions:options usingBlock:^(BCJSONReader *elementReader) {
             mappedElement = block(elementReader, elementIdx);
         }];
 
@@ -99,7 +99,7 @@
     for (id elementKey in sourceDict.allKeys) {
         id element = sourceDict[elementKey];
         __block id mappedElement = nil;
-        NSError *elementError = [BCJSONReader readJSONObject:element defaultOptions:options usingBlock:^(BCJSONReader *elementReader) {
+        NSError *elementError = [BCJSONReader readObject:element defaultOptions:options usingBlock:^(BCJSONReader *elementReader) {
             mappedElement = block(elementReader, elementKey);
         }];
 
