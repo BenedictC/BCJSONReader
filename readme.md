@@ -4,8 +4,8 @@
  BCJSONReader is a library for processing the crazy JSON structures that exist in the real world. Its key features are:
 + Flexible. Provides functionality for handling many JSON usage styles.
 + Extensible. Easy to integrate own code and still use BCJSONReader intrastructure.
-//+ Documented.
-//+ Tested.
++ Documented.
++ //Tested.
 
 
 
