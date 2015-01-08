@@ -526,7 +526,7 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
  
  The predicate can safely access values within the JSON object by using the %K type specifier. For example:
  [NSPredicate predicateWithFormat:@"%K == 'John Lennon'", @"members['guitar']['name']"].
- This behaviour differs from standard key path access embedded in the predicate format which will raise an exception of a path cannot be evaluated.
+ This behaviour differs from standard key path access embedded in the predicate format which will raise an exception if a path cannot be evaluated.
 
  @param predicate The predicate to evaluate.
 
@@ -539,7 +539,7 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
  The predicate can safely access values within the JSON object by using the %K type specifier. For example:
  [NSPredicate predicateWithFormat:@"%K == 'John Lennon'", @"members['guitar']['name']"].
- This behaviour differs from standard key path access embedded in the predicate format which will raise an exception of a path cannot be evaluated.
+ This behaviour differs from standard key path access embedded in the predicate format which will raise an exception if a path cannot be evaluated.
 
  @param predicateFormat The predicate format to create and evaluate.
 
