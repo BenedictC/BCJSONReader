@@ -21,7 +21,7 @@ static inline NSData *BCJDataFromBase64String(NSString *base64String) {
 
     int (^base64decode)(const char *in, size_t inLen, unsigned char *out, size_t *outLen) = ^int(const char *in, size_t inLen, unsigned char *out, size_t *outLen) {
         static const char WHITESPACE = 64;
-        static const char EQUALS = 65;
+        static const char PADDING = 65;
         static const char INVALID = 66;
         static const unsigned char d[] = {
             66,66,66,66,66,66,66,66,66,64,66,66,66,66,66,66,66,66,66,66,66,66,66,66,66,
@@ -48,7 +48,7 @@ static inline NSData *BCJDataFromBase64String(NSString *base64String) {
             switch (c) {
                 case WHITESPACE: continue;   /* skip whitespace */
                 case INVALID:    return 1;   /* invalid input, return error */
-                case EQUALS:                 /* pad character, end of data */
+                case PADDING:                /* pad character, end of data */
                     in = end;
                     continue;
                 default:
@@ -87,7 +87,8 @@ static inline NSData *BCJDataFromBase64String(NSString *base64String) {
     size_t outLength;
     int result = base64decode(input, inLength, dataBuf, &outLength);
 
-    if (result != 0) {
+    BOOL didSucceed = result == 0;
+    if (!didSucceed) {
         free(dataBuf);
         return nil;
     }
