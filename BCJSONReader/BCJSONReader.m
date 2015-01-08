@@ -7,7 +7,7 @@
 //
 
 #import "BCJSONReader.h"
-#import "BCJEnumerateJSONPathComponents.h"
+#import "BCJSONPathEvaluation.h"
 #import "BCJError.h"
 
 
@@ -99,44 +99,9 @@
     if (didSucceed != NULL) *didSucceed = YES;
 
     //Fetch value
-    __block id failedComponent = nil;
-    __block NSUInteger failedComponentIdx = NSNotFound;
-    id value = ({
-        //Get the containedObject if implemented, otherwise just use the object
-        __block id lastValue = self.jsonObject;
-        NSError *pathError = BCJEnumerateJSONPathComponents(JSONPath, ^(id component, NSUInteger componentIdx, BOOL *stop) {
-
-            if ([component isKindOfClass:[NSNumber class]]) {
-                //Index component
-                if ([lastValue respondsToSelector:@selector(objectAtIndex:)] && [lastValue respondsToSelector:@selector(count)]) {
-                    NSUInteger idx = [component integerValue];
-                    lastValue = (idx < [lastValue count]) ? [lastValue objectAtIndex:idx] : nil;
-                }
-            } else if ([component isKindOfClass:[NSString class]]) {
-                //keyed component
-                if ([lastValue respondsToSelector:@selector(objectForKey:)]) {
-                    lastValue = [lastValue objectForKey:component];
-                }
-            } else if ([component isKindOfClass:[NSNull class]]) {
-                //'self' component
-                [lastValue self];
-            }
-
-            BOOL didFetchFail = (lastValue == nil);
-            if (didFetchFail) {
-                failedComponent = component;
-                failedComponentIdx = componentIdx;
-                *stop = YES;
-            }
-        });
-        if (pathError != nil) {
-            failedComponent = JSONPath;
-            failedComponentIdx = 0;
-            BCJExpectation(pathError == nil, @"Error in JSON path: %@", pathError);
-        }
-
-        lastValue;
-    });
+    NSUInteger failedComponentIdx;
+    id failedComponent;
+    id value = BCJEvaluateJSONPath(JSONPath, self.jsonObject, &failedComponentIdx, &failedComponent);
 
     //1. Check that path did evaluate
     BOOL isRequiredToEvaluate =  (BCJSONReaderOptionPathMustEvaluateToValue & options) != 0;
