@@ -1,5 +1,5 @@
 //
-//  BCJEnumerateJSONPathComponents.m
+//  BCJSONPathParsing.m
 //  BCJSONReader
 //
 //  Created by Benedict Cohen on 05/11/2014.
@@ -33,6 +33,7 @@ static inline ScanResult scanSubscriptComponent(NSScanner *scanner, id *outCompo
     if (didScanIntegerSubscript) {
         subscript = @(idx);
     }
+#pragma message "TODO: Is it a negative integer subscript?"
 
     //Is it a string subscript?
     BOOL shouldScanForStringSubscript = (subscript == nil);
@@ -81,7 +82,7 @@ static inline ScanResult scanSubscriptComponent(NSScanner *scanner, id *outCompo
     //Is it the 'self' subscript?
     BOOL shouldScanForSelfSubscript = (subscript == nil);
     if (shouldScanForSelfSubscript) {
-        if ([scanner scanString:@"." intoString:NULL]) {
+        if ([scanner scanString:@"self" intoString:NULL]) {
             subscript = [NSNull null];
         }
     }

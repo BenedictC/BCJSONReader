@@ -1,5 +1,5 @@
 //
-//  BCJEnumerateJSONPathComponents.h
+//  BCJSONPathParsing.h
 //  BCJSONReader
 //
 //  Created by Benedict Cohen on 05/11/2014.
@@ -13,7 +13,7 @@
  - subscript component: square braces containing one of the following:
                         - an integer 
                         - a single quote delimitted string enclosed by square braces. Single quotes are escaped with the '`' character. Literal '`' are represented with as '``'.
-                        - a ., eg "[.]"
+                        - self, i.e @"[self]"
  - identifier component: a string that starts with the a character matching the regex a-z|A-Z|$|_ followed by zero of more characters matching a-z|A-Z|$|_|0-9 . Identifier components must be terminated with a '.' except if the component is the final component in the path.
  
  Note that the allowable characters for an identifier component is a subset of the allowable characters for a Javascript identifier which allows for many unicode codepoints. If a unicode character is required then a subscript component should be used.
