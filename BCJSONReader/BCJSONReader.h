@@ -72,7 +72,7 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
  - subscript component: square braces containing one of the following:
     - an integer
     - a single quote delimited string enclosed by square braces. Single quotes are escaped with the '`' character. Literal '`' are represented with as '``'.
-    - a ., eg "[.]"
+    - self, i.e, @"[self]"
  - identifier component: a string that starts with the a character matching the regex a-z|A-Z|$|_ followed by zero of more characters matching a-z|A-Z|$|_|0-9 . Identifier components must be terminated with a '.' except if the component is the final component in the path.
 
  Note that the allowable characters for an identifier component is a subset of the allowable characters for a Javascript identifier which allows for many unicode codepoints. If a unicode character is required then a subscript component should be used.
@@ -83,7 +83,7 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
  - @"events[0].date"            Identifier, subscript, identifer.
  - @"['events'][0]['date']"     3 subscript components
  - @"['latest events']"         One subscript component containing a string which cannot be represented by identifer component
- - @"[.]"                       [.] represents the current object. @"[.]" will fetch the root object.
+ - @"[self]"                    [self] represents the current object. @"[self]" will fetch the root object, @"dict[self]" is equivalent to @"dict".
  - @"['']"                      The empty string component
  - @"$schema"                   $ and _ are valid in indentifer components
 
@@ -512,9 +512,40 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
 @interface BCJSONReader (Validation)
 
--(NSError *)assertObject:(id)object isKindOfClass:(Class)class BCJ_REQUIRED();
--(NSError *)assertPredicate:(NSPredicate *)predicate BCJ_REQUIRED();
--(NSError *)assertPredicateWithFormat:(NSString *)predicateFormat, ...  BCJ_PRINTF_FORMAT_STYLE(1,2) BCJ_REQUIRED(1);
+/**
+ Checks that object is of type class. If it is not then an error is added to errors.
+
+ @param object The object to check. May be nil.
+ @param class  The expected class. If Nil then an exception is raised.
+
+ @return YES if object is nil or is of type class, otherwise NO.
+ */
+-(BOOL)assertObject:(id)object isKindOfClass:(Class)class BCJ_REQUIRED();
+/**
+ Evaluates predicate against JSONObject. If evaluation fails then an error is added to errors.
+ 
+ The predicate can safely access values within the JSON object by using the %K type specifier. For example:
+ [NSPredicate predicateWithFormat:@"%K == 'John Lennon'", @"members['guitar']['name']"].
+ This behaviour differs from standard key path access embedded in the predicate format which will raise an exception of a path cannot be evaluated.
+
+ @param predicate The predicate to evaluate.
+
+ @return YES if the evaluation succeeds, otherwise NO.
+ */
+-(BOOL)assertPredicate:(NSPredicate *)predicate BCJ_REQUIRED();
+
+/**
+ Creates a predicate using predicateFormat and evaluates it against JSONObject. If evaluation fails then an error is added to errors.
+
+ The predicate can safely access values within the JSON object by using the %K type specifier. For example:
+ [NSPredicate predicateWithFormat:@"%K == 'John Lennon'", @"members['guitar']['name']"].
+ This behaviour differs from standard key path access embedded in the predicate format which will raise an exception of a path cannot be evaluated.
+
+ @param predicateFormat The predicate format to create and evaluate.
+
+ @return YES if the evaluation succeeds, otherwise NO.
+ */
+-(BOOL)assertPredicateWithFormat:(NSString *)predicateFormat, ... BCJ_REQUIRED(1);
 
 @end
 
