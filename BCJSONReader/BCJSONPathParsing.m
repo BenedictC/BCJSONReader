@@ -28,12 +28,12 @@ static inline ScanResult scanSubscriptComponent(NSScanner *scanner, id *outCompo
     if (!isSubscript) return kScanResultNoMatch;
 
     //Is it an integer subscript?
-    unsigned long long idx = 0;
-    BOOL didScanIntegerSubscript = [scanner scanUnsignedLongLong:&idx];
+    //Note that this handles negative values too
+    long long idx = 0;
+    BOOL didScanIntegerSubscript = [scanner scanLongLong:&idx];
     if (didScanIntegerSubscript) {
         subscript = @(idx);
     }
-#pragma message "TODO: Is it a negative integer subscript?"
 
     //Is it a string subscript?
     BOOL shouldScanForStringSubscript = (subscript == nil);

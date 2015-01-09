@@ -26,8 +26,13 @@ id BCJEvaluateJSONPath(NSString *JSONPath, id object, NSUInteger *outFailedCompo
         if ([component isKindOfClass:[NSNumber class]]) {
             //Index component
             if ([lastValue respondsToSelector:@selector(objectAtIndex:)] && [lastValue respondsToSelector:@selector(count)]) {
-                NSUInteger idx = [component integerValue];
-                lastValue = (idx < [lastValue count]) ? [lastValue objectAtIndex:idx] : nil;
+                NSInteger componentValue = [component longLongValue];
+                BOOL isNegativeIndex = componentValue < 0;
+                NSUInteger count = [lastValue count];
+                NSUInteger idx = (!isNegativeIndex) ? componentValue : ({
+                    count + componentValue;
+                });
+                lastValue = (idx < count) ? [lastValue objectAtIndex:idx] : nil;
             }
         } else if ([component isKindOfClass:[NSString class]]) {
             //keyed component
