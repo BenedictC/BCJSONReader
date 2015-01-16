@@ -26,14 +26,15 @@ id BCJEvaluateJSONPath(NSString *JSONPath, id object, NSUInteger *outFailedCompo
         if ([component isKindOfClass:[NSNumber class]]) {
             //Index component
             if ([lastValue respondsToSelector:@selector(objectAtIndex:)] && [lastValue respondsToSelector:@selector(count)]) {
-#pragma message "TODO: NSInteger may not be big enough to store a long long"
-                NSInteger componentValue = [component longLongValue];
+
+                long long componentValue = [component longLongValue];
                 BOOL isNegativeIndex = componentValue < 0;
-                NSUInteger count = [lastValue count];
-                NSUInteger idx = (!isNegativeIndex) ? componentValue : ({
+                long long count = [lastValue count];
+                long long idx = (!isNegativeIndex) ? componentValue : ({
                     count + componentValue;
                 });
-                lastValue = (idx < count) ? [lastValue objectAtIndex:idx] : nil;
+                NSUInteger sizeSafeIdx = (NSUInteger)idx; //We do this dance to avoid type conversion warnings. The warnings are is incorrect because... TODO
+                lastValue = (idx < count) ? [lastValue objectAtIndex:sizeSafeIdx] : nil;
             }
         } else if ([component isKindOfClass:[NSString class]]) {
             //keyed component
