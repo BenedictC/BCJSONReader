@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "BCJSONReader"
-  s.version      = "0.3.2"
+  s.version      = "0.3.3"
   s.summary      = "An Objective-C library for handling real world JSON."
 
   s.description  = <<-DESC
@@ -73,7 +73,7 @@ BCJSONReader is a library for processing the crazy JSON structures that exist in
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/BenedictC/BCJSONReader.git", :tag => "0.3.2" }
+  s.source       = { :git => "https://github.com/BenedictC/BCJSONReader.git", :tag => "0.3.3" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
