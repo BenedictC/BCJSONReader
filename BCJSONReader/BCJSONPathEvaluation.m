@@ -26,6 +26,7 @@ id BCJEvaluateJSONPath(NSString *JSONPath, id object, NSUInteger *outFailedCompo
         if ([component isKindOfClass:[NSNumber class]]) {
             //Index component
             if ([lastValue respondsToSelector:@selector(objectAtIndex:)] && [lastValue respondsToSelector:@selector(count)]) {
+#pragma message "TODO: NSInteger may not be big enough to store a long long"
                 NSInteger componentValue = [component longLongValue];
                 BOOL isNegativeIndex = componentValue < 0;
                 NSUInteger count = [lastValue count];
