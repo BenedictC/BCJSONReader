@@ -24,8 +24,10 @@
 #pragma mark - instance life cycle
 -(instancetype)init
 {
-    id object = nil;
-    return [self initWithObject:object defaultOptions:BCJNoOptions];
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wnonnull"
+    return [self initWithObject:nil defaultOptions:BCJNoOptions];
+#pragma clang diagnostic pop
 }
 
 
