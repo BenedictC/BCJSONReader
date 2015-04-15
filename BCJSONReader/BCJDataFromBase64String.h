@@ -83,7 +83,7 @@ static inline NSData *BCJDataFromBase64String(NSString *base64String) {
 
     const char *input = base64String.UTF8String;
     const size_t inLength = [base64String lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
-    unsigned char *dataBuf = malloc(inLength * sizeof(char)); //Theoretically we could figure out the exact output size and thus make a smaller malloc, but lots of effort for little gain.
+    unsigned char *dataBuf = malloc(inLength * sizeof(unsigned char)); //Theoretically we could figure out the exact output size and thus make a smaller malloc, but lots of effort for little gain.
     size_t outLength;
     int result = base64decode(input, inLength, dataBuf, &outLength);
 
