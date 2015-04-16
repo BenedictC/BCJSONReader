@@ -25,7 +25,7 @@ BCJSONMapper has been retired. Please use BCJSONReader instead.
                    DESC
 
   s.homepage     = "https://github.com/BenedictC/BCJSONMapper"
-  spec.deprecated_in_favor_of = 'BCJSONReader'
+  s.deprecated_in_favor_of = 'BCJSONReader'
 
 
   # ―――  Spec License  ――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -82,7 +82,7 @@ BCJSONMapper has been retired. Please use BCJSONReader instead.
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = ""
+  s.source_files  = "BCJSONReader"
   # s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "**/*.h"
