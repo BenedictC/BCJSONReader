@@ -432,7 +432,7 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
  @return If the enumMapping look up succeeds then an object, otherwise nil.
  */
--(id)enumAt:(NSString *)jsonPath enumMapping:(NSDictionary *)enumMapping BCJ_REQUIRED();
+-(id)enumerationAt:(NSString *)jsonPath enumMapping:(NSDictionary *)enumMapping BCJ_REQUIRED();
 /**
  Queries the JSONObject for an object at JSONPath using the options and default key. If an object is found or the default key is specifed then the a look up is performed on enumMapping. If the fetch fails or a value is not found in enumMapping then an error is added to errors.
 
@@ -444,7 +444,25 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
 
  @return If the enumMapping look up succeeds then an object, otherwise nil.
  */
--(id)enumAt:(NSString *)jsonPath enumMapping:(NSDictionary *)enumMapping options:(BCJSONReaderOptions)options defaultKey:(id)defaultKey didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1,2);
+-(id)enumerationAt:(NSString *)jsonPath enumMapping:(NSDictionary *)enumMapping options:(BCJSONReaderOptions)options defaultKey:(id)defaultKey didSucceed:(BOOL *)didSucceed BCJ_REQUIRED(1,2);
+
+/**
+ Queries the JSONObject for an array at JSONPath using the default options. If an array is found then the elementReaderBlock is invoked for each element. The BCJSONReader passed to the elementReaderBlock is initialized with the element and default options. If the fetch fails or any of the elementReader contain errors then an error is added to errors.
+
+ @param jsonPath           The JSON path to query.
+ @param elementReaderBlock A block that is invoked once for each element. This block is invoked once for each element.
+ */
+-(void)enumerateArrayAt:(NSString *)jsonPath usingElementReaderBlock:(void(^)(BCJSONReader *elementReader, NSUInteger elementIndex))block;
+
+/**
+ Queries the JSONObject for an array at JSONPath using options. If an array is found then the elementReaderBlock is invoked for each element. The BCJSONReader passed to the elementReaderBlock is initialized with the element and options. If the fetch fails or any of the elementReader contain errors then an error is added to errors.
+
+ @param jsonPath   The JSON path to query.
+ @param options    The options used to perform the fetch.
+ @param didSucceed On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+ @param block      A block that is invoked once for each element. This block is invoked once for each element.
+ */
+-(void)enumerateArrayAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed usingElementReaderBlock:(void(^)(BCJSONReader *elementReader, NSUInteger elementIndex))block;
 
 /**
  Queries the JSONObject for an array at JSONPath using the default options. If an array is found then the elementReaderBlock is invoked for each element. The BCJSONReader passed to the elementReaderBlock is initialized with the element and default options. The objects returned by the elementReaderBlock are collated into a new array which is then returned. If the fetch fails or any of the elementReader contain errors then an error is added to errors.
@@ -466,6 +484,28 @@ const static BCJSONReaderMode BCJSONReaderModeRequiredNullable = BCJSONReaderOpt
  @return If the query matches an array and each element in the array is successfully mapped then returns an array, otherwise nil.
  */
 -(NSArray *)arrayFromArrayAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, NSUInteger elementIndex))elementReaderBlock BCJ_REQUIRED(1,4);
+
+/**
+ Queries the JSONObject for a dictionary at JSONPath using the default options. If a dictionary is found then the elementReaderBlock is invoked for each element. The BCJSONReader passed to the elementReaderBlock is initialized with the element and the default options. If the fetch fails or any of the elementReader contain errors then an error is added to errors.
+ 
+ The unsafeElementKey of elementReaderBlock can be made safe by calling verifyObject:isKindOfClass:didSucceed:. In most cases the key will be an NSString (the JSON spec only always keys to be strings), this however is not enforced by BCJSONReader allowing it to be useful for handing a super-set of the what is permitted by the JSON spec. Note that the order in which the elements are enumerated is not specified.
+
+ @param jsonPath    The JSON path to query.
+ @param block       A block invoked once for each element.
+ */
+-(void)enumerateDictionaryAt:(NSString *)jsonPath usingElementReaderBlock:(void(^)(BCJSONReader *elementReader, id unsafeElementKey))block;
+
+/**
+ Queries the JSONObject for a dictionary at JSONPath using options. If a dictionary is found then the elementReaderBlock is invoked for each element. The BCJSONReader passed to the elementReaderBlock is initialized with the element and options. If the fetch fails or any of the elementReader contain errors then an error is added to errors.
+
+ The unsafeElementKey of elementReaderBlock can be made safe by calling verifyObject:isKindOfClass:didSucceed:. In most cases the key will be an NSString (the JSON spec only always keys to be strings), this however is not enforced by BCJSONReader allowing it to be useful for handing a super-set of the what is permitted by the JSON spec. Note that the order in which the elements are enumerated is not specified.
+
+ @param jsonPath    The JSON path to query.
+ @param options     The options used to perform the fetch.
+ @param didSucceed  On return contains YES if the method was successful, otherwise NO. NULL is permitted.
+ @param block       A block invoked once for each element.
+ */
+-(void)enumerateDictionaryAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed usingElementReaderBlock:(void(^)(BCJSONReader *elementReader, id unsafeElementKey))block;
 
 /**
  Queries the JSONObject for a dictionary at JSONPath using the default options. If a dictionary is found then the elementReaderBlock is invoked for each element. The BCJSONReader passed to the elementReaderBlock is initialized with the element and the default options. The objects returned by the elementReaderBlock are collated into a new array which is then returned. If the fetch fails or any of the elementReader contain errors then an error is added to errors.
