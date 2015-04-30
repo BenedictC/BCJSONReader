@@ -39,6 +39,41 @@
 
 
 
+#pragma mark - arrays
+-(void)enumerateArrayAt:(NSString *)jsonPath usingElementReaderBlock:(void(^)(BCJSONReader *elementReader, NSUInteger elementIndex))block
+{
+    [self enumerateArrayAt:jsonPath options:self.defaultOptions didSucceed:NULL usingElementReaderBlock:block];
+}
+
+
+
+-(void)enumerateArrayAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed usingElementReaderBlock:(void(^)(BCJSONReader *elementReader, NSUInteger elementIndex))block
+{
+    NSArray *sourceArray = [self arrayAt:jsonPath options:options defaultValue:nil didSucceed:didSucceed];
+    if (sourceArray == nil) return;
+
+    NSInteger elementIdx = 0;
+
+    for (id element in sourceArray) {
+        NSError *elementError = [BCJSONReader readObject:element defaultOptions:options usingBlock:^(BCJSONReader *elementReader) {
+            block(elementReader, elementIdx);
+        }];
+
+        //Handle element error
+        if (elementError != nil) {
+            NSError *mappingError = [BCJError collectionMappingErrorWithJSONPath:jsonPath elementSubscript:@(elementIdx) elementError:elementError];
+            [self addError:mappingError];
+            if (didSucceed != NULL) *didSucceed = NO;
+            return;
+        }
+
+        //Prep for next interation
+        elementIdx++;
+    }
+}
+
+
+
 -(NSArray *)arrayFromArrayAt:(NSString *)jsonPath usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, NSUInteger elementIndex))block
 {
     return [self arrayFromArrayAt:jsonPath options:self.defaultOptions didSucceed:NULL usingElementReaderBlock:block];
