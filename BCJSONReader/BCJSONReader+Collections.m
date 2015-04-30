@@ -13,14 +13,15 @@
 
 @implementation BCJSONReader (Collections)
 
--(id)enumAt:(NSString *)jsonPath enumMapping:(NSDictionary *)enumMapping
+#pragma mark - enumerations
+-(id)enumerationAt:(NSString *)jsonPath enumMapping:(NSDictionary *)enumMapping
 {
-    return [self enumAt:jsonPath enumMapping:enumMapping options:self.defaultOptions defaultKey:nil didSucceed:NULL];
+    return [self enumerationAt:jsonPath enumMapping:enumMapping options:self.defaultOptions defaultKey:nil didSucceed:NULL];
 }
 
 
 
--(id)enumAt:(NSString *)jsonPath enumMapping:(NSDictionary *)enumMapping options:(BCJSONReaderOptions)options defaultKey:(id)defaultKey  didSucceed:(BOOL *)didSucceed
+-(id)enumerationAt:(NSString *)jsonPath enumMapping:(NSDictionary *)enumMapping options:(BCJSONReaderOptions)options defaultKey:(id)defaultKey  didSucceed:(BOOL *)didSucceed
 {
     id key = [self objectAt:jsonPath type:Nil options:options defaultValue:defaultKey didSucceed:didSucceed];
     if (key == nil) return nil;
