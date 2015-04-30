@@ -117,6 +117,37 @@
 
 
 
+#pragma mark - dictionaries
+-(void)enumerateDictionaryAt:(NSString *)jsonPath usingElementReaderBlock:(void(^)(BCJSONReader *elementReader, id unsafeElementKey))block
+{
+    [self enumerateDictionaryAt:jsonPath options:self.defaultOptions didSucceed:NULL usingElementReaderBlock:block];
+}
+
+
+
+-(void)enumerateDictionaryAt:(NSString *)jsonPath options:(BCJSONReaderOptions)options didSucceed:(BOOL *)didSucceed usingElementReaderBlock:(void(^)(BCJSONReader *elementReader, id unsafeElementKey))block
+{
+    NSDictionary *sourceDict = [self dictionaryAt:jsonPath options:options defaultValue:nil didSucceed:didSucceed];
+    if (sourceDict == nil) return;
+
+    for (id elementKey in sourceDict.allKeys) {
+        id element = sourceDict[elementKey];
+        NSError *elementError = [BCJSONReader readObject:element defaultOptions:options usingBlock:^(BCJSONReader *elementReader) {
+            block(elementReader, elementKey);
+        }];
+
+        //Handle element error
+        if (elementError != nil) {
+            NSError *mappingError = [BCJError collectionMappingErrorWithJSONPath:jsonPath elementSubscript:elementKey elementError:elementError];
+            [self addError:mappingError];
+            if (didSucceed != NULL) *didSucceed = NO;
+            return;
+        }
+    }
+}
+
+
+
 -(NSArray *)arrayFromDictionaryAt:(NSString *)jsonPath usingElementReaderBlock:(id(^)(BCJSONReader *elementReader, id unsafeElementKey))block
 {
     return [self arrayFromDictionaryAt:jsonPath options:self.defaultOptions didSucceed:NULL usingElementReaderBlock:block];
@@ -129,7 +160,6 @@
     NSDictionary *sourceDict = [self dictionaryAt:jsonPath options:options defaultValue:nil didSucceed:didSucceed];
     if (sourceDict == nil) return nil;
 
-    NSInteger idx = 0;
     NSMutableArray *mappedArray = [NSMutableArray new];
 
     for (id elementKey in sourceDict.allKeys) {
@@ -151,9 +181,6 @@
         if (mappedElement != nil) {
             [mappedArray addObject:mappedElement];
         }
-
-        //Prep for next interation
-        idx++;
     }
     
     return mappedArray;
