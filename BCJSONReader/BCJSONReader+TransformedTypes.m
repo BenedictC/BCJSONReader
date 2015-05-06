@@ -31,7 +31,7 @@
 
 -(NSDate *)dateFromISO8601StringAt:(NSString *)jsonPath
 {
-    return [self dateFromTimeIntervalSince1970At:jsonPath options:self.defaultOptions defaultValue:nil didSucceed:NULL];
+    return [self dateFromISO8601StringAt:jsonPath options:self.defaultOptions defaultValue:nil didSucceed:NULL];
 }
 
 
